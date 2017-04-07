@@ -1,0 +1,329 @@
+<?php
+  // memanggil file koneksi.php untuk melakukan koneksi database
+  include 'system/koneksi.php';
+
+ $logged_in = false;
+ if (empty($_SESSION['email'])) {
+   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='login.php';</script>";
+ }
+ else {
+   $logged_in = true;
+ }
+?>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="assets/img/icon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Dashboard</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Animation library for notifications   -->
+    <link href="assets/css/animate.min.css" rel="stylesheet"/>
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="assets/css/demo.css" rel="stylesheet" />
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="index.php" class="simple-text">
+                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM )</small></small>
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="index.php">
+                        <i class="pe pe-7s-graph"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="pengajuan.php">
+                        <i class="pe pe-7s-note2"></i>
+                        <p>Pengajuan</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="riwayat.php">
+                        <i class="pe pe-7s-timer"></i>
+                        <p>Riwayat</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="master.php">
+                        <i class="pe pe-7s-server"></i>
+                        <p>Master</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="profil.php">
+                        <i class="pe pe-7s-user"></i>
+                        <p>Profile</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="logout.php">
+                        <i class="pe pe-7s-back"></i>
+                        <p>Log out</p>
+                    </a>
+                </li>
+            </ul>
+    	</div>
+    </div>
+
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title" align="center">
+                                    Pengajuan Berstatus <br><b>"Menunggu"</b>
+                                </h4>
+                            </div>
+<?php
+    $query_menunggu = "SELECT * FROM pengajuan WHERE status LIKE 'menunggu'";
+    $result_menunggu = mysqli_query($link, $query_menunggu);
+      $banyakdata_menunggu = $result_menunggu->num_rows;
+?>
+                            <div align="center">
+                                <h1><?php echo $banyakdata_menunggu ?></h1>
+                                <div class="footer">
+                                    <hr>
+                                    <div class="stats">
+                                        <a href="pencarian_pengajuan.php?pengajuan=&pengaju=&tanggal=&status=menunggu"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Menunggu</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title" align="center">
+                                Pengajuan Berstatus <br><b>"Proses"</b>
+                                </h4>
+                            </div>
+<?php
+    $query_proses = "SELECT * FROM pengajuan WHERE status LIKE 'proses'";
+    $result_proses = mysqli_query($link, $query_proses);
+      $banyakdata_proses = $result_proses->num_rows;
+?>
+                            <div align="center">
+                                <h1><?php echo $banyakdata_proses ?></h1>
+                                <div class="footer">
+                                    <hr>
+                                    <div class="stats">
+                                        <a href="pencarian_pengajuan.php?pengajuan=&pengaju=&tanggal=&status=proses"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Proses</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title" align="center">
+                                Pengajuan Berstatus <br><b>"Selesai"</b>
+                                </h4>
+                            </div>
+<?php
+    $query_selesai = "SELECT * FROM pengajuan WHERE status LIKE 'selesai'";
+    $result_selesai = mysqli_query($link, $query_proses);
+      $banyakdata_selesai = $result_selesai->num_rows;
+?>
+                            <div align="center">
+                                <h1><?php echo $banyakdata_selesai ?></h1>
+                                <div class="footer">
+                                    <hr>
+                                    <div class="stats">
+                                        <a href="pencarian_pengajuan.php?pengajuan=&pengaju=&tanggal=&status=selesai"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Selesai</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="card ">
+                            <div class="header">
+                                <h4 class="title">List Pengajuan</h4>
+                                <p class="category">Status Pengajuan : <b>"Proses"</b></p>
+                            </div>
+                            <div class="content">
+                                <div class="table-full-width">
+                                    <table class="table">
+                                        <tbody>
+
+<?php
+      $query_pengajuan = "SELECT * FROM pengajuan WHERE status = 'proses' ORDER BY id_pengajuan DESC " ;
+      $result_pengajuan = mysqli_query($link, $query_pengajuan);
+      if(!$result_pengajuan){
+        die ("Query Error: ".mysqli_errno($link).
+           " - ".mysqli_error($link));
+      }
+      while($data_pengajuan = mysqli_fetch_assoc($result_pengajuan))
+      {
+                                        echo "<tr>";
+                                        	echo "<td> $data_pengajuan[pengajuan] - <b>$data_pengajuan[username_pengaju]</b></td>";
+                                            echo '</td>';
+                                            echo '<td class="td-actions text-right">
+                                                    <a href="detail_pengajuan.php?id='.$data_pengajuan['id_pengajuan'].'">
+                                                        <button type="button" rel="tooltip" title="Lihat Pengajuan" class="btn btn-info btn-simple btn-xs">
+                                                            <i class="fa fa-eye"></i>
+                                                        </button>
+                                                    </a>
+                                                </td>';
+                                        echo "</tr>";
+      }
+?>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="footer">
+                                    <hr>
+                                    <div class="stats">
+                                        <a href="pencarian_pengajuan.php?pengajuan=&pengaju=&tanggal=&status=proses"><i class="fa fa-link"></i> Lihat Semua Pengajuan Proses</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="card ">
+                            <div class="header">
+                                <h4 class="title">Riwayat</h4>
+                            </div>
+                            <div class="content">
+                                <div class="table-full-width">
+                                    <table class="table">
+                                        <tbody>
+<?php
+    $query2 = "SELECT * FROM riwayat ORDER BY kegiatan DESC limit 5 " ;
+      $result2 = mysqli_query($link, $query2);
+      if(!$result2){
+        die ("Query Error: ".mysqli_errno($link).
+           " - ".mysqli_error($link));
+      }
+      $no = 1;
+      while($data2 = mysqli_fetch_assoc($result2)){ 
+                                            echo "<tr>";
+                                                echo "<td>";
+                                                echo '<a href="detail_pengajuan.php?id='.$data2['id_pengajuan_kegiatan'].'" style="color:black">';
+                                                        echo '<b>'.$data2['jenis_riwayat'].'</b> - '.$data2['kegiatan'].'';
+                                                    echo '<br>';
+                                                        echo 'Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'';
+                                                echo '</a>';
+                                                echo '</td>';
+                                            echo '</tr>';
+                                        $no++;                               
+      }
+?>                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="footer">
+                                    <hr>
+                                    <div class="stats">
+                                        <a href="riwayat.php"><i class="fa fa-link"></i> Klik Disini untuk melihat semua Riwayat</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <form id="form_catatan" method="post" action="system/proses_catatan.php">
+                                <h4 class="title">Catatan</h4>
+<?php
+    $query_catatan = "SELECT * FROM catatan";
+    $result_catatan = mysqli_query($link, $query_catatan);
+    if(!$result_catatan){
+      die ("Query Error: ".mysqli_errno($link).
+         " - ".mysqli_error($link));
+    }
+    $data_catatan = mysqli_fetch_assoc($result_catatan);
+?>
+                                    <p class="category">Update Terakhir : <b><?php echo $data_catatan['update_catatan']?></b></p>
+                                </div>
+                                <div class="content">
+                                    <input type="hidden" name="id_catatan" id="form_catatan" value="<?php echo $data_catatan['id_catatan'] ?>">
+                                    <div class="form-group">
+                                        <textarea rows="5" class="form-control" placeholder="Kosong" name="catatan" id="form_catatan"><?php echo $data_catatan['catatan'] ?></textarea>
+                                    </div>
+                                
+                                <div align="right">
+                                    <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
+                                        <i class="fa fa-check"></i> Ubah Catatan
+                                    </button>
+                                </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <p class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script>, Sistem Keuangan
+                </p>
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
+
+	<!--  Charts Plugin -->
+	<script src="assets/js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="assets/js/bootstrap-notify.js"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+	<script src="assets/js/light-bootstrap-dashboard.js"></script>
+
+	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+	<script src="assets/js/demo.js"></script>
+
+	<script type="text/javascript">
+    	$(document).ready(function(){
+        	demo.initChartist();
+    	});
+	</script>
+
+</html>
