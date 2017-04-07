@@ -1,6 +1,8 @@
 <?php
+  include 'system/koneksi.php';
+  
 
-
+session_start();
  $logged_in = false;
  if (empty($_SESSION['email'])) {
    echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../login.php';</script>";
@@ -8,8 +10,6 @@
  else {
    $logged_in = true;
  }
- 
-  include 'system/koneksi.php';
   if (isset($_GET['username'])) {
     $username = ($_GET["username"]);
     $query = "SELECT * FROM user WHERE username ='$username'";
@@ -64,7 +64,17 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index.php" class="simple-text">
-                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen )</small></small>
+<?php
+ $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
+    $result_login = mysqli_query($link, $query_login);
+    if(!$result_login){
+      die ("Query Error: ".mysqli_errno($link).
+         " - ".mysqli_error($link));
+    }
+    $data_login = mysqli_fetch_assoc($result_login);
+    $username = $data_login["username"];
+?>
+                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
                 </a>
             </div>
 
@@ -91,12 +101,6 @@
                     <a href="master.php">
                         <i class="pe pe-7s-server"></i>
                         <p>Master</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="profil.php">
-                        <i class="pe pe-7s-user"></i>
-                        <p>Profile</p>
                     </a>
                 </li>
                 <li>
@@ -202,12 +206,19 @@
                                             <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
                                                 <i class="fa fa-edit"></i> Konfirmasi
                                             </button>
-                                        </a>
-                                        <a href="system/hapus_user.php?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan menghapus data?\')">
-                                            <button type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-fill">
-                                                <i class="fa fa-trash"></i> Hapus Profile
-                                            </button>
                                         </a>';
+    if( $email == $_SESSION['email'] ){
+                                            echo'<button type="button" rel="tooltip" class="btn btn-danger btn-fill" disabled>
+                                                <i class="fa fa-trash"></i> Hapus Profile
+                                            </button>';
+    }
+    else{
+                                            echo '<a href="system/hapus_user.php?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan menghapus data?\')">
+                                                <button type="button" rel="tooltip" class="btn btn-danger btn-fill">
+                                                    <i class="fa fa-trash"></i> Hapus Profile
+                                                </button>
+                                            </a>';
+    }
 ?>
                                     </div>
                                     <div class="clearfix"></div>

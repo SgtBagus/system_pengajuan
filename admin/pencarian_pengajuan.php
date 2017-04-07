@@ -3,6 +3,8 @@
   include 'system/koneksi.php';
 
 
+
+session_start();
  $logged_in = false;
  if (empty($_SESSION['email'])) {
    echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../login.php';</script>";
@@ -10,7 +12,6 @@
  else {
    $logged_in = true;
  }
- 
 ?>
 <!doctype html>
 <html lang="en">
@@ -42,7 +43,17 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index.php" class="simple-text">
-                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen )</small></small>
+<?php
+ $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
+    $result_login = mysqli_query($link, $query_login);
+    if(!$result_login){
+      die ("Query Error: ".mysqli_errno($link).
+         " - ".mysqli_error($link));
+    }
+    $data_login = mysqli_fetch_assoc($result_login);
+    $username = $data_login["username"];
+?>
+                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
                 </a>
             </div>
 
@@ -69,12 +80,6 @@
                     <a href="master.php">
                         <i class="pe pe-7s-server"></i>
                         <p>Master</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="profil.php">
-                        <i class="pe pe-7s-user"></i>
-                        <p>Profile</p>
                     </a>
                 </li>
                 <li>
