@@ -159,19 +159,20 @@ session_start();
                                     <tbody>
 
 <?php
-      $query = "SELECT * FROM pengajuan ORDER BY id_pengajuan DESC " ;
+      $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user, b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
+                a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user" ;
       $result = mysqli_query($link, $query);
       if(!$result){
         die ("Query Error: ".mysqli_errno($link).
            " - ".mysqli_error($link));
       }
       $no = 1;
-      while($data = mysqli_fetch_assoc($result))
+      while($data = mysqli_fetch_assoc($result))  
       {
                                         echo "<tr>";
                                             echo "<td>$no</td>";
                                         	echo "<td>$data[pengajuan]</td>";
-                                        	echo "<td>$data[username_pengaju]</td>";
+                                        	echo "<td>$data[username]</td>";
                                         	echo "<td>$data[jenis_pengajuan]</td>";
                                             echo "<td>$data[tanggal_pengajuan]</td>";
                                             echo "<td>$data[biaya]</td>";

@@ -11,9 +11,9 @@ session_start();
    $logged_in = true;
  }
  
-  if (isset($_GET['username'])) {
-    $username = ($_GET["username"]);
-    $query = "SELECT * FROM user WHERE username ='$username'";
+  if (isset($_GET['id'])) {
+    $id = ($_GET["id"]);
+    $query = "SELECT * FROM user WHERE id_user ='$id'";
     $result = mysqli_query($link, $query);
     if(!$result){
       die ("Query Error: ".mysqli_errno($link).
@@ -72,9 +72,9 @@ session_start();
          " - ".mysqli_error($link));
     }
     $data_login = mysqli_fetch_assoc($result_login);
-    $username = $data_login["username"];
+    $username_login = $data_login["username"];
 ?>
-                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
+                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username_login ?></small></small>
                 </a>
             </div>
 
@@ -145,7 +145,7 @@ session_start();
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="Password">Password</label>
-                                                <input type="text" name="password" class="form-control" disabled placeholder="password" value="<?php echo$password ?>">
+                                                <input type="password" name="password" class="form-control" disabled placeholder="password" value="<?php echo$password ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -219,7 +219,7 @@ session_start();
                                         </button>
                                     </a>
 <?php
-                                    echo '<a href="edit_user.php?username='.$data['username'].'">
+                                    echo '<a href="edit_user.php?id='.$data['id_user'].'">
                                             <button type="button" rel="tooltip" class="btn btn-primary btn-fill">
                                                 <i class="fa fa-edit"></i> Edit Profile
                                             </button>

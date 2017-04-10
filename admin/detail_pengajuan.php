@@ -12,7 +12,10 @@ session_start();
  
   if (isset($_GET['id'])) {
     $id = ($_GET["id"]);
-    $query = "SELECT * FROM pengajuan WHERE id_pengajuan ='$id'";
+    $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user, b.username, a.jenis_pengajuan, 
+              a.tanggal_pengajuan, a.gambar, a.biaya, a.alasan, a.status, a.catatan, a.keterangan, 
+              a.update_pengajuan, a.jadwal_pelaksanaan FROM pengajuan AS a 
+              INNER JOIN user AS b WHERE  a.id_pengajuan ='$id' AND a.id_user = b.id_user ";
     $result = mysqli_query($link, $query);
     if(!$result){
       die ("Query Error: ".mysqli_errno($link).
@@ -21,7 +24,8 @@ session_start();
     $data = mysqli_fetch_assoc($result);
     $id_pengajuan = $data["id_pengajuan"];
     $pengajuan = $data["pengajuan"];
-    $pengaju = $data["username_pengaju"];
+    $id_pengaju = $data["id_user"];
+    $pengaju = $data["username"];
     $jenis_pengajuan = $data["jenis_pengajuan"];
     $taggal_pengajuan = $data["tanggal_pengajuan"];
     $gambar = $data["gambar"];
@@ -119,7 +123,13 @@ session_start();
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title"><b><?php echo $pengajuan ?></b> ( <?php echo $status ?> ) <small> Pengaju <b>( <?php echo $pengaju ?> )</b> </small></h4>
+                                <h4 class="title"><b><?php echo $pengajuan ?></b> ( <?php echo $status ?> ) <small> Pengaju 
+                                <?php
+                                echo '<a href="detail_user.php?id='.$id_pengaju.'">
+                                    <b>( '.$pengaju.' )</b> 
+                                </a>';
+                                ?>
+                                </small></h4>
                             </div>
                             <div class="content">
                                 <form id="form_pengajuan_diterima" method="post" action="system/pengajuan_diselesaikan.php">

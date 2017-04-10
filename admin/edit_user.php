@@ -10,9 +10,9 @@ session_start();
  else {
    $logged_in = true;
  }
-  if (isset($_GET['username'])) {
-    $username = ($_GET["username"]);
-    $query = "SELECT * FROM user WHERE username ='$username'";
+  if (isset($_GET['id'])) {
+    $id = ($_GET["id"]);
+    $query = "SELECT * FROM user WHERE id_user ='$id'";
     $result = mysqli_query($link, $query);
     if(!$result){
       die ("Query Error: ".mysqli_errno($link).
@@ -72,9 +72,9 @@ session_start();
          " - ".mysqli_error($link));
     }
     $data_login = mysqli_fetch_assoc($result_login);
-    $username = $data_login["username"];
+    $username_login = $data_login["username"];
 ?>
-                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
+                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username_login ?></small></small>
                 </a>
             </div>
 

@@ -156,18 +156,18 @@ session_start();
                                             echo "<td>$data[email]</td>";
                                             echo "<td>$data[role]</td>";
                                             echo '<td>
-                                                <a href="detail_user.php?username='.$data['username'].'">
+                                                <a href="detail_user.php?id='.$data['id_user'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>
-                                                <a href="edit_user.php?username='.$data['username'].'">
+                                                <a href="edit_user.php?id='.$data['id_user'].'">
                                                     <button type="button" rel="tooltip" title="Ubah Pengguna" class="btn btn-primary">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                 </a>';
     if( $data['email'] == $_SESSION['email'] ){
-                                            echo'<button type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger" disabled>
+                                            echo'<button type="button" title="Hapus Data" class="btn btn-danger" disabled>
                                                         <i class="fa fa-trash"></i>
                                                     </button>';
     }
