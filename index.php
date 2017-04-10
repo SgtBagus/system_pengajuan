@@ -49,8 +49,8 @@ session_start();
             <ul class="nav">
                 <li class="active">
                     <a href="index.php">
-                        <i class="pe pe-7s-graph"></i>
-                        <p>Dashboard</p>
+                        <i class="pe pe-7s-home"></i>
+                        <p>Home</p>
                     </a>
                 </li>
                 <li>
@@ -60,15 +60,9 @@ session_start();
                     </a>
                 </li>
                 <li>
-                    <a href="riwayat.php">
-                        <i class="pe pe-7s-timer"></i>
-                        <p>Riwayat</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="master.php">
-                        <i class="pe pe-7s-server"></i>
-                        <p>Master</p>
+                    <a href="notifikasi.php">
+                        <i class="pe pe-7s-bell"></i>
+                        <p>Notifikasi</p>
                     </a>
                 </li>
                 <li>
@@ -78,7 +72,7 @@ session_start();
                     </a>
                 </li>
                 <li>
-                    <a href="logout.php">
+                    <a href="login.php">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
