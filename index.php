@@ -18,7 +18,7 @@ session_start();
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="assets/img/icon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Dashboard</title>
+	<title>Home</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -42,7 +42,18 @@ session_start();
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index.php" class="simple-text">
-                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM )</small></small>
+<?php
+ $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
+    $result_login = mysqli_query($con, $query_login);
+    if(!$result_login){
+      die ("Query Error: ".mysqli_errno($con).
+         " - ".mysqli_error($con));
+    }
+    $data_login = mysqli_fetch_assoc($result_login);
+    $id_login = $data_login["id_user"];
+    $username_login = $data_login["username"];
+?>
+                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) - <?php echo $username_login ?></small></small>
                 </a>
             </div>
 
@@ -85,99 +96,52 @@ session_start();
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title" align="center">
-                                    Pengajuan Berstatus <br><b>"Menunggu"</b>
-                                </h4>
-                            </div>
-<?php
-    $query_menunggu = "SELECT * FROM pengajuan WHERE status LIKE 'menunggu'";
-    $result_menunggu = mysqli_query($link, $query_menunggu);
-      $banyakdata_menunggu = $result_menunggu->num_rows;
-?>
-                            <div align="center">
-                                <h1><?php echo $banyakdata_menunggu ?></h1>
-                                <div class="footer">
-                                    <hr>
-                                    <div class="stats">
-                                        <a href="pencarian_pengajuan.php?pengajuan=&pengaju=&tanggal=&status=menunggu"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Menunggu</a>
+                                    <h4 class="title">Catatan</h4>
+    <?php
+        $query_catatan = "SELECT * FROM catatan";
+        $result_catatan = mysqli_query($con, $query_catatan);
+        if(!$result_catatan){
+        die ("Query Error: ".mysqli_errno($con).
+            " - ".mysqli_error($con));
+        }
+        $data_catatan = mysqli_fetch_assoc($result_catatan);
+    ?>
+                                        <p class="category">Update Terakhir : <b><?php echo $data_catatan['update_catatan']?></b></p>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title" align="center">
-                                Pengajuan Berstatus <br><b>"Proses"</b>
-                                </h4>
-                            </div>
-<?php
-    $query_proses = "SELECT * FROM pengajuan WHERE status LIKE 'proses'";
-    $result_proses = mysqli_query($link, $query_proses);
-      $banyakdata_proses = $result_proses->num_rows;
-?>
-                            <div align="center">
-                                <h1><?php echo $banyakdata_proses ?></h1>
-                                <div class="footer">
-                                    <hr>
-                                    <div class="stats">
-                                        <a href="pencarian_pengajuan.php?pengajuan=&pengaju=&tanggal=&status=proses"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Proses</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title" align="center">
-                                Pengajuan Berstatus <br><b>"Selesai"</b>
-                                </h4>
-                            </div>
-<?php
-    $query_selesai = "SELECT * FROM pengajuan WHERE status LIKE 'selesai'";
-    $result_selesai = mysqli_query($link, $query_proses);
-      $banyakdata_selesai = $result_selesai->num_rows;
-?>
-                            <div align="center">
-                                <h1><?php echo $banyakdata_selesai ?></h1>
-                                <div class="footer">
-                                    <hr>
-                                    <div class="stats">
-                                        <a href="pencarian_pengajuan.php?pengajuan=&pengaju=&tanggal=&status=selesai"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Selesai</a>
-                                    </div>
-                                </div>
+                                    <div class="content">
+                                    <p><?php echo $data_catatan['catatan'] ?></p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-7">
-                        <div class="card ">
+                    <div class="col-md-8">
+                        <div class="card">
                             <div class="header">
-                                <h4 class="title">List Pengajuan</h4>
-                                <p class="category">Status Pengajuan : <b>"Proses"</b></p>
+                                <h4 class="title" align="center">
+                                    Pengajuan Terakhir <br>
+                                </h4>
                             </div>
                             <div class="content">
                                 <div class="table-full-width">
                                     <table class="table">
                                         <tbody>
-
 <?php
-      $query_pengajuan = "SELECT * FROM pengajuan WHERE status = 'proses' ORDER BY id_pengajuan DESC " ;
-      $result_pengajuan = mysqli_query($link, $query_pengajuan);
+      $query_pengajuan = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.status
+                            FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user
+                            AND b.username = '$username_login' ORDER BY a.id_pengajuan DESC LIMIT 5 ";
+      $result_pengajuan = mysqli_query($con, $query_pengajuan);
       if(!$result_pengajuan){
-        die ("Query Error: ".mysqli_errno($link).
-           " - ".mysqli_error($link));
+        die ("Query Error: ".mysqli_errno($con).
+           " - ".mysqli_error($con));
       }
       while($data_pengajuan = mysqli_fetch_assoc($result_pengajuan))
       {
                                         echo "<tr>";
-                                        	echo "<td> $data_pengajuan[pengajuan] - <b>$data_pengajuan[username_pengaju]</b></td>";
+                                        	echo "<td> $data_pengajuan[pengajuan] - ( <b>$data_pengajuan[status]</b> )</td>";
                                             echo '</td>';
                                             echo '<td class="td-actions text-right">
                                                     <a href="detail_pengajuan.php?id='.$data_pengajuan['id_pengajuan'].'">
@@ -196,42 +160,24 @@ session_start();
                                 <div class="footer">
                                     <hr>
                                     <div class="stats">
-                                        <a href="pencarian_pengajuan.php?pengajuan=&pengaju=&tanggal=&status=proses"><i class="fa fa-link"></i> Lihat Semua Pengajuan Proses</a>
+                                        <a href="pengajuan.php"><i class="fa fa-link"></i> Lihat Semua Pengajuan </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
-                        <div class="card ">
+                    <div class="col-md-4">
+                        <div class="card">
                             <div class="header">
-                                <h4 class="title">Riwayat</h4>
+                                <h4 class="title" align="center">
+                                Notifikasi
+                                </h4>
                             </div>
                             <div class="content">
                                 <div class="table-full-width">
                                     <table class="table">
                                         <tbody>
-<?php
-    $query2 = "SELECT * FROM riwayat ORDER BY kegiatan DESC limit 5 " ;
-      $result2 = mysqli_query($link, $query2);
-      if(!$result2){
-        die ("Query Error: ".mysqli_errno($link).
-           " - ".mysqli_error($link));
-      }
-      $no = 1;
-      while($data2 = mysqli_fetch_assoc($result2)){ 
-                                            echo "<tr>";
-                                                echo "<td>";
-                                                echo '<a href="detail_pengajuan.php?id='.$data2['id_pengajuan_kegiatan'].'" style="color:black">';
-                                                        echo '<b>'.$data2['jenis_riwayat'].'</b> - '.$data2['kegiatan'].'';
-                                                    echo '<br>';
-                                                        echo 'Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'';
-                                                echo '</a>';
-                                                echo '</td>';
-                                            echo '</tr>';
-                                        $no++;                               
-      }
-?>                                            
+<!--  blm ada table notifikasi -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -239,43 +185,20 @@ session_start();
                                 <div class="footer">
                                     <hr>
                                     <div class="stats">
-                                        <a href="riwayat.php"><i class="fa fa-link"></i> Klik Disini untuk melihat semua Riwayat</a>
+                                        <a href="notifikasi.php"><i class="fa fa-link"></i> Lihat Semua Notifikasi </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="header">
-                            <form id="form_catatan" method="post" action="system/proses_catatan.php">
-                                <h4 class="title">Catatan</h4>
-<?php
-    $query_catatan = "SELECT * FROM catatan";
-    $result_catatan = mysqli_query($link, $query_catatan);
-    if(!$result_catatan){
-      die ("Query Error: ".mysqli_errno($link).
-         " - ".mysqli_error($link));
-    }
-    $data_catatan = mysqli_fetch_assoc($result_catatan);
-?>
-                                    <p class="category">Update Terakhir : <b><?php echo $data_catatan['update_catatan']?></b></p>
-                                </div>
-                                <div class="content">
-                                    <input type="hidden" name="id_catatan" id="form_catatan" value="<?php echo $data_catatan['id_catatan'] ?>">
-                                    <div class="form-group">
-                                        <textarea rows="5" class="form-control" placeholder="Kosong" name="catatan" id="form_catatan"><?php echo $data_catatan['catatan'] ?></textarea>
-                                    </div>
-                                
-                                <div align="right">
-                                    <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
-                                        <i class="fa fa-check"></i> Ubah Catatan
-                                    </button>
-                                </div>
-                                </div>
-                            </form>
-                        </div>
+                <div class="row">
+                    <div align="right">
+                        <a href="ajukan_pengajuan.php">
+                            <button type="button" rel="tooltip" class="btn btn-primary btn-fill">
+                                <i class="fa fa-plus"></i> Ajukan Pengajuan
+                            </button>
+                        </a>    
                     </div>
                 </div>
             </div>

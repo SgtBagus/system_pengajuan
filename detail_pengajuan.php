@@ -74,7 +74,7 @@ include"system/koneksi.php";
     $data_login = mysqli_fetch_assoc($result_login);
     $username_login = $data_login["username"];
 ?>
-                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) <?php echo $username_login ?></small></small>
+                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) - <?php echo $username_login ?></small></small>
                 </a>
             </div>
 

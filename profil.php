@@ -60,7 +60,7 @@ session_start();
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index.php" class="simple-text">
-                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) <?php echo $username ?></small></small>
+                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) - <?php echo $username ?></small></small>
                 </a>
             </div>
 
