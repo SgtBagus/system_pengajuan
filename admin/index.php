@@ -176,7 +176,9 @@ session_start();
                                         <tbody>
 
 <?php
-      $query_pengajuan = "SELECT * FROM pengajuan WHERE status = 'proses' ORDER BY id_pengajuan DESC " ;
+      $query_pengajuan = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.status
+                            FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user
+                            AND a.status = 'proses' ";
       $result_pengajuan = mysqli_query($link, $query_pengajuan);
       if(!$result_pengajuan){
         die ("Query Error: ".mysqli_errno($link).
@@ -185,7 +187,7 @@ session_start();
       while($data_pengajuan = mysqli_fetch_assoc($result_pengajuan))
       {
                                         echo "<tr>";
-                                        	echo "<td> $data_pengajuan[pengajuan] - <b>$data_pengajuan[username_pengaju]</b></td>";
+                                        	echo "<td> $data_pengajuan[pengajuan] - <b>$data_pengajuan[username]</b></td>";
                                             echo '</td>';
                                             echo '<td class="td-actions text-right">
                                                     <a href="detail_pengajuan.php?id='.$data_pengajuan['id_pengajuan'].'">
@@ -230,7 +232,7 @@ session_start();
       while($data2 = mysqli_fetch_assoc($result2)){ 
                                             echo "<tr>";
                                                 echo "<td>";
-                                                echo '<a href="detail_pengajuan.php?id='.$data2['id_pengajuan_kegiatan'].'" style="color:black">';
+                                                echo '<a href="detail_pengajuan.php?id='.$data2['id_pengajuan'].'" style="color:black">';
                                                         echo '<b>'.$data2['jenis_riwayat'].'</b> - '.$data2['kegiatan'].'';
                                                     echo '<br>';
                                                         echo 'Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'';
