@@ -99,8 +99,10 @@ session_start();
     $judul = ($_GET["pengajuan"]);
     $tanggal = ($_GET["tanggal"]);
     $status = ($_GET["status"]);
-    $query = "SELECT * FROM pengajuan WHERE pengajuan LIKE '%".$judul."%' AND tanggal_pengajuan like '%".$tanggal."%' 
-              AND status like '%".$status."%' ORDER BY pengajuan ASC ";
+    $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
+            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+            AND b.username like '$username_login' AND a.pengajuan LIKE '%".$judul."%' AND a.tanggal_pengajuan like '%".$tanggal."%' 
+            AND a.status like '%".$status."%' ORDER BY a.pengajuan ASC " ;  
     $result = mysqli_query($con, $query);
       $no = 1;
       $cek = count($result);
@@ -204,7 +206,6 @@ if ($status == ""){
 ?>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>

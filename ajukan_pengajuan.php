@@ -47,6 +47,7 @@ include"system/koneksi.php";
          " - ".mysqli_error($con));
     }
     $data_login = mysqli_fetch_assoc($result_login);
+    $id_login = $data_login["id_user"];
     $username_login = $data_login["username"];
 ?>
                     Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) <?php echo $username_login ?></small></small>
@@ -104,7 +105,7 @@ include"system/koneksi.php";
                                             <div class="form-group">
                                                 <label>Pengajuan</label>
                                                 <input type="text" name="pengajuan" id="form_pengajuan" class="form-control" placeholder="Pengajuan" required >
-                                                <input type="hidden" name="username_pengaju" id="form_pengajuan" value="<?php echo $username_login ?>" >
+                                                <input type="hidden" name="id_pengaju" id="form_pengajuan" value="<?php echo $id_login ?>" >
                                             </div>
                                         </div>
                                     </div>

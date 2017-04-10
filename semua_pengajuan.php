@@ -1,25 +1,23 @@
 <?php
-include"system/koneksi.php";
-?>
-<html>
-<?php
-    session_start();
-  $logged_in = false;
-  if (empty($_SESSION['email'])) {
-    echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../Pengajuan Barang dan Training/login.php';</script>";
-  }
-  else {
-    $logged_in = true;
-  }
+  // memanggil file koneksi.php untuk melakukan koneksi database
+  include 'system/koneksi.php';
+session_start();
+ $logged_in = false;
+ if (empty($_SESSION['email'])) {
+   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../login.php';</script>";
+ }
+ else {
+   $logged_in = true;
+ }
 ?>
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="assets/img/icon.png">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Dashboard</title>
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/img/icon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Master</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -39,7 +37,7 @@ include"system/koneksi.php";
 
 <div class="wrapper">
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
-    	<div class="sidebar-wrapper">
+        <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index.php" class="simple-text">
 <?php
@@ -52,7 +50,7 @@ include"system/koneksi.php";
     $data_login = mysqli_fetch_assoc($result_login);
     $username_login = $data_login["username"];
 ?>
-                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) <?php echo $username_login ?></small></small>
+                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) - <?php echo $username_login ?></small></small>
                 </a>
             </div>
 
@@ -88,7 +86,7 @@ include"system/koneksi.php";
                     </a>
                 </li>
             </ul>
-    	</div>
+        </div>
     </div>
 
     <div class="main-panel">
@@ -169,7 +167,8 @@ include"system/koneksi.php";
                                     </thead>
                                     <tbody>
 <?php
-      $query = "SELECT * FROM pengajuan ORDER BY id_pengajuan DESC " ;
+      $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
+                a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user";
       $result = mysqli_query($con, $query);
       if(!$result){
         die ("Query Error: ".mysqli_errno($con).
@@ -181,28 +180,28 @@ include"system/koneksi.php";
                                         echo "<tr>";
                                             echo "<td>$no</td>";
                                             echo "<td>$data[pengajuan]</td>";
-                                            echo "<td>$data[username_pengaju]</td>";
+                                            echo "<td>$data[username]</td>";
                                             echo "<td>$data[jenis_pengajuan]</td>";
                                             echo "<td>$data[tanggal_pengajuan]</td>";
                                             echo "<td>$data[biaya]</td>";
                                             echo "<td>$data[status]</td>";
                                             echo '<td align="center">';
-    if($data['username_pengaju']== $username_login ){
+    if($data['username']== $username_login ){
         if($data['status'] == "menunggu" ){
                                             echo '
                                                 <a href="detail_pengajuan.php?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
-                                                        <i class="fa fa-eye"></i>
+                                                        <i class="fa fa-eye"> </i>
                                                     </button>
                                                 </a>
                                                 <a href="edit_pengajuan.php?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Ubah Pengajuan" class="btn btn-primary btn-fill">
-                                                        <i class="fa fa-Edit"></i>
+                                                        <i class="fa fa-edit"></i>
                                                     </button>
                                                 </a>
                                                 <a href="system/hapus_user.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
                                                     <button type="button" rel="tooltip" title="Batalkan Pengajuan" class="btn btn-danger btn-fill">
-                                                        <i class="fa fa-trash"></i>
+                                                        <i class="fa fa-trash"> </i>
                                                     </button>
                                                 </a>';
         }
@@ -210,7 +209,7 @@ include"system/koneksi.php";
                                             echo '
                                                 <a href="detail_pengajuan.php?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
-                                                        <i class="fa fa-eye"></i>
+                                                        <i class="fa fa-eye"> </i>
                                                     </button>
                                                 </a>';
         }
@@ -227,7 +226,6 @@ include"system/koneksi.php";
                                                     </button>
                                                 </a>';
         }
-
     }
     else {
         echo '
@@ -260,13 +258,13 @@ include"system/koneksi.php";
 
     <!--   Core JS Files   -->
     <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
-	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
+    <!--  Checkbox, Radio & Switch Plugins -->
+    <script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
 
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
+    <!--  Charts Plugin -->
+    <script src="assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
@@ -275,15 +273,15 @@ include"system/koneksi.php";
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="assets/js/light-bootstrap-dashboard.js"></script>
+    <script src="assets/js/light-bootstrap-dashboard.js"></script>
 
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
+    <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+    <script src="assets/js/demo.js"></script>
 
-	<script type="text/javascript">
-    	$(document).ready(function(){
-        	demo.initChartist();
-    	});
-	</script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            demo.initChartist();
+        });
+    </script>
 
 </html>

@@ -11,7 +11,9 @@ include"system/koneksi.php";
 
   if (isset($_GET['id'])) {
     $id = ($_GET["id"]);
-    $query = "SELECT * FROM pengajuan WHERE id_pengajuan ='$id'";
+    $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
+                a.gambar, a.biaya, a.alasan, a.keterangan, a.jadwal_pelaksanaan, a.catatan, a.status, a.update_pengajuan
+                FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user AND a.id_pengajuan like '$id'" ;
     $result = mysqli_query($con, $query);
     if(!$result){
       die ("Query Error: ".mysqli_errno($con).
@@ -20,7 +22,7 @@ include"system/koneksi.php";
     $data = mysqli_fetch_assoc($result);
     $id_pengajuan = $data["id_pengajuan"];
     $pengajuan = $data["pengajuan"];
-    $pengaju = $data["username_pengaju"];
+    $pengaju = $data["username"];
     $jenis_pengajuan = $data["jenis_pengajuan"];
     $taggal_pengajuan = $data["tanggal_pengajuan"];
     $gambar = $data["gambar"];
@@ -153,7 +155,7 @@ include"system/koneksi.php";
                                                         <td><h5><b> : </h5></b></td>
                                                         <td><h5>';
 ?>
-                                                         <img src='../image/<?php echo $gambar ?>' width='320' height='180'></h5>
+                                                         <img src='image/<?php echo $gambar ?>' width='320' height='180'></h5>
 <?php                                                        
                                                         echo '</td>
                                                     </tr>';
@@ -210,7 +212,7 @@ include"system/koneksi.php";
                                                 </table>
                                                 <table>
 <?php
-    $query2 = "SELECT * FROM riwayat WHERE id_pengajuan_kegiatan ='$id' ORDER BY kegiatan ASC" ;
+    $query2 = "SELECT * FROM riwayat WHERE id_pengajuan ='$id' ORDER BY kegiatan ASC" ;
       $result2 = mysqli_query($con, $query2);
       if(!$result2){
         die ("Query Error: ".mysqli_errno($con).
@@ -222,8 +224,7 @@ include"system/koneksi.php";
                                                         echo "<td><b>$no </b></td>";
                                                         echo "<td> - </td>";
                                                         echo "<td> <b>$data2[kegiatan2] </b> </td>";
-                                                        echo "<td> - </td>";
-                                                        echo "<td><small> <b>$data2[tanggal_kegiatan]</b></small></td>";
+                                                        echo "<td><small>$data2[tanggal_kegiatan]</small></td>";
                                                     echo "</tr>";
                                         $no++;
       }                                                      
@@ -269,7 +270,6 @@ if( $data['status'] == "menunggu"){
                                                 </a>';
         }
     else {
-
     }   
     }
 ?>
