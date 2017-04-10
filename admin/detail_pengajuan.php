@@ -221,7 +221,7 @@ session_start();
                                                 </table>
                                                 <table>
 <?php
-    $query2 = "SELECT * FROM riwayat WHERE id_pengajuan_kegiatan ='$id' ORDER BY kegiatan ASC" ;
+    $query2 = "SELECT * FROM riwayat WHERE id_pengajuan ='$id' ORDER BY kegiatan ASC" ;
       $result2 = mysqli_query($link, $query2);
       if(!$result2){
         die ("Query Error: ".mysqli_errno($link).

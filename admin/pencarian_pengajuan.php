@@ -51,7 +51,7 @@ session_start();
          " - ".mysqli_error($link));
     }
     $data_login = mysqli_fetch_assoc($result_login);
-    $username = $data_login["username"];
+    $username = $data_login["username"]; 
 ?>
                     Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
                 </a>
@@ -102,8 +102,10 @@ session_start();
     $username = ($_GET["pengaju"]);
     $tanggal = ($_GET["tanggal"]);
     $status = ($_GET["status"]);
-    $query = "SELECT * FROM pengajuan WHERE pengajuan LIKE '%".$judul."%' AND username_pengaju LIKE '%".$username."%' AND tanggal_pengajuan like '%".$tanggal."%' 
-              AND status like '%".$status."%' ORDER BY pengajuan ASC ";
+    $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
+            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+            AND a.pengajuan LIKE '%".$judul."%' AND b.username LIKE '%".$username."%' AND a.tanggal_pengajuan like '%".$tanggal."%' 
+            AND a.status like '%".$status."%' ORDER BY a.pengajuan ASC " ;
     $result = mysqli_query($link, $query);
       $no = 1;
       $cek = count($result);
@@ -121,7 +123,7 @@ if ($status == ""){
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h4 class="title">Data Pengguna</h4>
-                                        <small>Pencarian Judul = <b>"<?php echo $judul ?>"</b> Tanggal = <b>"<?php echo $tanggal ?>"</b> Status = <b>"<?php echo $semua ?>"</b>
+                                        <small>Pencarian Judul = <b>"<?php echo $judul ?>"</b> Pengaju = <b>"<?php echo $username ?>"</b> Tanggal = <b>"<?php echo $tanggal ?>"</b> Status = <b>"<?php echo $semua ?>"</b>
                                         <br> Data sebanyak <b>[ '<?php echo $banyakdata ?>' ]</b></small>
                                         <a href="pengajuan.php"><p class="category"><i class="fa fa-refresh"></i> Reset Data Pengguna</p></a>
                                     </div>  
@@ -135,7 +137,7 @@ if ($status == ""){
                                         <th>No</th>
                                         <th>Pengajuan</th>
                                         <th>Pengaju</th>
-                                    	<th>Jenis</th>
+                                        <th>Jenis</th>
                                         <th>tanggal</th>
                                         <th>biaya</th>
                                         <th>status</th>
@@ -154,9 +156,9 @@ if ($status == ""){
       {
                                         echo "<tr>";
                                             echo "<td>$no</td>";
-                                        	echo "<td>$data[pengajuan]</td>";
-                                        	echo "<td>$data[username_pengaju]</td>";
-                                        	echo "<td>$data[jenis_pengajuan]</td>";
+                                            echo "<td>$data[pengajuan]</td>";
+                                            echo "<td>$data[username]</td>";
+                                            echo "<td>$data[jenis_pengajuan]</td>";
                                             echo "<td>$data[tanggal_pengajuan]</td>";
                                             echo "<td>$data[biaya]</td>";
                                             echo "<td>$data[status]</td>";

@@ -106,22 +106,28 @@ session_start();
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Edit Profile <b> (<?php echo $username ?> ) </b> - <small> <?php echo $role ?></small></h4>
+                                <h4 class="title">Edit Profile <b> (<?php echo $username ?> ) </b></h4>
                             </div>
                             <div class="content">
                                 <form id="form_edit_user" method="post" action="system/proses_edit_profil.php">
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                <label for="Email">Username</label>
+                                                <input type="text" name="username" id="form_edit_user" class="form-control" placeholder="email" value="<?php echo $username ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
                                                 <label for="Email">Email address</label>
-                                                <input type="email" name="email" id="email" class="form-control" placeholder="email" value="<?php echo $email ?>">
+                                                <input type="email" name="email" id="form_edit_user" class="form-control" placeholder="email" value="<?php echo $email ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="Password">Password</label>
-                                                <input type="password" name="password" id="password" class="form-control" placeholder="Password" value="<?php echo $password ?>">
+                                                <input type="password" name="password" id="form_edit_user" class="form-control" placeholder="Password" value="<?php echo $password ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -130,13 +136,13 @@ session_start();
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nama Depan</label>
-                                                <input type="text" name="nama_depan" id="nama_depan" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>">
+                                                <input type="text" name="nama_depan" id="form_edit_user" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nama Belakang</label>
-                                                <input type="text" name="nama_belakang" id="nama_belakang" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" >
+                                                <input type="text" name="nama_belakang" id="form_edit_user" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" >
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +150,7 @@ session_start();
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Alamat</label>
-                                                <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" >
+                                                <input type="text" name="alamat" id="form_edit_user" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" >
                                             </div>
                                         </div>
                                     </div>
@@ -154,7 +160,7 @@ session_start();
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>No. Hp</label>
-                                                <input type="number" name="nohp" id="no_hp" class="form-control" placeholder="No Hp" value="<?php echo $nohp ?>" >
+                                                <input type="number" name="nohp" id="form_edit_user" class="form-control" placeholder="No Hp" value="<?php echo $nohp ?>" >
                                             </div>
                                         </div>
                                     </div>
