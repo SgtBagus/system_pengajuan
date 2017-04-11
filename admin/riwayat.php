@@ -97,44 +97,35 @@ session_start();
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card ">
-                            <div class="header">
-                                <h4 class="title">Riwayat</h4>
-                            </div>
-                            <div class="content">
-                                <div class="table-full-width">
-                                    <table class="table">
-                                        <tbody>
+                    <div class="header">
+                        <h4>Riwayat</h4>
+                    </div>
 <?php
-    $query2 = "SELECT * FROM riwayat ORDER BY kegiatan DESC " ;
+    $query2 = "SELECT a.id_riwayat, a.kegiatan, a.id_pengajuan, a.jenis_riwayat, a.kegiatan3, 
+               a.tanggal_kegiatan, b.id_user, a.notifikasi FROM riwayat 
+               AS a INNER JOIN pengajuan AS b WHERE a.id_pengajuan = b.id_pengajuan
+               ORDER BY id_riwayat DESC " ;
       $result2 = mysqli_query($link, $query2);
       if(!$result2){
         die ("Query Error: ".mysqli_errno($link).
            " - ".mysqli_error($link));
       }
-      $no = 1;
       while($data2 = mysqli_fetch_assoc($result2)){ 
-                                            echo "<tr>";
-                                                echo "<td>";
-                                                echo '<a href="detail_pengajuan.php?id='.$data2['id_pengajuan_kegiatan'].'" style="color:black">';
-                                                        echo '<b>'.$data2['jenis_riwayat'].'</b> - '.$data2['kegiatan'].'';
-                                                    echo '<br>';
-                                                        echo 'Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'';
-                                                echo '</a>';
-                                                echo '</td>';
-                                            echo '</tr>';
-                                        $no++;                               
+                    echo '<a href="detail_pengajuan.php?id='.$data2['id_pengajuan'].'" style="color:black">';
+                        echo '<div class="card">';
+                            echo '<div class="content">';
+                                echo '<input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">';
+                                echo '<h5><b>'.$data2['jenis_riwayat'].'</b> - <small>'.$data2['kegiatan3'].'</small></h5>';
+                                echo '<h5>Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'</h5>';
+                            echo '</div>';
+                        echo '</div>';
+                    echo '</a>';
       }
-?>                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+?>                          
                     </div>
                 </div>
             </div>
-        </div>
+        </div>  
     </div>
 </div>
 

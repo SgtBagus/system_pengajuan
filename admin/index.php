@@ -213,43 +213,40 @@ session_start();
                         </div>
                     </div>
                     <div class="col-md-5">
-                        <div class="card ">
+                        <div class="card">
                             <div class="header">
-                                <h4 class="title">Riwayat</h4>
+                                <h4 class="title">
+                                Riwayat
+                                </h4>
                             </div>
                             <div class="content">
-                                <div class="table-full-width">
-                                    <table class="table">
-                                        <tbody>
 <?php
-    $query2 = "SELECT * FROM riwayat ORDER BY kegiatan DESC limit 5 " ;
+    $query2 = "SELECT a.id_riwayat, a.kegiatan, a.id_pengajuan, a.jenis_riwayat, a.kegiatan3, 
+               a.tanggal_kegiatan, b.id_user, a.notifikasi FROM riwayat 
+               AS a INNER JOIN pengajuan AS b WHERE a.id_pengajuan = b.id_pengajuan
+               ORDER BY id_riwayat DESC LIMIT 3" ;
       $result2 = mysqli_query($link, $query2);
       if(!$result2){
         die ("Query Error: ".mysqli_errno($link).
            " - ".mysqli_error($link));
       }
-      $no = 1;
       while($data2 = mysqli_fetch_assoc($result2)){ 
-                                            echo "<tr>";
-                                                echo "<td>";
-                                                echo '<a href="detail_pengajuan.php?id='.$data2['id_pengajuan'].'" style="color:black">';
-                                                        echo '<b>'.$data2['jenis_riwayat'].'</b> - '.$data2['kegiatan'].'';
-                                                    echo '<br>';
-                                                        echo 'Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'';
-                                                echo '</a>';
-                                                echo '</td>';
-                                            echo '</tr>';
-                                        $no++;                               
+                    echo '<a href="detail_pengajuan.php?id='.$data2['id_pengajuan'].'" style="color:black">';
+                        echo '<div class="card">';
+                            echo '<div class="content">';
+                                echo '<input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">';
+                                echo '<h5><b>'.$data2['jenis_riwayat'].'</b> - <small>'.$data2['kegiatan'].'</small></h5>';
+                                echo 'Tanggal = '.$data2['tanggal_kegiatan'].'';
+                            echo '</div>';
+                        echo '</div>';
+                    echo '</a>';
       }
-?>                                            
-                                        </tbody>
-                                    </table>
-                                </div>
+?>  
 
                                 <div class="footer">
                                     <hr>
                                     <div class="stats">
-                                        <a href="riwayat.php"><i class="fa fa-link"></i> Klik Disini untuk melihat semua Riwayat</a>
+                                        <a href="riwayat.php"><i class="fa fa-link"></i> Lihat Semua Riwayat </a>
                                     </div>
                                 </div>
                             </div>
@@ -289,15 +286,13 @@ session_start();
                     </div>
                 </div>
             </div>
-        </div>
-        <footer class="footer">
-            <div class="container-fluid">
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, Sistem Keuangan
-                </p>
-            </div>
-        </footer>
-
+            <footer class="footer">
+                <div class="container-fluid">
+                    <p class="copyright pull-right">
+                        &copy; <script>document.write(new Date().getFullYear())</script>, Sistem Keuangan
+                    </p>
+                </div>
+            </footer>
     </div>
 </div>
 
