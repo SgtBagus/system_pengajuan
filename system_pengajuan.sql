@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 11 Apr 2017 pada 04.02
+-- Generation Time: 11 Apr 2017 pada 10.28
 -- Versi Server: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -100,19 +100,21 @@ CREATE TABLE `riwayat` (
   `id_riwayat` int(11) NOT NULL,
   `kegiatan` varchar(225) NOT NULL,
   `kegiatan2` varchar(225) NOT NULL,
+  `kegiatan3` varchar(225) NOT NULL,
   `jenis_riwayat` varchar(225) NOT NULL,
   `id_pengajuan` int(11) NOT NULL,
-  `tanggal_kegiatan` date NOT NULL
+  `tanggal_kegiatan` date NOT NULL,
+  `notifikasi` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `riwayat`
 --
 
-INSERT INTO `riwayat` (`id_riwayat`, `kegiatan`, `kegiatan2`, `jenis_riwayat`, `id_pengajuan`, `tanggal_kegiatan`) VALUES
-(6, 'Telah Melakukan Menerima Pengajuan', 'Pengajuan diterima', 'Penerimaan', 1, '2017-04-06'),
-(7, 'Telah Melakukan Menolak Pengajuan', 'Pengajuan Ditolak', 'Penolakan', 5, '2017-04-06'),
-(9, 'Telah Melakukan Perubahan Pengajuan', 'Pengajuan Diubah', 'Pengubahan', 1, '2017-04-06');
+INSERT INTO `riwayat` (`id_riwayat`, `kegiatan`, `kegiatan2`, `kegiatan3`, `jenis_riwayat`, `id_pengajuan`, `tanggal_kegiatan`, `notifikasi`) VALUES
+(6, 'Telah Melakukan Menerima Pengajuan', 'Pengajuan diterima', 'Pengajuan Anda Telah DiTerima Oleh Pihak Manajemen', 'Penerimaan', 1, '2017-04-06', '1'),
+(7, 'Telah Melakukan Menolak Pengajuan', 'Pengajuan Ditolak', 'Pengajuan Anda Telah DiTolak Oleh Pihak Manajemen', 'Penolakan', 5, '2017-04-06', '1'),
+(9, 'Telah Melakukan Perubahan Pengajuan', 'Pengajuan Diubah', 'Pengajuan Anda Telah Diubah Oleh Pihak Manajemen', 'Pengubahan', 1, '2017-04-06', '0');
 
 -- --------------------------------------------------------
 
