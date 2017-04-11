@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 07 Apr 2017 pada 11.27
+-- Generation Time: 11 Apr 2017 pada 04.02
 -- Versi Server: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -65,9 +65,9 @@ INSERT INTO `jenis_pengajuan` (`id_jenis_pengajuan`, `jenis_pengajuan`, `deskrip
 --
 
 CREATE TABLE `pengajuan` (
-  `id_pengajuan` int(5) NOT NULL,
+  `id_pengajuan` int(11) NOT NULL,
   `pengajuan` varchar(225) NOT NULL,
-  `username_pengaju` varchar(225) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `jenis_pengajuan` varchar(225) NOT NULL,
   `tanggal_pengajuan` date NOT NULL,
   `gambar` varchar(225) NOT NULL,
@@ -84,12 +84,11 @@ CREATE TABLE `pengajuan` (
 -- Dumping data untuk tabel `pengajuan`
 --
 
-INSERT INTO `pengajuan` (`id_pengajuan`, `pengajuan`, `username_pengaju`, `jenis_pengajuan`, `tanggal_pengajuan`, `gambar`, `biaya`, `alasan`, `keterangan`, `jadwal_pelaksanaan`, `catatan`, `status`, `update_pengajuan`) VALUES
-(1, 'Pengajuan Pembelian Terminal Listrik', 'Bambang57', 'barang', '2017-03-31', 'tes.png', 50000, 'Saya mengajukan ini, karena saya merasa disini kita kekurangan terminal listrik sebanyak 2 dengan 5 stopkontak/terminal', '', '2017-04-07', 'tes', 'proses', '2017-04-06'),
-(2, 'Pengajuan Kabel LAN', 'Resuni32', 'barang', '2017-03-31', '', 40000, 'Saya merasa disini kita kekurangan kabel LAN, kasian terhadap PC user yang tidak bisa terkoneksi ke internet', '-', '0000-00-00', 'ditolak karena alasan pengajuan tidak jelas', 'selesai', '2017-04-04'),
-(3, 'Pengajuan Kipas Angin', 'Sulito45', 'barang', '2017-03-31', '', 50000, 'Kita Sepertinya Kekurangan Kipas angin ', '-', '2017-04-08', 'Tes riwayat ubah', 'proses', '2017-04-06'),
-(4, 'Pengajuan Meja', 'Susilo89', 'barang', '2017-04-05', '', 300000, 'Kita sepertinya kekurangan meja buat kerja', '', '0000-00-00', '', 'menunggu', '2017-04-05'),
-(5, 'Pengajuan Kursi', 'Susilo56', 'barang', '2017-04-06', 'kursi.jpg', 500000, 'Di belakang kita kekurangan Kursi', '', '0000-00-00', 'Kursi Udah banyak ', 'selesai', '2017-04-06');
+INSERT INTO `pengajuan` (`id_pengajuan`, `pengajuan`, `id_user`, `jenis_pengajuan`, `tanggal_pengajuan`, `gambar`, `biaya`, `alasan`, `keterangan`, `jadwal_pelaksanaan`, `catatan`, `status`, `update_pengajuan`) VALUES
+(1, 'Pengajuan Pembelian Terminal Listrik', 6, 'barang', '2017-03-31', 'tes.png', 50000, 'Saya mengajukan ini, karena saya merasa disini kita kekurangan terminal listrik sebanyak 2 dengan 5 stopkontak/terminal', '', '2017-04-07', 'tes', 'proses', '2017-04-06'),
+(4, 'Pengajuan Meja', 6, 'barang', '2017-04-05', '', 300000, 'Kita sepertinya kekurangan meja buat kerja', '', '0000-00-00', '', 'menunggu', '2017-04-05'),
+(5, 'Pengajuan Kursi', 6, 'barang', '2017-04-06', 'kursi.jpg', 500000, 'Di belakang kita kekurangan Kursi', '', '0000-00-00', 'Kursi Udah banyak ', 'selesai', '2017-04-06'),
+(6, 'tes', 4, 'tes', '2017-04-10', '', 12334, 'tes', 'tes', '0000-00-00', '', 'menunggu', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -102,7 +101,7 @@ CREATE TABLE `riwayat` (
   `kegiatan` varchar(225) NOT NULL,
   `kegiatan2` varchar(225) NOT NULL,
   `jenis_riwayat` varchar(225) NOT NULL,
-  `id_pengajuan_kegiatan` int(11) NOT NULL,
+  `id_pengajuan` int(11) NOT NULL,
   `tanggal_kegiatan` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -110,10 +109,10 @@ CREATE TABLE `riwayat` (
 -- Dumping data untuk tabel `riwayat`
 --
 
-INSERT INTO `riwayat` (`id_riwayat`, `kegiatan`, `kegiatan2`, `jenis_riwayat`, `id_pengajuan_kegiatan`, `tanggal_kegiatan`) VALUES
-(6, 'Telah Melakukan Menerima Pengajuan', 'Pengajuan diterima', 'Penerimaan', 3, '2017-04-06'),
+INSERT INTO `riwayat` (`id_riwayat`, `kegiatan`, `kegiatan2`, `jenis_riwayat`, `id_pengajuan`, `tanggal_kegiatan`) VALUES
+(6, 'Telah Melakukan Menerima Pengajuan', 'Pengajuan diterima', 'Penerimaan', 1, '2017-04-06'),
 (7, 'Telah Melakukan Menolak Pengajuan', 'Pengajuan Ditolak', 'Penolakan', 5, '2017-04-06'),
-(9, 'Telah Melakukan Perubahan Pengajuan', 'Pengajuan Diubah', 'Pengubahan', 3, '2017-04-06');
+(9, 'Telah Melakukan Perubahan Pengajuan', 'Pengajuan Diubah', 'Pengubahan', 1, '2017-04-06');
 
 -- --------------------------------------------------------
 
@@ -142,7 +141,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `username`, `email`, `password`, `nama_depan`, `nama_belakang`, `jk`, `no_hp`, `alamat`, `role`, `pembuatan_akun`, `update_akun`) VALUES
 (4, 'bagus unik', 'bagus@gmail.com', '17b38fc02fd7e92f3edeb6318e3066d8', 'bagus', 'andhika', 'laki-laki', '086735463721323', 'Prum Bumi Asri J-15', 'manajemen', '2017-04-06 10:07:32', '2017-04-07 09:44:24'),
-(6, 'bambang', 'bambang57@gmail.com', 'a9711cbb2e3c2d5fc97a63e45bbe5076', 'bambang', 'susilo', 'laki-laki', '09738456327812', 'rumha dusun ringa no 56', 'tim', '2017-04-06 10:14:47', '2017-04-06 10:14:47'),
+(6, 'bambang57', 'bambang57@gmail.com', 'a9711cbb2e3c2d5fc97a63e45bbe5076', 'bambang', 'susilo', 'laki-laki', '09738456327812', 'rumha dusun ringa no 56', 'tim', '2017-04-06 10:14:47', '2017-04-10 11:31:16'),
 (7, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', 'laki-laki', '0983743829', 'jalan admin', 'manajemen', '2017-04-07 00:00:00', '2017-04-07 00:00:00');
 
 --
@@ -188,6 +187,11 @@ ALTER TABLE `user`
 --
 ALTER TABLE `jenis_pengajuan`
   MODIFY `id_jenis_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `pengajuan`
+--
+ALTER TABLE `pengajuan`
+  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `riwayat`
 --
