@@ -14,9 +14,10 @@ $query = "UPDATE pengajuan SET catatan='$catatan', status='selesai', update_peng
            " - ".mysqli_error($link));
   }
 
-
+ 
 $query2 = "INSERT INTO riwayat SET kegiatan='Telah Melakukan Menolak Pengajuan', kegiatan2='Pengajuan Ditolak',
-            jenis_riwayat='Penolakan', id_pengajuan_kegiatan='$id_pengajuan', tanggal_kegiatan='$tgl'";
+          kegiatan3 = 'Pengajuan Anda Telah DiTolak Oleh Pihak Manajemen', jenis_riwayat='Penolakan', 
+          id_pengajuan_kegiatan='$id_pengajuan', tanggal_kegiatan='$tgl', notifikasi='1'";
   $result2 = mysqli_query($link, $query2);
 
   if(!$result2){

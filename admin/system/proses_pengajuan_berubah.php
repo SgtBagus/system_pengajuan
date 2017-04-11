@@ -13,10 +13,11 @@ $query = "UPDATE pengajuan SET jadwal_pelaksanaan='$jadwal_pelaksanaan', catatan
   if(!$result){
       die ("Query gagal dijalankan: ".mysqli_errno($link).
            " - ".mysqli_error($link));
-  }
+  } 
 
 $query2 = "INSERT INTO riwayat SET kegiatan='Telah Melakukan Perubahan Pengajuan', kegiatan2='Pengajuan Diubah',
-            jenis_riwayat='Pengubahan', id_pengajuan_kegiatan='$id_pengajuan', tanggal_kegiatan='$tgl'";
+          kegiatan3 = 'Pengajuan Anda Telah Diubah Oleh Pihak Manajemen', jenis_riwayat='Pengubahan', '
+          id_pengajuan_kegiatan='$id_pengajuan', tanggal_kegiatan='$tgl',  notifikasi='1' ";
   $result2 = mysqli_query($link, $query2);
 
   if(!$result2){

@@ -18,7 +18,7 @@ session_start();
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="assets/img/icon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Home</title>
+	<title>Notifikasi</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -58,7 +58,7 @@ session_start();
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="index.php">
                         <i class="pe pe-7s-home"></i>
                         <p>Home</p>
@@ -70,7 +70,7 @@ session_start();
                         <p>Pengajuan</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="notifikasi.php">
                         <i class="pe pe-7s-bell"></i>
                         <p>Notifikasi</p>
@@ -94,15 +94,46 @@ session_start();
 
     <div class="main-panel">
         <div class="content">
-            
-        <footer class="footer">
             <div class="container-fluid">
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, Sistem Keuangan
-                </p>
-            </div>
-        </footer>
+                <div class="row">
+                    <div class="col-md-12">
+                    <div class="header">
+                        <h4>Notifikasi</h4>
+                    </div>
+<?php
+    $query2 = "SELECT a.id_riwayat, a.kegiatan, a.id_pengajuan, a.jenis_riwayat, a.kegiatan3, 
+               a.tanggal_kegiatan, b.id_user, a.notifikasi FROM riwayat 
+               AS a INNER JOIN pengajuan AS b WHERE a.id_pengajuan = b.id_pengajuan
+               AND b.id_user = '$id_login' ORDER BY id_riwayat DESC " ;
+      $result2 = mysqli_query($con, $query2);
+      if(!$result2){
+        die ("Query Error: ".mysqli_errno($con).
+           " - ".mysqli_error($con));
+      }
+      while($data2 = mysqli_fetch_assoc($result2)){ 
+                    echo '<a href="system/notifikasi_pengajuan.php?id='.$data2['id_riwayat'].'" style="color:black">';
+                        echo '<div class="card">';
+                            echo '<div class="content">';
+                                echo '<input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">';
+                                echo '<h5><b>'.$data2['jenis_riwayat'].'</b> - <small>'.$data2['kegiatan3'].'</small></h5>';
+                                echo '<h5>Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'</h5>';
+    if ($data2['notifikasi'] == "1"){
+                                echo '<div align="right">';
+                                    echo '<i class="fa fa-check"></i>';
+                                echo '</div>';
+    }
+    else{
 
+    }
+                            echo '</div>';
+                        echo '</div>';
+                    echo '</a>';
+      }
+?>                          
+                    </div>
+                </div>
+            </div>
+        </div>  
     </div>
 </div>
 
