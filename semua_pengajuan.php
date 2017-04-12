@@ -168,7 +168,8 @@ session_start();
                                     <tbody>
 <?php
       $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
-                a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user";
+                a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user
+                ORDER BY a.id_pengajuan DESC ";
       $result = mysqli_query($con, $query);
       if(!$result){
         die ("Query Error: ".mysqli_errno($con).

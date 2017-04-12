@@ -116,11 +116,10 @@ session_start();
                                 <h4 class="title">Edit Pengajuan</h4>
                             </div>
                             <div class="content">
-                                <form id="form_user" method="post" action="system/proses_edit_pengajuan.php">
+                                <form id="form_user" method="post" action="system/proses_edit_pengajuan.php?id=<?php echo $id_pengajuan?>" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input type="hidden" name="id_pengajuan" id="form_pengajuan" value=<?php echo $id_pengajuan ?> >
                                                 <label>Pengajuan</label>
                                                 <input type="text" name="pengajuan" id="form_pengajuan" class="form-control" placeholder="Pengajuan" value=<?php echo $pengajuan ?> >
                                             </div>
@@ -156,15 +155,16 @@ session_start();
                                         </div>
                                     </div>
 
-                                    <!-- <div class="row">
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Gambar</label>
                                                 <br>
-                                                    <input type="file" name="gambar" id="form_pengajuan" >
+			                                        <input type="checkbox" name="ubah_foto" value="true"> Ceklis jika ingin mengubah foto<br>
+                                                    <input type="file" name="foto">
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div> 
 
                                     <div class="row">
                                         <div class="col-md-12">

@@ -156,7 +156,9 @@ session_start();
                                                         <td><h5><b> : </h5></b></td>
                                                         <td><h5>';
 ?>
-                                                         <img src='image/<?php echo $gambar ?>' width='320' height='180'></h5>
+                                                        <a href="image/<?php echo $gambar ?>">
+                                                            <img src='image/<?php echo $gambar ?>' width='282' height='177'></h5>
+                                                        </a>
 <?php                                                        
                                                         echo '</td>
                                                     </tr>';
@@ -250,7 +252,7 @@ if( $data['status'] == "menunggu"){
                                                         <i class="fa fa-edit"></i> Ubah Pengajuan
                                                     </button>
                                                 </a>
-                                                <a href="hapus_pengajuan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menghapus pengajuan ?\')">
+                                                <a href="system/hapus_pengajuan.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menghapus pengajuan ?\')">
                                                     <button type="button" rel="tooltip" title="hapus Pengajuan" class="btn btn-danger btn-fill">
                                                         <i class="fa fa-trash"></i> Hapus
                                                     </button>

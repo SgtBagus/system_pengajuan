@@ -99,7 +99,7 @@ include"system/koneksi.php";
                                 <h4 class="title">Tambah Data User</h4>
                             </div>
                             <div class="content">
-                                <form id="form_user" method="post" action="system/proses_tambah_pengajuan.php">
+                                <form id="form_user" method="post" action="system/proses_tambah_pengajuan.php" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -139,15 +139,15 @@ include"system/koneksi.php";
                                         </div>
                                     </div>
 
-                                    <!-- <div class="row">
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Gambar</label>
                                                 <br>
-                                                    <input type="file" name="gambar" id="form_pengajuan" >
+                                                   <input type="file" name="gambar">
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div> 
 
                                     <div class="row">
                                         <div class="col-md-12">
