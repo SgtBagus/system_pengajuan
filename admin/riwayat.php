@@ -1,6 +1,6 @@
 <?php
   // memanggil file koneksi.php untuk melakukan koneksi database
-  include 'system/koneksi.php';
+  include '../system/koneksi.php';
 
 
 session_start();
@@ -45,10 +45,10 @@ session_start();
                 <a href="index.php" class="simple-text">
 <?php
  $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
-    $result_login = mysqli_query($link, $query_login);
+    $result_login = mysqli_query($con, $query_login);
     if(!$result_login){
-      die ("Query Error: ".mysqli_errno($link).
-         " - ".mysqli_error($link));
+      die ("Query Error: ".mysqli_errno($con).
+         " - ".mysqli_error($con));
     }
     $data_login = mysqli_fetch_assoc($result_login);
     $username = $data_login["username"];
@@ -105,10 +105,10 @@ session_start();
                a.tanggal_kegiatan, b.id_user, a.notifikasi FROM riwayat 
                AS a INNER JOIN pengajuan AS b WHERE a.id_pengajuan = b.id_pengajuan
                ORDER BY id_riwayat DESC " ;
-      $result2 = mysqli_query($link, $query2);
+      $result2 = mysqli_query($con, $query2);
       if(!$result2){
-        die ("Query Error: ".mysqli_errno($link).
-           " - ".mysqli_error($link));
+        die ("Query Error: ".mysqli_errno($con).
+           " - ".mysqli_error($con));
       }
       while($data2 = mysqli_fetch_assoc($result2)){ 
                     echo '<a href="detail_pengajuan.php?id='.$data2['id_pengajuan'].'" style="color:black">';

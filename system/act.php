@@ -21,7 +21,7 @@ if($op=="in"){
 		?>
 		<script lenguage="JavaScript">
 		alert(Email atau Password Salah silahkan di ulang);
-		document.location='login.php';
+		document.location='../login.php';
 		</script>
 		<?php
 	}
@@ -29,8 +29,8 @@ if($op=="in"){
 }else if($op=="out"){
 	unset($_SESSION['email']);
 	unset($_SESSION['role']);
-	header("location:login.php");
+	header("location:../login.php");
 
 }	
-    // echo "<script type='text/javascript'>alert('Email atau Password Salah'); document.location='../Pengajuan Barang dan Training/login.php';</script>";
+    echo "<script type='text/javascript'>alert('Email atau Password Salah'); document.location='../login.php';</script>";
 ?>

@@ -1,5 +1,5 @@
 <?php 
-include 'koneksi.php';
+include '../../system/koneksi.php';
 $id= $_POST['id_catatan'];
 $catatan = $_POST['catatan'];
  
@@ -8,11 +8,11 @@ $tgl = date("Y-m-d", $tanggal);
 
 $query = "UPDATE catatan SET catatan='$catatan', update_catatan='$tgl' WHERE id_catatan ='$id'";
 echo $query;
-  $result = mysqli_query($link, $query);
+  $result = mysqli_query($con, $query);
   // periska query apakah ada error
   if(!$result){
-      die ("Query gagal dijalankan: ".mysqli_errno($link).
-           " - ".mysqli_error($link));
+      die ("Query gagal dijalankan: ".mysqli_errno($con).
+           " - ".mysqli_error($con));
   }
   
 header("location:../index.php");

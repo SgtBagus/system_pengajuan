@@ -1,9 +1,10 @@
 <?php
   include 'system/koneksi.php';
+
 session_start();
  $logged_in = false;
  if (empty($_SESSION['email'])) {
-   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../login.php';</script>";
+   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='login.php';</script>";
  }
  else {
    $logged_in = true;

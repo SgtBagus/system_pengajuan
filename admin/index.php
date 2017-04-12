@@ -1,6 +1,6 @@
 <?php
   // memanggil file koneksi.php untuk melakukan koneksi database
-  include 'system/koneksi.php';
+  include '../system/koneksi.php';
 session_start();
  $logged_in = false;
  if (empty($_SESSION['email'])) {
@@ -42,10 +42,10 @@ session_start();
                 <a href="index.php" class="simple-text">
 <?php
  $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
-    $result_login = mysqli_query($link, $query_login);
+    $result_login = mysqli_query($con, $query_login);
     if(!$result_login){
-      die ("Query Error: ".mysqli_errno($link).
-         " - ".mysqli_error($link));
+      die ("Query Error: ".mysqli_errno($con).
+         " - ".mysqli_error($con));
     }
     $data_login = mysqli_fetch_assoc($result_login);
     $username = $data_login["username"];
@@ -102,7 +102,7 @@ session_start();
                             </div>
 <?php
     $query_menunggu = "SELECT * FROM pengajuan WHERE status LIKE 'menunggu'";
-    $result_menunggu = mysqli_query($link, $query_menunggu);
+    $result_menunggu = mysqli_query($con, $query_menunggu);
       $banyakdata_menunggu = $result_menunggu->num_rows;
 ?>
                             <div align="center">
@@ -125,7 +125,7 @@ session_start();
                             </div>
 <?php
     $query_proses = "SELECT * FROM pengajuan WHERE status LIKE 'proses'";
-    $result_proses = mysqli_query($link, $query_proses);
+    $result_proses = mysqli_query($con, $query_proses);
       $banyakdata_proses = $result_proses->num_rows;
 ?>
                             <div align="center">
@@ -148,7 +148,7 @@ session_start();
                             </div>
 <?php
     $query_selesai = "SELECT * FROM pengajuan WHERE status LIKE 'selesai'";
-    $result_selesai = mysqli_query($link, $query_proses);
+    $result_selesai = mysqli_query($con, $query_proses);
       $banyakdata_selesai = $result_selesai->num_rows;
 ?>
                             <div align="center">
@@ -179,10 +179,10 @@ session_start();
       $query_pengajuan = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.status
                             FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user
                             AND a.status = 'proses' ";
-      $result_pengajuan = mysqli_query($link, $query_pengajuan);
+      $result_pengajuan = mysqli_query($con, $query_pengajuan);
       if(!$result_pengajuan){
-        die ("Query Error: ".mysqli_errno($link).
-           " - ".mysqli_error($link));
+        die ("Query Error: ".mysqli_errno($con).
+           " - ".mysqli_error($con));
       }
       while($data_pengajuan = mysqli_fetch_assoc($result_pengajuan))
       {
@@ -225,10 +225,10 @@ session_start();
                a.tanggal_kegiatan, b.id_user, a.notifikasi FROM riwayat 
                AS a INNER JOIN pengajuan AS b WHERE a.id_pengajuan = b.id_pengajuan
                ORDER BY id_riwayat DESC LIMIT 3" ;
-      $result2 = mysqli_query($link, $query2);
+      $result2 = mysqli_query($con, $query2);
       if(!$result2){
-        die ("Query Error: ".mysqli_errno($link).
-           " - ".mysqli_error($link));
+        die ("Query Error: ".mysqli_errno($con).
+           " - ".mysqli_error($con));
       }
       while($data2 = mysqli_fetch_assoc($result2)){ 
                     echo '<a href="detail_pengajuan.php?id='.$data2['id_pengajuan'].'" style="color:black">';
@@ -260,10 +260,10 @@ session_start();
                                 <h4 class="title">Catatan</h4>
 <?php
     $query_catatan = "SELECT * FROM catatan";
-    $result_catatan = mysqli_query($link, $query_catatan);
+    $result_catatan = mysqli_query($con, $query_catatan);
     if(!$result_catatan){
-      die ("Query Error: ".mysqli_errno($link).
-         " - ".mysqli_error($link));
+      die ("Query Error: ".mysqli_errno($con).
+         " - ".mysqli_error($con));
     }
     $data_catatan = mysqli_fetch_assoc($result_catatan);
 ?>

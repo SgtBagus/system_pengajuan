@@ -1,6 +1,6 @@
 <?php
 
-  include 'system/koneksi.php';
+  include '../system/koneksi.php';
 
 
 session_start();
@@ -13,10 +13,10 @@ session_start();
  }
  
     $query = "SELECT max(id_jenis_pengajuan) FROM jenis_pengajuan ";
-    $result = mysqli_query($link, $query);
+    $result = mysqli_query($con, $query);
     if(!$result){
-      die ("Query Error: ".mysqli_errno($link).
-         " - ".mysqli_error($link));
+      die ("Query Error: ".mysqli_errno($con).
+         " - ".mysqli_error($con));
     }
     $data = mysqli_fetch_assoc($result);
     $id = $data["max(id_jenis_pengajuan)"];
@@ -54,10 +54,10 @@ session_start();
                 <a href="index.php" class="simple-text">
 <?php
  $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
-    $result_login = mysqli_query($link, $query_login);
+    $result_login = mysqli_query($con, $query_login);
     if(!$result_login){
-      die ("Query Error: ".mysqli_errno($link).
-         " - ".mysqli_error($link));
+      die ("Query Error: ".mysqli_errno($con).
+         " - ".mysqli_error($con));
     }
     $data_login = mysqli_fetch_assoc($result_login);
     $username = $data_login["username"];

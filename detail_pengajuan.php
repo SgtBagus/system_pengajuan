@@ -1,13 +1,14 @@
 <?php
 include"system/koneksi.php";
-    session_start();
-  $logged_in = false;
-  if (empty($_SESSION['email'])) {
-    echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../Pengajuan Barang dan Training/login.php';</script>";
-  }
-  else {
-    $logged_in = true;
-  }
+   
+session_start();
+ $logged_in = false;
+ if (empty($_SESSION['email'])) {
+   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='login.php';</script>";
+ }
+ else {
+   $logged_in = true;
+ }
 
   if (isset($_GET['id'])) {
     $id = ($_GET["id"]);

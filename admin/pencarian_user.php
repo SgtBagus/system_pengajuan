@@ -1,6 +1,6 @@
 <?php
   // memanggil file koneksi.php untuk melakukan koneksi database
-  include 'system/koneksi.php';
+  include '../system/koneksi.php';
 
 
 
@@ -46,10 +46,10 @@ session_start();
                 <a href="index.php" class="simple-text">
 <?php
  $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
-    $result_login = mysqli_query($link, $query_login);
+    $result_login = mysqli_query($con, $query_login);
     if(!$result_login){
-      die ("Query Error: ".mysqli_errno($link).
-         " - ".mysqli_error($link));
+      die ("Query Error: ".mysqli_errno($con).
+         " - ".mysqli_error($con));
     }
     $data_login = mysqli_fetch_assoc($result_login);
     $username = $data_login["username"];
@@ -101,7 +101,7 @@ session_start();
 <?php
     $pencarian = ($_GET["cari"]);
     $query = "SELECT * FROM user WHERE username LIKE '%".$pencarian."%'";
-    $result = mysqli_query($link, $query);
+    $result = mysqli_query($con, $query);
       $no = 1;
       $cek = count($result);
       $banyakdata = $result->num_rows;
