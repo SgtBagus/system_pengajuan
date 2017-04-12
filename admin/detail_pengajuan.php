@@ -164,7 +164,9 @@ session_start();
                                                         <td><h5><b> : </h5></b></td>
                                                         <td><h5>';
 ?>
-                                                         <img src='../image/<?php echo $gambar ?>' width='320' height='180'></h5>
+                                                         <a href="../image/<?php echo $gambar ?>">
+                                                            <img src='../image/<?php echo $gambar ?>' width='282' height='177'></h5>
+                                                        </a>
 <?php                                                        
                                                         echo '</td>
                                                     </tr>';
@@ -225,7 +227,7 @@ session_start();
       $result2 = mysqli_query($con, $query2);
       if(!$result2){
         die ("Query Error: ".mysqli_errno($con).
-           " - ".mysqli_error($con));
+           " - ".mysqli_error($con)); 
       }
       $no = 1;
       while($data2 = mysqli_fetch_assoc($result2)){

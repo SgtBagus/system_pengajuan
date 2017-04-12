@@ -105,7 +105,7 @@ session_start();
     $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
             AND a.pengajuan LIKE '%".$judul."%' AND b.username LIKE '%".$username."%' AND a.tanggal_pengajuan like '%".$tanggal."%' 
-            AND a.status like '%".$status."%' ORDER BY a.pengajuan ASC " ;
+            AND a.status like '%".$status."%' ORDER BY a.id_pengajuan ASC " ;
     $result = mysqli_query($con, $query);
       $no = 1;
       $cek = count($result);
