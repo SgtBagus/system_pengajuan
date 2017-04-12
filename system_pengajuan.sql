@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 11 Apr 2017 pada 10.28
+-- Generation Time: 12 Apr 2017 pada 11.55
 -- Versi Server: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -56,7 +56,7 @@ CREATE TABLE `jenis_pengajuan` (
 --
 
 INSERT INTO `jenis_pengajuan` (`id_jenis_pengajuan`, `jenis_pengajuan`, `deskripsi`) VALUES
-(1, 'Barang', 'Jenis Pengajuan, berupa jenis barang yang akan di ajukan tes');
+(1, 'Barang', 'Jenis Pengajuan, berupa jenis barang yang akan di ajukan');
 
 -- --------------------------------------------------------
 
@@ -88,7 +88,7 @@ INSERT INTO `pengajuan` (`id_pengajuan`, `pengajuan`, `id_user`, `jenis_pengajua
 (1, 'Pengajuan Pembelian Terminal Listrik', 6, 'barang', '2017-03-31', 'tes.png', 50000, 'Saya mengajukan ini, karena saya merasa disini kita kekurangan terminal listrik sebanyak 2 dengan 5 stopkontak/terminal', '', '2017-04-07', 'tes', 'proses', '2017-04-06'),
 (4, 'Pengajuan Meja', 6, 'barang', '2017-04-05', '', 300000, 'Kita sepertinya kekurangan meja buat kerja', '', '0000-00-00', '', 'menunggu', '2017-04-05'),
 (5, 'Pengajuan Kursi', 6, 'barang', '2017-04-06', 'kursi.jpg', 500000, 'Di belakang kita kekurangan Kursi', '', '0000-00-00', 'Kursi Udah banyak ', 'selesai', '2017-04-06'),
-(6, 'tes', 4, 'tes', '2017-04-10', '', 12334, 'tes', 'tes', '0000-00-00', '', 'menunggu', '0000-00-00');
+(10, 'halo tes', 6, 'Barang', '2017-04-12', '12042017113600247bb2c1dfe6d85ac68ce2f74b51eac8.jpg', 50000, 'tes ubah', 'tes ubah', '0000-00-00', '', 'menunggu', '2017-04-12');
 
 -- --------------------------------------------------------
 
@@ -143,8 +143,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `username`, `email`, `password`, `nama_depan`, `nama_belakang`, `jk`, `no_hp`, `alamat`, `role`, `pembuatan_akun`, `update_akun`) VALUES
 (4, 'bagus unik', 'bagus@gmail.com', '17b38fc02fd7e92f3edeb6318e3066d8', 'bagus', 'andhika', 'laki-laki', '086735463721323', 'Prum Bumi Asri J-15', 'manajemen', '2017-04-06 10:07:32', '2017-04-07 09:44:24'),
-(6, 'bambang57', 'bambang57@gmail.com', 'a9711cbb2e3c2d5fc97a63e45bbe5076', 'bambang', 'susilo', 'laki-laki', '09738456327812', 'rumha dusun ringa no 56', 'tim', '2017-04-06 10:14:47', '2017-04-10 11:31:16'),
-(7, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', 'laki-laki', '0983743829', 'jalan admin', 'manajemen', '2017-04-07 00:00:00', '2017-04-07 00:00:00');
+(6, 'bambang57', 'bambang57@gmail.com', 'a9711cbb2e3c2d5fc97a63e45bbe5076', 'bambang', 'susilo', 'laki-laki', '09738456327812', 'rumha dusun ringa no 56', 'tim', '2017-04-06 10:14:47', '2017-04-10 11:31:16');
 
 --
 -- Indexes for dumped tables
@@ -193,7 +192,7 @@ ALTER TABLE `jenis_pengajuan`
 -- AUTO_INCREMENT for table `pengajuan`
 --
 ALTER TABLE `pengajuan`
-  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `riwayat`
 --
