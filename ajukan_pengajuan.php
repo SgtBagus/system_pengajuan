@@ -111,7 +111,7 @@ include"system/koneksi.php";
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-9">
                                             <div class="form-group">
                                                 <label>Jenis Pengajuan</label>
                                                 <select name="jenis_pengajuan" id="form_pengajuan" class="form-control" required>
@@ -124,13 +124,13 @@ include"system/koneksi.php";
       }
       while($data = mysqli_fetch_assoc($result))
       {
-        echo '<option value="'.$data[jenis_pengajuan].'">'.$data[jenis_pengajuan].'</option>';
+        echo '<option value="'.$data[jenis_pengajuan].'" title="Diskripsi : '.$data[deskripsi].'">'.$data[jenis_pengajuan].'</option>';
       }
 ?>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Tanggal Pengajuan</label>
                                                 <input type="date" name="tanggal_pengajuan" id="form_pengajuan" class="form-control" 
