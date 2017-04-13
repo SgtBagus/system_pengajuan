@@ -8,5 +8,5 @@ $query2 = "SELECT id_pengajuan FROM riwayat WHERE id_riwayat = '$id' " ;
     echo $id_pengajuan;
     $query = "UPDATE riwayat SET notifikasi='0' WHERE id_riwayat='$id'";
     $result = mysqli_query($con, $query);
-header("location:../detail_pengajuan.php?id=$id_pengajuan");
+header("location:../detail_pengajuan?id=$id_pengajuan");
 ?>

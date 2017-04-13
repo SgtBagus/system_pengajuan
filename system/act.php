@@ -12,16 +12,16 @@ if($op=="in"){
 		$_SESSION['email'] = $qry['email'];
 		$_SESSION['role'] = $qry['role'];
 		if($qry['role']=="manajemen"){
-			header("location:../admin/index.php");
+			header("location:../admin/index");
 		}
 		else if($qry['role']=="tim"){
-			header("location:../index.php");
+			header("location:../index");
 		}
 	}else{
 		?>
 		<script lenguage="JavaScript">
 		alert(Email atau Password Salah silahkan di ulang);
-		document.location='../login.php';
+		document.location='../login';
 		</script>
 		<?php
 	}
@@ -29,8 +29,8 @@ if($op=="in"){
 }else if($op=="out"){
 	unset($_SESSION['email']);
 	unset($_SESSION['role']);
-	header("location:../login.php");
+	header("location:../login");
 
 }	
-    echo "<script type='text/javascript'>alert('Email atau Password Salah'); document.location='../login.php';</script>";
+    echo "<script type='text/javascript'>alert('Email atau Password Salah'); document.location='../login';</script>";
 ?>

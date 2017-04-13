@@ -4,7 +4,7 @@ include"system/koneksi.php";
 session_start();
  $logged_in = false;
  if (empty($_SESSION['email'])) {
-   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='login.php';</script>";
+   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='login';</script>";
  }
  else {
    $logged_in = true;
@@ -64,7 +64,7 @@ session_start();
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="index.php" class="simple-text">
+                <a href="index" class="simple-text">
 <?php
  $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
     $result_login = mysqli_query($con, $query_login);
@@ -81,31 +81,31 @@ session_start();
 
             <ul class="nav">
                 <li >
-                    <a href="index.php">
+                    <a href="index">
                         <i class="pe pe-7s-home"></i>
                         <p>Home</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="pengajuan.php">
+                    <a href="pengajuan">
                         <i class="pe pe-7s-note2"></i>
                         <p>Pengajuan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="notifikasi.php">
+                    <a href="notifikasi">
                         <i class="pe pe-7s-bell"></i>
                         <p>Notifikasi</p>
                     </a>
                 </li>
                 <li>
-                    <a href="profil.php">
+                    <a href="profil">
                         <i class="pe pe-7s-user"></i>
                         <p>Profile</p>
                     </a>
                 </li>
                 <li>
-                    <a href="login.php">
+                    <a href="login">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
@@ -124,8 +124,8 @@ session_start();
                                 <h4 class="title"><b><?php echo $pengajuan ?></b> ( <?php echo $status ?> ) <small> Pengaju <b>( <?php echo $pengaju ?> )</b> </small></h4>
                             </div>
                             <div class="content">
-                                <form id="form_pengajuan_diterima" method="post" action="system/pengajuan_diselesaikan.php">
-                                    <input type="hidden" name="id_pengajuan" value="<?php echo $id_pengajuan ?>">
+                                <form id="form_pengajuan_diterima" method="" action="">
+                                <input type="hidden" name="id_pengajuan" value="<?php echo $id_pengajuan ?>">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -239,7 +239,7 @@ session_start();
 
                                     
                                     <div align="right">
-                                    <a href="pengajuan.php">
+                                    <a href="pengajuan">
                                         <button type="button" rel="tooltip" class="btn btn-info btn-fill" title="kembali">
                                                     <i class="fa fa-arrow-left"></i> Kembali 
                                         </button>
@@ -247,7 +247,7 @@ session_start();
 <?php
 if( $data['status'] == "menunggu"){
     if ( $pengaju == $username_login ){
-                                        echo '<a href="edit_pengajuan.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin merubah pengajuan ?\')">
+                                        echo '<a href="edit_pengajuan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin merubah pengajuan ?\')">
                                                     <button type="button" rel="tooltip" title="Ubah Pengajuan" class="btn btn-primary btn-fill" >
                                                         <i class="fa fa-edit"></i> Ubah Pengajuan
                                                     </button>

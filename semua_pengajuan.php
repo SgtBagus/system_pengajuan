@@ -4,7 +4,7 @@
 session_start();
  $logged_in = false;
  if (empty($_SESSION['email'])) {
-   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='login.php';</script>";
+   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='login';</script>";
  }
  else {
    $logged_in = true;
@@ -39,7 +39,7 @@ session_start();
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
         <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="index.php" class="simple-text">
+                <a href="index" class="simple-text">
 <?php
  $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
     $result_login = mysqli_query($con, $query_login);
@@ -56,31 +56,31 @@ session_start();
 
             <ul class="nav">
                 <li >
-                    <a href="index.php">
+                    <a href="index">
                         <i class="pe pe-7s-home"></i>
                         <p>Home</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="pengajuan.php">
+                    <a href="pengajuan">
                         <i class="pe pe-7s-note2"></i>
                         <p>Pengajuan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="notifikasi.php">
+                    <a href="notifikasi">
                         <i class="pe pe-7s-bell"></i>
                         <p>Notifikasi</p>
                     </a>
                 </li>
                 <li>
-                    <a href="profil.php">
+                    <a href="profil">
                         <i class="pe pe-7s-user"></i>
                         <p>Profile</p>
                     </a>
                 </li>
                 <li>
-                    <a href="login.php">
+                    <a href="login">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
@@ -101,12 +101,12 @@ session_start();
                                         <h4 class="title">Data Pengajuan</h4>
                                     </div>  
                                     <div class="col-md-6" align="right">
-                                        <a href="pengajuan.php">
+                                        <a href="pengajuan">
                                             <button type="button" rel="tooltip" class="btn btn-primary btn-fill">
                                                     <i class="fa fa-search"></i> Pengajuan Sendiri
                                             </button>
                                         </a>
-                                        <a href="ajukan_pengajuan.php">
+                                        <a href="ajukan_pengajuan">
                                             <button type="button" rel="tooltip" class="btn btn-primary btn-fill">
                                                     <i class="fa fa-plus"></i> Ajukan Pengajuan
                                             </button>
@@ -114,7 +114,7 @@ session_start();
                                     </div>
                                 </div>
                                 <br>    
-                                <form id="form_pencarian"  action="pencarian_pengajuan.php" method="get">
+                                <form id="form_pencarian"  action="pencarian_pengajuan" method="get">
                                     <div class="row">
                                         <div class="col-md-2">
                                             <div class="form-group">
@@ -190,17 +190,17 @@ session_start();
     if($data['username']== $username_login ){
         if($data['status'] == "menunggu" ){
                                             echo '
-                                                <a href="detail_pengajuan.php?id='.$data['id_pengajuan'].'">
+                                                <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
                                                         <i class="fa fa-eye"> </i>
                                                     </button>
                                                 </a>
-                                                <a href="edit_pengajuan.php?id='.$data['id_pengajuan'].'">
+                                                <a href="edit_pengajuan?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Ubah Pengajuan" class="btn btn-primary btn-fill">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                 </a>
-                                                <a href="system/hapus_user.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
+                                                <a href="system/hapus_pengajuan.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
                                                     <button type="button" rel="tooltip" title="Batalkan Pengajuan" class="btn btn-danger btn-fill">
                                                         <i class="fa fa-trash"> </i>
                                                     </button>
@@ -208,7 +208,7 @@ session_start();
         }
         else if ($data['status'] == "proses" ){
                                             echo '
-                                                <a href="detail_pengajuan.php?id='.$data['id_pengajuan'].'">
+                                                <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
                                                         <i class="fa fa-eye"> </i>
                                                     </button>
@@ -216,12 +216,12 @@ session_start();
         }
         else{
                                             echo '
-                                                <a href="detail_pengajuan.php?id='.$data['id_pengajuan'].'">
+                                                <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>
-                                                <a href="system/hapus_user.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
+                                                <a href="system/hapus_pengajuan.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
                                                     <button type="button" rel="tooltip" title="Batalkan Pengajuan" class="btn btn-danger btn-fill">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
@@ -230,7 +230,7 @@ session_start();
     }
     else {
         echo '
-                                                <a href="detail_pengajuan.php?id='.$data['id_pengajuan'].'">
+                                                <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
                                                         <i class="fa fa-eye"></i>
                                                     </button>

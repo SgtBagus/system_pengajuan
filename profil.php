@@ -6,7 +6,7 @@
 session_start();
  $logged_in = false;
  if (empty($_SESSION['email'])) {
-   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='login.php';</script>";
+   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='login';</script>";
  }
  else {
    $logged_in = true;
@@ -59,38 +59,38 @@ session_start();
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="index.php" class="simple-text">
+                <a href="index" class="simple-text">
                     Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) - <?php echo $username ?></small></small>
                 </a>
             </div>
 
             <ul class="nav">
                 <li>
-                    <a href="index.php">
+                    <a href="index">
                         <i class="pe pe-7s-home"></i>
                         <p>Home</p>
                     </a>
                 </li>
                 <li>
-                    <a href="pengajuan.php">
+                    <a href="pengajuan">
                         <i class="pe pe-7s-note2"></i>
                         <p>Pengajuan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="notifikasi.php">
+                    <a href="notifikasi">
                         <i class="pe pe-7s-bell"></i>
                         <p>Notifikasi</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="profil.php">
+                    <a href="profil">
                         <i class="pe pe-7s-user"></i>
                         <p>Profile</p>
                     </a>
                 </li>
                 <li>
-                    <a href="login.php">
+                    <a href="login">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>

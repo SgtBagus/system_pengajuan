@@ -3,7 +3,7 @@ include"system/koneksi.php";
     session_start();
     $logged_in = false;
     if (empty($_SESSION['email'])) {
-    echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='login.php';</script>";
+    echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='login';</script>";
     }
     else {
     $logged_in = true;
@@ -38,7 +38,7 @@ include"system/koneksi.php";
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="index.php" class="simple-text">
+                <a href="index" class="simple-text">
 <?php
  $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
     $result_login = mysqli_query($con, $query_login);
@@ -56,31 +56,31 @@ include"system/koneksi.php";
 
             <ul class="nav">
                 <li >
-                    <a href="index.php">
+                    <a href="index">
                         <i class="pe pe-7s-home"></i>
                         <p>Home</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="pengajuan.php">
+                    <a href="pengajuan">
                         <i class="pe pe-7s-note2"></i>
                         <p>Pengajuan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="notifikasi.php">
+                    <a href="notifikasi">
                         <i class="pe pe-7s-bell"></i>
                         <p>Notifikasi</p>
                     </a>
                 </li>
                 <li>
-                    <a href="profil.php">
+                    <a href="profil">
                         <i class="pe pe-7s-user"></i>
                         <p>Profile</p>
                     </a>
                 </li>
                 <li>
-                    <a href="login.php">
+                    <a href="login">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
@@ -186,7 +186,7 @@ include"system/koneksi.php";
                                         </div>
                                     </div>
                                     <div align="right">
-                                        <a href="pengajuan.php">
+                                        <a href="pengajuan">
                                             <button type="button" rel="tooltip" class="btn btn-info btn-fill">
                                                         <i class="fa fa-arrow-left"></i> Batal
                                             </button>

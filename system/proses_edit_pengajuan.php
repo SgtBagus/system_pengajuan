@@ -35,14 +35,14 @@ if(isset($_POST['ubah_foto'])){
 
 		if($sql){ 
 			
-			header("location: ../detail_pengajuan.php?id=$id"); 
+			header("location: ../detail_pengajuan?id=$id"); 
 		}else{
 			echo "Maaf, Terjadi kesalahan saat mencoba untuk menyimpan data ke database.";
-			echo "<br><a href='../pengajuan.php'>Kembali Ke Form</a>";
+			echo "<br><a href='../pengajuan'>Kembali Ke Form</a>";
 		}
 	}else{
 		echo "Maaf, Gambar gagal untuk diupload.";
-		echo "<br><a href='../pengajuan.php'>Kembali Ke Form</a>";
+		echo "<br><a href='../pengajuan'>Kembali Ke Form</a>";
 	}
 }else{ 
 
@@ -54,10 +54,10 @@ if(isset($_POST['ubah_foto'])){
 
 	if($sql){ 
 		
-			header("location: ../detail_pengajuan.php?id=$id"); 
+			header("location: ../detail_pengajuan?id=$id"); 
 	}else{
 			echo "Maaf, Terjadi kesalahan saat mencoba untuk menyimpan data ke database.";
-			echo "<br><a href='edit_pengajuan.php'>Kembali Ke Form</a>";
+			echo "<br><a href='edit_pengajuan'>Kembali Ke Form</a>";
 	}
 }
 ?>

@@ -31,18 +31,16 @@ if(move_uploaded_file($tmp, $path)){ // Cek apakah gambar berhasil diupload atau
   }
 
 	if($result){ 
-		header("location:../pengajuan.php"); 
+		header("location:../pengajuan"); 
 	}else{
 		// Jika Gagal, Lakukan :
 		echo "Maaf, Terjadi kesalahan saat mencoba untuk menyimpan data ke database.";
-		echo "<br><a href='../ajukan_pengajuan.php'>Kembali Ke Form</a>";
+		echo "<br><a href='../ajukan_pengajuan'>Kembali Ke Form</a>";
 	}
 }else{
 
 	echo "Maaf, Gambar gagal untuk diupload.";
-	echo "<br><a href='../ajukan_pengajuan.php'>Kembali Ke Form</a>";
+	echo "<br><a href='../ajukan_pengajuan'>Kembali Ke Form</a>";
 }
 
-
-// header("location:../pengajuan.php");
 ?>
