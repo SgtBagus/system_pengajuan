@@ -114,8 +114,8 @@ session_start();
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="<?php echo $id ?>">
-                                                <label for="Email">Username</label>
-                                                <input type="text" name="username" id="form_edit_user" class="form-control" placeholder="email" value="<?php echo $username ?>">
+                                                <label for="Username" >Username</label>
+                                                <input type="text" name="username" id="form_edit_user" class="form-control" placeholder="username" value="<?php echo $username ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">

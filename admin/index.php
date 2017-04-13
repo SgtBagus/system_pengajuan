@@ -4,7 +4,7 @@
 session_start();
  $logged_in = false;
  if (empty($_SESSION['email'])) {
-   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../login.php';</script>";
+   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../login';</script>";
  }
  else {
    $logged_in = true;
@@ -39,7 +39,7 @@ session_start();
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="index.php" class="simple-text">
+                <a href="index" class="simple-text">
 <?php
  $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
     $result_login = mysqli_query($con, $query_login);
@@ -56,31 +56,31 @@ session_start();
 
             <ul class="nav">
                 <li class="active">
-                    <a href="index.php">
+                    <a href="index">
                         <i class="pe pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="pengajuan.php">
+                    <a href="pengajuan">
                         <i class="pe pe-7s-note2"></i>
                         <p>Pengajuan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="riwayat.php">
+                    <a href="riwayat">
                         <i class="pe pe-7s-timer"></i>
                         <p>Riwayat</p>
                     </a>
                 </li>
                 <li>
-                    <a href="master.php">
+                    <a href="master">
                         <i class="pe pe-7s-server"></i>
                         <p>Master</p>
                     </a>
                 </li>
                 <li>
-                    <a href="../logout.php">
+                    <a href="../logout">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
@@ -110,7 +110,7 @@ session_start();
                                 <div class="footer">
                                     <hr>
                                     <div class="stats">
-                                        <a href="pencarian_pengajuan.php?pengajuan=&pengaju=&tanggal=&status=menunggu"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Menunggu</a>
+                                        <a href="pencarian_pengajuan?pengajuan=&pengaju=&tanggal=&status=menunggu"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Menunggu</a>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@ session_start();
                                 <div class="footer">
                                     <hr>
                                     <div class="stats">
-                                        <a href="pencarian_pengajuan.php?pengajuan=&pengaju=&tanggal=&status=proses"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Proses</a>
+                                        <a href="pencarian_pengajuan?pengajuan=&pengaju=&tanggal=&status=proses"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Proses</a>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@ session_start();
                                 <div class="footer">
                                     <hr>
                                     <div class="stats">
-                                        <a href="pencarian_pengajuan.php?pengajuan=&pengaju=&tanggal=&status=selesai"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Selesai</a>
+                                        <a href="pencarian_pengajuan?pengajuan=&pengaju=&tanggal=&status=selesai"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Selesai</a>
                                     </div>
                                 </div>
                             </div>
@@ -190,7 +190,7 @@ session_start();
                                         	echo "<td> $data_pengajuan[pengajuan] - <b>$data_pengajuan[username]</b></td>";
                                             echo '</td>';
                                             echo '<td class="td-actions text-right">
-                                                    <a href="detail_pengajuan.php?id='.$data_pengajuan['id_pengajuan'].'">
+                                                    <a href="detail_pengajuan?id='.$data_pengajuan['id_pengajuan'].'">
                                                         <button type="button" rel="tooltip" title="Lihat Pengajuan" class="btn btn-info btn-simple btn-xs">
                                                             <i class="fa fa-eye"></i>
                                                         </button>
@@ -206,7 +206,7 @@ session_start();
                                 <div class="footer">
                                     <hr>
                                     <div class="stats">
-                                        <a href="pencarian_pengajuan.php?pengajuan=&pengaju=&tanggal=&status=proses"><i class="fa fa-link"></i> Lihat Semua Pengajuan Proses</a>
+                                        <a href="pencarian_pengajuan?pengajuan=&pengaju=&tanggal=&status=proses"><i class="fa fa-link"></i> Lihat Semua Pengajuan Proses</a>
                                     </div>
                                 </div>
                             </div>
@@ -231,7 +231,7 @@ session_start();
            " - ".mysqli_error($con));
       }
       while($data2 = mysqli_fetch_assoc($result2)){ 
-                    echo '<a href="detail_pengajuan.php?id='.$data2['id_pengajuan'].'" style="color:black">';
+                    echo '<a href="detail_pengajuan?id='.$data2['id_pengajuan'].'" style="color:black">';
                         echo '<div class="card">';
                             echo '<div class="content">';
                                 echo '<input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">';
@@ -246,7 +246,7 @@ session_start();
                                 <div class="footer">
                                     <hr>
                                     <div class="stats">
-                                        <a href="riwayat.php"><i class="fa fa-link"></i> Lihat Semua Riwayat </a>
+                                        <a href="riwayat"><i class="fa fa-link"></i> Lihat Semua Riwayat </a>
                                     </div>
                                 </div>
                             </div>

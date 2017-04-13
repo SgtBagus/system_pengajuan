@@ -4,7 +4,7 @@
 session_start();
  $logged_in = false;
  if (empty($_SESSION['email'])) {
-   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../login.php';</script>";
+   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../login';</script>";
  }
  else {
    $logged_in = true;
@@ -39,7 +39,7 @@ session_start();
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="index.php" class="simple-text">
+                <a href="index" class="simple-text">
 <?php
  $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
     $result_login = mysqli_query($con, $query_login);
@@ -56,31 +56,31 @@ session_start();
 
             <ul class="nav">
                 <li>
-                    <a href="index.php">
+                    <a href="index">
                         <i class="pe pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="pengajuan.php">
+                    <a href="pengajuan">
                         <i class="pe pe-7s-note2"></i>
                         <p>Pengajuan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="riwayat.php">
+                    <a href="riwayat">
                         <i class="pe pe-7s-timer"></i>
                         <p>Riwayat</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="master.php">
+                    <a href="master">
                         <i class="pe pe-7s-server"></i>
                         <p>Master</p>
                     </a>
                 </li>
                 <li>
-                    <a href="../logout.php">
+                    <a href="../logout">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
@@ -99,10 +99,10 @@ session_start();
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h4 class="title">Data Jenis Pengajuan</h4>
-                                        <a href="master.php"><p class="category"><i class="fa fa-arrow-left"></i> Klik di sini untuk kembali ke menu Master</p></a>
+                                        <a href="master"><p class="category"><i class="fa fa-arrow-left"></i> Klik di sini untuk kembali ke menu Master</p></a>
                                     </div>  
                                     <div class="col-md-6" align="right">
-                                        <a href="tambah_jenispengajuan.php">
+                                        <a href="tambah_jenispengajuan">
                                             <button type="button" rel="tooltip" class="btn btn-info">
                                                 <i class="fa fa-plus"></i> Tambah Jenis Pengajuan
                                             </button>
@@ -110,7 +110,7 @@ session_start();
                                     </div>
                                 </div>
                                 <br>
-                                <form id="form_user"  action="pencarian_jenispengajuan.php" method="get">
+                                <form id="form_user"  action="pencarian_jenispengajuan" method="get">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group">
@@ -150,7 +150,7 @@ session_start();
                                             echo "<td>$jenispengajuan[jenis_pengajuan]</td>";
                                             echo "<td>$jenispengajuan[deskripsi]</td>";
                                             echo '<td>
-                                                <a href="edit_jenispengajuan.php?id='.$jenispengajuan['id_jenis_pengajuan'].'">
+                                                <a href="edit_jenispengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Ubah Data" class="btn btn-primary">
                                                         <i class="fa fa-edit"></i>
                                                     </button>

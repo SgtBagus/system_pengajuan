@@ -28,5 +28,5 @@ if (isset($_POST['input'])) {
   }
 }
 
-header("location:../user.php");
+header("location:../user");
 ?>

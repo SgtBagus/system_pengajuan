@@ -19,5 +19,5 @@ if (isset($_POST['input'])) {
   }
 }
 
-header("location:../jenis_pengajuan.php");
+header("location:../jenis_pengajuan");
 ?>

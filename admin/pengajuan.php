@@ -6,7 +6,7 @@
 session_start();
  $logged_in = false;
  if (empty($_SESSION['email'])) {
-   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../login.php';</script>";
+   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../login';</script>";
  }
  else {
    $logged_in = true;
@@ -42,7 +42,7 @@ session_start();
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="index.php" class="simple-text">
+                <a href="index" class="simple-text">
 <?php
  $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
     $result_login = mysqli_query($con, $query_login);
@@ -59,31 +59,31 @@ session_start();
 
             <ul class="nav">
                 <li>
-                    <a href="index.php">
+                    <a href="index">
                         <i class="pe pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="pengajuan.php">
+                    <a href="pengajuan">
                         <i class="pe pe-7s-note2"></i>
                         <p>Pengajuan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="riwayat.php">
+                    <a href="riwayat">
                         <i class="pe pe-7s-timer"></i>
                         <p>Riwayat</p>
                     </a>
                 </li>
                 <li>
-                    <a href="master.php">
+                    <a href="master">
                         <i class="pe pe-7s-server"></i>
                         <p>Master</p>
                     </a>
                 </li>
                 <li>
-                    <a href="../logout.php">
+                    <a href="../logout">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
@@ -105,7 +105,7 @@ session_start();
                                     </div>  
                                 </div>
                                 <br>    
-                                <form id="form_pencarian"  action="pencarian_pengajuan.php" method="get">
+                                <form id="form_pencarian"  action="pencarian_pengajuan" method="get">
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
@@ -122,7 +122,20 @@ session_start();
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label> Tanggal Pengajuan</label>
-                                                <input type="date" name="tanggal" id="tanggal" class="form-control"  value="<?php echo date("Y-m-d");?>">
+                                                <!--<input type="date" name="tanggal" id="tanggal" class="form-control"  value="<?php echo date("Y-m-d");?>">-->
+                                                <input id="tanggal">
+                                                <script src="development-bundle/jquery-1.6.2.js">
+    </script>
+    <script src="development-bundle/ui/jquery.ui.core.js">
+    </script>
+    <script src="development-bundle/ui/jquery.ui.datepicker.js">
+    </script>
+
+    <script>
+    (function($){
+        $("#tanggal").datepicker();
+    })(jQuery);
+    </script>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -181,17 +194,17 @@ session_start();
                                             echo '<td align="center">';
     if( $data['status'] == "menunggu" ){
         echo '
-                                                <a href="pengajuan_diterima.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menerima pengajuan ?\')">
+                                                <a href="pengajuan_diterima?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menerima pengajuan ?\')">
                                                     <button type="button" rel="tooltip" title="Terima Pengajuan" class="btn btn-primary btn-fill">
                                                         <i class="fa fa-check"></i>
                                                     </button>
                                                 </a>
-                                                <a href="pengajuan_ditolak.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menolak pengajuan ?\')">
+                                                <a href="pengajuan_ditolak?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menolak pengajuan ?\')">
                                                     <button type="button" rel="tooltip" title="Tolak Pengajuan" class="btn btn-danger btn-fill">
                                                         <i class="fa fa-close"></i>
                                                     </button>
                                                 </a>
-                                                <a href="detail_pengajuan.php?id='.$data['id_pengajuan'].'">
+                                                <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
@@ -199,12 +212,12 @@ session_start();
     }
     else if ($data['status'] == "proses"){
         echo '
-                                                <a href="detail_pengajuan.php?id='.$data['id_pengajuan'].'">
+                                                <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>
-                                                <a href="pengajuan_diselesaikan.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menyelesaikan pengajuan ?\')">
+                                                <a href="pengajuan_diselesaikan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menyelesaikan pengajuan ?\')">
                                                     <button type="button" rel="tooltip" title="Selesaikan Pengajuan" class="btn btn-primary btn-fill">
                                                         <i class="fa fa-check"></i>
                                                     </button>
@@ -213,7 +226,7 @@ session_start();
     }
     else {
         echo '
-                                                <a href="detail_pengajuan.php?id='.$data['id_pengajuan'].'">
+                                                <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
                                                         <i class="fa fa-eye"></i>
                                                     </button>

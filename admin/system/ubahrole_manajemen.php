@@ -16,5 +16,5 @@ $query = "UPDATE user SET role='manajemen', update_akun='$tgl $jam' WHERE id_use
            " - ".mysqli_error($con));
   }
 
-header("location:../user.php");
+header("location:../user");
 ?>

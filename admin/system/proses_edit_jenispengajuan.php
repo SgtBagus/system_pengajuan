@@ -15,5 +15,5 @@ $query = "UPDATE jenis_pengajuan SET jenis_pengajuan='$jenis_pengajuan', deskrip
            " - ".mysqli_error($con));
 
   }
-header("location:../jenis_pengajuan.php");
+header("location:../jenis_pengajuan");
 ?>

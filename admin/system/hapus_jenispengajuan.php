@@ -13,5 +13,5 @@
   }
 
 
-  header("location:../jenis_pengajuan.php");
+  header("location:../jenis_pengajuan");
 ?>

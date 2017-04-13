@@ -15,5 +15,5 @@ echo $query;
            " - ".mysqli_error($con));
   }
   
-header("location:../index.php");
+header("location:../index");
 ?>

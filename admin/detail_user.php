@@ -5,7 +5,7 @@
 session_start();
  $logged_in = false;
  if (empty($_SESSION['email'])) {
-   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../login.php';</script>";
+   echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu'); document.location='../login';</script>";
  }
  else {
    $logged_in = true;
@@ -63,7 +63,7 @@ session_start();
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="index.php" class="simple-text">
+                <a href="index" class="simple-text">
 <?php
  $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
     $result_login = mysqli_query($con, $query_login);
@@ -80,31 +80,31 @@ session_start();
 
             <ul class="nav">
                 <li>
-                    <a href="index.php">
+                    <a href="index">
                         <i class="pe pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="pengajuan.php">
+                    <a href="pengajuan">
                         <i class="pe pe-7s-note2"></i>
                         <p>Pengajuan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="riwayat.php">
+                    <a href="riwayat">
                         <i class="pe pe-7s-timer"></i>
                         <p>Riwayat</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="master.php">
+                    <a href="master">
                         <i class="pe pe-7s-server"></i>
                         <p>Master</p>
                     </a>
                 </li>
                 <li>
-                    <a href="../logout.php">
+                    <a href="../logout">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
@@ -213,13 +213,13 @@ session_start();
                                         </div>
                                     </div>
                                     <div align="right">
-                                    <a href="user.php">
+                                    <a href="user">
                                         <button type="button" rel="tooltip" class="btn btn-info btn-fill">
                                                     <i class="fa fa-arrow-left"></i> Lihat Data Pengguna
                                         </button>
                                     </a>
 <?php
-                                    echo '<a href="edit_user.php?id='.$data['id_user'].'">
+                                    echo '<a href="edit_user?id='.$data['id_user'].'">
                                             <button type="button" rel="tooltip" class="btn btn-primary btn-fill">
                                                 <i class="fa fa-edit"></i> Edit Profile
                                             </button>

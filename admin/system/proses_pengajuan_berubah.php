@@ -25,5 +25,5 @@ $query2 = "INSERT INTO riwayat SET kegiatan='Telah Melakukan Perubahan Pengajuan
            " - ".mysqli_error($con));
   }
 
-header("location:../pengajuan.php");
+header("location:../pengajuan");
 ?>

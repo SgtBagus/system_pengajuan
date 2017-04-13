@@ -14,5 +14,5 @@ echo $query;
            " - ".mysqli_error($con));
   }
 
-header("location:../pengajuan.php");
+header("location:../pengajuan");
 ?> 
