@@ -35,6 +35,10 @@ session_start();
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
+<script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
+<!-- polyfiller file to detect and load polyfills -->
+<script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
+
 </head>
 <body>
 
@@ -83,7 +87,7 @@ session_start();
                     </a>
                 </li>
                 <li>
-                    <a href="../logout">
+                    <a href="../logout" onclick = "if (! confirm('Anda yakin ingin keluar ?')) { return false; }">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
@@ -122,20 +126,7 @@ session_start();
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label> Tanggal Pengajuan</label>
-                                                <!--<input type="date" name="tanggal" id="tanggal" class="form-control"  value="<?php echo date("Y-m-d");?>">-->
-                                                <input id="tanggal">
-                                                <script src="development-bundle/jquery-1.6.2.js">
-    </script>
-    <script src="development-bundle/ui/jquery.ui.core.js">
-    </script>
-    <script src="development-bundle/ui/jquery.ui.datepicker.js">
-    </script>
-
-    <script>
-    (function($){
-        $("#tanggal").datepicker();
-    })(jQuery);
-    </script>
+                                                <input type="date" name="tanggal" id="tanggal" class="form-control"  value="<?php echo date("Y-m-d");?>">
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -278,6 +269,9 @@ session_start();
     	$(document).ready(function(){
         	demo.initChartist();
     	});
-	</script>
 
+  webshims.setOptions('waitReady', false);
+  webshims.setOptions('forms-ext', {types: 'date'});
+  webshims.polyfill('forms forms-ext');
+</script>
 </html>

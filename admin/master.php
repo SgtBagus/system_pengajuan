@@ -84,7 +84,7 @@ session_start();
                     </a>
                 </li>
                 <li>
-                    <a href="../logout">
+                    <a href="../logout" onclick = "if (! confirm('Anda yakin ingin keluar ?')) { return false; }">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
@@ -241,16 +241,6 @@ session_start();
                 </div>
             </div>
         </div>
-
-        <footer class="footer">
-            <div class="container-fluid">
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, Sistem Keuangan
-                </p>
-            </div>
-        </footer>
-
-
     </div>
 </div>
 

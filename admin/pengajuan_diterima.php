@@ -46,6 +46,10 @@ session_start();
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+ 
+<script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
+<!-- polyfiller file to detect and load polyfills -->
+<script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
 
 </head>
 <body>
@@ -95,7 +99,7 @@ session_start();
                     </a>
                 </li>
                 <li>
-                    <a href="../logout">
+                    <a href="../logout" onclick = "if (! confirm('Anda yakin ingin keluar ?')) { return false; }">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
@@ -120,7 +124,8 @@ session_start();
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="Email">Pelaksanaan DiLaksanakan Pada Tanggal</label>
-                                                <input type="date" name="jadwal_pelaksanaan" id="form_pengajuan_diterima" required class="form-control">
+                                                <input type="date" name="jadwal_pelaksanaan" id="form_pengajuan_diterima" 
+                                                value="<?php echo date("Y-m-d");?>" required class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -184,6 +189,11 @@ session_start();
     	$(document).ready(function(){
         	demo.initChartist();
     	});
+
+  webshims.setOptions('waitReady', false);
+  webshims.setOptions('forms-ext', {types: 'date'});
+  webshims.polyfill('forms forms-ext');
+
 	</script>
 
 </html>

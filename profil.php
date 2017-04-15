@@ -22,7 +22,6 @@ session_start();
     $id = $data["id_user"];
     $username = $data["username"];
     $email = $data["email"];
-    $password = $data["password"];
     $namadepan = $data["nama_depan"];
     $namabelakang = $data["nama_belakang"];
     $jk = $data["jk"];
@@ -90,7 +89,7 @@ session_start();
                     </a>
                 </li>
                 <li>
-                    <a href="login">
+                    <a href="logout" onclick = "if (! confirm('Anda yakin ingin keluar ?')) { return false; }">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
@@ -127,7 +126,7 @@ session_start();
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="Password">Password</label>
-                                                <input type="password" name="password" id="form_edit_user" class="form-control" placeholder="Password" value="<?php echo $password ?>">
+                                                <input type="password" name="password" id="form_edit_user" class="form-control" placeholder="Ubah Password">
                                             </div>
                                         </div>
                                     </div>

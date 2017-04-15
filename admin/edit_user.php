@@ -22,7 +22,6 @@ session_start();
     $id = $data["id_user"];
     $username = $data["username"];
     $email = $data["email"];
-    $password = $data["password"];
     $namadepan = $data["nama_depan"];
     $namabelakang = $data["nama_belakang"];
     $jk = $data["jk"];
@@ -104,7 +103,7 @@ session_start();
                     </a>
                 </li>
                 <li>
-                    <a href="../logout">
+                    <a href="../logout" onclick = "if (! confirm('Anda yakin ingin keluar ?')) { return false; }">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
@@ -125,7 +124,7 @@ session_start();
                             <div class="content">
                                 <form id="form_edit_user" method="post" action="system/proses_edit_user.php">
                                     <div class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Username</label>
                                                 <input type="hidden" name="id" value="<?php echo $id ?>">
@@ -138,10 +137,10 @@ session_start();
                                                 <input type="email" name="email" id="email" class="form-control" placeholder="email" value="<?php echo $email ?>">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="Password">Password</label>
-                                                <input type="password" name="password" id="password" class="form-control" placeholder="Password" value="<?php echo $password ?>">
+                                                <input type="password" name="password" id="form_edit_user" class="form-control" placeholder="Ubah Password">
                                             </div>
                                         </div>
                                     </div>

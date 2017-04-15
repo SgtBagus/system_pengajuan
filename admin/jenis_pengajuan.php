@@ -80,7 +80,7 @@ session_start();
                     </a>
                 </li>
                 <li>
-                    <a href="../logout">
+                    <a href="../logout" onclick = "if (! confirm('Anda yakin ingin keluar ?')) { return false; }">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
