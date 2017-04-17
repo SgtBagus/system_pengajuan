@@ -218,7 +218,7 @@ session_start();
                                                 </a>
                                                 <a href="system/hapus_pengajuan.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
                                                     <button type="button" rel="tooltip" title="Batalkan Pengajuan" class="btn btn-danger btn-fill">
-                                                        <i class="fa fa-trash"> </i>
+                                                        <i class="fa fa-close"> </i>
                                                     </button>
                                                 </a>';
         }
@@ -238,7 +238,7 @@ session_start();
                                                     </button>
                                                 </a>
                                                 <a href="system/hapus_pengajuan.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
-                                                    <button type="button" rel="tooltip" title="Batalkan Pengajuan" class="btn btn-danger btn-fill">
+                                                    <button type="button" rel="tooltip" title="Hapus Pengajuan" class="btn btn-danger btn-fill">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </a>';
