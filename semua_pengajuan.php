@@ -68,7 +68,6 @@ session_start();
                         <p>Pengajuan</p>
                     </a>
                 </li>
-                
                 <li>
                     <a href="notifikasi">
                         <i class="pe pe-7s-bell"></i>
@@ -79,14 +78,24 @@ session_start();
                AND b.id_user = '$id_login' AND a.notifikasi= '1' ";
     $result_notifikasi = mysqli_query($con, $query_notifikasi);
       $banyakdata_notifikasi = $result_notifikasi->num_rows;
-    if( $banyakdata_notifikasi <= 10 ){
-        $hasil = $banyakdata_notifikasi;
-    }else{
-        $hasil = "10 +";
-    }
 ?>
 
-                        <p>Notifikasi <span class="new badge"><?php echo $hasil ?></span> </p>
+
+                        <p>Notifikasi 
+<?php
+    if ($banyakdata_notifikasi > 0){
+        if( $banyakdata_notifikasi <= 10 ){
+            $hasil = $banyakdata_notifikasi;
+            echo "<span class='new badge'>$hasil</span>";
+        }else{
+            $hasil = "10 +";
+            echo "<span class='new badge'>$hasil</span>";
+        }
+    }else{
+
+    }
+?>
+                        </p>
                     </a>
                 </li>
                 <li>
@@ -299,6 +308,10 @@ session_start();
         $(document).ready(function(){
             demo.initChartist();
         });
+
+  webshims.setOptions('waitReady', false);
+  webshims.setOptions('forms-ext', {types: 'date'});
+  webshims.polyfill('forms forms-ext');
     </script>
 
 </html>
