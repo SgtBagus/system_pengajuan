@@ -139,7 +139,7 @@ session_start();
     if ($data2['notifikasi'] == "1"){
                             echo '<div align="right">';
                                 echo '<span class="new badge">Belum DiBaca</span>';
-                            echo '</div>';
+                            echo '</div>'; 
     }
     else{
     }
