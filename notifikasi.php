@@ -89,7 +89,7 @@ session_start();
     }
 ?>
 
-                        <p>[ <?php echo $hasil ?> ] - Notifikasi</p>
+                        <p>Notifikasi <span class="new badge"><?php echo $hasil ?></span> </p>
                     </a>
                 </li>
                 <li>

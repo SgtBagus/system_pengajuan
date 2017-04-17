@@ -57,7 +57,7 @@ session_start();
                 </a>
             </div>
 
-            <ul class="nav">
+            <ul class="nav"> 
                 <li class="active">
                     <a href="index">
                         <i class="pe pe-7s-home"></i>
@@ -87,7 +87,8 @@ session_start();
     }
 ?>
 
-                        <p>[ <?php echo $hasil ?> ] - Notifikasi</p>
+
+                        <p>Notifikasi <span class="new badge"><?php echo $hasil ?></span> </p>
                     </a>
                 </li>
                 <li>
