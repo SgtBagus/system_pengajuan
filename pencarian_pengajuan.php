@@ -48,6 +48,7 @@ session_start();
          " - ".mysqli_error($con));
     }
     $data_login = mysqli_fetch_assoc($result_login);
+    $id_login = $data_login["id_user"];
     $username_login = $data_login["username"];
 ?>
                     Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username_login ?></small></small>
@@ -67,10 +68,25 @@ session_start();
                         <p>Pengajuan</p>
                     </a>
                 </li>
+                
                 <li>
                     <a href="notifikasi">
                         <i class="pe pe-7s-bell"></i>
-                        <p>Notifikasi</p>
+
+<?php
+    $query_notifikasi = " SELECT a.id_riwayat FROM riwayat 
+               AS a INNER JOIN pengajuan AS b WHERE a.id_pengajuan = b.id_pengajuan
+               AND b.id_user = '$id_login' AND a.notifikasi= '1' ";
+    $result_notifikasi = mysqli_query($con, $query_notifikasi);
+      $banyakdata_notifikasi = $result_notifikasi->num_rows;
+    if( $banyakdata_notifikasi <= 10 ){
+        $hasil = $banyakdata_notifikasi;
+    }else{
+        $hasil = "10 +";
+    }
+?>
+
+                        <p>[ <?php echo $hasil ?> ] - Notifikasi</p>
                     </a>
                 </li>
                 <li>
@@ -96,12 +112,11 @@ session_start();
                     <div class="col-md-12">
 <?php
     $judul = ($_GET["pengajuan"]);
-    $username = ($_GET["pengaju"]);
     $tanggal = ($_GET["tanggal"]);
     $status = ($_GET["status"]);
     $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
-            AND a.pengajuan LIKE '%".$judul."%' AND b.username LIKE '%".$username."%' AND a.tanggal_pengajuan like '%".$tanggal."%' 
+            AND a.pengajuan LIKE '%".$judul."%' AND a.tanggal_pengajuan like '%".$tanggal."%' 
             AND a.status like '%".$status."%' ORDER BY a.pengajuan ASC " ;
     $result = mysqli_query($con, $query);
       $no = 1;
@@ -120,9 +135,9 @@ if ($status == ""){
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h4 class="title">Data Pengguna</h4>
-                                        <small>Pencarian Judul = <b>"<?php echo $judul ?>"</b> Pengaju = <b>"<?php echo $username ?>"</b> Tanggal = <b>"<?php echo $tanggal ?>"</b> Status = <b>"<?php echo $semua ?>"</b>
+                                        <small>Pencarian Judul = <b>"<?php echo $judul ?>"</b> Tanggal = <b>"<?php echo $tanggal ?>"</b> Status = <b>"<?php echo $semua ?>"</b>
                                         <br> Data sebanyak <b>[ '<?php echo $banyakdata ?>' ]</b></small>
-                                        <a href="semua_pengajuan"><p class="category"><i class="fa fa-refresh"></i> Reset Data Pengguna</p></a>
+                                        <a href="pengajuan"><p class="category"><i class="fa fa-refresh"></i> Reset Data Pengguna</p></a>
                                     </div>  
                                 </div>
                                 <br>
@@ -133,7 +148,6 @@ if ($status == ""){
                                     <thead>
                                         <th>No</th>
                                         <th>Pengajuan</th>
-                                        <th>Pengaju</th>
                                         <th>Jenis</th>
                                         <th>tanggal</th>
                                         <th>biaya</th>
