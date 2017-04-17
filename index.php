@@ -207,7 +207,7 @@ session_start();
                                 echo '<h5><b>'.$data2['jenis_riwayat'].'</b> - <small>'.$data2['kegiatan3'].'</small></h5>';                           
     if ($data2['notifikasi'] == "1"){
                             echo '<div align="right">';
-                                echo '<span class="new badge">Belum Dibaca</span>';
+                                echo '<span class="new badge">Belum DiBaca</span>';
                             echo '</div>';
     }
     else{

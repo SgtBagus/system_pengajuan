@@ -138,7 +138,7 @@ session_start();
                                         echo '<h5>Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'</h5>';
     if ($data2['notifikasi'] == "1"){
                             echo '<div align="right">';
-                                echo '<span class="new badge">Belum Dibaca</span>';
+                                echo '<span class="new badge">Belum DiBaca</span>';
                             echo '</div>';
     }
     else{
