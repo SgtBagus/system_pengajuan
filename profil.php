@@ -125,7 +125,7 @@ session_start();
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="Password">Password</label>
+                                                <label for="Password">Ubah Password</label>
                                                 <input type="password" name="password" id="form_edit_user" class="form-control" placeholder="Ubah Password">
                                             </div>
                                         </div>
