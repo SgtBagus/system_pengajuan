@@ -109,6 +109,7 @@ session_start();
     </div>
 
     <div class="main-panel">
+        <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
@@ -128,28 +129,7 @@ session_start();
       }
       while($data2 = mysqli_fetch_assoc($result2)){ 
                     echo '<a href="system/notifikasi_pengajuan.php?id='.$data2['id_riwayat'].'" style="color:black">';
-    if ($data2['notifikasi'] == "1"){
-                    echo '<div class="card">';
-                            echo '<div class="content" style="background-color:#f2f2f2" >';
-                                echo '<div class="row" >';
-                                    echo '<div class="col-md-10">';
-                                        echo '<input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">';
-                                        echo '<h5><b>'.$data2['jenis_riwayat'].'</b> - <small>'.$data2['kegiatan3'].'</small></h5>';
-                                        echo '<h5>Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'</h5>';
-                                    echo '</div>';
-                                    echo '<div class="col-md-2">'; 
-                                        echo '<br>';
-                                        echo '<div align="right">';
-                                        
-                                        echo '</div>';
-                                    echo '</div>';
-                                echo'</div>';
-                            echo '</div>';
-                        echo '</div>';
-                                    
-    }
-    else{
-                    echo '<div class="card">';
+                        echo '<div class="card">';
                             echo '<div class="content">';
                                 echo '<div class="row">';
                                     echo '<div class="col-md-10">';
@@ -160,20 +140,27 @@ session_start();
                                     echo '<div class="col-md-2">'; 
                                         echo '<br>';
                                         echo '<div align="right">';
+    if ($data2['notifikasi'] == "1"){
+                                        echo '<i class="fa fa-check fa-2x"></i>';
+                                        
+                                        
+    }
+    else{
+
+    }
                                         
                                         echo '</div>';
                                     echo '</div>';
                                 echo'</div>';
                             echo '</div>';
                         echo '</div>';
-
-    }
                     echo '</a>';
       }
 ?>                          
                     </div>
                 </div>
             </div>
+        </div>  
     </div>
 </div>
 
