@@ -22,7 +22,7 @@ session_start();
     $data = mysqli_fetch_assoc($result);
     $id_pengajuan = $data["id_pengajuan"];
     $pengajuan = $data["pengajuan"];
-    $pengaju = $data["username_pengaju"];
+    $id_pengaju = $data["id_user"];
     $jenis_pengajuan = $data["jenis_pengajuan"];
     $taggal_pengajuan = $data["tanggal_pengajuan"];
     $gambar = $data["gambar"];
