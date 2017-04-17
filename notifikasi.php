@@ -101,6 +101,7 @@ session_start();
                     <div class="header">
                         <h4>Notifikasi</h4>
                     </div>
+                    
 <?php
     $query2 = "SELECT a.id_riwayat, a.kegiatan, a.id_pengajuan, a.jenis_riwayat, a.kegiatan3, 
                a.tanggal_kegiatan, b.id_user, a.notifikasi FROM riwayat 
@@ -115,17 +116,25 @@ session_start();
                     echo '<a href="system/notifikasi_pengajuan.php?id='.$data2['id_riwayat'].'" style="color:black">';
                         echo '<div class="card">';
                             echo '<div class="content">';
-                                echo '<input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">';
-                                echo '<h5><b>'.$data2['jenis_riwayat'].'</b> - <small>'.$data2['kegiatan3'].'</small></h5>';
-                                echo '<h5>Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'</h5>';
+                                echo '<div class="row">';
+                                    echo '<div class="col-md-10">';
+                                        echo '<input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">';
+                                        echo '<h5><b>'.$data2['jenis_riwayat'].'</b> - <small>'.$data2['kegiatan3'].'</small></h5>';
+                                        echo '<h5>Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'</h5>';
+                                    echo '</div>';
+                                    echo '<div class="col-md-2">';
+                                        echo '<br>';
+                                        echo '<div align="right">';
     if ($data2['notifikasi'] == "1"){
-                                echo '<div align="right">';
-                                    echo '<i class="fa fa-check"></i>';
-                                echo '</div>';
+                                        echo '<i class="fa fa-check fa-2x"></i>';
     }
     else{
 
     }
+    
+                                        echo '</div>';
+                                    echo '</div>';
+                                echo'</div>';
                             echo '</div>';
                         echo '</div>';
                     echo '</a>';
