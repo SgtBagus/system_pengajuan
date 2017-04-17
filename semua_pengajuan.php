@@ -130,7 +130,7 @@ session_start();
                                     </div>
                                 </div>
                                 <br>    
-                                <form id="form_pencarian"  action="pencarian_pengajuan" method="get">
+                                <form id="form_pencarian"  action="pencarian_semua_pengajuan" method="get">
                                     <div class="row">
                                         <div class="col-md-2">
                                             <div class="form-group">

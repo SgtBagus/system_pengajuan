@@ -10,15 +10,14 @@ session_start();
    $logged_in = true;
  }
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="assets/img/icon.png">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Pengajuan</title>
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/img/icon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Pengajuan</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -38,7 +37,7 @@ session_start();
 
 <div class="wrapper">
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
-    	<div class="sidebar-wrapper">
+        <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index" class="simple-text">
 <?php
@@ -52,7 +51,7 @@ session_start();
     $id_login = $data_login["id_user"];
     $username_login = $data_login["username"];
 ?>
-                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) - <?php echo $username_login ?></small></small>
+                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username_login ?></small></small>
                 </a>
             </div>
 
@@ -103,7 +102,7 @@ session_start();
                     </a>
                 </li>
             </ul>
-    	</div>
+        </div>
     </div>
 
     <div class="main-panel">
@@ -113,12 +112,13 @@ session_start();
                     <div class="col-md-12">
 <?php
     $judul = ($_GET["pengajuan"]);
+    $username = ($_GET["pengaju"]);
     $tanggal = ($_GET["tanggal"]);
     $status = ($_GET["status"]);
     $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
-            AND b.username like '$username_login' AND a.pengajuan LIKE '%".$judul."%' AND a.tanggal_pengajuan like '%".$tanggal."%' 
-            AND a.status like '%".$status."%' ORDER BY a.pengajuan ASC " ;  
+            AND a.pengajuan LIKE '%".$judul."%' AND b.username LIKE '%".$username."%' 
+            AND a.tanggal_pengajuan like '%".$tanggal."%' AND a.status like '%".$status."%' ORDER BY a.pengajuan ASC " ;
     $result = mysqli_query($con, $query);
       $no = 1;
       $cek = count($result);
@@ -136,9 +136,9 @@ if ($status == ""){
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h4 class="title">Data Pengguna</h4>
-                                        <small>Pencarian Judul = <b>"<?php echo $judul ?>"</b> Tanggal = <b>"<?php echo $tanggal ?>"</b> Status = <b>"<?php echo $semua ?>"</b>
+                                        <small>Pencarian Judul = <b>"<?php echo $judul ?>"</b> Pengaju = <b>"<?php echo $username ?>"</b> Tanggal = <b>"<?php echo $tanggal ?>"</b> Status = <b>"<?php echo $semua ?>"</b>
                                         <br> Data sebanyak <b>[ '<?php echo $banyakdata ?>' ]</b></small>
-                                        <a href="pengajuan"><p class="category"><i class="fa fa-refresh"></i> Reset Data Pengguna</p></a>
+                                        <a href="semua_pengajuan"><p class="category"><i class="fa fa-refresh"></i> Reset Data Pengguna</p></a>
                                     </div>  
                                 </div>
                                 <br>
@@ -149,7 +149,8 @@ if ($status == ""){
                                     <thead>
                                         <th>No</th>
                                         <th>Pengajuan</th>
-                                    	<th>Jenis</th>
+                                        <th>Pengaju</th>
+                                        <th>Jenis</th>
                                         <th>tanggal</th>
                                         <th>biaya</th>
                                         <th>status</th>
@@ -168,51 +169,53 @@ if ($status == ""){
       {
                                         echo "<tr>";
                                             echo "<td>$no</td>";
-                                        	echo "<td>$data[pengajuan]</td>";
-                                        	echo "<td>$data[jenis_pengajuan]</td>";
+                                            echo "<td>$data[pengajuan]</td>";
+                                            echo "<td>$data[username]</td>";
+                                            echo "<td>$data[jenis_pengajuan]</td>";
                                             echo "<td>$data[tanggal_pengajuan]</td>";
                                             echo "<td>$data[biaya]</td>";
                                             echo "<td>$data[status]</td>";
                                             echo '<td align="center">';
-    if($data['status'] == "menunggu" ){
-                                            echo '
-                                                <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
-                                                        <i class="fa fa-eye"></i>
+    if( $data['status'] == "menunggu" ){
+        echo '
+                                                <a href="pengajuan_diterima?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menerima pengajuan ?\')">
+                                                    <button type="button" rel="tooltip" title="Terima Pengajuan" class="btn btn-primary btn-fill">
+                                                        <i class="fa fa-check"></i>
                                                     </button>
                                                 </a>
-                                                <a href="edit_pengajuan?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Ubah Pengajuan" class="btn btn-primary btn-fill">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                </a>
-                                                <a href="system/hapus_pengajuan.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
-                                                    <button type="button" rel="tooltip" title="Batalkan Pengajuan" class="btn btn-danger btn-fill">
+                                                <a href="pengajuan_ditolak?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menolak pengajuan ?\')">
+                                                    <button type="button" rel="tooltip" title="Tolak Pengajuan" class="btn btn-danger btn-fill">
                                                         <i class="fa fa-close"></i>
                                                     </button>
-                                                </a>';
-        }
-        else if ($data['status'] == "proses" ){
-                                            echo '
+                                                </a>
                                                 <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>';
-        }
-        else{
-                                            echo '
+    }
+    else if ($data['status'] == "proses"){
+        echo '
                                                 <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>
-                                                <a href="system/hapus_pengajuan.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
-                                                    <button type="button" rel="tooltip" title="Hapus Pengajuan" class="btn btn-danger btn-fill">
-                                                        <i class="fa fa-trash"></i>
+                                                <a href="pengajuan_diselesaikan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menyelesaikan pengajuan ?\')">
+                                                    <button type="button" rel="tooltip" title="Selesaikan Pengajuan" class="btn btn-primary btn-fill">
+                                                        <i class="fa fa-check"></i>
                                                     </button>
                                                 </a>';
-        }
+
+    }
+    else {
+        echo '
+                                                <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
+                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
+                                                        <i class="fa fa-eye"></i>
+                                                    </button>
+                                                </a>';
+    }
                                             echo '</td>';
                                         echo "</tr>";
                                         $no++;
@@ -221,6 +224,7 @@ if ($status == ""){
 ?>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>
@@ -235,13 +239,13 @@ if ($status == ""){
 
     <!--   Core JS Files   -->
     <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
-	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
+    <!--  Checkbox, Radio & Switch Plugins -->
+    <script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
 
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
+    <!--  Charts Plugin -->
+    <script src="assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
@@ -250,15 +254,15 @@ if ($status == ""){
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="assets/js/light-bootstrap-dashboard.js"></script>
+    <script src="assets/js/light-bootstrap-dashboard.js"></script>
 
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
+    <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+    <script src="assets/js/demo.js"></script>
 
-	<script type="text/javascript">
-    	$(document).ready(function(){
-        	demo.initChartist();
-    	});
-	</script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            demo.initChartist();
+        });
+    </script>
 
 </html>
