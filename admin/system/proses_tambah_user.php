@@ -17,6 +17,13 @@ if (isset($_POST['input'])) {
   $alamat        = $_POST['alamat'];
   $role        = $_POST['role'];
 
+$cekdulu= "SELECT * FROM user WHERE username='$username' OR email='$email'";
+$prosescek= mysqli_query($con, $cekdulu);
+if (mysqli_num_rows($prosescek)>0) { 
+    echo "<script>alert('Username atau Email Sudah Digunakan');history.go(-1) </script>";
+}
+else { 
+
   $query = "INSERT INTO user SET username='$username',email='$email'
         ,password=md5('$password'),nama_depan='$nama_depan',nama_belakang='$nama_belakang',jk='$jk'
         ,no_hp='$nohp',alamat='$alamat',role='$role', pembuatan_akun='$tgl $jam', update_akun='$tgl $jam'";
@@ -26,7 +33,8 @@ if (isset($_POST['input'])) {
       die ("Query gagal dijalankan: ".mysqli_errno($con).
            " - ".mysqli_error($con));
   }
+header("location:../user");
+}
 }
 
-header("location:../user");
 ?>
