@@ -1,5 +1,4 @@
 <?php
-  // memanggil file koneksi.php untuk melakukan koneksi database
   include '../system/koneksi.php';
 
 
@@ -147,7 +146,7 @@ session_start();
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                 </a>
-                                                <a href="system/hapus_user.php?id='.$data['id_jenis_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data?\')">
+                                                <a href="system/hapus_user?id='.$data['id_jenis_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data?\')">
                                                     <button type="button" rel="tooltip" title="Hapus User" class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>
                                                     </button>

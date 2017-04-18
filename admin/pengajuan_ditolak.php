@@ -123,7 +123,7 @@ session_start();
                                 <h4 class="title"><b>Berikan Alasan Penolakan</h4>
                             </div>
                             <div class="content">
-                                <form id="form_pengajuan_diterima" method="post" action="system/proses_pengajuan_ditolak.php">
+                                <form id="form_pengajuan_diterima" method="post" action="system/proses_pengajuan_ditolak">
                                     <input type="hidden" name="id_pengajuan" value="<?php echo $id_pengajuan ?>">
                                     <div class="row">
                                         <div class="col-md-12">

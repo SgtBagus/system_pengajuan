@@ -132,7 +132,7 @@ session_start();
                                 </small></h4>
                             </div>
                             <div class="content">
-                                <form id="form_pengajuan_diterima" method="post" action="system/pengajuan_diselesaikan.php">
+                                <form id="form_pengajuan_diterima" method="post" action="system/pengajuan_diselesaikan">
                                     <input type="hidden" name="id_pengajuan" value="<?php echo $id_pengajuan ?>">
                                     <div class="row">
                                         <div class="col-md-12">

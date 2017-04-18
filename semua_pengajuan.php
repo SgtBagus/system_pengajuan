@@ -1,5 +1,4 @@
 <?php
-  // memanggil file koneksi.php untuk melakukan koneksi database
   include 'system/koneksi.php';
 session_start();
  $logged_in = false;
@@ -225,7 +224,7 @@ session_start();
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                 </a>
-                                                <a href="system/hapus_pengajuan.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
+                                                <a href="system/hapus_pengajuan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
                                                     <button type="button" rel="tooltip" title="Batalkan Pengajuan" class="btn btn-danger btn-fill">
                                                         <i class="fa fa-close"> </i>
                                                     </button>
@@ -246,7 +245,7 @@ session_start();
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>
-                                                <a href="system/hapus_pengajuan.php?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
+                                                <a href="system/hapus_pengajuan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
                                                     <button type="button" rel="tooltip" title="Hapus Pengajuan" class="btn btn-danger btn-fill">
                                                         <i class="fa fa-trash"></i>
                                                     </button>

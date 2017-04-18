@@ -1,5 +1,4 @@
 <?php
-  // memanggil file koneksi.php untuk melakukan koneksi database
   include '../system/koneksi.php';
 session_start();
  $logged_in = false;
@@ -256,7 +255,7 @@ session_start();
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">
-                            <form id="form_catatan" method="post" action="system/proses_catatan.php">
+                            <form id="form_catatan" method="post" action="system/proses_catatan">
                                 <h4 class="title">Catatan</h4>
 <?php
     $query_catatan = "SELECT * FROM catatan";

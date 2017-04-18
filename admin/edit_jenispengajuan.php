@@ -115,7 +115,7 @@ session_start();
                                 <h4 class="title">Edit Jenis Pengajuan</h4>
                             </div>
                             <div class="content">
-                                <form id="form_edit_jenispengajuan" method="post" action="system/proses_edit_jenispengajuan.php">
+                                <form id="form_edit_jenispengajuan" method="post" action="system/proses_edit_jenispengajuan">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -149,7 +149,7 @@ session_start();
                                                 <i class="fa fa-edit"></i> Konfirmasi
                                             </button>
                                         </a>
-                                        <a href="system/hapus_jenispengajuan.php?id='.$data['id_jenis_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data?\')">
+                                        <a href="system/hapus_jenispengajuan?id='.$data['id_jenis_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data?\')">
                                             <button type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-fill">
                                                 <i class="fa fa-trash"></i> Hapus Profile
                                             </button>

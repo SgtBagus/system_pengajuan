@@ -158,7 +158,7 @@ session_start();
                                                     </button>';
     }
     else{
-                                            echo '<a href="system/hapus_user.php?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
+                                            echo '<a href="system/hapus_user?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan menghapus data pengguna?\')">
                                                     <button type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>
                                                     </button>

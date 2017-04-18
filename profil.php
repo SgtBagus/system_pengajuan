@@ -1,5 +1,4 @@
 <?php
-  // memanggil file koneksi.php untuk melakukan koneksi database
   include 'system/koneksi.php';
 
 
@@ -132,7 +131,7 @@ session_start();
                                 <h4 class="title">Edit Profile <b> (<?php echo $username ?> ) </b></h4>
                             </div>
                             <div class="content">
-                                <form id="form_edit_user" method="post" action="system/proses_edit_profil.php">
+                                <form id="form_edit_user" method="post" action="system/proses_edit_profil">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">

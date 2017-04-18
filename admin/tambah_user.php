@@ -103,7 +103,7 @@ session_start();
                                 <h4 class="title">Tambah Data User</h4>
                             </div>
                             <div class="content">
-                                <form id="form_user" method="post" action="system/proses_tambah_user.php">
+                                <form id="form_user" method="post" action="system/proses_tambah_user">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">

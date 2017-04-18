@@ -23,7 +23,7 @@ include"system/koneksi.php";
 
         <div class="page-container">
             <h1>Pengajuan Barang Dan Training<br><h5>( Login )</h5></h1>
-            <form action="system/act.php?op=in" method="POST">
+            <form action="system/act?op=in" method="POST">
                 <input type="email" name="email" class="username" placeholder="Email">
                 <input type="password" name="password" class="password" placeholder="Password">
                 <button type="submit" value="Login" name="submit">Login</button>

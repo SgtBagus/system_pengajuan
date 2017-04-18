@@ -122,7 +122,7 @@ session_start();
                                 <h4 class="title">Edit Profile <b> (<?php echo $username ?> ) </b> - <small> <?php echo $role ?></small></h4>
                             </div>
                             <div class="content">
-                                <form id="form_edit_user" method="post" action="system/proses_edit_user.php">
+                                <form id="form_edit_user" method="post" action="system/proses_edit_user">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -187,14 +187,14 @@ session_start();
                                         
 <?php
     if( $role == "manajemen" ){
-        echo '<a href="system/ubahrole_tim.php?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan merubah role menjadi tim ?\')">
+        echo '<a href="system/ubahrole_tim?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan merubah role menjadi tim ?\')">
                                             <button type="button" name="input" rel="tooltip" class="btn btn-primary btn-fill">
                                                 <i class="fa fa-arrow-down"></i> Ubah Role Menjadi Tim
                                             </button>
                                         </a>';
     }
     else {
-        echo '<a href="system/ubahrole_manajemen.php?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan merubah role menjadi Manajemen ?\')">
+        echo '<a href="system/ubahrole_manajemen?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan merubah role menjadi Manajemen ?\')">
                                             <button type="button" name="input" rel="tooltip" class="btn btn-primary btn-fill">
                                                 <i class="fa fa-arrow-up"></i> Ubah Role Menjadi Manajemen
                                             </button>
@@ -212,7 +212,7 @@ session_start();
                                             </button>';
     }
     else{
-                                            echo '<a href="system/hapus_user.php?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan menghapus data?\')">
+                                            echo '<a href="system/hapus_user?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan menghapus data?\')">
                                                 <button type="button" rel="tooltip" class="btn btn-danger btn-fill">
                                                     <i class="fa fa-trash"></i> Hapus Profile
                                                 </button>

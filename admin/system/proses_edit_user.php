@@ -6,7 +6,7 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 $nama_depan = $_POST['nama_depan'];
 $nama_belakang = $_POST['nama_belakang'];
-$alamat = $_POST['alamat'];
+$alamat = $_POST['alamat']; 
 $nohp = $_POST['nohp'];
  
 $tanggal= mktime(date("m"),date("d"),date("Y"));
@@ -29,6 +29,6 @@ $query = "UPDATE user SET username='$username', email='$email', password=md5('$p
            " - ".mysqli_error($con));
   }
   echo "<script>alert('User Berhasil Diubah')</script>";
-header("location:../user");
+header("location:../detail_user?id=$id");
 }
 ?>

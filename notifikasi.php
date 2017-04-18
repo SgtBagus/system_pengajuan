@@ -1,5 +1,4 @@
 <?php
-  // memanggil file koneksi.php untuk melakukan koneksi database
   include 'system/koneksi.php';
 
 
@@ -137,7 +136,7 @@ session_start();
            " - ".mysqli_error($con));
       }
       while($data2 = mysqli_fetch_assoc($result2)){ 
-                    echo '<a href="system/notifikasi_pengajuan.php?id='.$data2['id_riwayat'].'" style="color:black">';
+                    echo '<a href="system/notifikasi_pengajuan?id='.$data2['id_riwayat'].'" style="color:black">';
                         echo '<div class="card">';
                             echo '<div class="content">';
                                 echo '<div class="row">';

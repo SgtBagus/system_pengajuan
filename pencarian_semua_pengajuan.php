@@ -1,5 +1,4 @@
 <?php
-  // memanggil file koneksi.php untuk melakukan koneksi database
   include 'system/koneksi.php';
 session_start();
  $logged_in = false;

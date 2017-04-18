@@ -142,7 +142,7 @@ session_start();
                                 <h4 class="title">Edit Pengajuan</h4>
                             </div>
                             <div class="content">
-                                <form id="form_user" method="post" action="system/proses_edit_pengajuan.php?id=<?php echo $id_pengajuan?>" enctype="multipart/form-data">
+                                <form id="form_user" method="post" action="system/proses_edit_pengajuan?id=<?php echo $id_pengajuan?>" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">

@@ -230,7 +230,7 @@ if( $email == $_SESSION['email'] ){
                                             </button>';
     }
     else{
-                                            echo '<a href="system/hapus_user.php?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan menghapus data?\')">
+                                            echo '<a href="system/hapus_user?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan menghapus data?\')">
                                                 <button type="button" rel="tooltip" class="btn btn-danger btn-fill">
                                                     <i class="fa fa-trash"></i> Hapus Profile
                                                 </button>

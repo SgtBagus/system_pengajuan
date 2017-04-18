@@ -1,8 +1,7 @@
 <?php
-// Load file koneksi.php
-include "koneksi.php";
 
-// Ambil data NIS yang dikirim oleh index.php melalui URL
+include "koneksi.php"; 
+
 $id = $_GET['id'];
 
 $query = "SELECT * FROM pengajuan WHERE id_pengajuan='".$id."'";
