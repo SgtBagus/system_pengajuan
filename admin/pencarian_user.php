@@ -56,7 +56,6 @@ session_start();
                     Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
                 </a>
             </div>
-
             <ul class="nav">
                 <li>
                     <a href="index">

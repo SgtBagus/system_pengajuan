@@ -80,7 +80,6 @@ session_start();
                     Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
                 </a>
             </div>
-
             <ul class="nav">
                 <li>
                     <a href="index">
@@ -100,6 +99,7 @@ session_start();
                         <p>Riwayat</p>
                     </a>
                 </li>
+                
                 <li>
                     <a href="master">
                         <i class="pe pe-7s-server"></i>

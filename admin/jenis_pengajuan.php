@@ -61,7 +61,7 @@ session_start();
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="pengajuan">
                         <i class="pe pe-7s-note2"></i>
                         <p>Pengajuan</p>
@@ -73,7 +73,7 @@ session_start();
                         <p>Riwayat</p>
                     </a>
                 </li>
-                <li class="active">
+                <li >
                     <a href="master">
                         <i class="pe pe-7s-server"></i>
                         <p>Master</p>

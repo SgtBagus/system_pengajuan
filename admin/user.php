@@ -56,6 +56,7 @@ session_start();
                 </a>
             </div>
 
+            
             <ul class="nav">
                 <li>
                     <a href="index">
@@ -75,11 +76,18 @@ session_start();
                         <p>Riwayat</p>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="master">
+                
+                <li  class="active">
+                    <a data-toggle="collapse" href="#componentsExamples">
                         <i class="pe pe-7s-server"></i>
-                        <p>Master</p>
+                        <p>Master </p>
                     </a>
+                    <div class="collapse in" id="componentsExamples">
+                        <ul class="nav">
+                            <li  class="active"><a href="user"> User </a></li>
+                            <li><a href="jenis_pengajuan"> Jenis Pengajuan </a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <a href="../logout" onclick = "if (! confirm('Anda yakin ingin keluar ?')) { return false; }">
