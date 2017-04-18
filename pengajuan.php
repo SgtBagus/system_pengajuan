@@ -212,7 +212,7 @@ session_start();
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>
-                                                <a href="edit_pengajuan?id='.$data['id_pengajuan'].'">
+                                                <a href="edit_pengajuan?id='.$data['id_pengajuan'].'"  onclick="return confirm(\'Anda yakin merubah pengajuan ?\')">
                                                     <button type="button" rel="tooltip" title="Ubah Pengajuan" class="btn btn-primary btn-fill">
                                                         <i class="fa fa-edit"></i>
                                                     </button>

@@ -21,6 +21,7 @@ session_start();
     $id_pengajuan = $data["id_pengajuan"];
     $pengajuan = $data["pengajuan"];
     $biaya = $data["biaya"];
+    $gambar = $data["gambar"];
     $alasan = $data["alasan"];
     $keterangan = $data["keterangan"];
   } 
@@ -146,7 +147,7 @@ session_start();
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Pengajuan</label>
-                                                <input type="text" name="pengajuan" id="form_pengajuan" class="form-control" placeholder="Pengajuan" value=<?php echo $pengajuan ?> >
+                                                <input type="text" name="pengajuan" id="form_pengajuan" class="form-control" placeholder="Pengajuan" value="<?php echo $pengajuan ?>" >
                                             </div>
                                         </div>
                                     </div>
@@ -179,13 +180,29 @@ session_start();
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Gambar</label>
                                                 <br>
-			                                        <input type="checkbox" name="ubah_foto" value="true"> Ceklis jika ingin mengubah foto<br>
+                                                
+<?php
+
+if($gambar == "" ){
+    echo '<input type="checkbox" name="tambah_foto" value="true"> Ceklis jika ingin menambah foto<br>';
+}else{
+    ?>
+    
+                                                        <a href="image/<?php echo $gambar ?>">
+                                                            <img src='image/<?php echo $gambar ?>' width='282' height='177'></h5>
+                                                        </a>
+                                                        <br>
+    <?php
+    echo '<input type="radio" id="2" name="ubah_foto" value="ubah"> Ceklis Disini jika ingin Mengubah foto ';
+    echo '<input type="radio" id="2" name="ubah_foto" value="hapus"> Ceklis Disini jika ingin Menghapus foto ';
+}
+
+?>
                                                     <input type="file" name="foto">
                                             </div>
                                         </div>
