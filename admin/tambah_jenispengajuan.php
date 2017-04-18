@@ -131,7 +131,7 @@ session_start();
                                     </div>
                                 
                                     <div align="right">
-                                        <a href="user">
+                                        <a href="jenis_pengajuan">
                                             <button type="button" rel="tooltip" class="btn btn-info btn-fill">
                                                         <i class="fa fa-arrow-left"></i> Kembali
                                             </button>

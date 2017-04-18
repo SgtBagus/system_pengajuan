@@ -123,7 +123,7 @@ include"system/koneksi.php";
                                 <h4 class="title">Tambah Data User</h4>
                             </div>
                             <div class="content">
-                                <form id="form_user" method="post" action="system/proses_tambah_pengajuan.php" enctype="multipart/form-data">
+                                <form id="form_user" method="post" action="system/proses_tambah_pengajuan" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">

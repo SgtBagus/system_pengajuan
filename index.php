@@ -136,7 +136,15 @@ session_start();
                                         <p class="category">Update Terakhir : <b><?php echo $data_catatan['update_catatan']?></b></p>
                                     </div>
                                     <div class="content">
-                                    <p><?php echo $data_catatan['catatan'] ?></p>
+                                    <p>
+    <?php 
+    if ( $data_catatan['catatan'] == '' ){
+        echo "<small style='color:#bfbfbf'>- Tidak ada catatan -</small>";
+    }else{
+        echo $data_catatan['catatan'];
+    }
+    ?>
+                                    </p>
                             </div>
                         </div>
                     </div>

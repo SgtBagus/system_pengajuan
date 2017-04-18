@@ -272,7 +272,7 @@ session_start();
                                 <div class="content">
                                     <input type="hidden" name="id_catatan" id="form_catatan" value="<?php echo $data_catatan['id_catatan'] ?>">
                                     <div class="form-group">
-                                        <textarea rows="5" class="form-control" placeholder="Kosong" name="catatan" id="form_catatan"><?php echo $data_catatan['catatan'] ?></textarea>
+                                        <textarea rows="5" class="form-control" placeholder="Tidak Ada Catatan !" name="catatan" id="form_catatan"><?php echo $data_catatan['catatan'] ?></textarea>
                                     </div>
                                 
                                 <div align="right">
