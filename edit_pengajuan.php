@@ -189,7 +189,7 @@ session_start();
 <?php
 
 if($gambar == "" ){
-    echo '<input type="checkbox" name="tambah_foto" value="true"> Ceklis jika ingin menambah foto<br>';
+    echo '<input type="radio" name="ubah_foto" value="tambah"> Pilih jika ingin menambah foto<br>';
 }else{
     ?>
     
@@ -198,8 +198,8 @@ if($gambar == "" ){
                                                         </a>
                                                         <br>
     <?php
-    echo '<input type="radio" id="2" name="ubah_foto" value="ubah"> Ceklis Disini jika ingin Mengubah foto ';
-    echo '<input type="radio" id="2" name="ubah_foto" value="hapus"> Ceklis Disini jika ingin Menghapus foto ';
+    echo '<input type="radio" id="radio" name="ubah_foto" value="ubah"> Pilih Disini jika ingin Mengubah foto ';
+    echo '<input type="radio" id="radio" name="ubah_foto" value="hapus"> Pilih Disini jika ingin Menghapus foto ';
 }
 
 ?>
