@@ -221,8 +221,8 @@ session_start();
                             </div>
                             <div class="content">
 <?php
-    $query2 = "SELECT a.id_riwayat, a.kegiatan, a.id_pengajuan, a.jenis_riwayat, a.kegiatan3, 
-               a.tanggal_kegiatan, b.id_user, a.notifikasi FROM riwayat 
+    $query2 = "SELECT a.id_riwayat, a.kegiatan, a.id_pengajuan, b.pengajuan, 
+               a.jenis_riwayat, a.kegiatan3, a.tanggal_kegiatan, b.id_user, a.notifikasi FROM riwayat 
                AS a INNER JOIN pengajuan AS b WHERE a.id_pengajuan = b.id_pengajuan
                ORDER BY id_riwayat DESC LIMIT 3" ;
       $result2 = mysqli_query($con, $query2);
@@ -235,8 +235,8 @@ session_start();
                         echo '<div class="card">';
                             echo '<div class="content">';
                                 echo '<input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">';
-                                echo '<h5><b>'.$data2['jenis_riwayat'].'</b> - <small>'.$data2['kegiatan'].'</small></h5>';
-                                echo 'Tanggal = '.$data2['tanggal_kegiatan'].'';
+                                echo '<h5><b>'.$data2['jenis_riwayat'].' </b> - <small>'.$data2['pengajuan'].'</small></h5>';
+                                echo '<h5>Tanggal kegiatan : '.$data2['tanggal_kegiatan'].'</h5>';
                             echo '</div>';
                         echo '</div>';
                     echo '</a>';

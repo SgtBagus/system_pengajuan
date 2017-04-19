@@ -99,9 +99,10 @@ session_start();
                         <h4>Riwayat</h4>
                     </div>
 <?php
-    $query2 = "SELECT a.id_riwayat, a.kegiatan, a.id_pengajuan, a.jenis_riwayat, a.kegiatan3, 
-               a.tanggal_kegiatan, b.id_user, a.notifikasi FROM riwayat 
-               AS a INNER JOIN pengajuan AS b WHERE a.id_pengajuan = b.id_pengajuan
+    $query2 = "SELECT a.id_riwayat, a.kegiatan, a.id_pengajuan, b.pengajuan, 
+               a.jenis_riwayat, a.kegiatan3, a.tanggal_kegiatan, b.id_user, 
+               a.notifikasi FROM riwayat AS a INNER JOIN pengajuan AS b 
+               WHERE a.id_pengajuan = b.id_pengajuan
                ORDER BY id_riwayat DESC " ;
       $result2 = mysqli_query($con, $query2);
       if(!$result2){
@@ -113,8 +114,8 @@ session_start();
                         echo '<div class="card">';
                             echo '<div class="content">';
                                 echo '<input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">';
-                                echo '<h5><b>'.$data2['jenis_riwayat'].'</b> - <small>'.$data2['kegiatan3'].'</small></h5>';
-                                echo '<h5>Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'</h5>';
+                                echo '<h5><b>'.$data2['jenis_riwayat'].' </b> </h5><h6>'.$data2['pengajuan'].' - <small>'.$data2['kegiatan'].'</small></h6>';
+                                echo '<h5>Tanggal kegiatan : '.$data2['tanggal_kegiatan'].'</h5>';
                             echo '</div>';
                         echo '</div>';
                     echo '</a>';
