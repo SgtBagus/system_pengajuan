@@ -126,7 +126,7 @@ session_start();
                     </div>
                     
 <?php
-    $query2 = "SELECT a.id_riwayat, a.kegiatan, a.id_pengajuan, a.jenis_riwayat, a.kegiatan3, 
+    $query2 = "SELECT a.id_riwayat, a.kegiatan, a.id_pengajuan, b.pengajuan, a.jenis_riwayat, a.kegiatan3, 
                a.tanggal_kegiatan, b.id_user, a.notifikasi FROM riwayat 
                AS a INNER JOIN pengajuan AS b WHERE a.id_pengajuan = b.id_pengajuan
                AND b.id_user = '$id_login' ORDER BY id_riwayat DESC " ;
@@ -142,7 +142,9 @@ session_start();
                                 echo '<div class="row">';
                                     echo '<div class="col-md-12">';
                                         echo '<input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">';
-                                        echo '<h5><b>'.$data2['jenis_riwayat'].'</b> - <small>'.$data2['kegiatan3'].'</small></h5>';
+                                        echo '<h5><b>'.$data2['jenis_riwayat'].'</b> - '.$data2['pengajuan'].'
+                                        <br> 
+                                        <small>'.$data2['kegiatan3'].'</small></h5>';
                                         echo '<h5>Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'</h5>';
     if ($data2['notifikasi'] == "1"){
                             echo '<div align="right">';

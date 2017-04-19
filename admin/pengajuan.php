@@ -206,7 +206,7 @@ session_start();
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>
-                                                <a href="pengajuan_diselesaikan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menyelesaikan pengajuan ?\')">
+                                                <a href="system/pengajuan_diselesaikan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menyelesaikan pengajuan ?\')">
                                                     <button type="button" rel="tooltip" title="Selesaikan Pengajuan" class="btn btn-primary btn-fill">
                                                         <i class="fa fa-check"></i>
                                                     </button>
