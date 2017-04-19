@@ -282,7 +282,7 @@ if( $data['status'] == "menunggu"){
                                                     <button type="button" rel="tooltip" title="hapus Pengajuan" class="btn btn-danger btn-fill">
                                                         <i class="fa fa-trash"></i> Hapus
                                                     </button>
-                                                </a>';
+                                                </a>'; 
         }
     else {
 
@@ -292,7 +292,7 @@ if( $data['status'] == "menunggu"){
 
     }else {
         if ( $pengaju == $username_login ){
-                                        echo'<a href="hapus_pengajuan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menghapus pengajuan ?\')">
+                                        echo'<a href="system/hapus_pengajuan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menghapus pengajuan ?\')">
                                                     <button type="button" rel="tooltip" title="hapus Pengajuan" class="btn btn-danger btn-fill">
                                                         <i class="fa fa-trash"></i> Hapus
                                                     </button>
