@@ -249,8 +249,8 @@ session_start();
                                     
                                     <div align="right">
                                     <a href="pengajuan">
-                                        <button type="button" rel="tooltip" class="btn btn-info btn-fill" title="kembali">
-                                                    <i class="fa fa-arrow-left"></i> Kembali 
+                                        <button type="button" rel="tooltip" class="btn btn-info btn-fill" title="Pengajuan">
+                                                    <i class="pe pe-7s-note2"></i> Pengajuan 
                                         </button>
                                     </a>
 <?php

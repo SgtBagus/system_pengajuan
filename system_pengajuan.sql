@@ -124,13 +124,13 @@ INSERT INTO `riwayat` (`id_riwayat`, `kegiatan`, `kegiatan2`, `kegiatan3`, `jeni
 
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
-  `username` varchar(15) NOT NULL,
-  `email` varchar(25) NOT NULL,
+  `username` varchar(225) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` varchar(225) NOT NULL,
-  `nama_depan` varchar(15) NOT NULL,
-  `nama_belakang` varchar(15) NOT NULL,
+  `nama_depan` varchar(225) NOT NULL,
+  `nama_belakang` varchar(225) NOT NULL,
   `jk` enum('laki-laki','perempuan') NOT NULL,
-  `no_hp` varchar(15) NOT NULL,
+  `no_hp` varchar(25) NOT NULL,
   `alamat` text NOT NULL,
   `role` enum('manajemen','tim') NOT NULL,
   `pembuatan_akun` datetime NOT NULL,

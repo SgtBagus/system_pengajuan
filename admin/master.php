@@ -103,7 +103,7 @@ session_start();
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h4 class="title">Data Pengguna</h4>
-                                        <a href="use"><p class="category"><i class="fa fa-link"></i> Klik di sini untuk melihat semua Data Pengguna</p></a>
+                                        <a href="user"><p class="category"><i class="fa fa-link"></i> Klik di sini untuk melihat semua Data Pengguna</p></a>
                                     </div>  
                                     <div class="col-md-6" align="right">
                                         <a href="tambah_user">
