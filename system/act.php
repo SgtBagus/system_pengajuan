@@ -18,12 +18,6 @@ if($op=="in"){
 			header("location:../index");
 		}
 	}else{
-		?>
-		<script lenguage="JavaScript">
-		alert(Email atau Password Salah silahkan di ulang);
-		document.location='../login';
-		</script>
-		<?php
 	}
 
 }else if($op=="out"){

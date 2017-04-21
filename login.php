@@ -17,12 +17,21 @@ include"system/koneksi.php";
         <link rel="stylesheet" href="assets/css/reset.css">
         <link rel="stylesheet" href="assets/css/supersized.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        
+        <style>
+body{background-image:url(assets/img/1.jpg); background-size:cover}
+#test{padding:20px}
+h1{text-align:center; color:#FFF}
+p{margin-bottom:10px; color:#FFF}
+</style>
+
     </head>
 
     <body>
 
         <div class="page-container">
-            <h1>Pengajuan Barang Dan Training<br><h5>( Login )</h5></h1>
+            <img src='assets/img/logo.png' width='300' height='158'><br>
+            <h1>Pengajuan Barang Dan Training<br>
             <form action="system/act?op=in" method="POST">
                 <input type="email" name="email" class="username" placeholder="Email">
                 <input type="password" name="password" class="password" placeholder="Password">
@@ -30,13 +39,6 @@ include"system/koneksi.php";
                 <div class="error"><span>+</span></div>
             </form>
         </div>
-        <!-- Javascript -->
-        <script src="assets/js/jquery-1.8.2.min.js"></script>
-        <script src="assets/js/supersized.3.2.7.min.js"></script>
-        <script src="assets/js/supersized-init.js"></script>
-        <script src="assets/js/scripts.js"></script>
-
     </body>
-
 </html>
 
