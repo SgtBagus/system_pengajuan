@@ -56,6 +56,8 @@ session_start();
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/lightbox.min.css">
 
   <link rel="stylesheet" href="assets/dist/sweetalert.css">
   <script src="assets/dist/sweetalert-dev.js"></script>
@@ -204,15 +206,15 @@ session_start();
                                                         <td><h5><b> : </h5></b></td>
                                                         <td><h5>';
 ?>
-                                                        <a href="image/<?php echo $gambar ?>">
-                                                            <img src='image/<?php echo $gambar ?>' width='282' height='177'></h5>
+                                                        <a class="example-image-link" href="image/<?php echo $gambar ?>" data-lightbox="example-2" data-title="<?php echo $pengajuan ?>">
+                                                            <img class="example-image" src="image/<?php echo $gambar ?>" width='282' height='177' alt="image-1"/>
                                                         </a>
 <?php                                                        
                                                         echo '</td>
                                                     </tr>';
     }
 
-?>                                                    
+?>                                                 
                                                     <tr>
                                                         <td><h5><b>Biaya</h5></b></td>
                                                         <td><h5><b> : </h5></b></td>
@@ -287,24 +289,52 @@ session_start();
 
                                     
                                     <div align="right">
-                                    <a href="pengajuan">
+                                    <a href="semua_pengajuan">
                                         <button type="button" rel="tooltip" class="btn btn-info btn-fill" title="kembali">
-                                                    <i class="fa fa-arrow-left"></i> Kembali 
+                                                    <i class="fa fa-list"></i> Semua Pengajuan 
                                         </button>
                                     </a>
 <?php
 if( $data['status'] == "menunggu"){
     if ( $pengaju == $username_login ){
-                                        echo '<a href="edit_pengajuan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin merubah pengajuan ?\')">
-                                                    <button type="button" rel="tooltip" title="Ubah Pengajuan" class="btn btn-primary btn-fill" >
-                                                        <i class="fa fa-edit"></i> Ubah Pengajuan
-                                                    </button>
-                                                </a>
-                                                <a href="system/hapus_pengajuan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menghapus pengajuan ?\')">
-                                                    <button type="button" rel="tooltip" title="hapus Pengajuan" class="btn btn-danger btn-fill">
-                                                        <i class="fa fa-trash"></i> Hapus
-                                                    </button>
-                                                </a>'; 
+                                                echo '<button onclick="editpengajuan()" type="button" rel="tooltip" title="Ubah Pengajuan" class="btn btn-primary btn-fill" >
+                                                    <i class="fa fa-edit"></i> Ubah Pengajuan
+                                                </button>
+                                                <button onclick="batalpengajuan()" type="button" rel="tooltip" title="hapus Pengajuan" class="btn btn-danger btn-fill">
+                                                    <i class="fa fa-trash"></i> Hapus
+                                                </button>'; 
+        echo '<script type="text/javascript">
+            function editpengajuan() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin mengubah pengajuan",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3472F7",
+                    confirmButtonText: "Iya",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="edit_pengajuan?id='.$data['id_pengajuan'].'";
+                })
+            }
+            function batalpengajuan() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin membatalkan pengajuan",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#FF4A55",
+                    confirmButtonText: "Iya",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="system/hapus_pengajuan?id='.$data['id_pengajuan'].'";
+                })
+            }
+        </script>';
         }
     else {
 
@@ -314,11 +344,27 @@ if( $data['status'] == "menunggu"){
 
     }else {
         if ( $pengaju == $username_login ){
-                                        echo'<a href="system/hapus_pengajuan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menghapus pengajuan ?\')">
-                                                    <button type="button" rel="tooltip" title="hapus Pengajuan" class="btn btn-danger btn-fill">
-                                                        <i class="fa fa-trash"></i> Hapus
-                                                    </button>
-                                                </a>';
+                                        echo'<button onclick="hapuspengajuan()" type="button" rel="tooltip" title="hapus Pengajuan" class="btn btn-danger btn-fill">
+                                                <i class="fa fa-trash"></i> Hapus
+                                            </button>';                                      
+    echo '<script type="text/javascript">
+            function hapuspengajuan() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin menghapus pengajuan",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#FF4A55",
+                    confirmButtonText: "Iya",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="system/hapus_pengajuan?id='.$data['id_pengajuan'].'";
+                })
+            }
+        </script>';
+
         }
     else {
     }   
@@ -360,6 +406,8 @@ if( $data['status'] == "menunggu"){
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
+
+    <script src="assets/js/lightbox-plus-jquery.min.js"></script>
 
 	<script type="text/javascript">
     	$(document).ready(function(){

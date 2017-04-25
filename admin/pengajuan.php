@@ -43,7 +43,7 @@ session_start();
 
 </head>
 <body>
-
+ 
 <div class="wrapper">
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
@@ -71,7 +71,7 @@ session_start();
                 </li>
                 <li class="active">
                     <a href="pengajuan">
-                        <i class="pe pe-7s-note2"></i>
+                        <i class="pe pe-7s-note2"></i> 
                         <p>Pengajuan</p>
                     </a>
                 </li>
