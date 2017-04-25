@@ -6,7 +6,6 @@ $tanggal= mktime(date("m"),date("d"),date("Y"));
 $tgl = date("Y-m-d", $tanggal);
 
 $query = "UPDATE pengajuan SET status='selesai', update_pengajuan='$tgl' WHERE id_pengajuan='$id_pengajuan'";
-echo $query;
   $result = mysqli_query($con, $query);
   // periska query apakah ada error
   if(!$result){

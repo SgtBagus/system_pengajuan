@@ -32,6 +32,9 @@ session_start();
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
+  <link rel="stylesheet" href="assets/dist/sweetalert.css">
+  <script src="assets/dist/sweetalert-dev.js"></script>
+
 </head>
 <body>
 
@@ -80,11 +83,31 @@ session_start();
                     </a>
                 </li>
                 <li>
-                    <a href="../logout" onclick = "if (! confirm('Anda yakin ingin keluar ?')) { return false; }">
+                    <a href="#" onclick = "logout()">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
                 </li>
+
+                <script type="text/javascript">
+                    function logout() {
+                        swal({
+                            title: "Konfirmasi ?",
+                            text: "Apakah anda ingin keluar ",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#FF4A55",
+                            confirmButtonText: "Logout",
+                            cancelButtonText: "Batal",
+                            closeOnConfirm: false
+                        },
+                        function(){
+                            document.location="../logout";
+                        })
+                    }
+                </script>
+
+            </ul>
             </ul>
     	</div>
     </div>
@@ -103,7 +126,7 @@ session_start();
                                     </div>  
                                     <div class="col-md-6" align="right">
                                         <a href="tambah_jenispengajuan">
-                                            <button type="button" rel="tooltip" class="btn btn-info">
+                                            <button type="button" rel="tooltip" class="btn btn-info btn-fill">
                                                 <i class="fa fa-plus"></i> Tambah Jenis Pengajuan
                                             </button>
                                         </a>
@@ -142,7 +165,7 @@ session_start();
         die ("Query Error: ".mysqli_errno($con).
            " - ".mysqli_error($con));
       }
-      $no = 1;
+      $no = 1; 
       while($jenispengajuan = mysqli_fetch_assoc($result))
       {
                                         echo "<tr>";
@@ -151,16 +174,31 @@ session_start();
                                             echo "<td>$jenispengajuan[deskripsi]</td>";
                                             echo '<td>
                                                 <a href="edit_jenispengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Ubah Data" class="btn btn-primary">
+                                                    <button type="button" rel="tooltip" title="Ubah Data" class="btn btn-primary btn-sm btn-fill">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                 </a>
-                                                <a href="system/hapus_jenispengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'" onclick="return confirm(\'Anda yakin akan menghapus data?\')">
-                                                    <button type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </a>
-                                            </td>';
+                                                <button onclick="hapusjenispengajuan()" type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>';
+    echo '<script type="text/javascript">
+            function hapusjenispengajuan() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin menghapus pengguna",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#FF4A55",
+                    confirmButtonText: "Hapus",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="system/hapus_jenispengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'";
+                })
+            }
+        </script>';
+                                        echo '</td>';
                                         echo "</tr>";
                                         $no++;
       }

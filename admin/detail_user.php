@@ -56,6 +56,9 @@ session_start();
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
+  <link rel="stylesheet" href="assets/dist/sweetalert.css">
+  <script src="assets/dist/sweetalert-dev.js"></script>
+
 </head>
 <body>
 
@@ -103,11 +106,30 @@ session_start();
                     </a>
                 </li>
                 <li>
-                    <a href="../logout" onclick = "if (! confirm('Anda yakin ingin keluar ?')) { return false; }">
+                    <a href="#" onclick = "logout()">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
                 </li>
+
+                <script type="text/javascript">
+                    function logout() {
+                        swal({
+                            title: "Konfirmasi ?",
+                            text: "Apakah anda ingin keluar ",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#FF4A55",
+                            confirmButtonText: "Logout",
+                            cancelButtonText: "Batal",
+                            closeOnConfirm: false
+                        },
+                        function(){
+                            document.location="../logout";
+                        })
+                    }
+                </script>
+
             </ul>
     	</div>
     </div>
@@ -229,11 +251,26 @@ if( $email == $_SESSION['email'] ){
                                             </button>';
     }
     else{
-                                            echo '<a href="system/hapus_user?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan menghapus data?\')">
-                                                <button type="button" rel="tooltip" class="btn btn-danger btn-fill">
-                                                    <i class="fa fa-trash"></i> Hapus Profile
-                                                </button>
-                                            </a>';
+                                            echo' <button onclick="hapususer()"  type="button" rel="tooltip" class="btn btn-danger btn-fill ">
+                                                <i class="fa fa-trash"></i> Hapus Profile
+                                            </button>';
+    echo '<script type="text/javascript">
+            function hapususer() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin menghapus pengguna",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#FF4A55",
+                    confirmButtonText: "Hapus",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="system/hapus_user?id='.$id.'";
+                })
+            }
+        </script>';
     }
                                         
 ?>

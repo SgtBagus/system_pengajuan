@@ -34,6 +34,8 @@ session_start();
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
+  <link rel="stylesheet" href="assets/dist/sweetalert.css">
+  <script src="assets/dist/sweetalert-dev.js"></script>
 </head>
 <body>
 
@@ -81,11 +83,30 @@ session_start();
                     </a>
                 </li>
                 <li>
-                    <a href="../logout" onclick = "if (! confirm('Anda yakin ingin keluar ?')) { return false; }">
+                    <a href="#" onclick = "logout()">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
                 </li>
+
+                <script type="text/javascript">
+                    function logout() {
+                        swal({
+                            title: "Konfirmasi ?",
+                            text: "Apakah anda ingin keluar ",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#FF4A55",
+                            confirmButtonText: "Logout",
+                            cancelButtonText: "Batal",
+                            closeOnConfirm: false
+                        },
+                        function(){
+                            document.location="../logout";
+                        })
+                    }
+                </script>
+
             </ul>
     	</div>
     </div>
@@ -103,12 +124,11 @@ session_start();
     $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
             AND a.pengajuan LIKE '%".$judul."%' AND b.username LIKE '%".$username."%' AND a.tanggal_pengajuan like '%".$tanggal."%' 
-            AND a.status like '%".$status."%' ORDER BY a.id_pengajuan ASC " ;
+            AND a.status like '%".$status."%' ORDER BY a.id_pengajuan DESC " ;
     $result = mysqli_query($con, $query);
       $no = 1;
       $cek = count($result);
       $banyakdata = $result->num_rows;
-
 
 if ($status == ""){
     $semua = "semua";
@@ -163,18 +183,47 @@ if ($status == ""){
                                             echo '<td align="center">';
     if( $data['status'] == "menunggu" ){
         echo '
-                                                <a href="pengajuan_diterima?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menerima pengajuan ?\')">
-                                                    <button type="button" rel="tooltip" title="Terima Pengajuan" class="btn btn-primary btn-fill">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                </a>
-                                                <a href="pengajuan_ditolak?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menolak pengajuan ?\')">
-                                                    <button type="button" rel="tooltip" title="Tolak Pengajuan" class="btn btn-danger btn-fill">
-                                                        <i class="fa fa-close"></i>
-                                                    </button>
-                                                </a>
+                                                <button onclick="pengajuanditerima()" type="button" rel="tooltip" title="Terima Pengajuan" class="btn btn-primary btn-fill btn-sm">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                                <button onclick="pengajuanditolak()" type="button" rel="tooltip" title="Tolak Pengajuan" class="btn btn-danger btn-fill btn-sm">
+                                                    <i class="fa fa-close"></i>
+                                                </button>';
+        echo '<script type="text/javascript">
+            function pengajuanditerima() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin menerima pengajuan",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3472F7",
+                    confirmButtonText: "Terima",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="pengajuan_diterima?id='.$data['id_pengajuan'].'";
+                })
+            }
+            function pengajuanditolak() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin menolak pengajuan",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#FF4A55",
+                    confirmButtonText: "Tolak",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="pengajuan_ditolak?id='.$data['id_pengajuan'].'";
+                })
+            }
+        </script>';
+        echo'
                                                 <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
+                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill btn-sm">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>';
@@ -182,21 +231,35 @@ if ($status == ""){
     else if ($data['status'] == "proses"){
         echo '
                                                 <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
+                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill btn-sm">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>
-                                                <a href="pengajuan_diselesaikan?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menyelesaikan pengajuan ?\')">
-                                                    <button type="button" rel="tooltip" title="Selesaikan Pengajuan" class="btn btn-primary btn-fill">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                </a>';
+                                                <button onclick="pengajuandiselesaikan()" type="button" rel="tooltip" title="Selesaikan Pengajuan" class="btn btn-primary btn-fill btn-sm">
+                                                    <i class="fa fa-check"></i>
+                                                </button>';
 
+        echo '<script type="text/javascript">
+                function pengajuandiselesaikan() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin menyelesaikan pengajuan",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Selesaikan",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="system/proses_pengajuan_diselesaikan?id='.$data['id_pengajuan'].'";
+                })
+            }
+            </script>';
     }
     else {
         echo '
                                                 <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill">
+                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill btn-sm">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>';

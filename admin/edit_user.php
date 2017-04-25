@@ -55,6 +55,9 @@ session_start();
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
+  <link rel="stylesheet" href="assets/dist/sweetalert.css">
+  <script src="assets/dist/sweetalert-dev.js"></script>
+  
 </head>
 <body>
 
@@ -103,11 +106,36 @@ session_start();
                     </a>
                 </li>
                 <li>
-                    <a href="../logout" onclick = "if (! confirm('Anda yakin ingin keluar ?')) { return false; }">
+                    <a href="#" onclick = "logout()">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
                 </li>
+                <li>
+                    <a href="#" onclick = "logout()">
+                        <i class="pe pe-7s-back"></i>
+                        <p>Log out</p>
+                    </a>
+                </li>
+
+                <script type="text/javascript">
+                    function logout() {
+                        swal({
+                            title: "Konfirmasi ?",
+                            text: "Apakah anda ingin keluar ",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#FF4A55",
+                            confirmButtonText: "Logout",
+                            cancelButtonText: "Batal",
+                            closeOnConfirm: false
+                        },
+                        function(){
+                            document.location="../logout";
+                        })
+                    }
+                </script>
+
             </ul>
     	</div>
     </div>
@@ -186,37 +214,90 @@ session_start();
                                         </a>
                                         
 <?php
-    if( $role == "manajemen" ){
-        echo '<a href="system/ubahrole_tim?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan merubah role menjadi tim ?\')">
-                                            <button type="button" name="input" rel="tooltip" class="btn btn-primary btn-fill">
-                                                <i class="fa fa-arrow-down"></i> Ubah Role Menjadi Tim
-                                            </button>
-                                        </a>';
+    if( $id == $data_login['id_user'] ){
+        if( $role == "manajemen" ){
+            echo '<button type="button" name="input" rel="tooltip" class="btn btn-primary btn-fill " disabled>
+                <i class="fa fa-arrow-down"></i> Ubah Role Menjadi Tim
+            </button>';
+        }
     }
-    else {
-        echo '<a href="system/ubahrole_manajemen?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan merubah role menjadi Manajemen ?\')">
-                                            <button type="button" name="input" rel="tooltip" class="btn btn-primary btn-fill">
+    else{
+        if( $role == "manajemen" ){
+                                    echo '<button onclick="tim()" type="button" name="input" rel="tooltip" class="btn btn-primary btn-fill ">
+                                                <i class="fa fa-arrow-down"></i> Ubah Role Menjadi Tim
+                                            </button>';
+        echo '<script type="text/javascript">
+                function tim() {
+                    swal({
+                        title: "Konfirmasi ?",
+                        text: "Apakah anda ingin mengubah role pengguna",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3472F7",
+                        confirmButtonText: "Ubah Role",
+                        cancelButtonText: "Batal",
+                        closeOnConfirm: false
+                    },
+                    function(){
+                        document.location="system/ubahrole_tim?id='.$id.'";
+                    })
+                }
+            </script>';
+        }
+        else {
+                                        echo '<button onclick="manajemen()" type="button" name="input" rel="tooltip" class="btn btn-primary btn-fill ">
                                                 <i class="fa fa-arrow-up"></i> Ubah Role Menjadi Manajemen
-                                            </button>
-                                        </a>';
+                                            </button>';
+        echo '<script type="text/javascript">
+                function manajemen() {
+                    swal({
+                        title: "Konfirmasi ?",
+                        text: "Apakah anda ingin mengubah role pengguna",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3472F7",
+                        confirmButtonText: "Ubah Role",
+                        cancelButtonText: "Batal",
+                        closeOnConfirm: false
+                    },
+                    function(){
+                        document.location="system/ubahrole_tim?id='.$id.'";
+                    })
+                }
+            </script>';
+        }
     }
                                     echo'
-                                        <a href="" onclick="return confirm(\'Anda yakin akan merubah data?\')">
-                                            <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
-                                                <i class="fa fa-edit"></i> Konfirmasi
-                                            </button>
-                                        </a>';
-    if( $email == $_SESSION['email'] ){
-                                            echo'<button type="button" rel="tooltip" class="btn btn-danger btn-fill" disabled>
+                                        <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill ">
+                                            <i class="fa fa-edit"></i> Konfirmasi
+                                        </button>';
+
+    if( $data['id_user'] == $data_login['id_user'] ){
+                                            echo' <button type="button" rel="tooltip" class="btn btn-danger btn-fill " disabled>
                                                 <i class="fa fa-trash"></i> Hapus Profile
                                             </button>';
     }
     else{
-                                            echo '<a href="system/hapus_user?id='.$data['id_user'].'" onclick="return confirm(\'Anda yakin akan menghapus data?\')">
-                                                <button type="button" rel="tooltip" class="btn btn-danger btn-fill">
-                                                    <i class="fa fa-trash"></i> Hapus Profile
-                                                </button>
-                                            </a>';
+                                            echo' <button onclick="hapususer()"  type="button" rel="tooltip" class="btn btn-danger btn-fill ">
+                                                <i class="fa fa-trash"></i> Hapus Profile
+                                            </button>';
+    echo '<script type="text/javascript">
+            function hapususer() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin menghapus pengguna",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#FF4A55",
+                    confirmButtonText: "Hapus",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="system/hapus_user?id='.$id.'";
+                })
+            }
+        </script>';
     }
 ?>
                                     </div>

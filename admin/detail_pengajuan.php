@@ -58,7 +58,11 @@ session_start();
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/lightbox.min.css">
 
+  <link rel="stylesheet" href="assets/dist/sweetalert.css">
+  <script src="assets/dist/sweetalert-dev.js"></script>
+  
 </head>
 <body>
 
@@ -107,11 +111,30 @@ session_start();
                     </a>
                 </li>
                 <li>
-                    <a href="../logout" onclick = "if (! confirm('Anda yakin ingin keluar ?')) { return false; }">
+                    <a href="#" onclick = "logout()">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
                     </a>
                 </li>
+
+                <script type="text/javascript">
+                    function logout() {
+                        swal({
+                            title: "Konfirmasi ?",
+                            text: "Apakah anda ingin keluar ",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#FF4A55",
+                            confirmButtonText: "Logout",
+                            cancelButtonText: "Batal",
+                            closeOnConfirm: false
+                        },
+                        function(){
+                            document.location="../logout";
+                        })
+                    }
+                </script>
+
             </ul>
     	</div>
     </div>
@@ -132,7 +155,7 @@ session_start();
                                 </small></h4>
                             </div>
                             <div class="content">
-                                <form id="form_pengajuan_diterima" method="post" action="system/pengajuan_diselesaikan">
+                                <form id="form_pengajuan_diterima" method="post" >
                                     <input type="hidden" name="id_pengajuan" value="<?php echo $id_pengajuan ?>">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -164,8 +187,8 @@ session_start();
                                                         <td><h5><b> : </h5></b></td>
                                                         <td><h5>';
 ?>
-                                                         <a href="../image/<?php echo $gambar ?>">
-                                                            <img src='../image/<?php echo $gambar ?>' width='282' height='177'></h5>
+                                                        <a class="example-image-link" href="../image/<?php echo $gambar ?>" data-lightbox="example-2" data-title="<?php echo $pengajuan ?>">
+                                                            <img class="example-image" src="../image/<?php echo $gambar ?>" width='282' height='177' alt="image-1"/>
                                                         </a>
 <?php                                                        
                                                         echo '</td>
@@ -233,10 +256,10 @@ session_start();
       while($data2 = mysqli_fetch_assoc($result2)){
                                                     echo "<tr>";
                                                         echo "<td><b>$no </b></td>";
-                                                        echo "<td> - </td>";
+                                                        echo "<td> . </td>";
                                                         echo "<td> <b>$data2[kegiatan2] </b> </td>";
-                                                        echo "<td> - </td>";
-                                                        echo "<td><small> <b>$data2[tanggal_kegiatan]</b></small></td>";
+                                                        echo "<td> : </td>";
+                                                        echo "<td><small> $data2[tanggal_kegiatan]</small></td>";
                                                     echo "</tr>";
                                         $no++;
       }                                                      
@@ -249,36 +272,94 @@ session_start();
                                     
                                     <div align="right">
                                     <a href="pengajuan">
-                                        <button type="button" rel="tooltip" class="btn btn-info btn-fill" title="Pengajuan">
+                                        <button type="button" rel="tooltip" class="btn btn-info  btn-fill" title="Pengajuan">
                                                     <i class="pe pe-7s-note2"></i> Pengajuan 
                                         </button>
                                     </a>
 <?php
 if( $data['status'] == "menunggu" ){
         echo '
-                                                <a href="pengajuan_diterima?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menerima pengajuan ?\')">
-                                                    <button type="button" rel="tooltip" title="Terima Pengajuan" class="btn btn-primary btn-fill" >
-                                                        <i class="fa fa-check"></i> Terima
-                                                    </button>
-                                                </a>
-                                                <a href="pengajuan_ditolak?id='.$data['id_pengajuan'].'" onclick="return confirm(\'Anda yakin menolak pengajuan ?\')">
-                                                    <button type="button" rel="tooltip" title="Tolak Pengajuan" class="btn btn-danger btn-fill">
-                                                        <i class="fa fa-close"></i> Tolak
-                                                    </button>
-                                                </a>';
+                                                
+                                                <button onclick="pengajuanditerima()" type="button" rel="tooltip" title="Terima Pengajuan" class="btn btn-primary btn-fill">
+                                                    <i class="fa fa-check"></i> Terima
+                                                </button>
+                                                <button onclick="pengajuanditolak()" type="button" rel="tooltip" title="Tolak Pengajuan" class="btn btn-danger  btn-fill">
+                                                    <i class="fa fa-close"></i> Tolak
+                                                </button>';
+        echo '<script type="text/javascript">
+            function pengajuanditerima() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin menerima pengajuan",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3472F7",
+                    confirmButtonText: "Terima",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="pengajuan_diterima?id='.$data['id_pengajuan'].'";
+                })
+            }
+            function pengajuanditolak() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin menolak pengajuan",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#FF4A55",
+                    confirmButtonText: "Tolak",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="pengajuan_ditolak?id='.$data['id_pengajuan'].'";
+                })
+            }
+        </script>';                                       
     }
     else if ($data['status'] == "proses"){
         echo '
-                                                <a href="pengajuan_diubah?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Ubah Jadwal" class="btn btn-primary btn-fill"  onclick="return confirm(\'Anda yakin merubah jadwal pengajuan ?\')">
-                                                        <i class="fa fa-edit"></i> Ubah Jadwal Pelaksanaan
-                                                    </button>
-                                                </a>
-                                                <a href="" onclick="return confirm(\'Anda yakin menyelesaikan pengajuan ?\')">
-                                                    <button type="submit" name="input" rel="tooltip" title="Selesaikan Pengajuan" class="btn btn-primary btn-fill">
-                                                        <i class="fa fa-check"></i> Selesaikan Pengajuan
-                                                    </button>
-                                                </a>';
+                                                <button onclick="pengajuandiubah()" type="button" rel="tooltip" title="Ubah Jadwal" class="btn btn-primary  btn-fill">
+                                                    <i class="fa fa-edit"></i> Ubah Jadwal Pelaksanaan
+                                                </button>
+                                                <button onclick="pengajuandiselesaikan()" type="button" name="input" rel="tooltip" title="Selesaikan Pengajuan" class="btn btn-primary  btn-fill">
+                                                    <i class="fa fa-check"></i> Selesaikan Pengajuan
+                                                </button>';
+        echo '<script type="text/javascript">
+            function pengajuandiubah() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin mengubah jadwal pengajuan",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3472F7",
+                    confirmButtonText: "Iya",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="pengajuan_diubah?id='.$data['id_pengajuan'].'";
+                })
+            }
+
+            function pengajuandiselesaikan() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin menyelesaikan pengajuan",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3472F7",
+                    confirmButtonText: "Selesaikan",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="system/proses_pengajuan_diselesaikan?id='.$data['id_pengajuan'].'";
+                })
+            }
+            </script>'; 
     }
 ?>
                                     </div>
@@ -317,6 +398,8 @@ if( $data['status'] == "menunggu" ){
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
+
+    <script src="assets/js/lightbox-plus-jquery.min.js"></script>
 
 	<script type="text/javascript">
     	$(document).ready(function(){
