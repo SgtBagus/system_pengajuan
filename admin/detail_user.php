@@ -134,6 +134,16 @@ session_start();
     	</div>
     </div>
 
+<?php
+if (isset($_GET['proses'])) {
+    $proses = ($_GET["proses"]);
+    if($proses == "edit"){
+        echo'<script>
+            swal("Terubah!", "Data User telah diubah !", "success")
+        </script>';
+  } 
+}
+?>
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">

@@ -115,7 +115,6 @@ session_start();
             </ul>
     	</div>
     </div>
-
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">

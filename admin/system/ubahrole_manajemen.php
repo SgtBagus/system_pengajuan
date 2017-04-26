@@ -15,6 +15,5 @@ $query = "UPDATE user SET role='manajemen', update_akun='$tgl $jam' WHERE id_use
       die ("Query gagal dijalankan: ".mysqli_errno($con).
            " - ".mysqli_error($con));
   }
-
-header("location:../user");
+        header('location:../detail_user?id='.$id.'&proses=edit'); 
 ?>

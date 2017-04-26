@@ -15,5 +15,5 @@ echo $query;
            " - ".mysqli_error($con));
   }
   
-header("location:../index");
+header("location:../index?update=true"); 
 ?>

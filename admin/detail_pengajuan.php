@@ -139,6 +139,31 @@ session_start();
     	</div>
     </div>
 
+<?php
+if (isset($_GET['proses'])) {
+    $proses = ($_GET["proses"]);
+    if($proses == "edit"){
+        echo'<script>
+            swal("Terubah!", "Data pengajuan telah diubah !", "success")
+        </script>';
+    }
+    else if($proses == "terima"){
+        echo'<script>
+            swal("Terterima!", "Data pengajuan telah diterima !", "success")
+        </script>';
+    }
+    else if($proses == "selesai"){
+        echo'<script>
+            swal("Terselesaikan!", "Data pengajuan telah diselesaikan !", "success")
+        </script>';
+    }else{
+        echo'<script>
+            swal("Tertolak!", "Data pengajuan telah ditolak !", "success")
+        </script>';
+    }
+  }  
+?>
+
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -246,7 +271,7 @@ session_start();
                                                 </table>
                                                 <table>
 <?php
-    $query2 = "SELECT * FROM riwayat WHERE id_pengajuan ='$id' ORDER BY kegiatan ASC" ;
+    $query2 = "SELECT * FROM riwayat WHERE id_pengajuan ='$id' ORDER BY id_riwayat DESC" ;
       $result2 = mysqli_query($con, $query2);
       if(!$result2){
         die ("Query Error: ".mysqli_errno($con).

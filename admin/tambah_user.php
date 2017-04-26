@@ -115,6 +115,17 @@ session_start();
     	</div>
     </div>
 
+<?php
+if (isset($_GET['error'])) {
+    $error = ($_GET["error"]);
+    if($error == "true"){
+        echo'<script>
+            sweetAlert("Mohon Maaf", "Email atau Username yang anda masukan sudah ada!", "error");
+        </script>';
+    }
+  } 
+?>
+
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -130,19 +141,25 @@ session_start();
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Username</label>
-                                                <input type="text" name="username" id="username" class="form-control" placeholder="Username" required >
+                                                <input type="text" name="username" id="username" class="form-control" placeholder="Username" required 
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="Email">Email address</label>
-                                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
+                                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="Password">Password</label>
-                                                <input type="password" name="password" id="password" class="form-control" placeholder="password" required>
+                                                <input type="password" name="password" id="password" class="form-control" placeholder="password" required 
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')" >
                                             </div>
                                         </div>
                                     </div>
@@ -151,13 +168,17 @@ session_start();
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nama Depan</label>
-                                                <input type="text" name="nama_depan" id="nama_depan" class="form-control" placeholder="Nama Pertama" required>
+                                                <input type="text" name="nama_depan" id="nama_depan" class="form-control" placeholder="Nama Pertama" required
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')" >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nama Belakang</label>
-                                                <input type="text" name="nama_belakang" id="nama_belakang" class="form-control" placeholder="Nama Terakhir" required >
+                                                <input type="text" name="nama_belakang" id="nama_belakang" class="form-control" placeholder="Nama Terakhir" required 
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')" >
                                             </div>
                                         </div>
                                     </div>
@@ -167,8 +188,17 @@ session_start();
                                             <div class="form-group">
                                                 <label>Jenis Kelamin</label>
                                                 <br>
-                                                    <input type="radio" name="jeniskelamin" id="jeniskelamin" value="laki-laki" required> Laki - Laki
-                                                    <input type="radio" name="jeniskelamin" id="jeniskelamin" value="perempuan" required> Perempuan
+                                                    <input type="radio" name="jeniskelamin" id="jeniskelamin" value="laki-laki" required
+                                                    oninvalid="this.setCustomValidity('Pilih salah satu jenis kelamin berikut !')" onclick="clearValidity();">
+                                                    Laki - Laki
+                                                    <input type="radio" name="jeniskelamin" id="jeniskelamin" value="perempuan" required
+                                                    onclick="clearValidity()"> 
+                                                    Perempuan
+<script>
+    function clearValidity(){
+        document.getElementById('jeniskelamin').setCustomValidity('');
+    }
+</script>
                                             </div>
                                         </div>
                                     </div>
@@ -177,7 +207,9 @@ session_start();
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Alamat</label>
-                                                <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" required>
+                                                <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" required
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')">
                                             </div>
                                         </div>
                                     </div>
@@ -197,8 +229,16 @@ session_start();
                                             <div class="form-group">
                                                 <label>Role</label>
                                                 <br>
-                                                    <input type="radio" name="role" id="role" value="manajemen" required> Manajemen
-                                                    <input type="radio" name="role" id="role" value="tim" required> Tim
+                                                    <input type="radio" name="role" id="role" value="manajemen" required
+                                                    oninvalid="this.setCustomValidity('Pilih salah satu role berikut !')" onclick="clearValidity();"> 
+                                                        Manajemen
+                                                    <input type="radio" name="role" id="role" value="tim" required onclick="clearValidity()"> 
+                                                        Tim
+<script>
+    function clearValidity(){
+        document.getElementById('role').setCustomValidity('');
+    }
+</script>
                                             </div>
                                         </div>
                                     </div>

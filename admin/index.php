@@ -37,6 +37,16 @@ session_start();
 </head>
 <body>
 
+<?php
+if (isset($_GET['update'])) {
+    $update = ($_GET["update"]);
+    if($update == "true"){
+        echo'<script>
+            swal("Terubah!", "Catatan telah diubah !", "success")
+        </script>';
+    }
+  } 
+?>
 <div class="wrapper">
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">

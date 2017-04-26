@@ -16,11 +16,11 @@ if (isset($_POST['input'])) {
   $nohp        = $_POST['nohp'];
   $alamat        = $_POST['alamat'];
   $role        = $_POST['role'];
-
+ 
 $cekdulu= "SELECT * FROM user WHERE username='$username' OR email='$email'";
 $prosescek= mysqli_query($con, $cekdulu);
 if (mysqli_num_rows($prosescek)>0) { 
-    echo "<script>alert('Username atau Email Sudah Digunakan');history.go(-1) </script>";
+  header("location:../tambah_user?error=true"); 
 }
 else { 
 
@@ -33,7 +33,7 @@ else {
       die ("Query gagal dijalankan: ".mysqli_errno($con).
            " - ".mysqli_error($con));
   }
-header("location:../user");
+header("location:../user?proses=tambah"); 
 }
 }
 

@@ -50,6 +50,17 @@ session_start();
 </head>
 <body>
 
+<?php
+if (isset($_GET['error'])) {
+    $error = ($_GET["error"]);
+    if($error == "true"){
+        echo'<script>
+            sweetAlert("Mohon Maaf", "Jenis pengajuan yang anda masukan sudah ada!", "error");
+        </script>';
+    }
+  } 
+?>
+
 <div class="wrapper">
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
@@ -137,7 +148,9 @@ session_start();
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Jenis Pengajuan</label>
-                                                <input type="text" name="jenis_pengajuan" id="jenis_pengajuan" class="form-control" placeholder="Jenis Pengajuan" required >
+                                                <input type="text" name="jenis_pengajuan" id="jenis_pengajuan" class="form-control" placeholder="Jenis Pengajuan" required 
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')">
                                             </div>
                                         </div>
                                     </div>

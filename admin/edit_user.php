@@ -75,7 +75,7 @@ session_start();
     }
     $data_login = mysqli_fetch_assoc($result_login);
     $username_login = $data_login["username"];
-?>
+?> 
                     Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username_login ?></small></small>
                 </a>
             </div>
@@ -111,12 +111,6 @@ session_start();
                         <p>Log out</p>
                     </a>
                 </li>
-                <li>
-                    <a href="#" onclick = "logout()">
-                        <i class="pe pe-7s-back"></i>
-                        <p>Log out</p>
-                    </a>
-                </li>
 
                 <script type="text/javascript">
                     function logout() {
@@ -139,7 +133,6 @@ session_start();
             </ul>
     	</div>
     </div>
-
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -261,7 +254,7 @@ session_start();
                         closeOnConfirm: false
                     },
                     function(){
-                        document.location="system/ubahrole_tim?id='.$id.'";
+                        document.location="system/ubahrole_manajemen?id='.$id.'";
                     })
                 }
             </script>';

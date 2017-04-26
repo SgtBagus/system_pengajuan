@@ -111,7 +111,24 @@ session_start();
             </ul>
     	</div>
     </div>
-
+<?php
+if (isset($_GET['proses'])) {
+    $proses = ($_GET["proses"]);
+    if($proses == "delete"){
+        echo'<script>
+            swal("Terhapus!", "Jenis pengajuan telah dihapus !", "success")
+        </script>';
+    }else if ($proses == "edit"){
+        echo'<script>
+            swal("Terubah!", "Jenis pengajuan telah diubah !", "success")
+        </script>';
+    }else{
+        echo'<script>
+            swal("Tertambah!", "Jenis pengajuan telah ditambah !", "success")
+        </script>';
+    }
+  } 
+?>
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -173,19 +190,32 @@ session_start();
                                             echo "<td>$jenispengajuan[jenis_pengajuan]</td>";
                                             echo "<td>$jenispengajuan[deskripsi]</td>";
                                             echo '<td>
-                                                <a href="edit_jenispengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Ubah Data" class="btn btn-primary btn-sm btn-fill">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                </a>
+                                                <button onclick="editjenispengajuan()" type="button" rel="tooltip" title="Ubah Data" class="btn btn-primary btn-sm btn-fill">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
                                                 <button onclick="hapusjenispengajuan()" type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill">
                                                     <i class="fa fa-trash"></i>
                                                 </button>';
     echo '<script type="text/javascript">
+            function editjenispengajuan() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin mengubah jenis pengguna",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3472F7",
+                    confirmButtonText: "Iya",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="edit_jenispengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'";
+                })
+            }
             function hapusjenispengajuan() {
                 swal({
                     title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menghapus pengguna",
+                    text: "Apakah anda ingin menghapus jenis pengguna",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#FF4A55",

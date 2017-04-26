@@ -54,6 +54,17 @@ session_start();
 </head>
 <body>
 
+<?php
+if (isset($_GET['error'])) {
+    $error = ($_GET["error"]);
+    if($error == "true"){
+        echo'<script>
+            sweetAlert("Mohon Maaf", "Jenis pengajuan yang anda masukan sudah ada!", "error");
+        </script>';
+    }
+  } 
+?>
+
 <div class="wrapper">
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
@@ -165,11 +176,9 @@ session_start();
                                         </a>
 <?php
                                     echo'
-                                        <a href="" onclick="return confirm(\'Anda yakin akan merubah data?\')">
-                                            <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
-                                                <i class="fa fa-edit"></i> Konfirmasi
-                                            </button>
-                                        </a>
+                                        <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
+                                            <i class="fa fa-edit"></i> Konfirmasi
+                                        </button>
                                         <button onclick="hapusjenispengajuan()" type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-fill">
                                             <i class="fa fa-trash"></i> Hapus Profile
                                         </button>';
@@ -177,7 +186,7 @@ session_start();
             function hapusjenispengajuan() {
                 swal({
                     title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menghapus pengguna",
+                    text: "Apakah anda ingin menghapus jenis pengguna",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#FF4A55",

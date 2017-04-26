@@ -20,11 +20,6 @@ if($op=="in"){
 	}else{
 	}
 
-}else if($op=="out"){
-	unset($_SESSION['email']);
-	unset($_SESSION['role']);
-	header("location:../login");
-
-}	
-    echo "<script type='text/javascript'>alert('Email atau Password Salah'); document.location='../login';</script>";
+}
+    echo "<script type='text/javascript'>document.location='../login?proses=false ';</script>";
 ?>

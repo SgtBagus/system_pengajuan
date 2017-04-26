@@ -271,11 +271,11 @@ session_start();
                     showCancelButton: true,
                     confirmButtonColor: "#FF4A55",
                     confirmButtonText: "Hapus",
-                    cancelButtonText: "Batal",
+                    cancelButtonText: "Batal", 
                     closeOnConfirm: false
                 },
                 function(){
-                    document.location="system/hapus_jenispengajuan?id='.$data['id_jenis_pengajuan'].'";
+                    document.location="system/hapus_jenispengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'";
                 })
             }
         </script>';

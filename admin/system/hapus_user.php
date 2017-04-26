@@ -19,5 +19,5 @@ $tgl = date("Y-m-d", $tanggal);
     }
 
   }
-  header("location:../user");
+header("location:../user?proses=delete"); 
 ?>

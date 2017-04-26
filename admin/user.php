@@ -111,7 +111,21 @@ session_start();
             </ul>
     	</div>
     </div>
-
+<?php
+if (isset($_GET['proses'])) {
+    $proses = ($_GET["proses"]);
+    if($proses == "delete"){
+        echo'<script>
+            swal("Terhapus!", "Data User telah dihapus !", "success")
+        </script>';
+    }
+    else{
+        echo'<script>
+            swal("Tertambah!", "Data User telah ditambah !", "success")
+        </script>';
+    }
+  } 
+?>
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">

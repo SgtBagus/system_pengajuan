@@ -9,7 +9,7 @@ if (isset($_POST['input'])) {
 $cekdulu= "SELECT * FROM jenis_pengajuan WHERE jenis_pengajuan='$jenis_pengajuan'";
 $prosescek= mysqli_query($con, $cekdulu);
 if (mysqli_num_rows($prosescek)>0) { 
-    echo "<script>alert('Jenis Pengajuan Sudah Ada');history.go(-1) </script>";
+  header("location:../tambah_jenispengajuan?error=true"); 
 }
 else { 
 
@@ -19,7 +19,7 @@ else {
       die ("Query gagal dijalankan: ".mysqli_errno($con).
            " - ".mysqli_error($con));
   }
-header("location:../jenis_pengajuan");
+header("location:../jenis_pengajuan?proses=tambah"); 
 }
 }
 ?>

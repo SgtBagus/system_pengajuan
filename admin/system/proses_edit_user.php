@@ -29,7 +29,9 @@ if ($cekemail == $email) {
                     nama_belakang='$nama_belakang', no_hp='$nohp', alamat='$alamat', update_akun='$tgl $jam' WHERE id_user='$id'";
         $result = mysqli_query($con, $query);
     }
-            echo "<script>alert('Email Sudah Digunakan');history.go(-1) </script>";
+        header('location:../detail_user?id='.$id.' & proses=edit'); 
+}else if ($cek_data == $email){
+
 }
 else {
     if($password == ""){ 
@@ -41,8 +43,7 @@ else {
                     nama_belakang='$nama_belakang', no_hp='$nohp', alamat='$alamat', update_akun='$tgl $jam' WHERE id_user='$id'";
         $result = mysqli_query($con, $query);
     }
-        echo "<script>alert('User Berhasil Diubah')</script>";
-        header("location:../detail_user?id=$id");
+        header('location:../detail_user?id='.$id.'&proses=edit'); 
 }
 
         if(!$result){
