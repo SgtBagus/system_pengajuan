@@ -135,7 +135,24 @@ session_start();
             </ul>
         </div>
     </div>
-
+<?php
+if (isset($_GET['proses'])) {
+    $proses = ($_GET["proses"]);
+    if($proses == "delete"){
+        echo'<script>
+            swal("Terhapus!", "Pengajuan anda telah dihapus !", "success")
+        </script>';
+    }else if($proses == "tambah"){
+        echo'<script>
+            swal("Tersimpan!", "Pengajuan anda telah disimpan !", "success")
+        </script>';
+    }else {
+        echo'<script>
+            swal("Error!", "Terjadi Kesalahan!", "error")
+        </script>';
+    }
+  } 
+?>
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">

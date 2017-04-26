@@ -55,6 +55,15 @@ session_start();
 </head>
 <body>
 
+<?php
+if (isset($_GET['proses'])) {
+    $proses = ($_GET["proses"]);
+    if($proses == "edit"){
+        echo'<script>
+            swal("Terubah!", "Profil anda telah diubah !", "success")
+        </script>';
+  } 
+?>
 <div class="wrapper">
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
@@ -152,7 +161,7 @@ session_start();
                                 <h4 class="title">Edit Profile <b> (<?php echo $username ?> ) </b></h4>
                             </div>
                             <div class="content">
-                                <form id="form_edit_user" method="post" action="system/proses_edit_profil">
+                                <form id="form_edit_user" method="post" action="">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -211,13 +220,27 @@ session_start();
                                     <div align="right">
                                         
 <?php
-                                    echo'
-                                        <a href="" onclick="return confirm(\'Anda yakin akan merubah data?\')">
-                                            <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
-                                                <i class="fa fa-edit"></i> Konfirmasi
-                                            </button>
-                                        </a>';
+                                    echo'<button onclick="tim()" type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
+                                            <i class="fa fa-edit"></i> Konfirmasi
+                                        </button>';
 ?>
+<script>
+    function tim() {
+                    swal({
+                        title: "Konfirmasi ?",
+                        text: "Apakah anda ingin mengubah role pengguna",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3472F7",
+                        confirmButtonText: "Ubah Role",
+                        cancelButtonText: "Batal",
+                        closeOnConfirm: false
+                    }, 
+                    function(){
+                        document.location="system/proses_edit_profil";
+                    })
+                }
+</script>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>

@@ -15,10 +15,10 @@ $query2 = "DELETE FROM pengajuan WHERE id_pengajuan='".$id."'";
 $sql2 = mysqli_query($con, $query2);
 
 if($sql2){ 
-	header("location:../pengajuan"); 
+	header("location:../pengajuan?proses=delete"); 
 }else{
 
-	echo "Data gagal dihapus. <a href='../pengajuan'>Kembali</a>";
+	header("location:../pengajuan?proses=error"); 
 }
 ?>
- 
+  

@@ -63,6 +63,7 @@ session_start();
   <script src="assets/dist/sweetalert-dev.js"></script>
   
 </head>
+
 <body>
 
 <div class="wrapper">
@@ -164,6 +165,16 @@ session_start();
     	</div>
     </div>
 
+<?php
+if (isset($_GET['proses'])) {
+    $proses = ($_GET["proses"]);
+    if($proses == "edit"){
+        echo'<script>
+                swal("Terubah!", "Pengajuan anda telah diubah !", "success")
+            </script>';
+    }
+  } 
+?>
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">

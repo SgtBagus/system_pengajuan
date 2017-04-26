@@ -153,7 +153,20 @@ session_start();
             </ul>
     	</div>
     </div>
-
+<?php
+if (isset($_GET['proses'])) {
+    $proses = ($_GET["proses"]);
+    if($proses == "fail"){
+        echo'<script>
+            swal("Mohon Maaf!", "Format atau size gambar tidak sesuai !", "error")
+        </script>';
+    }else {
+        echo'<script>
+            swal("Error!", "Terjadi Kesalahan!", "error")
+        </script>';
+    }
+  } 
+?>
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -226,6 +239,7 @@ if($gambar == "" ){
 
 ?>
                                                     <input type="file" name="foto">
+                                                <label>Max size : 1MB</label>
                                             </div>
                                         </div>
                                     </div> 

@@ -135,6 +135,25 @@ include"system/koneksi.php";
     	</div>
     </div>
 
+<?php
+if (isset($_GET['proses'])) {
+    $proses = ($_GET["proses"]);
+    if($proses == "error"){
+        echo'<script>
+                swal("Mohon Maaf !", "Terjadi kesalahan !", "error")
+            </script>';
+    }else if ($proses == "tambah"){
+        echo'<script>
+                swal("Tersimpan!", "Pengajuan anda telah disimpan !", "success")
+            </script>';
+    }else{
+        echo'<script>
+                swal("Mohon Maaf!", "Format atau size gambar tidak sesuai !", "error")
+            </script>';
+    }
+  } 
+?>
+
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -191,6 +210,7 @@ include"system/koneksi.php";
                                                 <label>Gambar</label>
                                                 <br>
                                                    <input type="file" name="gambar">
+                                                <label>Max size : 1MB</label>
                                             </div>
                                         </div>
                                     </div> 

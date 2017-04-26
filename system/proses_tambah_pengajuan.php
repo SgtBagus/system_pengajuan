@@ -23,13 +23,12 @@ if($gambar == NULL){
 
         if(!$result){
             die ("Query gagal dijalankan: ".mysqli_errno($con).
-                " - ".mysqli_error($con));
+                " - ".mysqli_error($con)); 
         }
         if($result){ 
-          echo "<script>alert('Berhasil Menyimpan Data');</script>";
-          header("location:../pengajuan"); 
+					header("location: ../pengajuan?proses=tambah"); 
         }else{
-          echo "<script>alert('Terjadi Kesalahan Saat Menyimpan Data !');history.go(-1) </script>";
+					header("location: ../ajukan_pengajuan?id=$id&proses=error"); 
         }
 }else{
   $file_type	= array('jpg','jpeg','png' );
@@ -45,7 +44,7 @@ if($gambar == NULL){
       $pesan  = '- Ukuran Gambar Terlalu Besar ';
     }
     if($eror == true){
-      echo "<script>alert('$pesan');history.go(-1) </script>";
+					header("location: ../ajukan_pengajuan?id=$id&proses=error"); 
     }
 
     else{
@@ -61,12 +60,12 @@ if($gambar == NULL){
                 " - ".mysqli_error($con));
         }
         if($result){ 
-          header("location:../pengajuan"); 
+					header("location: ../pengajuan?proses=tambah"); 
         }else{
-          echo "<script>alert('Terjadi Kesalahan Saat Menyimpan Data !');history.go(-1) </script>";
+					header("location: ../ajukan_pengajuan?id=$id&proses=error"); 
         }
       }else{
-          echo "<script>alert('Gambar Gagal Disimpan !');history.go(-1) </script>";
+					header("location: ../ajukan_pengajuan?id=$id&proses=error"); 
       }
     }
 }

@@ -31,14 +31,12 @@ $tgl = date("Y-m-d", $tanggal);
 
   if(!in_array($extensi,$file_type)){
       $eror   = true;
-      $pesan  = '- Format Gambar Tidak Benar ';
     }
     if($size > 1000000){
       $eror   = true;
-      $pesan  = '- Ukuran Gambar Terlalu Besar ';
     }
     if($eror == true){
-      echo "<script>alert('$pesan');history.go(-1) </script>";
+		header("location:../edit_pengajuan?proses=fail"); 
     }
 
     else{
@@ -52,14 +50,12 @@ $tgl = date("Y-m-d", $tanggal);
 				, keterangan ='$keterangan' WHERE id_pengajuan='".$id."'";
 				$sql = mysqli_query($con, $query); 
 				if($sql){ 
-					header("location: ../detail_pengajuan?id=$id"); 
+					header("location: ../detail_pengajuan?id=$id&proses=edit"); 
 				}else{
-					echo "Maaf, Terjadi kesalahan saat mencoba untuk menyimpan data ke database.";
-					echo "<br><a href='../pengajuan'>Kembali Ke Form</a>";
+					header("location:../edit_pengajuan?proses=error"); 
 				}
 			}else{
-				echo "Maaf, Gambar gagal untuk diupload.";
-				echo "<br><a href='../pengajuan'>Kembali Ke Form</a>";
+					header("location:../edit_pengajuan?proses=error"); 
 			}
 		}
 		else if($ubah_foto == "ubah" ){ 
@@ -77,14 +73,12 @@ $tgl = date("Y-m-d", $tanggal);
 
 				if($sql){ 
 					
-					header("location: ../detail_pengajuan?id=$id"); 
+					header("location: ../detail_pengajuan?id=$id&proses=edit"); 
 				}else{
-					echo "Maaf, Terjadi kesalahan saat mencoba untuk menyimpan data ke database.";
-					echo "<br><a href='../pengajuan'>Kembali Ke Form</a>";
+					header("location:../edit_pengajuan?proses=error"); 
 				}
 			}else{
-				echo "Maaf, Gambar gagal untuk diupload.";
-				echo "<br><a href='../pengajuan'>Kembali Ke Form</a>";
+					header("location:../edit_pengajuan?proses=error"); 
 			}
 		}
 	}
@@ -100,10 +94,10 @@ $tgl = date("Y-m-d", $tanggal);
 				$sql = mysqli_query($con, $query); 
 
 			if($sql){ 
-				header("location:../detail_pengajuan?id=$id"); 
+					header("location: ../detail_pengajuan?id=$id&proses=edit"); 
 
 			}else{
-				echo "Data gagal dihapus. <a href='../pengajuan'>Kembali</a>";
+				header("location:../edit_pengajuan?proses=error"); 
 			}
 		}
 		else{ 
@@ -116,10 +110,9 @@ $tgl = date("Y-m-d", $tanggal);
 
 			if($sql){ 
 				
-					header("location: ../detail_pengajuan?id=$id"); 
+					header("location: ../detail_pengajuan?id=$id&proses=edit"); 
 			}else{
-					echo "Maaf, Terjadi kesalahan saat mencoba untuk menyimpan data ke database.";
-					echo "<br><a href='edit_pengajuan'>Kembali Ke Form</a>";
+					header("location:../edit_pengajuan?proses=error"); 
 			}
 		}
 ?>
