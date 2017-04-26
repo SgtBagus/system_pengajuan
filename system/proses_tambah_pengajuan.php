@@ -34,7 +34,7 @@ if($gambar == NULL){
 }else{
   $file_type	= array('jpg','jpeg','png' );
   $fotobaru = date('dmYHis').$gambar;
-  $path = "../image/".$fotobaru;
+  $path = "../image/".$fotobaru; 
 
   if(!in_array($extensi,$file_type)){
       $eror   = true;

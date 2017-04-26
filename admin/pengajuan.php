@@ -110,7 +110,7 @@ session_start();
                             document.location="../logout";
                         })
                     }
-                </script>
+                </script> 
 
             </ul>
     	</div>

@@ -23,5 +23,5 @@ $query = "UPDATE user SET username='$username', email='$email', password=md5('$p
            " - ".mysqli_error($con));
   }
 
-header("location:../profil");
+header("location:../profil"); 
 ?>

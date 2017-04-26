@@ -198,7 +198,7 @@ if (isset($_GET['error'])) {
     function clearValidity(){
         document.getElementById('jeniskelamin').setCustomValidity('');
     }
-</script>
+</script> 
                                             </div>
                                         </div>
                                     </div>

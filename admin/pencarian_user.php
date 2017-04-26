@@ -38,7 +38,7 @@ session_start();
   <link rel="stylesheet" href="assets/dist/sweetalert.css">
   <script src="assets/dist/sweetalert-dev.js"></script>
 </head>
-<body>
+<body> 
 
 <div class="wrapper">
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">

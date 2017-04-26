@@ -119,7 +119,7 @@ if (isset($_GET['proses'])) {
             swal("Terhapus!", "Data User telah dihapus !", "success")
         </script>';
     }
-    else{
+    else{ 
         echo'<script>
             swal("Tertambah!", "Data User telah ditambah !", "success")
         </script>';

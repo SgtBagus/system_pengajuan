@@ -34,7 +34,7 @@ session_start();
   <link rel="stylesheet" href="assets/dist/sweetalert.css">
   <script src="assets/dist/sweetalert-dev.js"></script>
   
-</head>
+</head> 
 <body>
 
 <?php

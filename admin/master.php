@@ -148,7 +148,7 @@ session_start();
                                     </thead>
                                     <tbody>
 
-<?php
+<?php 
       $query = "SELECT * FROM user ORDER BY id_user ASC limit 5" ;
       $result = mysqli_query($con, $query);
       if(!$result){

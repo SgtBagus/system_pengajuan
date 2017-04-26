@@ -76,7 +76,7 @@ session_start();
                         <p>Riwayat</p>
                     </a>
                 </li>
-                <li >
+                <li > 
                     <a href="master">
                         <i class="pe pe-7s-server"></i>
                         <p>Master</p>

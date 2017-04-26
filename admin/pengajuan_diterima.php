@@ -100,7 +100,7 @@ session_start();
                         <p>Master</p>
                     </a>
                 </li>
-                <li>
+                <li> 
                     <a href="#" onclick = "logout()">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>

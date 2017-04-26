@@ -21,3 +21,4 @@ if($sql2){
 	echo "Data gagal dihapus. <a href='../pengajuan'>Kembali</a>";
 }
 ?>
+ 

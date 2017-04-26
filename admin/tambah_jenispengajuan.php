@@ -59,7 +59,7 @@ if (isset($_GET['error'])) {
         </script>';
     }
   } 
-?>
+?> 
 
 <div class="wrapper">
     <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">

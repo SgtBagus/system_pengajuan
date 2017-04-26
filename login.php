@@ -43,7 +43,7 @@ if (isset($_GET['proses'])) {
         </script>';
     }
   } 
-?>
+?> 
             <form action="system/act?op=in" method="POST" >
                 <input type="text" name="email" placeholder="Email" required
                 oninvalid="this.setCustomValidity('Mohon isi Email Anda !')" 

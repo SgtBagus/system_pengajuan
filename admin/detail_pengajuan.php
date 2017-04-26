@@ -148,7 +148,7 @@ if (isset($_GET['proses'])) {
         </script>';
     }
     else if($proses == "terima"){
-        echo'<script>
+        echo'<script> 
             swal("Terterima!", "Data pengajuan telah diterima !", "success")
         </script>';
     }

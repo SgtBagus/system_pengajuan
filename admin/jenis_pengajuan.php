@@ -111,7 +111,7 @@ session_start();
             </ul>
     	</div>
     </div>
-<?php
+<?php 
 if (isset($_GET['proses'])) {
     $proses = ($_GET["proses"]);
     if($proses == "delete"){

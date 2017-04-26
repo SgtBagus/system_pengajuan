@@ -126,7 +126,7 @@ session_start();
                         },
                         function(){
                             document.location="../logout";
-                        })
+                        }) 
                     }
                 </script>
 

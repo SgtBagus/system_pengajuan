@@ -230,7 +230,7 @@ session_start();
                         confirmButtonText: "Ubah Role",
                         cancelButtonText: "Batal",
                         closeOnConfirm: false
-                    },
+                    }, 
                     function(){
                         document.location="system/ubahrole_tim?id='.$id.'";
                     })

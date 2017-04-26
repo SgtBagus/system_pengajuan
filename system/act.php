@@ -20,6 +20,6 @@ if($op=="in"){
 	}else{
 	}
 
-}
+} 
     echo "<script type='text/javascript'>document.location='../login?proses=false ';</script>";
 ?>
