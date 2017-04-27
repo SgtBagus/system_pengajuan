@@ -39,7 +39,7 @@ session_start();
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
+    <div class="sidebar" data-color="green" data-image="assets/img/1.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index" class="simple-text">
@@ -192,10 +192,7 @@ if (isset($_GET['proses'])) {
                                             echo '<td>
                                                 <button onclick="editjenispengajuan()" type="button" rel="tooltip" title="Ubah Data" class="btn btn-primary btn-sm btn-fill">
                                                     <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button onclick="hapusjenispengajuan()" type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>';
+                                                </button> ';
     echo '<script type="text/javascript">
             function editjenispengajuan() {
                 swal({
@@ -212,6 +209,17 @@ if (isset($_GET['proses'])) {
                     document.location="edit_jenispengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'";
                 })
             }
+            </script>';
+        if ($result->num_rows == 1){
+                                            echo '<button type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill" disabled>
+                                                    <i class="fa fa-trash"></i>
+                                                </button>';
+
+        }else {
+                                            echo '<button onclick="hapusjenispengajuan()" type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>';
+    echo '<script type="text/javascript">
             function hapusjenispengajuan() {
                 swal({
                     title: "Konfirmasi ?",
@@ -231,6 +239,7 @@ if (isset($_GET['proses'])) {
                                         echo '</td>';
                                         echo "</tr>";
                                         $no++;
+      }
       }
 ?>
                                     </tbody>

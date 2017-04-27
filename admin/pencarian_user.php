@@ -41,7 +41,7 @@ session_start();
 <body> 
 
 <div class="wrapper">
-    <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
+    <div class="sidebar" data-color="green" data-image="assets/img/1.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index" class="simple-text">
@@ -121,10 +121,13 @@ session_start();
     $pencarian = ($_GET["cari"]);
     $query = "SELECT * FROM user WHERE username LIKE '%".$pencarian."%'";
     $result = mysqli_query($con, $query);
+
+      $query_tim = "SELECT * FROM user WHERE ROLE = 'tim'" ;
+      $result_tim = mysqli_query($con, $query_tim);
+
       $no = 1;
       $cek = count($result);
       $banyakdata = $result->num_rows;
-
 ?>
                         <div class="card">
                             <div class="header">
@@ -180,6 +183,11 @@ session_start();
                                                     </button>';
     }
     else{
+        if ($result_tim->num_rows == 1){
+                                            echo'<button type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill" disabled>
+                                                    <i class="fa fa-trash"></i>
+                                                </button>';
+        }else{
                                             echo '<button onclick="hapususer()" type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill">
                                                      <i class="fa fa-trash"></i>
                                                 </button>';
@@ -200,6 +208,7 @@ session_start();
                 })
             }
         </script>';
+        }
     }
                                             echo"</td>";
                                         echo "</tr>";

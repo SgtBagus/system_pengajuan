@@ -43,7 +43,7 @@ session_start();
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
+    <div class="sidebar" data-color="green" data-image="assets/img/1.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index" class="simple-text">
@@ -149,37 +149,44 @@ session_start();
                                     <tbody>
 
 <?php 
-      $query = "SELECT * FROM user ORDER BY id_user ASC limit 5" ;
-      $result = mysqli_query($con, $query);
-      if(!$result){
+      $query_user = "SELECT * FROM user ORDER BY id_user ASC limit 5" ;
+      $result_user = mysqli_query($con, $query_user);
+      if(!$result_user){
         die ("Query Error: ".mysqli_errno($con).
            " - ".mysqli_error($con));
       }
+      $query_tim = "SELECT * FROM user WHERE ROLE = 'tim'" ;
+      $result_tim = mysqli_query($con, $query_tim);
       $no = 1;
-      while($data = mysqli_fetch_assoc($result))
+      while($data_user = mysqli_fetch_assoc($result_user))
       {
                                         echo "<tr>";
                                             echo "<td>$no</td>";
-                                        	echo "<td>$data[username]</td>";
-                                            echo "<td>$data[email]</td>";
-                                            echo "<td>$data[role]</td>";
+                                        	echo "<td>$data_user[username]</td>";
+                                            echo "<td>$data_user[email]</td>";
+                                            echo "<td>$data_user[role]</td>";
                                             echo '<td>
-                                                <a href="detail_user?id='.$data['id_user'].'">
+                                                <a href="detail_user?id='.$data_user['id_user'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-sm btn-fill">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>
-                                                <a href="edit_user?id='.$data['id_user'].'">
+                                                <a href="edit_user?id='.$data_user['id_user'].'">
                                                     <button type="button" rel="tooltip" title="Ubah Data" class="btn btn-primary btn-sm btn-fill">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                 </a>';
-    if( $data['id_user'] == $data_login['id_user'] ){
+    if( $data_user['id_user'] == $data_login['id_user'] ){
                                             echo'<button type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill" disabled>
                                                         <i class="fa fa-trash"></i>
                                                     </button>';
     }
     else{
+        if ($result_tim->num_rows == 1){
+                                            echo'<button type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill" disabled>
+                                                    <i class="fa fa-trash"></i>
+                                                </button>';
+        }else{
                                             echo '<button onclick="hapususer()" type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill">
                                                      <i class="fa fa-trash"></i>
                                                 </button>';
@@ -196,10 +203,11 @@ session_start();
                     closeOnConfirm: false
                 },
                 function(){
-                    document.location="system/hapus_user?id='.$data['id_user'].'";
+                    document.location="system/hapus_user?id='.$data_user['id_user'].'";
                 })
             }
         </script>';
+        }
     }
                                             echo"</td>";
                                         echo "</tr>";
@@ -240,38 +248,59 @@ session_start();
                                     </thead>
                                     <tbody>
 <?php
-      $query = "SELECT * FROM jenis_pengajuan ORDER BY id_jenis_pengajuan ASC limit 5" ;
-      $result = mysqli_query($con, $query);
-      if(!$result){
+      $query_jenispengajuan = "SELECT * FROM jenis_pengajuan ORDER BY id_jenis_pengajuan ASC limit 5" ;
+      $result_jenispengajuan = mysqli_query($con, $query_jenispengajuan);
+      if(!$result_jenispengajuan){
         die ("Query Error: ".mysqli_errno($con).
            " - ".mysqli_error($con));
       }
       $no = 1;
-      while($jenispengajuan = mysqli_fetch_assoc($result))
+      while($jenispengajuan = mysqli_fetch_assoc($result_jenispengajuan))
       {
                                         echo "<tr>";
                                             echo "<td>$no</td>";
                                             echo "<td>$jenispengajuan[jenis_pengajuan]</td>";
                                             echo "<td>$jenispengajuan[deskripsi]</td>";
                                             echo '<td>
-                                                <a href="edit_jenispengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Ubah Data" class="btn btn-primary btn-sm btn-fill">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                </a>
-                                                <button onclick="hapusjenispengajuan()" type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill">
+                                                <button onclick="editjenispengajuan()" type="button" rel="tooltip" title="Ubah Data" class="btn btn-primary btn-sm btn-fill">
+                                                    <i class="fa fa-edit"></i>
+                                                </button> ';
+    echo '<script type="text/javascript">
+            function editjenispengajuan() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin mengubah jenis pengguna",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3472F7",
+                    confirmButtonText: "Iya",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="edit_jenispengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'";
+                })
+            }
+            </script>';
+        if ($result_jenispengajuan->num_rows == 1){
+                                            echo '<button type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill" disabled>
+                                                    <i class="fa fa-trash"></i>
+                                                </button>';
+
+        }else {
+                                            echo '<button onclick="hapusjenispengajuan()" type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill">
                                                     <i class="fa fa-trash"></i>
                                                 </button>';
     echo '<script type="text/javascript">
             function hapusjenispengajuan() {
                 swal({
                     title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menghapus pengguna",
+                    text: "Apakah anda ingin menghapus jenis pengguna",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#FF4A55",
                     confirmButtonText: "Hapus",
-                    cancelButtonText: "Batal", 
+                    cancelButtonText: "Batal",
                     closeOnConfirm: false
                 },
                 function(){
@@ -282,6 +311,7 @@ session_start();
                                         echo '</td>';
                                         echo "</tr>";
                                         $no++;
+      }
       }
 ?>
                                     </tbody>

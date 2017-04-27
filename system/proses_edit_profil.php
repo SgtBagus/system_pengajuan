@@ -14,8 +14,15 @@ $tgl = date("Y-m-d", $tanggal);
 date_default_timezone_set('Asia/Jakarta');
 $jam=date("H:i:s");
 
+if($password == ""){ 
+$query = "UPDATE user SET username='$username', email='$email', nama_depan='$nama_depan', 
+            nama_belakang='$nama_belakang', no_hp='$nohp', alamat='$alamat', update_akun='$tgl $jam' WHERE id_user='$id'";
+    }
+else {
 $query = "UPDATE user SET username='$username', email='$email', password=md5('$password'), nama_depan='$nama_depan', 
             nama_belakang='$nama_belakang', no_hp='$nohp', alamat='$alamat', update_akun='$tgl $jam' WHERE id_user='$id'";
+}
+
   $result = mysqli_query($con, $query);
   // periska query apakah ada error
   if(!$result){

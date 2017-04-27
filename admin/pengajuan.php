@@ -45,7 +45,7 @@ session_start();
 <body>
  
 <div class="wrapper">
-    <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
+    <div class="sidebar" data-color="green" data-image="assets/img/1.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index" class="simple-text">
@@ -189,9 +189,16 @@ session_start();
         die ("Query Error: ".mysqli_errno($con).
            " - ".mysqli_error($con));
       }
+        if($result->num_rows == 0){
+            echo "<tr>";
+                echo "<td colspan='8' align='center'>Tidak ada Data Pengajuan</td>";
+            echo "</tr>";
+      }
+      else {
       $no = 1;
       while($data = mysqli_fetch_assoc($result))  
-      {
+      {    
+            
                                         echo "<tr>";
                                             echo "<td>$no</td>";
                                         	echo "<td>$data[pengajuan]</td>";
@@ -287,6 +294,7 @@ session_start();
                                             echo '</td>';
                                         echo "</tr>";
                                         $no++;
+      }
       }
 ?>
                                     </tbody>

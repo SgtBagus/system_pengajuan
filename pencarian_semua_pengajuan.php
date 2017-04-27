@@ -38,7 +38,7 @@ session_start();
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
+    <div class="sidebar" data-color="green" data-image="assets/img/sidebar.jpg">
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index" class="simple-text">

@@ -63,9 +63,10 @@ if (isset($_GET['proses'])) {
             swal("Terubah!", "Profil anda telah diubah !", "success")
         </script>';
   } 
+}
 ?>
 <div class="wrapper">
-    <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
+    <div class="sidebar" data-color="green" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index" class="simple-text">
@@ -161,7 +162,7 @@ if (isset($_GET['proses'])) {
                                 <h4 class="title">Edit Profile <b> (<?php echo $username ?> ) </b></h4>
                             </div>
                             <div class="content">
-                                <form id="form_edit_user" method="post" action="">
+                                <form id="form_edit_user" method="post" action="system/proses_edit_profil">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -224,23 +225,6 @@ if (isset($_GET['proses'])) {
                                             <i class="fa fa-edit"></i> Konfirmasi
                                         </button>';
 ?>
-<script>
-    function tim() {
-                    swal({
-                        title: "Konfirmasi ?",
-                        text: "Apakah anda ingin mengubah role pengguna",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3472F7",
-                        confirmButtonText: "Ubah Role",
-                        cancelButtonText: "Batal",
-                        closeOnConfirm: false
-                    }, 
-                    function(){
-                        document.location="system/proses_edit_profil";
-                    })
-                }
-</script>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>

@@ -39,7 +39,7 @@ session_start();
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
+    <div class="sidebar" data-color="green" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index" class="simple-text">
@@ -100,7 +100,7 @@ session_start();
 ?>
                         </p>
                     </a>
-                </li>
+                </li> 
                 <li>
                     <a href="profil">
                         <i class="pe pe-7s-user"></i>

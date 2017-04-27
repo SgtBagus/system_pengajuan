@@ -40,7 +40,7 @@ session_start();
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
+    <div class="sidebar" data-color="green" data-image="assets/img/1.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index" class="simple-text">
@@ -163,19 +163,40 @@ session_start();
                                         	echo "<td>$data[jenis_pengajuan]</td>";
                                             echo "<td>$data[deskripsi]</td>";
                                             echo '<td>
-                                                <a href="edit_jenispengajuan?id='.$data['id_jenis_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Ubah Data" class="btn btn-primary btn-sm btn-fill">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                </a>
-                                                <button onclick="hapusjenispengajuan()" type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill">
+                                                <button onclick="editjenispengajuan()" type="button" rel="tooltip" title="Ubah Data" class="btn btn-primary btn-sm btn-fill">
+                                                    <i class="fa fa-edit"></i>
+                                                </button> ';
+    echo '<script type="text/javascript">
+            function editjenispengajuan() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin mengubah jenis pengguna",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3472F7",
+                    confirmButtonText: "Iya",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="edit_jenispengajuan?id='.$data['id_jenis_pengajuan'].'";
+                })
+            }
+            </script>';
+        if ($result->num_rows == 1){
+                                            echo '<button type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill" disabled>
+                                                    <i class="fa fa-trash"></i>
+                                                </button>';
+
+        }else {
+                                            echo '<button onclick="hapusjenispengajuan()" type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill">
                                                     <i class="fa fa-trash"></i>
                                                 </button>';
     echo '<script type="text/javascript">
             function hapusjenispengajuan() {
                 swal({
                     title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menghapus pengguna",
+                    text: "Apakah anda ingin menghapus jenis pengguna",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#FF4A55",
@@ -192,6 +213,7 @@ session_start();
                                         echo "</tr>";
                                         $no++;
       }   
+      }
       }
 ?>
                                     </tbody>

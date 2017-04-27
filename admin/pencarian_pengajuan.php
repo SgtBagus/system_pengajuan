@@ -40,7 +40,7 @@ session_start();
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
+    <div class="sidebar" data-color="green" data-image="assets/img/1.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index" class="simple-text">
@@ -166,7 +166,7 @@ if ($status == ""){
 <?php
       if($result->num_rows == 0){
             echo "<tr>";
-                echo "<td>Data Tidak Di temukan</td>";
+                echo "<td colspan='8' align='center'>Data Tidak Di temukan</td>";
             echo "</tr>";
       }
       else {

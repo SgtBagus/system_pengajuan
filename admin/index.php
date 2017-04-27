@@ -48,7 +48,7 @@ if (isset($_GET['update'])) {
   } 
 ?>
 <div class="wrapper">
-    <div class="sidebar" data-color="black" data-image="assets/img/sidebar.jpg">
+    <div class="sidebar" data-color="green" data-image="assets/img/1.jpg">
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index" class="simple-text">
@@ -217,6 +217,12 @@ if (isset($_GET['update'])) {
         die ("Query Error: ".mysqli_errno($con).
            " - ".mysqli_error($con));
       }
+      if($result_pengajuan->num_rows == 0){
+            echo "<tr>";
+                echo "<td colspan='3'>Data Tidak Di temukan</td>";
+            echo "</tr>";
+      }
+      else {
       while($data_pengajuan = mysqli_fetch_assoc($result_pengajuan))
       {
                                         echo "<tr>";
@@ -230,6 +236,7 @@ if (isset($_GET['update'])) {
                                                     </a>
                                                 </td>';
                                         echo "</tr>";
+      }
       }
 ?>
                                         </tbody>
@@ -263,6 +270,10 @@ if (isset($_GET['update'])) {
         die ("Query Error: ".mysqli_errno($con).
            " - ".mysqli_error($con));
       }
+      if($result2->num_rows == 0){
+                echo "<p>Tidak ada riwayat kegiatan !</p>";
+      }
+      else {
       while($data2 = mysqli_fetch_assoc($result2)){ 
                     echo '<a href="detail_pengajuan?id='.$data2['id_pengajuan'].'" style="color:black">';
                         echo '<div class="card">';
@@ -273,6 +284,7 @@ if (isset($_GET['update'])) {
                             echo '</div>';
                         echo '</div>';
                     echo '</a>';
+      }
       }
 ?>  
 
