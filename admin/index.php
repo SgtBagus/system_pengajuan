@@ -219,7 +219,7 @@ if (isset($_GET['update'])) {
       }
       if($result_pengajuan->num_rows == 0){
             echo "<tr>";
-                echo "<td colspan='3'>Data Tidak Di temukan</td>";
+                echo "<td colspan='3'>Data Pengajuan Tidak Di temukan</td>";
             echo "</tr>";
       }
       else {

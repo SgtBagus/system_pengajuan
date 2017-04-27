@@ -131,6 +131,10 @@ session_start();
         die ("Query Error: ".mysqli_errno($con).
            " - ".mysqli_error($con));
       }
+      if($result2->num_rows == 0){
+                echo "<p>Tidak ada riwayat kegiatan !</p>";
+      }
+      else {
       while($data2 = mysqli_fetch_assoc($result2)){ 
                     echo '<a href="detail_pengajuan?id='.$data2['id_pengajuan'].'" style="color:black">';
                         echo '<div class="card">';
@@ -141,6 +145,7 @@ session_start();
                             echo '</div>';
                         echo '</div>';
                     echo '</a>';
+      }
       }
 ?>                          
                     </div>

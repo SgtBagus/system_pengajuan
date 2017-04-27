@@ -232,6 +232,12 @@ if (isset($_GET['proses'])) {
         die ("Query Error: ".mysqli_errno($con).
            " - ".mysqli_error($con));
       }
+      if($result->num_rows == 0){
+            echo "<tr>";
+                echo "<td colspan='7' align='center'>Anda tidak memiliki pengajuan</td>";
+            echo "</tr>";
+      }
+      else {
       $no = 1;
       while($data = mysqli_fetch_assoc($result))
       {
@@ -330,6 +336,7 @@ if (isset($_GET['proses'])) {
                                         echo "</tr>";
                                         $no++;
     }
+      }
 ?>
                                     </tbody>
                                 </table>

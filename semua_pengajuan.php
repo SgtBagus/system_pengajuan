@@ -221,6 +221,12 @@ session_start();
            " - ".mysqli_error($con));
       }
       $no = 1;
+      if($result->num_rows == 0){
+            echo "<tr>";
+                echo "<td colspan='8' align='center'>TIdak ada data pengajuan</td>";
+            echo "</tr>";
+      }
+      else {
       while($data = mysqli_fetch_assoc($result))
       {
                                         echo "<tr>";
@@ -330,6 +336,7 @@ session_start();
                                         echo "</tr>";
                                         $no++;
     }
+      }
 ?>
                                     </tbody>
                                 </table>

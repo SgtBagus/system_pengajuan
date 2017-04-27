@@ -190,6 +190,12 @@ session_start();
         die ("Query Error: ".mysqli_errno($con).
            " - ".mysqli_error($con));
       }
+      if($result_pengajuan->num_rows == 0){
+            echo "<tr>";
+                echo "<td colspan='3'>Anda tidak memiliki pengajuan</td>";
+            echo "</tr>";
+      }
+      else {
       while($data_pengajuan = mysqli_fetch_assoc($result_pengajuan))
       {
                                         echo "<tr>";
@@ -203,6 +209,7 @@ session_start();
                                                     </a>
                                                 </td>';
                                         echo "</tr>";
+      }
       }
 ?>
                                         </tbody>
@@ -236,6 +243,10 @@ session_start();
         die ("Query Error: ".mysqli_errno($con).
            " - ".mysqli_error($con));
       }
+      if($result2->num_rows == 0){
+                echo "<p>Anda tidak memiliki notifikasi !</p>";
+      }
+      else {
       while($data2 = mysqli_fetch_assoc($result2)){ 
                     echo '<a href="system/notifikasi_pengajuan?id='.$data2['id_riwayat'].'" style="color:black">';
                         echo '<div class="card">';
@@ -254,6 +265,7 @@ session_start();
                             echo '</div>';
                         echo '</div>';
                     echo '</a>';
+      }
       }
 ?>  
 
