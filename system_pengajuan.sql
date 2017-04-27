@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 12 Apr 2017 pada 11.55
+-- Generation Time: 27 Apr 2017 pada 07.56
 -- Versi Server: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -37,7 +37,7 @@ CREATE TABLE `catatan` (
 --
 
 INSERT INTO `catatan` (`id_catatan`, `catatan`, `update_catatan`) VALUES
-('C1', 'asd', '2017-04-07');
+('C1', 'Catatan ini cuma iseng ', '2017-04-26');
 
 -- --------------------------------------------------------
 
@@ -80,16 +80,6 @@ CREATE TABLE `pengajuan` (
   `update_pengajuan` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `pengajuan`
---
-
-INSERT INTO `pengajuan` (`id_pengajuan`, `pengajuan`, `id_user`, `jenis_pengajuan`, `tanggal_pengajuan`, `gambar`, `biaya`, `alasan`, `keterangan`, `jadwal_pelaksanaan`, `catatan`, `status`, `update_pengajuan`) VALUES
-(1, 'Pengajuan Pembelian Terminal Listrik', 6, 'barang', '2017-03-31', 'tes.png', 50000, 'Saya mengajukan ini, karena saya merasa disini kita kekurangan terminal listrik sebanyak 2 dengan 5 stopkontak/terminal', '', '2017-04-07', 'tes', 'proses', '2017-04-06'),
-(4, 'Pengajuan Meja', 6, 'barang', '2017-04-05', '', 300000, 'Kita sepertinya kekurangan meja buat kerja', '', '0000-00-00', '', 'menunggu', '2017-04-05'),
-(5, 'Pengajuan Kursi', 6, 'barang', '2017-04-06', 'kursi.jpg', 500000, 'Di belakang kita kekurangan Kursi', '', '0000-00-00', 'Kursi Udah banyak ', 'selesai', '2017-04-06'),
-(10, 'halo tes', 6, 'Barang', '2017-04-12', '12042017113600247bb2c1dfe6d85ac68ce2f74b51eac8.jpg', 50000, 'tes ubah', 'tes ubah', '0000-00-00', '', 'menunggu', '2017-04-12');
-
 -- --------------------------------------------------------
 
 --
@@ -107,15 +97,6 @@ CREATE TABLE `riwayat` (
   `notifikasi` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `riwayat`
---
-
-INSERT INTO `riwayat` (`id_riwayat`, `kegiatan`, `kegiatan2`, `kegiatan3`, `jenis_riwayat`, `id_pengajuan`, `tanggal_kegiatan`, `notifikasi`) VALUES
-(6, 'Telah Melakukan Menerima Pengajuan', 'Pengajuan diterima', 'Pengajuan Anda Telah DiTerima Oleh Pihak Manajemen', 'Penerimaan', 1, '2017-04-06', '1'),
-(7, 'Telah Melakukan Menolak Pengajuan', 'Pengajuan Ditolak', 'Pengajuan Anda Telah DiTolak Oleh Pihak Manajemen', 'Penolakan', 5, '2017-04-06', '1'),
-(9, 'Telah Melakukan Perubahan Pengajuan', 'Pengajuan Diubah', 'Pengajuan Anda Telah Diubah Oleh Pihak Manajemen', 'Pengubahan', 1, '2017-04-06', '0');
-
 -- --------------------------------------------------------
 
 --
@@ -125,12 +106,12 @@ INSERT INTO `riwayat` (`id_riwayat`, `kegiatan`, `kegiatan2`, `kegiatan3`, `jeni
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `username` varchar(225) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `email` varchar(225) NOT NULL,
   `password` varchar(225) NOT NULL,
   `nama_depan` varchar(225) NOT NULL,
   `nama_belakang` varchar(225) NOT NULL,
   `jk` enum('laki-laki','perempuan') NOT NULL,
-  `no_hp` varchar(25) NOT NULL,
+  `no_hp` int(25) NOT NULL,
   `alamat` text NOT NULL,
   `role` enum('manajemen','tim') NOT NULL,
   `pembuatan_akun` datetime NOT NULL,
@@ -142,8 +123,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `email`, `password`, `nama_depan`, `nama_belakang`, `jk`, `no_hp`, `alamat`, `role`, `pembuatan_akun`, `update_akun`) VALUES
-(4, 'bagus unik', 'bagus@gmail.com', '17b38fc02fd7e92f3edeb6318e3066d8', 'bagus', 'andhika', 'laki-laki', '086735463721323', 'Prum Bumi Asri J-15', 'manajemen', '2017-04-06 10:07:32', '2017-04-07 09:44:24'),
-(6, 'bambang57', 'bambang57@gmail.com', 'a9711cbb2e3c2d5fc97a63e45bbe5076', 'bambang', 'susilo', 'laki-laki', '09738456327812', 'rumha dusun ringa no 56', 'tim', '2017-04-06 10:14:47', '2017-04-10 11:31:16');
+(13, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'manajemen', 'laki-laki', 45809767, 'Rumah admin', 'manajemen', '2017-04-27 10:27:44', '2017-04-27 10:27:44'),
+(14, 'user', 'user@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', 'tim', 'laki-laki', 346572931, 'rumah tim', 'tim', '2017-04-27 10:28:13', '2017-04-27 10:28:13');
 
 --
 -- Indexes for dumped tables
@@ -192,17 +173,17 @@ ALTER TABLE `jenis_pengajuan`
 -- AUTO_INCREMENT for table `pengajuan`
 --
 ALTER TABLE `pengajuan`
-  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `riwayat`
 --
 ALTER TABLE `riwayat`
-  MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
