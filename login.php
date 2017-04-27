@@ -41,6 +41,10 @@ if (isset($_GET['proses'])) {
         echo'<script>
         sweetAlert("Mohon Maaf", "Periksa ulang Email atau Password anda!", "error");
         </script>';
+    }else{
+        echo'<script>
+        sweetAlert("Mohon Maaf", "Anda harus login terlebih dahulu!", "error");
+        </script>';
     }
   } 
 ?> 
