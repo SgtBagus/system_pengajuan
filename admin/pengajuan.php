@@ -37,9 +37,9 @@ session_start();
   <link rel="stylesheet" href="assets/dist/sweetalert.css">
   <script src="assets/dist/sweetalert-dev.js"></script>
 
-<script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
-<!-- polyfiller file to detect and load polyfills -->
-<script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
+        
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="assets/css/datepicker.css">
 
 </head>
 <body>
@@ -145,7 +145,7 @@ session_start();
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label> Tanggal Pengajuan</label>
-                                                <input type="date" name="tanggal" id="tanggal" class="form-control"  value="<?php echo date("Y-m-d");?>">
+                                                <input type="text" name="tanggal" id="datepicker" class="form-control" >
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -167,6 +167,7 @@ session_start();
                                         </div>
                                 </from>
                             </div>
+                            
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
@@ -181,7 +182,7 @@ session_start();
                                     </thead>
                                     <tbody>
 <?php
-      $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user, b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
+      $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user, b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %M - %Y') as tanggal_pengajuan, 
                 a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
                 ORDER BY a.id_pengajuan DESC " ;
       $result = mysqli_query($con, $query);
@@ -338,9 +339,15 @@ session_start();
     	$(document).ready(function(){
         	demo.initChartist();
     	});
+        
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
 
-  webshims.setOptions('waitReady', false);
-  webshims.setOptions('forms-ext', {types: 'date'});
-  webshims.polyfill('forms forms-ext');
 </script>
 </html>
