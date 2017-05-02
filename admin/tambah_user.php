@@ -20,7 +20,7 @@ session_start();
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="assets/img/icon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Tambah User</title>
+	<title>User</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -80,11 +80,17 @@ session_start();
                         <p>Riwayat</p>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="master">
-                        <i class="pe pe-7s-server"></i>
+                <li>
+                    <a data-toggle="collapse" href="#componentsExamples">
+                        <i class="pe-7s-server"></i>
                         <p>Master</p>
                     </a>
+                    <div class="collapse" id="componentsExamples">
+                        <ul class="nav">
+                            <li><a href="user">User</a></li>
+                            <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <a href="#" onclick = "logout()">

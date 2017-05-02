@@ -81,11 +81,17 @@ session_start();
                         <p>Riwayat</p>
                     </a>
                 </li>
-                <li >
-                    <a href="master">
-                        <i class="pe pe-7s-server"></i>
+                <li>
+                    <a data-toggle="collapse" href="#componentsExamples">
+                        <i class="pe-7s-server"></i>
                         <p>Master</p>
                     </a>
+                    <div class="collapse" id="componentsExamples">
+                        <ul class="nav">
+                            <li><a href="user">User</a></li>
+                            <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <a href="#" onclick = "logout()">
@@ -130,23 +136,37 @@ session_start();
                                 <br>    
                                 <form id="form_pencarian"  action="pencarian_pengajuan" method="get">
                                     <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label> Judul Pengajuan</label>
-                                                <input type="text" name="pengajuan" id="pengajuan" class="form-control" placeholder="Judul" >
-                                            </div>
-                                        </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label> Pengaju </label>
-                                                <input type="text" name="pengaju" id="pengaju" class="form-control" placeholder="pengaju" >
-                                            </div>
+                                                <label> Judul Pengajuan</label>
+                                                <input type="text" name="judul" class="form-control" >
+                                            </div> 
                                         </div>
+                                        <?php
+                                            $query_MIN = "SELECT MIN(tanggal_pengajuan) from pengajuan";
+                                            $result_MIN = mysqli_query($con, $query_MIN);
+                                            $data_MIN = mysqli_fetch_assoc($result_MIN);
+                                            $MIN = date_create($data_MIN['MIN(tanggal_pengajuan)']);
+                                            $awal = date_format($MIN,"d-m-Y");
+                                        ?>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label> Tanggal Pengajuan</label>
-                                                <input type="text" name="tanggal" id="datepicker" class="form-control" >
-                                            </div>
+                                                <label> Tanggal Pengajuan Awal </label>
+                                                <input type="text" name="tanggal_awal" id="datepicker1" class="form-control" value="<?php echo $awal;?>">
+                                            </div> 
+                                        </div>
+                                        <?php
+                                            $query_MAX = "SELECT MAX(tanggal_pengajuan) from pengajuan";
+                                            $result_MAX = mysqli_query($con, $query_MAX);
+                                            $data_MAX = mysqli_fetch_assoc($result_MAX);
+                                            $MAX = date_create($data_MAX['MAX(tanggal_pengajuan)']);
+                                            $akhir = date_format($MAX,"d-m-Y");
+                                        ?>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label> Tanggal Pengajuan Akhir </label>
+                                                <input type="text" name="tanggal_akhir" id="datepicker2" class="form-control" value="<?php echo $akhir; ?>" >
+                                            </div> 
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
@@ -161,7 +181,7 @@ session_start();
                                         </div>
                                         <div class="col-md-1">
                                             <label><br></label>
-                                            <button type="submit" rel="tooltip" class="btn btn-primary btn-fill">
+                                            <button type="submit" class="btn btn-primary btn-fill">
                                                     <i class="fa fa-search"></i> Cari
                                             </button>
                                         </div>
@@ -182,7 +202,7 @@ session_start();
                                     </thead>
                                     <tbody>
 <?php
-      $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user, b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %M - %Y') as tanggal_pengajuan, 
+      $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user, b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %m - %Y') as tanggal_pengajuan, 
                 a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
                 ORDER BY a.id_pengajuan DESC " ;
       $result = mysqli_query($con, $query);
@@ -211,10 +231,10 @@ session_start();
                                             echo '<td align="center">';
     if( $data['status'] == "menunggu" ){
         echo '
-                                                <button onclick="pengajuanditerima()" type="button" rel="tooltip" title="Terima Pengajuan" class="btn btn-primary btn-fill btn-sm">
+                                                <button onclick="pengajuanditerima()" type="button" class="btn btn-primary btn-fill btn-sm">
                                                     <i class="fa fa-check"></i>
                                                 </button>
-                                                <button onclick="pengajuanditolak()" type="button" rel="tooltip" title="Tolak Pengajuan" class="btn btn-danger btn-fill btn-sm">
+                                                <button onclick="pengajuanditolak()" type="button" class="btn btn-danger btn-fill btn-sm">
                                                     <i class="fa fa-close"></i>
                                                 </button>';
         echo '<script type="text/javascript">
@@ -224,7 +244,7 @@ session_start();
                     text: "Apakah anda ingin menerima pengajuan",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#3472F7",
+                    confirmButtonColor: "#9ACD32",
                     confirmButtonText: "Terima",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false
@@ -251,7 +271,7 @@ session_start();
         </script>';
         echo'
                                                 <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill btn-sm">
+                                                    <button type="button" class="btn btn-info btn-fill btn-sm">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>';
@@ -259,11 +279,11 @@ session_start();
     else if ($data['status'] == "proses"){
         echo '
                                                 <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill btn-sm">
+                                                    <button type="button" class="btn btn-info btn-fill btn-sm">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>
-                                                <button onclick="pengajuandiselesaikan()" type="button" rel="tooltip" title="Selesaikan Pengajuan" class="btn btn-primary btn-fill btn-sm">
+                                                <button onclick="pengajuandiselesaikan()" type="button" class="btn btn-primary btn-fill btn-sm">
                                                     <i class="fa fa-check"></i>
                                                 </button>';
 
@@ -287,7 +307,7 @@ session_start();
     else {
         echo '
                                                 <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill btn-sm">
+                                                    <button type="button" class="btn btn-info btn-fill btn-sm">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>';
@@ -345,7 +365,23 @@ session_start();
   
   <script>
   $( function() {
-    $( "#datepicker" ).datepicker();
+    $( "#datepicker1" ).datepicker({
+        dateFormat: "dd-mm-yy",
+        monthNames: [ "Januari", "Febuari", "Maret", 
+                      "April", "Mei", "Juni", 
+                      "Juli", "Agustus", "September", 
+                      "Oktober", "November", "December" ],
+        dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ]
+        
+    });
+    $( "#datepicker2" ).datepicker({
+        dateFormat: "dd-mm-yy",
+        monthNames: [ "Januari", "Febuari", "Maret", 
+                      "April", "Mei", "Juni", 
+                      "Juli", "Agustus", "September", 
+                      "Oktober", "November", "December" ],
+        dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ]
+    });
   } );
   </script>
 

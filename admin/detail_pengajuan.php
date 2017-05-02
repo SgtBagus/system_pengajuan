@@ -43,7 +43,7 @@ session_start();
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="assets/img/icon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Detail Pengajuan</title>
+	<title>Pengajuan</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -105,10 +105,16 @@ session_start();
                 </li>
                 
                 <li>
-                    <a href="master">
-                        <i class="pe pe-7s-server"></i>
+                    <a data-toggle="collapse" href="#componentsExamples">
+                        <i class="pe-7s-server"></i>
                         <p>Master</p>
                     </a>
+                    <div class="collapse" id="componentsExamples">
+                        <ul class="nav">
+                            <li><a href="user">User</a></li>
+                            <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <a href="#" onclick = "logout()">
@@ -297,7 +303,7 @@ if (isset($_GET['proses'])) {
                                     
                                     <div align="right">
                                     <a href="pengajuan">
-                                        <button type="button" rel="tooltip" class="btn btn-info  btn-fill" title="Pengajuan">
+                                        <button type="button" class="btn btn-info  btn-fill">
                                                     <i class="pe pe-7s-note2"></i> Pengajuan 
                                         </button>
                                     </a>
@@ -305,10 +311,10 @@ if (isset($_GET['proses'])) {
 if( $data['status'] == "menunggu" ){
         echo '
                                                 
-                                                <button onclick="pengajuanditerima()" type="button" rel="tooltip" title="Terima Pengajuan" class="btn btn-primary btn-fill">
+                                                <button onclick="pengajuanditerima()" type="button" class="btn btn-primary btn-fill">
                                                     <i class="fa fa-check"></i> Terima
                                                 </button>
-                                                <button onclick="pengajuanditolak()" type="button" rel="tooltip" title="Tolak Pengajuan" class="btn btn-danger  btn-fill">
+                                                <button onclick="pengajuanditolak()" type="button" class="btn btn-danger  btn-fill">
                                                     <i class="fa fa-close"></i> Tolak
                                                 </button>';
         echo '<script type="text/javascript">
@@ -346,10 +352,10 @@ if( $data['status'] == "menunggu" ){
     }
     else if ($data['status'] == "proses"){
         echo '
-                                                <button onclick="pengajuandiubah()" type="button" rel="tooltip" title="Ubah Jadwal" class="btn btn-primary  btn-fill">
+                                                <button onclick="pengajuandiubah()" type="button" class="btn btn-primary  btn-fill">
                                                     <i class="fa fa-edit"></i> Ubah Jadwal Pelaksanaan
                                                 </button>
-                                                <button onclick="pengajuandiselesaikan()" type="button" name="input" rel="tooltip" title="Selesaikan Pengajuan" class="btn btn-primary  btn-fill">
+                                                <button onclick="pengajuandiselesaikan()" type="button" name="input" class="btn btn-primary  btn-fill">
                                                     <i class="fa fa-check"></i> Selesaikan Pengajuan
                                                 </button>';
         echo '<script type="text/javascript">

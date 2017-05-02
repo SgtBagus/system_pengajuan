@@ -77,11 +77,17 @@ session_start();
                         <p>Riwayat</p>
                     </a>
                 </li>
-                <li >
-                    <a href="master">
-                        <i class="pe pe-7s-server"></i>
+                <li>
+                    <a data-toggle="collapse" href="#componentsExamples">
+                        <i class="pe-7s-server"></i>
                         <p>Master</p>
                     </a>
+                    <div class="collapse" id="componentsExamples">
+                        <ul class="nav">
+                            <li><a href="user">User</a></li>
+                            <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <a href="#" onclick = "logout()">

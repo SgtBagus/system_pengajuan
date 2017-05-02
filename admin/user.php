@@ -18,7 +18,7 @@ session_start();
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="assets/img/icon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Master - User</title>
+	<title>User</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -77,11 +77,17 @@ session_start();
                         <p>Riwayat</p>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="master">
-                        <i class="pe pe-7s-server"></i>
+                <li>
+                    <a data-toggle="collapse" href="#componentsExamples">
+                        <i class="pe-7s-server"></i>
                         <p>Master</p>
                     </a>
+                    <div class="collapse" id="componentsExamples">
+                        <ul class="nav">
+                            <li><a href="user">User</a></li>
+                            <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <a href="#" onclick = "logout()">
@@ -140,7 +146,7 @@ if (isset($_GET['proses'])) {
                                     </div>  
                                     <div class="col-md-6" align="right">
                                         <a href="tambah_user">
-                                            <button type="button" rel="tooltip" class="btn btn-info btn-fill">
+                                            <button type="button" class="btn btn-info btn-fill">
                                                 <i class="fa fa-plus"></i> Tambah Pengguna
                                             </button>
                                         </a>
@@ -156,7 +162,7 @@ if (isset($_GET['proses'])) {
                                         </div>
 
                                         <div class="col-md-1">
-                                            <button type="submit" rel="tooltip" class="btn btn-primary btn-fill">
+                                            <button type="submit" class="btn btn-primary btn-fill">
                                                     <i class="fa fa-search"></i> Cari
                                             </button>
                                         </div>
@@ -193,27 +199,27 @@ if (isset($_GET['proses'])) {
                                             echo "<td>$data_user[role]</td>";
                                             echo '<td>
                                                 <a href="detail_user?id='.$data_user['id_user'].'">
-                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-sm btn-fill">
+                                                    <button type="button" class="btn btn-info btn-sm btn-fill">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>
                                                 <a href="edit_user?id='.$data_user['id_user'].'">
-                                                    <button type="button" rel="tooltip" title="Ubah Data" class="btn btn-primary btn-sm btn-fill">
+                                                    <button type="button" class="btn btn-primary btn-sm btn-fill">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                 </a>';
     if( $data_user['id_user'] == $data_login['id_user'] ){
-                                            echo'<button type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill" disabled>
+                                            echo'<button type="button" class="btn btn-danger btn-sm btn-fill" disabled>
                                                         <i class="fa fa-trash"></i>
                                                     </button>';
     }
     else{
         if ($result_tim->num_rows == 1){
-                                            echo'<button type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill" disabled>
+                                            echo'<button type="button" class="btn btn-danger btn-sm btn-fill" disabled>
                                                     <i class="fa fa-trash"></i>
                                                 </button>';
         }else{
-                                            echo '<button onclick="hapususer()" type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-sm btn-fill">
+                                            echo '<button onclick="hapususer()" type="button" class="btn btn-danger btn-sm btn-fill">
                                                      <i class="fa fa-trash"></i>
                                                 </button>';
     echo '<script type="text/javascript">

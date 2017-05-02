@@ -18,7 +18,7 @@ session_start();
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="assets/img/icon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Master</title>
+	<title>Pengajuan</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -76,11 +76,17 @@ session_start();
                         <p>Riwayat</p>
                     </a>
                 </li>
-                <li > 
-                    <a href="master">
-                        <i class="pe pe-7s-server"></i>
+                <li>
+                    <a data-toggle="collapse" href="#componentsExamples">
+                        <i class="pe-7s-server"></i>
                         <p>Master</p>
                     </a>
+                    <div class="collapse" id="componentsExamples">
+                        <ul class="nav">
+                            <li><a href="user">User</a></li>
+                            <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <a href="#" onclick = "logout()">
@@ -117,13 +123,18 @@ session_start();
                 <div class="row">
                     <div class="col-md-12">
 <?php
-    $judul = ($_GET["pengajuan"]);
-    $username = ($_GET["pengaju"]);
-    $tanggal = ($_GET["tanggal"]);
+    $judul = ($_GET["judul"]);
+    $tanggal_awal = ($_GET["tanggal_awal"]);
+    $tanggal_akhir = ($_GET["tanggal_akhir"]);
+    $first = date_create(($_GET["tanggal_awal"]));
+    $lass = date_create(($_GET["tanggal_akhir"]));
+    $awal = date_format($first,"Y-m-d");
+    $akhir = date_format($lass,"Y-m-d");
     $status = ($_GET["status"]);
-    $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
+    
+    $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %m - %Y') as tanggal_pengajuan, 
             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
-            AND a.pengajuan LIKE '%".$judul."%' AND b.username LIKE '%".$username."%' AND a.tanggal_pengajuan like '%".$tanggal."%' 
+            AND a.pengajuan LIKE '%".$judul."%' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir')
             AND a.status like '%".$status."%' ORDER BY a.id_pengajuan DESC " ;
     $result = mysqli_query($con, $query);
       $no = 1;
@@ -139,9 +150,9 @@ if ($status == ""){
                         <div class="card">
                             <div class="header">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <h4 class="title">Data Pengguna</h4>
-                                        <small>Pencarian Judul = <b>"<?php echo $judul ?>"</b> Pengaju = <b>"<?php echo $username ?>"</b> Tanggal = <b>"<?php echo $tanggal ?>"</b> Status = <b>"<?php echo $semua ?>"</b>
+                                        <small>Judul = <b>"<?php echo $judul ?>"</b> Tanggal Awal= <b>"<?php echo $tanggal_awal ?>"</b> Tanggal Akhir= <b>"<?php echo $tanggal_akhir ?>"</b> Status = <b>"<?php echo $semua ?>"</b>
                                         <br> Data sebanyak <b>[ '<?php echo $banyakdata ?>' ]</b></small>
                                         <a href="pengajuan"><p class="category"><i class="fa fa-refresh"></i> Reset Data Pengguna</p></a>
                                     </div>  
@@ -183,10 +194,10 @@ if ($status == ""){
                                             echo '<td align="center">';
     if( $data['status'] == "menunggu" ){
         echo '
-                                                <button onclick="pengajuanditerima()" type="button" rel="tooltip" title="Terima Pengajuan" class="btn btn-primary btn-fill btn-sm">
+                                                <button onclick="pengajuanditerima()" type="button" class="btn btn-primary btn-fill btn-sm">
                                                     <i class="fa fa-check"></i>
                                                 </button>
-                                                <button onclick="pengajuanditolak()" type="button" rel="tooltip" title="Tolak Pengajuan" class="btn btn-danger btn-fill btn-sm">
+                                                <button onclick="pengajuanditolak()" type="button" class="btn btn-danger btn-fill btn-sm">
                                                     <i class="fa fa-close"></i>
                                                 </button>';
         echo '<script type="text/javascript">
@@ -223,7 +234,7 @@ if ($status == ""){
         </script>';
         echo'
                                                 <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill btn-sm">
+                                                    <button type="button" class="btn btn-info btn-fill btn-sm">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>';
@@ -231,11 +242,11 @@ if ($status == ""){
     else if ($data['status'] == "proses"){
         echo '
                                                 <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill btn-sm">
+                                                    <button type="button" class="btn btn-info btn-fill btn-sm">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>
-                                                <button onclick="pengajuandiselesaikan()" type="button" rel="tooltip" title="Selesaikan Pengajuan" class="btn btn-primary btn-fill btn-sm">
+                                                <button onclick="pengajuandiselesaikan()" type="button" class="btn btn-primary btn-fill btn-sm">
                                                     <i class="fa fa-check"></i>
                                                 </button>';
 
