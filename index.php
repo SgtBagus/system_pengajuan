@@ -121,7 +121,7 @@ session_start();
                             text: "Apakah anda ingin keluar ",
                             type: "warning",
                             showCancelButton: true,
-                            confirmButtonColor: "#FF4A55",
+                            confirmButtonColor: "#00cc00", 
                             confirmButtonText: "Logout",
                             cancelButtonText: "Batal",
                             closeOnConfirm: false
@@ -290,14 +290,6 @@ session_start();
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container-fluid">
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, Sistem Keuangan
-                </p>
-            </div>
-        </footer>
-
     </div>
 </div>
 

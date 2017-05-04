@@ -8,7 +8,7 @@ session_start();
  else {
    $logged_in = true;
  }
-?>
+?> 
 <!doctype html>
 <html lang="en">
 <head>
@@ -121,7 +121,7 @@ session_start();
                             text: "Apakah anda ingin keluar ",
                             type: "warning",
                             showCancelButton: true,
-                            confirmButtonColor: "#FF4A55",
+                            confirmButtonColor: "#00cc00", 
                             confirmButtonText: "Logout",
                             cancelButtonText: "Batal",
                             closeOnConfirm: false
@@ -269,7 +269,7 @@ if (isset($_GET['proses'])) {
                     text: "Apakah anda ingin mengubah pengajuan",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#3472F7",
+                    confirmButtonColor: "#00ff00",
                     confirmButtonText: "Iya",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false
@@ -284,7 +284,7 @@ if (isset($_GET['proses'])) {
                     text: "Apakah anda ingin membatalkan pengajuan",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#FF4A55",
+                    confirmButtonColor: "#00cc00",
                     confirmButtonText: "Iya",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false
@@ -321,7 +321,7 @@ if (isset($_GET['proses'])) {
                     text: "Apakah anda ingin menghapus pengajuan",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#FF4A55",
+                    confirmButtonColor: "#00ff00",
                     confirmButtonText: "Iya",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false
