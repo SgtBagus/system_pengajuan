@@ -109,11 +109,11 @@ if (isset($_GET['update'])) {
                 <script type="text/javascript">
                     function logout() {
                         swal({
-                            title: "Konfirmasi ?",
+                            title: "Konfirmasi ?", 
                             text: "Apakah anda ingin keluar ",
                             type: "warning",
                             showCancelButton: true,
-                            confirmButtonColor: "#FF4A55",
+                            confirmButtonColor: "#00cc00",  
                             confirmButtonText: "Logout",
                             cancelButtonText: "Batal",
                             closeOnConfirm: false

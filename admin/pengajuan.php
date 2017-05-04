@@ -107,7 +107,7 @@ session_start();
                             text: "Apakah anda ingin keluar ",
                             type: "warning",
                             showCancelButton: true,
-                            confirmButtonColor: "#FF4A55",
+                            confirmButtonColor: "#00cc00", 
                             confirmButtonText: "Logout",
                             cancelButtonText: "Batal",
                             closeOnConfirm: false
@@ -244,7 +244,7 @@ session_start();
                     text: "Apakah anda ingin menerima pengajuan",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#9ACD32",
+                    confirmButtonColor: "#00ff00",
                     confirmButtonText: "Terima",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false
@@ -259,7 +259,7 @@ session_start();
                     text: "Apakah anda ingin menolak pengajuan",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#FF4A55",
+                    confirmButtonColor: "#00cc00",
                     confirmButtonText: "Tolak",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false
@@ -294,6 +294,7 @@ session_start();
                     text: "Apakah anda ingin menyelesaikan pengajuan",
                     type: "warning",
                     showCancelButton: true,
+                    confirmButtonColor: "#00ff00",
                     confirmButtonText: "Selesaikan",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false

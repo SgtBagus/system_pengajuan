@@ -102,15 +102,15 @@ if (isset($_GET['error'])) {
                         <p>Riwayat</p>
                     </a>
                 </li>
-                <li>
-                    <a data-toggle="collapse" href="#componentsExamples">
+                <li class="active">
+                    <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
                         <i class="pe-7s-server"></i>
                         <p>Master</p>
                     </a>
-                    <div class="collapse" id="componentsExamples">
+                    <div class="collapse in" id="componentsExamples">
                         <ul class="nav">
                             <li><a href="user">User</a></li>
-                            <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
+                            <li class="active"><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
                         </ul>
                     </div>
                 </li>
@@ -128,7 +128,7 @@ if (isset($_GET['error'])) {
                             text: "Apakah anda ingin keluar ",
                             type: "warning",
                             showCancelButton: true,
-                            confirmButtonColor: "#FF4A55",
+                            confirmButtonColor: "#00cc00", 
                             confirmButtonText: "Logout",
                             cancelButtonText: "Batal",
                             closeOnConfirm: false

@@ -103,7 +103,7 @@ session_start();
                             text: "Apakah anda ingin keluar ",
                             type: "warning",
                             showCancelButton: true,
-                            confirmButtonColor: "#FF4A55",
+                            confirmButtonColor: "#00cc00", 
                             confirmButtonText: "Logout",
                             cancelButtonText: "Batal",
                             closeOnConfirm: false
@@ -179,7 +179,7 @@ session_start();
                     text: "Apakah anda ingin mengubah jenis pengguna",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#3472F7",
+                    confirmButtonColor: "#00ff00",
                     confirmButtonText: "Iya",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false
@@ -205,7 +205,7 @@ session_start();
                     text: "Apakah anda ingin menghapus jenis pengguna",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#FF4A55",
+                    confirmButtonColor: "#00cc00",
                     confirmButtonText: "Hapus",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false

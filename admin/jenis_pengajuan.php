@@ -76,15 +76,15 @@ session_start();
                         <p>Riwayat</p>
                     </a>
                 </li>
-                <li>
-                    <a data-toggle="collapse" href="#componentsExamples">
+                <li class="active">
+                    <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
                         <i class="pe-7s-server"></i>
                         <p>Master</p>
                     </a>
-                    <div class="collapse" id="componentsExamples">
+                    <div class="collapse in" id="componentsExamples">
                         <ul class="nav">
                             <li><a href="user">User</a></li>
-                            <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
+                            <li class="active"><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
                         </ul>
                     </div>
                 </li>
@@ -102,7 +102,7 @@ session_start();
                             text: "Apakah anda ingin keluar ",
                             type: "warning",
                             showCancelButton: true,
-                            confirmButtonColor: "#FF4A55",
+                            confirmButtonColor: "#00cc00", 
                             confirmButtonText: "Logout",
                             cancelButtonText: "Batal",
                             closeOnConfirm: false
@@ -122,15 +122,33 @@ if (isset($_GET['proses'])) {
     $proses = ($_GET["proses"]);
     if($proses == "delete"){
         echo'<script>
-            swal("Terhapus!", "Jenis pengajuan telah dihapus !", "success")
+            swal({
+                title: "Terhapus!",
+                text: "Jenis pengajuan telah ditambah.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })
         </script>';
     }else if ($proses == "edit"){
         echo'<script>
-            swal("Terubah!", "Jenis pengajuan telah diubah !", "success")
+            swal({
+                title: "Terubah!",
+                text: "Jenis pengajuan telah diubah.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })
         </script>';
-    }else{
+    }else if ($proses == "tambah"){
         echo'<script>
-            swal("Tertambah!", "Jenis pengajuan telah ditambah !", "success")
+            swal({
+                title: "Tertambah!",
+                text: "Jenis pengajuan telah ditambah.",
+                type: "success", 
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })
         </script>';
     }
   } 
@@ -206,7 +224,7 @@ if (isset($_GET['proses'])) {
                     text: "Apakah anda ingin mengubah jenis pengguna",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#3472F7",
+                    confirmButtonColor: "#00ff00",
                     confirmButtonText: "Iya",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false
@@ -232,7 +250,7 @@ if (isset($_GET['proses'])) {
                     text: "Apakah anda ingin menghapus jenis pengguna",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#FF4A55",
+                    confirmButtonColor: "#00cc00",
                     confirmButtonText: "Hapus",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false

@@ -77,14 +77,14 @@ session_start();
                         <p>Riwayat</p>
                     </a>
                 </li>
-                <li>
-                    <a data-toggle="collapse" href="#componentsExamples">
+                <li class="active">
+                    <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
                         <i class="pe-7s-server"></i>
                         <p>Master</p>
                     </a>
-                    <div class="collapse" id="componentsExamples">
+                    <div class="collapse in" id="componentsExamples">
                         <ul class="nav">
-                            <li><a href="user">User</a></li>
+                            <li class="active"><a href="user">User</a></li>
                             <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
                         </ul>
                     </div>
@@ -103,7 +103,7 @@ session_start();
                             text: "Apakah anda ingin keluar ",
                             type: "warning",
                             showCancelButton: true,
-                            confirmButtonColor: "#FF4A55",
+                            confirmButtonColor: "#00cc00", 
                             confirmButtonText: "Logout",
                             cancelButtonText: "Batal",
                             closeOnConfirm: false
@@ -122,12 +122,24 @@ if (isset($_GET['proses'])) {
     $proses = ($_GET["proses"]);
     if($proses == "delete"){
         echo'<script>
-            swal("Terhapus!", "Data User telah dihapus !", "success")
+            swal({
+                title: "Terhapus!",
+                text: "Data user telah dihapus.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })
         </script>';
     }
-    else{ 
+    else if ($proses == "edit") { 
         echo'<script>
-            swal("Tertambah!", "Data User telah ditambah !", "success")
+            swal({
+                title: "Terubah!",
+                text: "Data user telah diubah.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })
         </script>';
     }
   } 
@@ -197,21 +209,37 @@ if (isset($_GET['proses'])) {
                                         	echo "<td>$data_user[username]</td>";
                                             echo "<td>$data_user[email]</td>";
                                             echo "<td>$data_user[role]</td>";
-                                            echo '<td>
+                                            echo '<td> 
                                                 <a href="detail_user?id='.$data_user['id_user'].'">
                                                     <button type="button" class="btn btn-info btn-sm btn-fill">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
                                                 </a>
-                                                <a href="edit_user?id='.$data_user['id_user'].'">
-                                                    <button type="button" class="btn btn-primary btn-sm btn-fill">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                </a>';
+                                                <button onclick="edituser()" type="button" class="btn btn-primary btn-sm btn-fill">
+                                                    <i class="fa fa-edit"></i>
+                                                </button> ';
+    echo '<script type="text/javascript">
+            function edituser() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin mengubah data user",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#00ff00",
+                    confirmButtonText: "Iya",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.location="edit_user?id='.$data_user['id_user'].'";
+                })
+            }
+            </script>';
+
     if( $data_user['id_user'] == $data_login['id_user'] ){
                                             echo'<button type="button" class="btn btn-danger btn-sm btn-fill" disabled>
                                                         <i class="fa fa-trash"></i>
-                                                    </button>';
+                                                </button>';
     }
     else{
         if ($result_tim->num_rows == 1){
@@ -219,7 +247,7 @@ if (isset($_GET['proses'])) {
                                                     <i class="fa fa-trash"></i>
                                                 </button>';
         }else{
-                                            echo '<button onclick="hapususer()" type="button" class="btn btn-danger btn-sm btn-fill">
+                                            echo '<button onclick="hapususer()" class="btn btn-danger btn-sm btn-fill">
                                                      <i class="fa fa-trash"></i>
                                                 </button>';
     echo '<script type="text/javascript">
@@ -229,7 +257,7 @@ if (isset($_GET['proses'])) {
                     text: "Apakah anda ingin menghapus pengguna",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#FF4A55",
+                    confirmButtonColor: "#00cc00",
                     confirmButtonText: "Hapus",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false
