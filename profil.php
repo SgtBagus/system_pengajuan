@@ -219,14 +219,9 @@ if (isset($_GET['proses'])) {
                                                     </table>
                                                 </div>
                                                 <div align="right">
-                                                    <a href="user">
-                                                        <button type="button" rel="tooltip" class="btn btn-info btn-fill">
-                                                                    <i class="fa fa-arrow-left"></i> Lihat Data Pengguna
-                                                        </button>
-                                                    </a>
-                                                        <button onclick="editprofil()" type="button" rel="tooltip" class="btn btn-primary btn-fill">
-                                                            <i class="fa fa-edit"></i> Edit Profile
-                                                        </button>
+                                                    <button onclick="editprofil()" type="button" rel="tooltip" class="btn btn-primary btn-fill">
+                                                        <i class="fa fa-edit"></i> Edit Profile
+                                                    </button>
                                                 <script type="text/javascript">
                                                     function editprofil() {
                                                         swal({
