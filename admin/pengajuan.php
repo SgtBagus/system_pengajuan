@@ -198,7 +198,7 @@ session_start();
                                         <th>Tanggal</th>
                                         <th>Biaya</th>
                                         <th>Status</th>
-                                        <th>Lihat Detail</th>
+                                        <th>Detail</th>
                                     </thead>
                                     <tbody>
 <?php

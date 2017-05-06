@@ -159,88 +159,70 @@ if (isset($_GET['proses'])) {
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Profile</h4>
+                                <h4 class="title">Edit Profile <b> (<?php echo $username ?> ) </b></h4>
                             </div>
                             <div class="content">
-                                <form>
-                                    <input type="hidden" name="id_pengajuan" value="<?php echo $id_pengajuan ?>">
+                                <form id="form_edit_user" method="post" action="system/proses_edit_profil">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                <label for="Username" >Username</label>
+                                                <input type="text" name="username" id="form_edit_user" class="form-control" placeholder="username" value="<?php echo $username ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="Email">Email address</label>
+                                                <input type="email" name="email" id="form_edit_user" class="form-control" placeholder="email" value="<?php echo $email ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="Password">Ubah Password</label>
+                                                <input type="password" name="password" id="form_edit_user" class="form-control" placeholder="Ubah Password">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nama Depan</label>
+                                                <input type="text" name="nama_depan" id="form_edit_user" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nama Belakang</label>
+                                                <input type="text" name="nama_belakang" id="form_edit_user" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" >
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <div class="content table-responsive table-full-width">
-                                                    <table>
-                                                        <thead>
-                                                            <th width="150px"></th>
-                                                            <th width="25px"></th>
-                                                            <th></th>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td><h5><b>Username</h5></b></td>
-                                                                <td><h5><b>:</h5></b></td>
-                                                                <td><h5><?php echo $username ?></h5></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><h5><b>Email</h5></b></td>
-                                                                <td><h5><b>:</h5></b></td>
-                                                                <td><h5><?php echo $email ?></h5></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><h5><b>Nama depan</h5></b></td>
-                                                                <td><h5><b>:</h5></b></td>
-                                                                <td><h5><?php echo $namadepan ?></h5></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><h5><b>Nama belakang</h5></b></td>
-                                                                <td><h5><b>:</h5></b></td>
-                                                                <td><h5><?php echo $namabelakang ?></h5></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><h5><b>Jenis Kelamin</h5></b></td>
-                                                                <td><h5><b>:</h5></b></td>
-                                                                <td><h5><?php echo $jk ?></h5></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><h5><b>Alamat</h5></b></td>
-                                                                <td><h5><b>:</h5></b></td>
-                                                                <td><h5><?php echo $alamat ?></h5></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><h5><b>No HP</h5></b></td>
-                                                                <td><h5><b>:</h5></b></td>
-                                                                <td><h5><?php echo $nohp ?></h5></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><h5><b>Role</h5></b></td>
-                                                                <td><h5><b>:</h5></b></td>
-                                                                <td><h5><?php echo $role ?></h5></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div align="right">
-                                                    <button onclick="editprofil()" type="button" rel="tooltip" class="btn btn-primary btn-fill">
-                                                        <i class="fa fa-edit"></i> Edit Profile
-                                                    </button>
-                                                <script type="text/javascript">
-                                                    function editprofil() {
-                                                        swal({
-                                                            title: "Konfirmasi ?",
-                                                            text: "Apakah anda ingin menghapus pengguna",
-                                                            type: "warning",
-                                                            showCancelButton: true,
-                                                            confirmButtonColor: "#00ff00",
-                                                            confirmButtonText: "Iya",
-                                                            cancelButtonText: "Batal",
-                                                            closeOnConfirm: false
-                                                        },
-                                                        function(){
-                                                            document.location="edit_profil";
-                                                        })
-                                                    }       
-                                                </script>
+                                                <label>Alamat</label>
+                                                <input type="text" name="alamat" id="form_edit_user" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" >
                                             </div>
                                         </div>
+                                    </div>
+
+                                    
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>No. Hp</label>
+                                                <input type="number" name="nohp" id="form_edit_user" class="form-control" placeholder="No Hp" value="<?php echo $nohp ?>" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div align="right">
+                                        <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
+                                            <i class="fa fa-edit"></i> Konfirmasi
+                                        </button>
+                                    </div>
                                     <div class="clearfix"></div>
                                 </form>
                             </div>

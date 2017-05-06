@@ -223,9 +223,11 @@ if (isset($_GET['proses'])) {
                                                         </button>
                                                     </a>
 <?php
-                                    echo '<button onclick="editprofil()" type="button" rel="tooltip" class="btn btn-primary btn-fill">
+                                    echo '<a>
+                                            <button onclick="editprofil()" type="button" rel="tooltip" class="btn btn-primary btn-fill">
                                                 <i class="fa fa-edit"></i> Edit Profile
-                                            </button>';
+                                            </button>
+                                    </a>';
     echo '<script type="text/javascript">
             function editprofil() {
                 swal({

@@ -195,7 +195,7 @@ if (isset($_GET['proses'])) {
                                         <th>No</th>
                                         <th>Jenis Pengajuan</th>
                                         <th>Deskripsi</th>
-                                    	<th>Action</th>
+                                    	<th>Pengaturan</th>
                                     </thead>
                                     <tbody>
 
@@ -216,7 +216,7 @@ if (isset($_GET['proses'])) {
                                             echo '<td>
                                                 <a href="detail_jenis_pengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'">
                                                     <button type="button" class="btn btn-info btn-sm btn-fill">
-                                                        <i class="fa fa-eye"></i> Detail
+                                                        <i class="fa fa-gear"></i> Pengaturan
                                                     </button>
                                                 </a>';
                                         $no++;

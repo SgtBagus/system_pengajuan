@@ -188,7 +188,7 @@ if (isset($_GET['proses'])) {
                                         <th>Username</th>
                                     	<th>Email</th>
                                         <th>Role</th>
-                                    	<th>Lihat Detail</th>
+                                    	<th>Detail</th>
                                     </thead>
                                     <tbody>
 

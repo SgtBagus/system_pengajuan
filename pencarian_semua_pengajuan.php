@@ -145,11 +145,13 @@ session_start();
     $judul = ($_GET["pengajuan"]);
     $username = ($_GET["pengaju"]);
     $tanggal = ($_GET["tanggal"]);
+    $date = date_create(($_GET["tanggal"]));
+    $tgl = date_format($date,"Y-m-d");
     $status = ($_GET["status"]);
-    $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
+    $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %m - %Y') as tanggal_pengajuan,
             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
             AND a.pengajuan LIKE '%".$judul."%' AND b.username LIKE '%".$username."%' 
-            AND a.tanggal_pengajuan like '%".$tanggal."%' AND a.status like '%".$status."%' ORDER BY a.pengajuan ASC " ;
+            AND a.tanggal_pengajuan like '%".$tgl."%' AND a.status like '%".$status."%' ORDER BY a.pengajuan ASC " ;
     $result = mysqli_query($con, $query);
       $no = 1;
       $cek = count($result);

@@ -425,7 +425,7 @@ if( $data['status'] == "menunggu" ){
                     text: "Apakah anda ingin menyelesaikan pengajuan",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#3472F7",
+                    confirmButtonColor: "#00ff00",
                     confirmButtonText: "Selesaikan",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false
