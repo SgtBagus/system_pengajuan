@@ -159,7 +159,7 @@ if (isset($_GET['proses'])) {
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Edit Profile <b> (<?php echo $username ?> ) </b></h4>
+                                <h4 class="title">Profile</h4>
                             </div>
                             <div class="content">
                                 <form>
