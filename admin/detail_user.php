@@ -223,11 +223,26 @@ if (isset($_GET['proses'])) {
                                                         </button>
                                                     </a>
 <?php
-                                    echo '<a href="edit_user?id='.$data['id_user'].'">
-                                            <button type="button" rel="tooltip" class="btn btn-primary btn-fill">
+                                    echo '<button onclick="editprofil()" type="button" rel="tooltip" class="btn btn-primary btn-fill">
                                                 <i class="fa fa-edit"></i> Edit Profile
-                                            </button>
-                                        </a>';
+                                            </button>';
+    echo '<script type="text/javascript">
+            function editprofil() {
+                swal({
+                    title: "Konfirmasi ?",
+                    text: "Apakah anda ingin menghapus pengguna",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#00ff00",
+                    confirmButtonText: "Iya",
+                    cancelButtonText: "Batal",
+                    closeOnConfirm: false
+            },
+                function(){
+                    document.location="edit_profil";
+                })
+            }       
+        </script>';
 if( $email == $_SESSION['email'] ){
                                             echo'<button type="button" rel="tooltip" class="btn btn-danger btn-fill" disabled>
                                                 <i class="fa fa-trash"></i> Hapus Profile
@@ -244,7 +259,7 @@ if( $email == $_SESSION['email'] ){
                     text: "Apakah anda ingin menghapus pengguna",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#FF4A55",
+                    confirmButtonColor: "#00cc00",
                     confirmButtonText: "Hapus",
                     cancelButtonText: "Batal",
                     closeOnConfirm: false

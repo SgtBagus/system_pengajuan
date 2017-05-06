@@ -182,114 +182,140 @@ if (isset($_GET['proses'])) {
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title"><b><?php echo $pengajuan ?></b> ( <?php echo $status ?> ) <small> Pengaju <b>( <?php echo $pengaju ?> )</b> </small></h4>
+                                <h4 class="title">Detail Pengajuan <br>
+                                    <div align="center">
+                                        <b><?php echo $pengajuan ?></b> <small>Pengaju 
+                                            <?php
+                                                echo  '<b>( '.$pengaju.' )</b>';
+                                            ?>
+                                        </small> 
+                                    </div>
+                                </h4>
                             </div>
                             <div class="content">
-                                <form id="form_pengajuan_diterima" method="" action="">
-                                <input type="hidden" name="id_pengajuan" value="<?php echo $id_pengajuan ?>">
+                                <form id="form_pengajuan_diterima" method="post" >
+                                    <input type="hidden" name="id_pengajuan" value="<?php echo $id_pengajuan ?>">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <table>
-                                                    <tr>
-                                                        <td><h5><b>Pengajuan </h5></b></td>
-                                                        <td><h5><b> : </h5></b></td>
-                                                        <td><h5> <?php echo $pengajuan ?> </h5></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><h5><b>Jenis Pengajuan </h5></b></td>
-                                                        <td><h5><b> : </h5></b></td>
-                                                        <td><h5> <?php echo $jenis_pengajuan ?> </h5></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><h5><b>Tanggal Pengajuan </h5></b></td>
-                                                        <td><h5><b> : </h5></b></td>
-                                                        <td><h5> <?php echo date("d - m - Y", strtotime ($taggal_pengajuan ) )?> </h5></td>
-                                                    </tr>
-<?php
-    if( $data['gambar'] == "" ){
+                                                    <thead>
+                                                        <th width="150px"></th>
+                                                        <th width="25px"></th>
+                                                        <th></th>
+                                                    </thead>
+                                                    <tbody> 
+                                                        <tr>
+                                                            <td><h5><b>Pengajuan </h5></b></td>
+                                                            <td><h5><b> : </h5></b></td>
+                                                            <td><h5> <?php echo $pengajuan ?> </h5></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h5><b>Jenis Pengajuan </h5></b></td>
+                                                            <td><h5><b> : </h5></b></td>
+                                                            <td><h5> <?php echo $jenis_pengajuan ?> </h5></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h5><b>Tanggal Pengajuan </h5></b></td>
+                                                            <td><h5><b> : </h5></b></td>
+                                                            <td><h5> <?php echo date("d - m - Y", strtotime ($taggal_pengajuan ) )?> </h5></td>
+                                                        </tr>
+    <?php
+        if( $data['gambar'] == "" ){
 
-    }
-    else{
-        echo '
-                                                    <tr>
-                                                        <td><h5><b>Gambar</h5></b></td>
-                                                        <td><h5><b> : </h5></b></td>
-                                                        <td><h5>';
-?>
-                                                        <a class="example-image-link" href="image/<?php echo $gambar ?>" data-lightbox="example-2" data-title="<?php echo $pengajuan ?>">
-                                                            <img class="example-image" src="image/<?php echo $gambar ?>" width='282' height='177' alt="image-1"/>
-                                                        </a>
-<?php                                                        
-                                                        echo '</td>
-                                                    </tr>';
-    }
+        }
+        else{
+            echo '
+                                                        <tr>
+                                                            <td><h5><b>Gambar</h5></b></td>
+                                                            <td><h5><b> : </h5></b></td>
+                                                            <td><h5>';
+    ?>
+                                                            <a class="example-image-link" href="image/<?php echo $gambar ?>" data-lightbox="example-2" data-title="<?php echo $pengajuan ?>">
+                                                                <img class="example-image" src="image/<?php echo $gambar ?>" width='282' height='177' alt="image-1"/>
+                                                            </a>
+    <?php                                                        
+                                                            echo '</td>
+                                                        </tr>';
+        }
 
-?>                                                 
-                                                    <tr>
-                                                        <td><h5><b>Biaya</h5></b></td>
-                                                        <td><h5><b> : </h5></b></td>
-                                                        <td><h5>  Rp. <?php echo $biaya ?>,00,-</h5></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><h5><b>Alasan</h5></b></td>
-                                                        <td><h5><b> : </h5></b></td>
-                                                        <td><h5>  <?php echo $alasan ?></h5></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><h5><b>Keterangan</h5></b></td>
-                                                        <td><h5><b> : </h5></b></td>
-                                                        <td><h5> <?php echo $keterangan ?></h5></td>
-                                                    </tr>
-<?php
-    if( $data['status'] == "menunggu" ){
+    ?>                                                    
+                                                        <tr>
+                                                            <td><h5><b>Biaya</h5></b></td>
+                                                            <td><h5><b> : </h5></b></td>
+                                                            <td><h5>  Rp. <?php echo $biaya ?>,00,-</h5></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h5><b>Alasan</h5></b></td>
+                                                            <td><h5><b> : </h5></b></td>
+                                                            <td><h5>  <?php echo $alasan ?></h5></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h5><b>Keterangan</h5></b></td>
+                                                            <td><h5><b> : </h5></b></td>
+                                                            <td><h5> <?php echo $keterangan ?></h5></td>
+                                                        </tr>
+    <?php
+        if( $data['status'] == "menunggu" ){
 
-    }
-    else if ($data['status'] == "proses"){
-        echo '
-                                                    <tr>
-                                                        <td><h5><b>Jadwal Pelaksanaan</h5></b></td>
-                                                        <td><h5><b> : </h5></b></td>
-                                                        <td><h5>'.$data['jadwal_pelaksanaan'].'</h5></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><h5><b>Catatan</h5></b></td>
-                                                        <td><h5><b> : </h5></b></td>
-                                                        <td><h5>'.$data['catatan'].'</h5></td>
-                                                    </tr>
-        ';
-    }else{
-        echo '
-                                                    <tr>
-                                                        <td><h5><b>Catatan</h5></b></td>
-                                                        <td><h5><b> : </h5></b></td>
-                                                        <td><h5>'.$data['catatan'].'</h5></td>
-                                                    </tr>
-        ';
-        
-    }
+        }
+        else if ($data['status'] == "proses"){
+            echo '
+                                                        <tr>
+                                                            <td><h5><b>Jadwal Pelaksanaan</h5></b></td>
+                                                            <td><h5><b> : </h5></b></td>
+                                                            <td><h5>'.$data['jadwal_pelaksanaan'].'</h5></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h5><b>Catatan</h5></b></td>
+                                                            <td><h5><b> : </h5></b></td>
+                                                            <td><h5>'.$data['catatan'].'</h5></td>
+                                                        </tr>
+            ';
+        }else{
+            echo '
+                                                        <tr>
+                                                            <td><h5><b>Catatan</h5></b></td>
+                                                            <td><h5><b> : </h5></b></td>
+                                                            <td><h5>'.$data['catatan'].'</h5></td>
+                                                        </tr>
+            ';
+            
+        }
 
-?>
-                                                    <tr>
-                                                        <td><h5><b>Riwayat</h5></b></td>
-                                                    </tr>
+    ?>
+                                                        <tr>
+                                                            <td><h5><b>Riwayat</h5></b></td>
+                                                        </tr>
+                                                    </tbody>
                                                 </table>
                                                 <table>
+                                                <table>
+                                                    <thead>
+                                                        <th width="10px"></th>
+                                                        <th width="10px"></th>
+                                                        <th width="200px"></th>
+                                                        <th width="10px"></th>
+                                                        <th></th>
+                                                    </thead>
+                                                    <tbody> 
 <?php
-    $query2 = "SELECT * FROM riwayat WHERE id_pengajuan ='$id' ORDER BY kegiatan ASC" ;
+    $query2 = "SELECT * FROM riwayat WHERE id_pengajuan ='$id' ORDER BY id_riwayat DESC" ;
       $result2 = mysqli_query($con, $query2);
       if(!$result2){
         die ("Query Error: ".mysqli_errno($con).
-           " - ".mysqli_error($con));
+           " - ".mysqli_error($con)); 
       }
       $no = 1;
       while($data2 = mysqli_fetch_assoc($result2)){
                                                     echo "<tr>";
                                                         echo "<td><b>$no </b></td>";
-                                                        echo "<td> - </td>";
+                                                        echo "<td> . </td>";
                                                         echo "<td> <b>$data2[kegiatan2] </b> </td>";
-                                                        echo "<td><small>$data2[tanggal_kegiatan]</small></td>";
-                                                    echo "</tr>";
+                                                        echo "<td> : </td>";
+                                                        echo "<td><small> $data2[tanggal_kegiatan]</small></td>";
+                                                    echo "</tr>
+                                                    </tbody>";
                                         $no++;
       }                                                      
 ?>
@@ -297,8 +323,6 @@ if (isset($_GET['proses'])) {
                                             </div>
                                         </div>
                                     </div>
-
-                                    
                                     <div align="right">
                                     <a href="semua_pengajuan">
                                         <button type="button" rel="tooltip" class="btn btn-info btn-fill" title="kembali">

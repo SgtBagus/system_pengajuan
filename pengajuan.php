@@ -139,16 +139,34 @@ session_start();
 if (isset($_GET['proses'])) {
     $proses = ($_GET["proses"]);
     if($proses == "delete"){
-        echo'<script>
-            swal("Terhapus!", "Pengajuan anda telah dihapus !", "success")
+        echo'<script> 
+            swal({
+                title: "Terhapus!",
+                text: "Pengajuan telah dihapus.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })
         </script>';
     }else if($proses == "tambah"){
         echo'<script>
-            swal("Tersimpan!", "Pengajuan anda telah disimpan !", "success")
+            swal({
+                title: "Tertambah!",
+                text: "Pengajuan telah ditambah.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })
         </script>';
-    }else {
+    }else if ($proses == "edit"){
         echo'<script>
-            swal("Error!", "Terjadi Kesalahan!", "error")
+            swal({
+                title: "Terubah!",
+                text: "Pengajuan telah diubah.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })
         </script>';
     }
   } 
@@ -220,7 +238,7 @@ if (isset($_GET['proses'])) {
                                         <th>tanggal</th>
                                         <th>biaya</th>
                                         <th>status</th>
-                                        <th>Tindak Lanjut</th>
+                                        <th></th>
                                     </thead>
                                     <tbody>
 <?php
@@ -248,94 +266,16 @@ if (isset($_GET['proses'])) {
                                             echo "<td>$data[tanggal_pengajuan]</td>";
                                             echo "<td>$data[biaya]</td>";
                                             echo "<td>$data[status]</td>";
-                                            echo '<td align="center">';
-        if($data['status'] == "menunggu" ){
-                                            echo '
+                                            echo '<td align="center">
                                                 <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill btn-sm">
-                                                        <i class="fa fa-eye"></i>
-                                                    </button>
-                                                </a>
-                                                <button onclick="editpengajuan()"type="button" rel="tooltip" title="Ubah Pengajuan" class="btn btn-primary btn-fill btn-sm">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button onclick="batalpengajuan()" type="button" rel="tooltip" title="Batalkan Pengajuan" class="btn btn-danger btn-fill btn-sm">
-                                                    <i class="fa fa-close"></i>
-                                                </button>';                                            
-    echo '<script type="text/javascript">
-            function editpengajuan() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin mengubah pengajuan",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00ff00",
-                    confirmButtonText: "Iya",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="edit_pengajuan?id='.$data['id_pengajuan'].'";
-                })
-            }
-            function batalpengajuan() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin membatalkan pengajuan",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00cc00",
-                    confirmButtonText: "Iya",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="system/hapus_pengajuan?id='.$data['id_pengajuan'].'";
-                })
-            }
-        </script>';
-
-        }
-        else if ($data['status'] == "proses" ){
-                                            echo '
-                                                <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill btn-sm">
-                                                        <i class="fa fa-eye"></i>
+                                                        <i class="fa fa-eye"></i> Detail
                                                     </button>
                                                 </a>';
-        }
-        else{
-                                            echo '
-                                                <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill btn-sm">
-                                                        <i class="fa fa-eye"></i>
-                                                    </button>
-                                                </a>
-                                                <button onclick="hapuspengajuan()" type="button" rel="tooltip" title="Hapus Pengajuan" class="btn btn-danger btn-fill btn-sm">
-                                                    <i class="fa fa-close"></i>
-                                                </button>';                                            
-    echo '<script type="text/javascript">
-            function hapuspengajuan() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menghapus pengajuan",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00ff00",
-                    confirmButtonText: "Iya",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="system/hapus_pengajuan?id='.$data['id_pengajuan'].'";
-                })
-            }
-        </script>';
-        }
                                             echo '</td>';
                                         echo "</tr>";
                                         $no++;
-    }
+        }
       }
 ?>
                                     </tbody>

@@ -209,7 +209,7 @@ if (isset($_GET['proses'])) {
                                                     <b>( '.$pengaju.' )</b> 
                                                 </a>';
                                             ?>
-                                        </small>
+                                        </small> 
                                     </div>
                                 </h4>
                             </div>
@@ -311,6 +311,14 @@ if (isset($_GET['proses'])) {
                                                     </tbody>
                                                 </table>
                                                 <table>
+                                                    <thead>
+                                                        <th width="10px"></th>
+                                                        <th width="10px"></th>
+                                                        <th width="200px"></th>
+                                                        <th width="10px"></th>
+                                                        <th></th>
+                                                    </thead>
+                                                    <tbody> 
 <?php
     $query2 = "SELECT * FROM riwayat WHERE id_pengajuan ='$id' ORDER BY id_riwayat DESC" ;
       $result2 = mysqli_query($con, $query2);
@@ -326,7 +334,8 @@ if (isset($_GET['proses'])) {
                                                         echo "<td> <b>$data2[kegiatan2] </b> </td>";
                                                         echo "<td> : </td>";
                                                         echo "<td><small> $data2[tanggal_kegiatan]</small></td>";
-                                                    echo "</tr>";
+                                                    echo "</tr>
+                                                    </tbody>";
                                         $no++;
       }                                                      
 ?>
