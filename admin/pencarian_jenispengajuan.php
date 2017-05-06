@@ -77,15 +77,15 @@ session_start();
                         <p>Riwayat</p>
                     </a>
                 </li>
-                <li>
-                    <a data-toggle="collapse" href="#componentsExamples">
+                <li class="active">
+                    <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
                         <i class="pe-7s-server"></i>
                         <p>Master</p>
                     </a>
-                    <div class="collapse" id="componentsExamples">
+                    <div class="collapse in" id="componentsExamples">
                         <ul class="nav">
                             <li><a href="user">User</a></li>
-                            <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
+                            <li class="active"><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
                         </ul>
                     </div>
                 </li>
@@ -169,58 +169,17 @@ session_start();
                                         	echo "<td>$data[jenis_pengajuan]</td>";
                                             echo "<td>$data[deskripsi]</td>";
                                             echo '<td>
-                                                <button onclick="editjenispengajuan()" type="button" class="btn btn-primary btn-sm btn-fill">
-                                                    <i class="fa fa-edit"></i>
-                                                </button> ';
-    echo '<script type="text/javascript">
-            function editjenispengajuan() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin mengubah jenis pengguna",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00ff00",
-                    confirmButtonText: "Iya",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="edit_jenispengajuan?id='.$data['id_jenis_pengajuan'].'";
-                })
-            }
-            </script>';
-        if ($result->num_rows == 1){
-                                            echo '<button type="button" class="btn btn-danger btn-sm btn-fill" disabled>
-                                                    <i class="fa fa-trash"></i>
-                                                </button>';
-
-        }else {
-                                            echo '<button onclick="hapusjenispengajuan()" type="button" class="btn btn-danger btn-sm btn-fill">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>';
-    echo '<script type="text/javascript">
-            function hapusjenispengajuan() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menghapus jenis pengguna",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00cc00",
-                    confirmButtonText: "Hapus",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="system/hapus_jenispengajuan?id='.$data['id_jenis_pengajuan'].'";
-                })
-            }
-        </script>';
-                                        echo '</td>';
+                                                    <a href="detail_jenis_pengajuan?id='.$data['id_jenis_pengajuan'].'">
+                                                        <button type="button" class="btn btn-info btn-sm btn-fill">
+                                                            <i class="fa fa-eye"></i> Detail
+                                                        </button>
+                                                    </a>
+                                                </td>';
                                         echo "</tr>";
                                         $no++;
       }   
       }
-      }
+      
 ?>
                                     </tbody>
                                 </table>

@@ -30,8 +30,6 @@ if ($cekemail == $email) {
         $result = mysqli_query($con, $query);
     }
         header('location:../detail_user?id='.$id.' & proses=edit'); 
-}else if ($cek_data == $email){
-
 }
 else {
     if($password == ""){ 

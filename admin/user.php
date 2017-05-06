@@ -188,7 +188,7 @@ if (isset($_GET['proses'])) {
                                         <th>Username</th>
                                     	<th>Email</th>
                                         <th>Role</th>
-                                    	<th>Action</th>
+                                    	<th>Lihat Detail</th>
                                     </thead>
                                     <tbody>
 
@@ -212,63 +212,9 @@ if (isset($_GET['proses'])) {
                                             echo '<td> 
                                                 <a href="detail_user?id='.$data_user['id_user'].'">
                                                     <button type="button" class="btn btn-info btn-sm btn-fill">
-                                                        <i class="fa fa-eye"></i>
+                                                        <i class="fa fa-eye"></i> Detail
                                                     </button>
-                                                </a>
-                                                <button onclick="edituser()" type="button" class="btn btn-primary btn-sm btn-fill">
-                                                    <i class="fa fa-edit"></i>
-                                                </button> ';
-    echo '<script type="text/javascript">
-            function edituser() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin mengubah data user",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00ff00",
-                    confirmButtonText: "Iya",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="edit_user?id='.$data_user['id_user'].'";
-                })
-            }
-            </script>';
-
-    if( $data_user['id_user'] == $data_login['id_user'] ){
-                                            echo'<button type="button" class="btn btn-danger btn-sm btn-fill" disabled>
-                                                        <i class="fa fa-trash"></i>
-                                                </button>';
-    }
-    else{
-        if ($result_tim->num_rows == 1){
-                                            echo'<button type="button" class="btn btn-danger btn-sm btn-fill" disabled>
-                                                    <i class="fa fa-trash"></i>
-                                                </button>';
-        }else{
-                                            echo '<button onclick="hapususer()" class="btn btn-danger btn-sm btn-fill">
-                                                     <i class="fa fa-trash"></i>
-                                                </button>';
-    echo '<script type="text/javascript">
-            function hapususer() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menghapus pengguna",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00cc00",
-                    confirmButtonText: "Hapus",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="system/hapus_user?id='.$data_user['id_user'].'";
-                })
-            }
-        </script>';
-        }
-    }
+                                                </a>';
                                             echo"</td>";
                                         echo "</tr>";
                                         $no++;

@@ -214,56 +214,12 @@ if (isset($_GET['proses'])) {
                                             echo "<td>$jenispengajuan[jenis_pengajuan]</td>";
                                             echo "<td>$jenispengajuan[deskripsi]</td>";
                                             echo '<td>
-                                                <button onclick="editjenispengajuan()" type="button" class="btn btn-primary btn-sm btn-fill">
-                                                    <i class="fa fa-edit"></i>
-                                                </button> ';
-    echo '<script type="text/javascript">
-            function editjenispengajuan() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin mengubah jenis pengguna",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00ff00",
-                    confirmButtonText: "Iya",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="edit_jenispengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'";
-                })
-            }
-            </script>';
-        if ($result->num_rows == 1){
-                                            echo '<button type="button" class="btn btn-danger btn-sm btn-fill" disabled>
-                                                    <i class="fa fa-trash"></i>
-                                                </button>';
-
-        }else {
-                                            echo '<button onclick="hapusjenispengajuan()" type="button" class="btn btn-danger btn-sm btn-fill">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>';
-    echo '<script type="text/javascript">
-            function hapusjenispengajuan() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menghapus jenis pengguna",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00cc00",
-                    confirmButtonText: "Hapus",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="system/hapus_jenispengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'";
-                })
-            }
-        </script>';
-                                        echo '</td>';
-                                        echo "</tr>";
+                                                <a href="detail_jenis_pengajuan?id='.$jenispengajuan['id_jenis_pengajuan'].'">
+                                                    <button type="button" class="btn btn-info btn-sm btn-fill">
+                                                        <i class="fa fa-eye"></i> Detail
+                                                    </button>
+                                                </a>';
                                         $no++;
-      }
       }
 ?>
                                     </tbody>

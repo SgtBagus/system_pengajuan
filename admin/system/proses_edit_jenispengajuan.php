@@ -7,12 +7,6 @@ $deskripsi = $_POST['deskripsi'];
 $tanggal= mktime(date("m"),date("d"),date("Y"));
 $tgl = date("Y-m-d", $tanggal);
 
-$cekdulu= "SELECT * FROM jenis_pengajuan WHERE jenis_pengajuan='$jenis_pengajuan'";
-$prosescek= mysqli_query($con, $cekdulu);
-if (mysqli_num_rows($prosescek)>0) { 
-  header('location:../edit_jenispengajuan?id='.$id.' & error=true'); 
-}
-else { 
 $query = "UPDATE jenis_pengajuan SET jenis_pengajuan='$jenis_pengajuan', deskripsi='$deskripsi' WHERE id_jenis_pengajuan ='$id'";
   $result = mysqli_query($con, $query);
   // periska query apakah ada error
@@ -22,5 +16,4 @@ $query = "UPDATE jenis_pengajuan SET jenis_pengajuan='$jenis_pengajuan', deskrip
 
   }
 header("location:../jenis_pengajuan?proses=edit"); 
-}
 ?>

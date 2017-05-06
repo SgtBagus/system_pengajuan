@@ -119,6 +119,9 @@ h1 .subtitle {
 
 /*     General overwrite     */
 body,
+  pre{
+    border: 0; background-color: transparent;
+  }
 .wrapper {
   min-height: 100vh;
   position: relative; }

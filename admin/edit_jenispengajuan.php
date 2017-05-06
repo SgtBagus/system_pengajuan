@@ -180,32 +180,9 @@ if (isset($_GET['error'])) {
                                                         <i class="fa fa-arrow-left"></i> Kembali
                                             </button>
                                         </a>
-<?php
-                                    echo'
                                         <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
-                                            <i class="fa fa-edit"></i> Konfirmasi
+                                            <i class="fa fa-edit"></i> Simpan
                                         </button>
-                                        <button onclick="hapusjenispengajuan()" type="button" rel="tooltip" title="Hapus Data" class="btn btn-danger btn-fill">
-                                            <i class="fa fa-trash"></i> Hapus Profile
-                                        </button>';
-    echo '<script type="text/javascript">
-            function hapusjenispengajuan() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menghapus jenis pengguna",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#FF4A55",
-                    confirmButtonText: "Hapus",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="system/hapus_jenispengajuan?id='.$id.'";
-                })
-            }
-        </script>';
-?>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
