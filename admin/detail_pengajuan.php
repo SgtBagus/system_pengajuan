@@ -203,11 +203,14 @@ if (isset($_GET['proses'])) {
                             <div class="header">
                                 <h4 class="title">Detail Pengajuan <br>
                                     <div align="center">
-                                        <b><?php echo $pengajuan ?></b> <small>Pengaju 
+                                        <b><?php echo $pengajuan ?></b><br> 
+                                        <small>
+                                            Pengaju 
                                             <?php
                                                 echo '<a href="detail_user?id='.$id_pengaju.'">
                                                     <b>( '.$pengaju.' )</b> 
-                                                </a>';
+                                                </a>
+                                                    - '.$status.'';
                                             ?>
                                         </small> 
                                     </div>
@@ -220,52 +223,51 @@ if (isset($_GET['proses'])) {
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <table>
-                                                    <thead>
-                                                        <th width="150px"></th>
-                                                        <th width="25px"></th>
-                                                        <th></th>
-                                                    </thead>
-                                                    <tbody> 
-                                                        <tr>
-                                                            <td><h5><b>Pengajuan </h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5> <?php echo $pengajuan ?> </h5></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><h5><b>Jenis Pengajuan </h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5> <?php echo $jenis_pengajuan ?> </h5></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><h5><b>Tanggal Pengajuan </h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5> <?php echo date("d - m - Y", strtotime ($taggal_pengajuan ) )?> </h5></td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td width="150px"></td>
+                                                        <td width="25px"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><h5><b>Pengajuan </h5></b></td>
+                                                        <td><h5><b> : </h5></b></td>
+                                                        <td><h5> <?php echo $pengajuan ?> </h5></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><h5><b>Jenis Pengajuan </h5></b></td>
+                                                        <td><h5><b> : </h5></b></td>
+                                                        <td><h5> <?php echo $jenis_pengajuan ?> </h5></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><h5><b>Tanggal Pengajuan </h5></b></td>
+                                                        <td><h5><b> : </h5></b></td>
+                                                        <td><h5> <?php echo date("d - m - Y", strtotime ($taggal_pengajuan ) )?> </h5></td>
+                                                    </tr>
     <?php
         if( $data['gambar'] == "" ){
 
         }
         else{
             echo '
-                                                        <tr>
-                                                            <td><h5><b>Gambar</h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5>';
+                                                    <tr>
+                                                        <td><h5><b>Gambar</h5></b></td>
+                                                        <td><h5><b> : </h5></b></td>
+                                                        <td><h5>';
     ?>
-                                                            <a class="example-image-link" href="../image/<?php echo $gambar ?>" data-lightbox="example-2" data-title="<?php echo $pengajuan ?>">
-                                                                <img class="example-image" src="../image/<?php echo $gambar ?>" width='282' height='177' alt="image-1"/>
-                                                            </a>
+                                                        <a class="example-image-link" href="../image/<?php echo $gambar ?>" data-lightbox="example-2" data-title="<?php echo $pengajuan ?>">
+                                                            <img class="example-image" src="../image/<?php echo $gambar ?>" width='282' height='177' alt="image-1"/>
+                                                        </a>
     <?php                                                        
-                                                            echo '</td>
-                                                        </tr>';
+                                                        echo '</td>
+                                                    </tr>';
         }
 
     ?>                                                    
-                                                        <tr>
-                                                            <td><h5><b>Biaya</h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5>  Rp. <?php echo $biaya ?>,00,-</h5></td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td><h5><b>Biaya</h5></b></td>
+                                                        <td><h5><b> : </h5></b></td>
+                                                        <td><h5>  Rp. <?php echo $biaya ?>,00,-</h5></td>
+                                                    </tr>
                                                         <tr>
                                                             <td><h5><b>Alasan</h5></b></td>
                                                             <td><h5><b> : </h5></b></td>
@@ -314,7 +316,7 @@ if (isset($_GET['proses'])) {
                                                     <thead>
                                                         <th width="10px"></th>
                                                         <th width="10px"></th>
-                                                        <th width="200px"></th>
+                                                        <th width="150px"></th>
                                                         <th width="10px"></th>
                                                         <th></th>
                                                     </thead>

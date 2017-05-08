@@ -1,17 +1,14 @@
 <?php
-  include '../system/koneksi.php';
-
-
-session_start();
- $logged_in = false;
- if (empty($_SESSION['email'])) {
-    echo "<script type='text/javascript'>document.location='../login?proses=error ';</script>";
- }
- else {
-   $logged_in = true;
- }
- 
-?>
+    include '../system/koneksi.php';
+    session_start();
+    $logged_in = false;
+    if (empty($_SESSION['email'])) {
+        echo "<script type='text/javascript'>document.location='../login?proses=error ';</script>";
+    }
+    else {
+        $logged_in = true;
+    }
+ ?>
 <!doctype html>
 <html lang="en">
 <head> 
@@ -33,9 +30,7 @@ session_start();
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-
-  <link rel="stylesheet" href="../assets/dist/sweetalert.css">
-  <script src="../assets/dist/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="../assets/dist/sweetalert.css">
 </head>
 <body>
 
@@ -95,30 +90,9 @@ session_start();
                         <p>Log out</p>
                     </a>
                 </li>
-
-                <script type="text/javascript">
-                    function logout() {
-                        swal({
-                            title: "Konfirmasi ?",
-                            text: "Apakah anda ingin keluar ",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#00cc00", 
-                            confirmButtonText: "Logout",
-                            cancelButtonText: "Batal",
-                            closeOnConfirm: false
-                        },
-                        function(){
-                            document.location="../logout";
-                        })
-                    }
-                </script>
-
-            </ul>
             </ul>
     	</div>
     </div>
-
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -164,18 +138,17 @@ session_start();
       else {
         while($data = mysqli_fetch_array($result))
       {
-                                        echo "<tr>";
-                                            echo "<td>$no</td>";
-                                        	echo "<td>$data[jenis_pengajuan]</td>";
-                                            echo "<td>$data[deskripsi]</td>";
-                                            echo '<td>
-                                                    <a href="detail_jenis_pengajuan?id='.$data['id_jenis_pengajuan'].'">
-                                                        <button type="button" class="btn btn-info btn-sm btn-fill">
-                                                            <i class="fa fa-eye"></i> Detail
-                                                        </button>
-                                                    </a>
-                                                </td>';
-                                        echo "</tr>";
+                                        echo '<tr>
+                                            <td>'.$no.'</td>
+                                            <td>'.$data['jenis_pengajuan'].'</td>
+                                            <td>'.$data['deskripsi'].'</td>
+                                            <td>
+                                                <button onclick="edit('.$data['id_jenis_pengajuan'].')" type="button" rel="tooltip" class="btn btn-primary btn-fill btn-sm">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button onclick="hapus('.$data['id_jenis_pengajuan'].')" type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>';
                                         $no++;
       }   
       }
@@ -195,33 +168,66 @@ session_start();
 
 
 </body>
-
-    <!--   Core JS Files   -->
+    <script src="../assets/dist/sweetalert-dev.js"></script>
     <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="../assets/js/bootstrap-checkbox-radio-switch.js"></script>
-
-	<!--  Charts Plugin -->
 	<script src="../assets/js/chartist.min.js"></script>
-
-    <!--  Notifications Plugin    -->
     <script src="../assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
-
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="../assets/js/demo.js"></script>
-
 	<script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();
     	});
+
+        function logout() {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin keluar ",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cc00", 
+                confirmButtonText: "Logout",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="../logout";
+            })
+        }
+        function edit(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin mengubah jenis pengajuan",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00ff00",
+                confirmButtonText: "Iya",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="edit_jenispengajuan?id="+id;
+            })
+        }       
+        function hapus(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin menghapus jenis pengajuan",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cc00",
+                confirmButtonText: "Hapus",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="edit_jenispengajuan?id="+id;
+            })
+        }
+	</script>
 	</script>
 
 </html>

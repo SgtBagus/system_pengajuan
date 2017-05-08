@@ -269,7 +269,7 @@ if (isset($_GET['proses'])) {
                                             echo "<td>$data[tanggal_pengajuan]</td>";
                                             echo "<td>$data[biaya]</td>";
                                             echo "<td>$data[status]</td>";
-                                            echo '<td align="center">
+                                            echo '<td>
                                                 <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                     <button type="button" rel="tooltip" title="Lihat Detail" class="btn btn-info btn-fill btn-sm">
                                                         <i class="fa fa-eye"></i> Detail

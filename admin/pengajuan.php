@@ -15,35 +15,24 @@ session_start();
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="../assets/img/icon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<title>Pengajuan</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-    <!-- Bootstrap core CSS     -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Animation library for notifications   -->
     <link href="../assets/css/animate.min.css" rel="stylesheet"/>
-    <!--  Light Bootstrap Table core CSS    -->
     <link href="../assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
-    <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-
-  <link rel="stylesheet" href="../assets/dist/sweetalert.css">
-  <script src="../assets/dist/sweetalert-dev.js"></script>
-
-        
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="../assets/css/datepicker.css">
-
+    <link rel="stylesheet" href="../assets/dist/sweetalert.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="../assets/css/datepicker.css">
 </head>
 <body>
- 
 <div class="wrapper">
     <div class="sidebar" data-color="green" data-image="../assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
@@ -99,25 +88,6 @@ session_start();
                         <p>Log out</p>
                     </a>
                 </li>
-
-                <script type="text/javascript">
-                    function logout() {
-                        swal({
-                            title: "Konfirmasi ?",
-                            text: "Apakah anda ingin keluar ",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#00cc00", 
-                            confirmButtonText: "Logout",
-                            cancelButtonText: "Batal",
-                            closeOnConfirm: false
-                        },
-                        function(){
-                            document.location="../logout";
-                        })
-                    }
-                </script> 
-
             </ul>
     	</div>
     </div>
@@ -198,7 +168,7 @@ session_start();
                                         <th>Tanggal</th>
                                         <th>Biaya</th>
                                         <th>Status</th>
-                                        <th>Detail</th>
+                                        <th>Tindak Lanjut</th>
                                     </thead>
                                     <tbody>
 <?php
@@ -220,29 +190,44 @@ session_start();
       while($data = mysqli_fetch_assoc($result))  
       {    
             
-                                        echo "<tr>";
-                                            echo "<td>$no</td>";
-                                        	echo "<td>$data[pengajuan]</td>";
-                                        	echo "<td>$data[username]</td>";
-                                        	echo "<td>$data[jenis_pengajuan]</td>";
-                                            echo "<td>$data[tanggal_pengajuan]</td>";
-                                            echo "<td>$data[biaya]</td>";
-                                            echo "<td>$data[status]</td>";
-                                            echo '<td align="center">
-                                                <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                    <button type="button" class="btn btn-info btn-fill btn-sm">
-                                                        <i class="fa fa-eye"></i> Detail
-                                                    </button>
-                                                </a>';
-                                            echo '</td>';
-                                        echo "</tr>";
-                                        $no++;
+                                        echo '<tr>
+                                            <td>'.$no.'</td>
+                                            <td>'.$data['pengajuan'].'</td>
+                                            <td>'.$data['username'].'</td>
+                                            <td>'.$data['jenis_pengajuan'].'</td>
+                                            <td>'.$data['tanggal_pengajuan'].'</td>
+                                            <td>'.$data['biaya'].'</td>
+                                            <td>'.$data['status'].'</td>
+                                            <td>';
+if( $data['status'] == "menunggu" ){
+                                        echo '<button onclick="pengajuanditerima('.$data['id_pengajuan'].')" type="button" class="btn btn-primary btn-fill btn-sm">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                        <button onclick="pengajuanditolak('.$data['id_pengajuan'].')" type="button" class="btn btn-danger  btn-fill btn-sm">
+                                            <i class="fa fa-close"></i>
+                                        </button>';
+}
+else if ($data['status'] == "proses"){
+                                        echo '<button onclick="pengajuandiubah('.$data['id_pengajuan'].')" type="button" class="btn btn-primary  btn-fill btn-sm">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button onclick="pengajuandiselesaikan('.$data['id_pengajuan'].')" type="button" name="input" class="btn btn-primary  btn-fill btn-sm">
+                                            <i class="fa fa-check"></i>
+                                        </button>';
+}
+                                        echo '<a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
+                                            <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>';
+$no++;
       }
-      }
+}
 ?>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -251,61 +236,121 @@ session_start();
         </div>
     </div>
 </div>
-
-
 </body>
-
-    <!--   Core JS Files   -->
     <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="../assets/js/bootstrap-checkbox-radio-switch.js"></script>
-
-	<!--  Charts Plugin -->
 	<script src="../assets/js/chartist.min.js"></script>
-
-    <!--  Notifications Plugin    -->
     <script src="../assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
-
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="../assets/js/demo.js"></script>
-
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../assets/dist/sweetalert-dev.js"></script>
 	<script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();
     	});
         
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
-  <script>
-  $( function() {
-    $( "#datepicker1" ).datepicker({
-        dateFormat: "dd-mm-yy",
-        monthNames: [ "Januari", "Febuari", "Maret", 
-                      "April", "Mei", "Juni", 
-                      "Juli", "Agustus", "September", 
-                      "Oktober", "November", "December" ],
-        dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ]
-        
-    });
-    $( "#datepicker2" ).datepicker({
-        dateFormat: "dd-mm-yy",
-        monthNames: [ "Januari", "Febuari", "Maret", 
-                      "April", "Mei", "Juni", 
-                      "Juli", "Agustus", "September", 
-                      "Oktober", "November", "December" ],
-        dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ]
-    });
-  } );
-  </script>
+        function logout() {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin keluar ",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cc00", 
+                confirmButtonText: "Logout",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="../logout";
+            })
+        }
 
-</script>
+        function pengajuanditerima(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin menerima pengajuan",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00ff00",
+                confirmButtonText: "Terima",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="pengajuan_diterima?id="+id;
+            })
+        }
+
+        function pengajuanditolak(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin menolak pengajuan",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cc00",
+                confirmButtonText: "Tolak",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="pengajuan_ditolak?id="+id;
+            })
+        }
+
+        function pengajuandiubah(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin mengubah jadwal pengajuan",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00ff00",
+                confirmButtonText: "Iya",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="pengajuan_diubah?id="+id;
+            })
+        }
+
+        function pengajuandiselesaikan(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin menyelesaikan pengajuan",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00ff00",
+                confirmButtonText: "Selesaikan",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="system/proses_pengajuan_diselesaikan?id="+id;
+            })
+        }
+        
+        $( function() {
+            $( "#datepicker1" ).datepicker({
+                dateFormat: "dd-mm-yy",
+                monthNames: [ "Januari", "Febuari", "Maret", 
+                            "April", "Mei", "Juni", 
+                            "Juli", "Agustus", "September", 
+                            "Oktober", "November", "December" ],
+                dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ]
+                
+            });
+            $( "#datepicker2" ).datepicker({
+                dateFormat: "dd-mm-yy",
+                monthNames: [ "Januari", "Febuari", "Maret", 
+                            "April", "Mei", "Juni", 
+                            "Juli", "Agustus", "September", 
+                            "Oktober", "November", "December" ],
+                dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ]
+            });
+        });
+    </script>
 </html>

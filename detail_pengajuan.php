@@ -294,7 +294,7 @@ if (isset($_GET['proses'])) {
                                                     <thead>
                                                         <th width="10px"></th>
                                                         <th width="10px"></th>
-                                                        <th width="200px"></th>
+                                                        <th width="150px"></th>
                                                         <th width="10px"></th>
                                                         <th></th>
                                                     </thead>

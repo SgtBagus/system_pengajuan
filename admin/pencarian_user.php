@@ -1,18 +1,14 @@
 <?php
-  include '../system/koneksi.php';
-
-
-
-session_start();
- $logged_in = false;
- if (empty($_SESSION['email'])) {
-    echo "<script type='text/javascript'>document.location='../login?proses=error ';</script>";
- }
- else {
-   $logged_in = true;
- }
- 
-?>
+    include '../system/koneksi.php';
+    session_start();
+    $logged_in = false;
+    if (empty($_SESSION['email'])) {
+        echo "<script type='text/javascript'>document.location='../login?proses=error ';</script>";
+    }
+    else {
+        $logged_in = true;
+    }
+ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,24 +18,16 @@ session_start();
 	<title>User</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-    <!-- Bootstrap core CSS     -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Animation library for notifications   -->
     <link href="../assets/css/animate.min.css" rel="stylesheet"/>
-    <!--  Light Bootstrap Table core CSS    -->
     <link href="../assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
-    <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-
-  <link rel="stylesheet" href="../assets/dist/sweetalert.css">
-  <script src="../assets/dist/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="../assets/dist/sweetalert.css">
 </head>
 <body> 
-
 <div class="wrapper">
     <div class="sidebar" data-color="green" data-image="../assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
@@ -77,14 +65,14 @@ session_start();
                         <p>Riwayat</p>
                     </a>
                 </li>
-                <li>
-                    <a data-toggle="collapse" href="#componentsExamples">
+                <li class="active">
+                    <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
                         <i class="pe-7s-server"></i>
                         <p>Master</p>
                     </a>
-                    <div class="collapse" id="componentsExamples">
+                    <div class="collapse in" id="componentsExamples">
                         <ul class="nav">
-                            <li><a href="user">User</a></li>
+                            <li class="active"><a href="user">User</a></li>
                             <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
                         </ul>
                     </div>
@@ -95,29 +83,9 @@ session_start();
                         <p>Log out</p>
                     </a>
                 </li>
-
-                <script type="text/javascript">
-                    function logout() {
-                        swal({
-                            title: "Konfirmasi ?",
-                            text: "Apakah anda ingin keluar ",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#00cc00", 
-                            confirmButtonText: "Logout",
-                            cancelButtonText: "Batal",
-                            closeOnConfirm: false
-                        },
-                        function(){
-                            document.location="../logout";
-                        })
-                    }
-                </script>
-
             </ul>
     	</div>
     </div>
-
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -127,13 +95,11 @@ session_start();
     $pencarian = ($_GET["cari"]);
     $query = "SELECT * FROM user WHERE username LIKE '%".$pencarian."%'";
     $result = mysqli_query($con, $query);
-
-      $query_tim = "SELECT * FROM user WHERE ROLE = 'tim'" ;
-      $result_tim = mysqli_query($con, $query_tim);
-
-      $no = 1;
-      $cek = count($result);
-      $banyakdata = $result->num_rows;
+    $query_tim = "SELECT * FROM user WHERE ROLE = 'tim'" ;
+    $result_tim = mysqli_query($con, $query_tim);
+    $no = 1;
+    $cek = count($result);
+    $banyakdata = $result->num_rows;
 ?>
                         <div class="card">
                             <div class="header">
@@ -160,71 +126,51 @@ session_start();
 
 <?php
       if($result->num_rows == 0){
-            echo "<tr>";
-                echo "<td>Data Tidak Di temukan</td>";
-            echo "</tr>";
+            echo "<tr>
+                <td>Data Tidak Di temukan</td>
+            </tr>";
       }
       else {
         while($data = mysqli_fetch_array($result))
       {
-                                        echo "<tr>";
-                                            echo "<td>$no</td>";
-                                        	echo "<td>$data[username]</td>";
-                                            echo "<td>$data[email]</td>";
-                                            echo "<td>$data[role]</td>";
-                                            echo '<td>
-                                                <a href="detail_user?id='.$data['id_user'].'">
-                                                    <button type="button" class="btn btn-info btn-sm btn-fill">
-                                                        <i class="fa fa-eye"></i>
-                                                    </button>
-                                                </a>
-                                                <a href="edit_user?id='.$data['id_user'].'">
-                                                    <button type="button" class="btn btn-primary btn-sm btn-fill">
+                                        echo '<tr>
+                                                <td>'.$no.'</td>
+                                                <td>'.$data['username'].'</td>
+                                                <td>'.$data['email'].'</td>
+                                                <td>'.$data['role'].'</td>
+                                                <td>
+                                                    <a href="detail_user?id='.$data['id_user'].'">
+                                                        <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                            <i class="fa fa-eye"></i>
+                                                        </button>
+                                                    </a>
+                                                    <button onclick="editprofil('.$data['id_user'].')" type="button" rel="tooltip" class="btn btn-primary btn-fill btn-sm">
                                                         <i class="fa fa-edit"></i>
-                                                    </button>
-                                                </a>';
-    if( $data['id_user'] == $data_login['id_user'] ){
-                                            echo'<button type="button" class="btn btn-danger btn-sm btn-fill" disabled>
+                                                    </button>';
+if( $data['email'] == $_SESSION['email'] ){
+                                                    echo' <button  type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm" disabled>
                                                         <i class="fa fa-trash"></i>
                                                     </button>';
-    }
-    else{
-        if ($result_tim->num_rows == 1){
-                                            echo'<button type="button" class="btn btn-danger btn-sm btn-fill" disabled>
-                                                    <i class="fa fa-trash"></i>
-                                                </button>';
-        }else{
-                                            echo '<button onclick="hapususer()" type="button" class="btn btn-danger btn-sm btn-fill">
-                                                     <i class="fa fa-trash"></i>
-                                                </button>';
-    echo '<script type="text/javascript">
-            function hapususer() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menghapus pengguna",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#FF4A55",
-                    confirmButtonText: "Hapus",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="system/hapus_user?id='.$data['id_user'].'";
-                })
-            }
-        </script>';
-        }
-    }
-                                            echo"</td>";
-                                        echo "</tr>";
+}
+else{
+    if ($result_tim->num_rows == 1){
+                                                    echo' <button type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm" disabled>
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>';
+    }else{
+                                                    echo' <button onclick="hapususer('.$data['id_user'].')"  type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>';
                                         $no++;
-      }   
-      }
+    }
+}
+}
+}
 ?>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -233,36 +179,66 @@ session_start();
         </div>
     </div>
 </div>
-
-
 </body>
-
-    <!--   Core JS Files   -->
+    <script src="../assets/dist/sweetalert-dev.js"></script>
     <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="../assets/js/bootstrap-checkbox-radio-switch.js"></script>
-
-	<!--  Charts Plugin -->
 	<script src="../assets/js/chartist.min.js"></script>
-
-    <!--  Notifications Plugin    -->
     <script src="../assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
-
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="../assets/js/demo.js"></script>
-
 	<script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();
     	});
-	</script>
 
+        function logout() {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin keluar ",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cc00", 
+                confirmButtonText: "Logout",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="../logout";
+            })
+        }
+
+        function editprofil(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin menghapus pengguna",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00ff00",
+                confirmButtonText: "Iya",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="edit_user?id= "+id;
+            })
+        }       
+        function hapususer(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin menghapus pengguna",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cc00",
+                confirmButtonText: "Hapus",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="system/hapus_user?id="+id;
+            })
+        }
+	</script>
 </html>

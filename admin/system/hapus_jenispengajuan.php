@@ -13,5 +13,5 @@
   }
 
 
-  header("location:../jenis_pengajuan?proses=delete");
+  header("location:../jenis_pengajuan?proses=hapus");
 ?>
