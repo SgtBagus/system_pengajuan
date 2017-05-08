@@ -1,38 +1,35 @@
 <?php
-  include '../system/koneksi.php';
-
-
-session_start();
- $logged_in = false;
- if (empty($_SESSION['email'])) {
-    echo "<script type='text/javascript'>document.location='../login?proses=error ';</script>";
- }
- else {
-   $logged_in = true;
- }
- 
-  if (isset($_GET['id'])) {
-    $id = ($_GET["id"]);
-    $query = "SELECT * FROM user WHERE id_user ='$id'";
-    $result = mysqli_query($con, $query);
-    if(!$result){
-      die ("Query Error: ".mysqli_errno($con).
-         " - ".mysqli_error($con));
+    include '../system/koneksi.php';
+    session_start();
+    $logged_in = false;
+    if (empty($_SESSION['email'])) {
+        echo "<script type='text/javascript'>document.location='../login?proses=error ';</script>";
     }
-    $data = mysqli_fetch_assoc($result);
-    $id = $data["id_user"];
-    $username = $data["username"];
-    $email = $data["email"];
-    $password = $data["password"];
-    $namadepan = $data["nama_depan"];
-    $namabelakang = $data["nama_belakang"];
-    $jk = $data["jk"];
-    $nohp = $data["no_hp"];
-    $alamat = $data["alamat"];
-    $role = $data["role"];
-    $pembuatan_akun = $data["pembuatan_akun"];
-    $update_akun = $data["update_akun"];
-  } 
+    else {
+        $logged_in = true;
+    }  
+    if (isset($_GET['id'])) {
+        $id = ($_GET["id"]);
+        $query = "SELECT * FROM user WHERE id_user ='$id'";
+        $result = mysqli_query($con, $query);
+        if(!$result){
+        die ("Query Error: ".mysqli_errno($con).
+            " - ".mysqli_error($con));
+        }
+        $data = mysqli_fetch_assoc($result);
+        $id = $data["id_user"];
+        $username = $data["username"];
+        $email = $data["email"];
+        $password = $data["password"];
+        $namadepan = $data["nama_depan"];
+        $namabelakang = $data["nama_belakang"];
+        $jk = $data["jk"];
+        $nohp = $data["no_hp"];
+        $alamat = $data["alamat"];
+        $role = $data["role"];
+        $pembuatan_akun = date('d-m-Y', strtotime ($data["pembuatan_akun"]));
+        $update_akun = date('d-m-Y', strtotime ($data["update_akun"]));
+    } 
 ?>
 <!doctype html>
 <html lang="en">
@@ -55,13 +52,9 @@ session_start();
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-
-  <link rel="stylesheet" href="../assets/dist/sweetalert.css">
-  <script src="../assets/dist/sweetalert-dev.js"></script>
-
+    <link rel="stylesheet" href="../assets/dist/sweetalert.css">
 </head>
 <body>
-
 <div class="wrapper">
     <div class="sidebar" data-color="green" data-image="../assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
@@ -117,29 +110,9 @@ session_start();
                         <p>Log out</p>
                     </a>
                 </li>
-
-                <script type="text/javascript">
-                    function logout() {
-                        swal({
-                            title: "Konfirmasi ?",
-                            text: "Apakah anda ingin keluar ",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#00cc00", 
-                            confirmButtonText: "Logout",
-                            cancelButtonText: "Batal",
-                            closeOnConfirm: false
-                        },
-                        function(){
-                            document.location="../logout";
-                        }) 
-                    }
-                </script>
-
             </ul>
     	</div>
     </div>
-
 <?php
 if (isset($_GET['proses'])) {
     $proses = ($_GET["proses"]);
@@ -159,9 +132,9 @@ if (isset($_GET['proses'])) {
                             <div class="header">
                                 <h4 class="title">Detail Profile <b>( <?php echo $username ?>)</b> </h4>
                                 <small class="title">
-                                    Pembuatan Akun : <b>( <?php echo $pembuatan_akun ?>)</b> 
+                                    Pembuatan Akun : <b>( <?php echo $pembuatan_akun ?> )</b> 
                                     ||
-                                    Update Terakhir Akun : <b>( <?php echo $update_akun ?>)</b> 
+                                    Update Terakhir Akun : <b>( <?php echo $update_akun ?> )</b> 
                                 </small>
                             </div>
                             <div class="content">
@@ -224,53 +197,19 @@ if (isset($_GET['proses'])) {
                                                     </a>
 <?php
                                     echo '<a>
-                                            <button onclick="editprofil()" type="button" rel="tooltip" class="btn btn-primary btn-fill">
+                                            <button onclick="editprofil('.$id.')" type="button" rel="tooltip" class="btn btn-primary btn-fill">
                                                 <i class="fa fa-edit"></i> Edit Profile
                                             </button>
                                     </a>';
-    echo '<script type="text/javascript">
-            function editprofil() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menghapus pengguna",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00ff00",
-                    confirmButtonText: "Iya",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-            },
-                function(){
-                    document.location="edit_profil";
-                })
-            }       
-        </script>';
 if( $email == $_SESSION['email'] ){
                                             echo'<button type="button" rel="tooltip" class="btn btn-danger btn-fill" disabled>
                                                 <i class="fa fa-trash"></i> Hapus Profile
                                             </button>';
     }
     else{
-                                            echo' <button onclick="hapususer()"  type="button" rel="tooltip" class="btn btn-danger btn-fill ">
+                                            echo' <button onclick="hapususer('.$id.')"  type="button" rel="tooltip" class="btn btn-danger btn-fill ">
                                                 <i class="fa fa-trash"></i> Hapus Profile
                                             </button>';
-    echo '<script type="text/javascript">
-            function hapususer() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menghapus pengguna",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00cc00",
-                    confirmButtonText: "Hapus",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="system/hapus_user?id='.$id.'";
-                })
-            }
-        </script>';
     }
                                         
 ?>
@@ -286,36 +225,67 @@ if( $email == $_SESSION['email'] ){
         </div>
     </div>
 </div>
-
-
 </body>
-
-    <!--   Core JS Files   -->
+    <script src="../assets/dist/sweetalert-dev.js"></script>
     <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="../assets/js/bootstrap-checkbox-radio-switch.js"></script>
-
-	<!--  Charts Plugin -->
 	<script src="../assets/js/chartist.min.js"></script>
-
-    <!--  Notifications Plugin    -->
     <script src="../assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
-
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="../assets/js/demo.js"></script>
-
 	<script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();
     	});
-	</script>
+        
+        function logout() {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin keluar ",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cc00", 
+                confirmButtonText: "Logout",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="../logout";
+            }) 
+        }
 
+        function editprofil(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin mengubah pengguna",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00ff00",
+                confirmButtonText: "Iya",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="edit_user?id="+id;
+            })
+        }   
+
+        function hapususer(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin menghapus pengguna",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cc00",
+                confirmButtonText: "Hapus",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="system/hapus_user?id="+id;
+            })
+        }
+	</script>
 </html>

@@ -1,41 +1,40 @@
 <?php
-  include '../system/koneksi.php';
-
-session_start();
- $logged_in = false;
- if (empty($_SESSION['email'])) {
-    echo "<script type='text/javascript'>document.location='../login?proses=error ';</script>";
- }
- else {
-   $logged_in = true;
- } 
- 
-  if (isset($_GET['id'])) {
-    $id = ($_GET["id"]);
-    $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user, b.username, a.jenis_pengajuan, 
-              a.tanggal_pengajuan, a.gambar, a.biaya, a.alasan, a.status, a.catatan, a.keterangan, 
-              a.update_pengajuan, a.jadwal_pelaksanaan FROM pengajuan AS a 
-              INNER JOIN user AS b WHERE  a.id_pengajuan ='$id' AND a.id_user = b.id_user ";
-    $result = mysqli_query($con, $query);
-    if(!$result){
-      die ("Query Error: ".mysqli_errno($con).
-         " - ".mysqli_error($con));
+    include '../system/koneksi.php';
+    session_start();
+    $logged_in = false;
+    if (empty($_SESSION['email'])) {
+        echo "<script type='text/javascript'>document.location='../login?proses=error ';</script>";
     }
-    $data = mysqli_fetch_assoc($result);
-    $id_pengajuan = $data["id_pengajuan"];
-    $pengajuan = $data["pengajuan"];
-    $id_pengaju = $data["id_user"];
-    $pengaju = $data["username"];
-    $jenis_pengajuan = $data["jenis_pengajuan"];
-    $taggal_pengajuan = $data["tanggal_pengajuan"];
-    $gambar = $data["gambar"];
-    $biaya = $data["biaya"];
-    $alasan = $data["alasan"];
-    $status = $data["status"];
-    $keterangan = $data["keterangan"];
-    $update = $data["update_pengajuan"];
-    $pelaksanaan = $data["jadwal_pelaksanaan"];
-  } 
+    else {
+        $logged_in = true;
+    } 
+    
+    if (isset($_GET['id'])) {
+        $id = ($_GET["id"]);
+        $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user, b.username, a.jenis_pengajuan, 
+                a.tanggal_pengajuan, a.gambar, a.biaya, a.alasan, a.status, a.catatan, a.keterangan, 
+                a.update_pengajuan, a.jadwal_pelaksanaan FROM pengajuan AS a 
+                INNER JOIN user AS b WHERE  a.id_pengajuan ='$id' AND a.id_user = b.id_user ";
+        $result = mysqli_query($con, $query);
+        if(!$result){
+        die ("Query Error: ".mysqli_errno($con).
+            " - ".mysqli_error($con));
+        }
+        $data = mysqli_fetch_assoc($result);
+        $id_pengajuan = $data["id_pengajuan"];
+        $pengajuan = $data["pengajuan"];
+        $id_pengaju = $data["id_user"];
+        $pengaju = $data["username"];
+        $jenis_pengajuan = $data["jenis_pengajuan"];
+        $taggal_pengajuan = $data["tanggal_pengajuan"];
+        $gambar = $data["gambar"];
+        $biaya = $data["biaya"];
+        $alasan = $data["alasan"];
+        $status = $data["status"];
+        $keterangan = $data["keterangan"];
+        $update = $data["update_pengajuan"];
+        $pelaksanaan = $data["jadwal_pelaksanaan"];
+    } 
 ?>
 <!doctype html>
 <html lang="en">
@@ -46,26 +45,17 @@ session_start();
 	<title>Pengajuan</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-    <!-- Bootstrap core CSS     -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Animation library for notifications   -->
     <link href="../assets/css/animate.min.css" rel="stylesheet"/>
-    <!--  Light Bootstrap Table core CSS    -->
     <link href="../assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
-    <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/lightbox.min.css">
-
-  <link rel="stylesheet" href="../assets/dist/sweetalert.css">
-  <script src="../assets/dist/sweetalert-dev.js"></script>
-  
+    <link rel="stylesheet" href="../assets/dist/sweetalert.css">
 </head>
 <body>
-
 <div class="wrapper">
     <div class="sidebar" data-color="green" data-image="../assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
@@ -81,7 +71,10 @@ session_start();
     $data_login = mysqli_fetch_assoc($result_login);
     $username = $data_login["username"];
 ?>
-                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
+                    Pengajuan Pengadaaan 
+                    <small>Barang & Training <br> 
+                        <small>( Manajemen ) - <?php echo $username ?></small>
+                    </small>
                 </a>
             </div>
             <ul class="nav">
@@ -122,29 +115,9 @@ session_start();
                         <p>Log out</p>
                     </a>
                 </li>
-
-                <script type="text/javascript">
-                    function logout() {
-                        swal({
-                            title: "Konfirmasi ?",
-                            text: "Apakah anda ingin keluar ",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#00cc00", 
-                            confirmButtonText: "Logout",
-                            cancelButtonText: "Batal",
-                            closeOnConfirm: false
-                        },
-                        function(){
-                            document.location="../logout";
-                        })
-                    }
-                </script>
-
             </ul>
     	</div>
     </div>
-
 <?php
 if (isset($_GET['proses'])) {
     $proses = ($_GET["proses"]);
@@ -193,7 +166,6 @@ if (isset($_GET['proses'])) {
     }
   }  
 ?>
-
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -201,20 +173,19 @@ if (isset($_GET['proses'])) {
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Detail Pengajuan <br>
+                                <h4 class="title">
                                     <div align="center">
-                                        <b><?php echo $pengajuan ?></b><br> 
+                                        <b><?php echo $pengajuan ?></b><br>
                                         <small>
-                                            Pengaju 
                                             <?php
                                                 echo '<a href="detail_user?id='.$id_pengaju.'">
-                                                    <b>( '.$pengaju.' )</b> 
-                                                </a>
-                                                    - '.$status.'';
-                                            ?>
+                                                    <b>'.$pengaju.'</b> / <small>'.$taggal_pengajuan.'</small>
+                                                </a>';
+                                            ?> - <span class='badge'><?php echo $status ?></span>
                                         </small> 
                                     </div>
                                 </h4>
+                                <hr>
                             </div>
                             <div class="content">
                                 <form id="form_pengajuan_diterima" method="post" >
@@ -268,179 +239,101 @@ if (isset($_GET['proses'])) {
                                                         <td><h5><b> : </h5></b></td>
                                                         <td><h5>  Rp. <?php echo $biaya ?>,00,-</h5></td>
                                                     </tr>
-                                                        <tr>
-                                                            <td><h5><b>Alasan</h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5>  <?php echo $alasan ?></h5></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><h5><b>Keterangan</h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5> <?php echo $keterangan ?></h5></td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td><h5><b>Alasan</h5></b></td>
+                                                        <td><h5><b> : </h5></b></td>
+                                                        <td><h5>  <?php echo $alasan ?></h5></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><h5><b>Keterangan</h5></b></td>
+                                                        <td><h5><b> : </h5></b></td>
+                                                        <td><h5> <?php echo $keterangan ?></h5></td>
+                                                    </tr>
+                                                </tabel>
     <?php
         if( $data['status'] == "menunggu" ){
 
         }
-        else if ($data['status'] == "proses"){
+        else if ($data['status'] == "proses" && "selesai"){
             echo '
-                                                        <tr>
-                                                            <td><h5><b>Jadwal Pelaksanaan</h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5>'.$data['jadwal_pelaksanaan'].'</h5></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><h5><b>Catatan</h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5>'.$data['catatan'].'</h5></td>
-                                                        </tr>
-            ';
-        }else{
-            echo '
-                                                        <tr>
-                                                            <td><h5><b>Catatan</h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5>'.$data['catatan'].'</h5></td>
-                                                        </tr>
-            ';
-            
-        }
-
-    ?>
-                                                        <tr>
-                                                            <td><h5><b>Riwayat</h5></b></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
                                                 <table>
-                                                    <thead>
-                                                        <th width="10px"></th>
-                                                        <th width="10px"></th>
-                                                        <th width="150px"></th>
-                                                        <th width="10px"></th>
-                                                        <th></th>
-                                                    </thead>
-                                                    <tbody> 
+                                                    <tr>
+                                                        <td width="150px"></td>
+                                                        <td width="25px"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><h5><b>Jadwal Pelaksanaan</h5></b></td>
+                                                        <td><h5><b> : </h5></b></td>
+                                                        <td><h5>'.$data['jadwal_pelaksanaan'].'</h5></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><h5><b>Catatan</h5></b></td>
+                                                        <td><h5><b> : </h5></b></td>
+                                                        <td><h5>'.$data['catatan'].'</h5></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <hr>
+                                            <table>
+                                                <tr>
+                                                    <td colspan="5"><h5><b>Riwayat</h5></b></td>
+                                                </tr>
+            ';
+        }
+    ?>
 <?php
     $query2 = "SELECT * FROM riwayat WHERE id_pengajuan ='$id' ORDER BY id_riwayat DESC" ;
-      $result2 = mysqli_query($con, $query2);
-      if(!$result2){
-        die ("Query Error: ".mysqli_errno($con).
-           " - ".mysqli_error($con)); 
-      }
-      $no = 1;
+    $result2 = mysqli_query($con, $query2);
+        if(!$result2){
+            die ("Query Error: ".mysqli_errno($con).
+            " - ".mysqli_error($con)); 
+        }
+    $no = 1;
       while($data2 = mysqli_fetch_assoc($result2)){
-                                                    echo "<tr>";
-                                                        echo "<td><b>$no </b></td>";
-                                                        echo "<td> . </td>";
-                                                        echo "<td> <b>$data2[kegiatan2] </b> </td>";
-                                                        echo "<td> : </td>";
-                                                        echo "<td><small> $data2[tanggal_kegiatan]</small></td>";
-                                                    echo "</tr>
-                                                    </tbody>";
+                                                echo "<tr>
+                                                    <td width='10px'><b>$no </b></td>
+                                                    <td width='10px'> . </td>
+                                                    <td width='150px'> <b>$data2[kegiatan2] </b> </td>
+                                                    <td width='10px'> : </td>
+                                                    <td><small> $data2[tanggal_kegiatan]</small></td>
+                                                </tr>
+                                            </tbody>";
                                         $no++;
       }                                                      
 ?>
-                                                </table>
-                                            </div>
+                                        </table>
                                         </div>
                                     </div>
-
-                                    
-                                    <div align="right">
+                                </div>    
+                                <div align="right">
                                     <a href="pengajuan">
                                         <button type="button" class="btn btn-info  btn-fill">
-                                                    <i class="pe pe-7s-note2"></i> Pengajuan 
+                                            <i class="pe pe-7s-note2"></i> Pengajuan 
                                         </button>
                                     </a>
 <?php
 if( $data['status'] == "menunggu" ){
         echo '
                                                 
-                                                <button onclick="pengajuanditerima()" type="button" class="btn btn-primary btn-fill">
-                                                    <i class="fa fa-check"></i> Terima
-                                                </button>
-                                                <button onclick="pengajuanditolak()" type="button" class="btn btn-danger  btn-fill">
-                                                    <i class="fa fa-close"></i> Tolak
-                                                </button>';
-        echo '<script type="text/javascript">
-            function pengajuanditerima() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menerima pengajuan",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00ff00",
-                    confirmButtonText: "Terima",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="pengajuan_diterima?id='.$data['id_pengajuan'].'";
-                })
-            }
-            function pengajuanditolak() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menolak pengajuan",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00cc00",
-                    confirmButtonText: "Tolak",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="pengajuan_ditolak?id='.$data['id_pengajuan'].'";
-                })
-            }
-        </script>';                                       
+                                    <button onclick="pengajuanditerima('.$data['id_pengajuan'].')" type="button" class="btn btn-primary btn-fill">
+                                        <i class="fa fa-check"></i> Terima
+                                    </button>
+                                    <button onclick="pengajuanditolak('.$data['id_pengajuan'].')" type="button" class="btn btn-danger  btn-fill">
+                                        <i class="fa fa-close"></i> Tolak
+                                    </button>';                      
     }
     else if ($data['status'] == "proses"){
         echo '
-                                                <button onclick="pengajuandiubah()" type="button" class="btn btn-primary  btn-fill">
-                                                    <i class="fa fa-edit"></i> Ubah Jadwal Pelaksanaan
-                                                </button>
-                                                <button onclick="pengajuandiselesaikan()" type="button" name="input" class="btn btn-primary  btn-fill">
-                                                    <i class="fa fa-check"></i> Selesaikan Pengajuan
-                                                </button>';
-        echo '<script type="text/javascript">
-            function pengajuandiubah() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin mengubah jadwal pengajuan",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00ff00",
-                    confirmButtonText: "Iya",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="pengajuan_diubah?id='.$data['id_pengajuan'].'";
-                })
-            }
-
-            function pengajuandiselesaikan() {
-                swal({
-                    title: "Konfirmasi ?",
-                    text: "Apakah anda ingin menyelesaikan pengajuan",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#00ff00",
-                    confirmButtonText: "Selesaikan",
-                    cancelButtonText: "Batal",
-                    closeOnConfirm: false
-                },
-                function(){
-                    document.location="system/proses_pengajuan_diselesaikan?id='.$data['id_pengajuan'].'";
-                })
-            }
-            </script>'; 
+                                    <button onclick="pengajuandiubah('.$data['id_pengajuan'].')" type="button" class="btn btn-primary  btn-fill">
+                                        <i class="fa fa-edit"></i> Ubah Jadwal Pelaksanaan
+                                    </button>
+                                    <button onclick="pengajuandiselesaikan('.$data['id_pengajuan'].')" type="button" name="input" class="btn btn-primary  btn-fill">
+                                        <i class="fa fa-check"></i> Selesaikan Pengajuan
+                                    </button>';
     }
 ?>
                                     </div>
-                                    <div class="clearfix"></div>
                                 </form>
                             </div>
                         </div>
@@ -450,38 +343,99 @@ if( $data['status'] == "menunggu" ){
         </div>
     </div>
 </div>
-
-
 </body>
-
-    <!--   Core JS Files   -->
+    <script src="../assets/dist/sweetalert-dev.js"></script>
     <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="../assets/js/bootstrap-checkbox-radio-switch.js"></script>
-
-	<!--  Charts Plugin -->
 	<script src="../assets/js/chartist.min.js"></script>
-
-    <!--  Notifications Plugin    -->
     <script src="../assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
-
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="../assets/js/demo.js"></script>
-
     <script src="../assets/js/lightbox-plus-jquery.min.js"></script>
-
 	<script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();
     	});
-	</script>
+        
+        function logout() {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin keluar ",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cc00", 
+                confirmButtonText: "Logout",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="../logout";
+            })
+        }
 
+        function pengajuanditerima(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin menerima pengajuan",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00ff00",
+                confirmButtonText: "Terima",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="pengajuan_diterima?id="+id;
+            })
+        }
+
+        function pengajuanditolak(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin menolak pengajuan",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cc00",
+                confirmButtonText: "Tolak",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="pengajuan_ditolak?id="+id;
+            })
+        }
+        function pengajuandiubah(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin mengubah jadwal pengajuan",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00ff00",
+                confirmButtonText: "Iya",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="pengajuan_diubah?id="+id;
+            })
+        }
+
+        function pengajuandiselesaikan(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin menyelesaikan pengajuan",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00ff00",
+                confirmButtonText: "Selesaikan",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="system/proses_pengajuan_diselesaikan?id="+id;
+            })
+        }
+	</script>
 </html>

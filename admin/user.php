@@ -273,7 +273,7 @@ else{
                 closeOnConfirm: false
             },
             function(){
-                document.location="edit_user?id= "+id;
+                document.location="edit_user?id="+id;
             })
         }       
         function hapususer(id) {

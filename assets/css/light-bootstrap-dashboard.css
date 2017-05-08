@@ -99,6 +99,10 @@ h1 .subtitle {
   display: block;
   margin: 0 0 30px; }
 
+.badge{
+    background: #00ff00;
+}
+
 .text-muted {
   color: #9A9A9A; }
 

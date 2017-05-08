@@ -11,8 +11,6 @@ $nohp = $_POST['nohp'];
  
 $tanggal= mktime(date("m"),date("d"),date("Y"));
 $tgl = date("Y-m-d", $tanggal);
-date_default_timezone_set('Asia/Jakarta');
-$jam=date("H:i:s");
 
 $cekdulu= "SELECT * FROM user WHERE email='$email'";
 $prosescek= mysqli_query($con, $cekdulu);
@@ -20,13 +18,13 @@ $prosescek= mysqli_query($con, $cekdulu);
     $cekemail = $cek_data["email"];
 
 if ($cekemail == $email) { 
-    if($password == ""){
+    if($password == ""){ 
         $query = "UPDATE user SET username='$username', nama_depan='$nama_depan', 
-                    nama_belakang='$nama_belakang', no_hp='$nohp', alamat='$alamat', update_akun='$tgl $jam' WHERE id_user='$id'";
+                    nama_belakang='$nama_belakang', no_hp='$nohp', alamat='$alamat', update_akun='$tgl' WHERE id_user='$id'";
         $result = mysqli_query($con, $query);
     }else{
         $query = "UPDATE user SET username='$username',password=md5('$password'), nama_depan='$nama_depan', 
-                    nama_belakang='$nama_belakang', no_hp='$nohp', alamat='$alamat', update_akun='$tgl $jam' WHERE id_user='$id'";
+                    nama_belakang='$nama_belakang', no_hp='$nohp', alamat='$alamat', update_akun='$tgl' WHERE id_user='$id'";
         $result = mysqli_query($con, $query);
     }
         header('location:../detail_user?id='.$id.' & proses=edit'); 
@@ -34,11 +32,11 @@ if ($cekemail == $email) {
 else {
     if($password == ""){ 
         $query = "UPDATE user SET username='$username', email='$email', nama_depan='$nama_depan', 
-                    nama_belakang='$nama_belakang', no_hp='$nohp', alamat='$alamat', update_akun='$tgl $jam' WHERE id_user='$id'";
+                    nama_belakang='$nama_belakang', no_hp='$nohp', alamat='$alamat', update_akun='$tgl' WHERE id_user='$id'";
         $result = mysqli_query($con, $query);
     }else{
         $query = "UPDATE user SET username='$username', email='$email',password=md5('$password'), nama_depan='$nama_depan', 
-                    nama_belakang='$nama_belakang', no_hp='$nohp', alamat='$alamat', update_akun='$tgl $jam' WHERE id_user='$id'";
+                    nama_belakang='$nama_belakang', no_hp='$nohp', alamat='$alamat', update_akun='$tgl' WHERE id_user='$id'";
         $result = mysqli_query($con, $query);
     }
         header('location:../detail_user?id='.$id.'&proses=edit'); 

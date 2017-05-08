@@ -3,8 +3,6 @@
 include '../../system/koneksi.php';
 $tanggal= mktime(date("m"),date("d"),date("Y"));
 $tgl = date("Y-m-d", $tanggal);
-date_default_timezone_set('Asia/Jakarta');
-$jam=date("H:i:s");
 
 if (isset($_POST['input'])) {
   $username           = $_POST['username'];
@@ -26,7 +24,7 @@ else {
 
   $query = "INSERT INTO user SET username='$username',email='$email'
         ,password=md5('$password'),nama_depan='$nama_depan',nama_belakang='$nama_belakang',jk='$jk'
-        ,no_hp='$nohp',alamat='$alamat',role='$role', pembuatan_akun='$tgl $jam', update_akun='$tgl $jam'";
+        ,no_hp='$nohp',alamat='$alamat',role='$role', pembuatan_akun='$tgl', update_akun='$tgl'";
   $result = mysqli_query($con, $query);
 
   if(!$result){
