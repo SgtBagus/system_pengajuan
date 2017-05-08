@@ -39,6 +39,8 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/dist/sweetalert.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="../assets/css/datepicker.css">
 </head>
 <body>
     <div class="wrapper">
@@ -96,14 +98,9 @@
                             <p>Log out</p>
                         </a>
                     </li>
-
-                    <script type="text/javascript">
-                    </script>
-
                 </ul>
             </div>
         </div>
-
         <div class="main-panel">
             <div class="content">
                 <div class="container-fluid">
@@ -120,8 +117,8 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="Email">Pelaksanaan DiLaksanakan Pada Tanggal</label>
-                                                    <input type="date" name="jadwal_pelaksanaan" id="form_pengajuan_diterima" 
-                                                    value="<?php echo date("Y-m-d");?>" required class="form-control">
+                                                    <input type="text" name="jadwal_pelaksanaan" id="datepicker" 
+                                                    value="<?php echo date("d-m-Y");?>" required class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -155,10 +152,7 @@
             </div>
         </div>
     </div>
-
-
 </body>
-    <script src="../assets/dist/sweetalert-dev.js"></script>
     <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap-checkbox-radio-switch.js"></script>
@@ -167,6 +161,9 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
 	<script src="../assets/js/demo.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../assets/dist/sweetalert-dev.js"></script>
 	<script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();
@@ -187,6 +184,18 @@
                 document.location="../logout";
             })
         }
+
+        $( function() {
+            $( "#datepicker" ).datepicker({
+                dateFormat: "dd-mm-yy",
+                monthNames: [ "Januari", "Febuari", "Maret", 
+                            "April", "Mei", "Juni", 
+                            "Juli", "Agustus", "September", 
+                            "Oktober", "November", "December" ],
+                dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ]
+                
+            });
+        });
 	</script>
 
 </html>

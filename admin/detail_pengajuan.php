@@ -118,54 +118,6 @@
             </ul>
     	</div>
     </div>
-<?php
-if (isset($_GET['proses'])) {
-    $proses = ($_GET["proses"]);
-    if($proses == "edit"){
-        echo'<script>
-            swal({
-                title: "Terubah!",
-                text: "Data pengajuan telah diubah.",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }
-    else if($proses == "terima"){
-        echo'<script> 
-            swal({
-                title: "Terterima!",
-                text: "Data pengajuan telah diterima.",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }
-    else if($proses == "selesai"){
-        echo'<script>
-            swal({
-                title: "Terselesaikan!",
-                text: "Data pengajuan telah diselesaikan.",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }else if ($proses == "tolak"){
-        echo'<script>
-            swal({
-                title: "Tertolak!",
-                text: "Data pengajuan telah ditolak.",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }
-  }  
-?>
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -358,7 +310,58 @@ if( $data['status'] == "menunggu" ){
     	$(document).ready(function(){
         	demo.initChartist();
     	});
-        
+    </script>
+
+<?php
+if (isset($_GET['proses'])) {
+    $proses = ($_GET["proses"]);
+    if($proses == "edit"){
+        echo'<script>
+            swal({
+                title: "Terubah!",
+                text: "Data pengajuan telah diubah.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })
+        </script>';
+    }
+    else if($proses == "terima"){
+        echo'<script> 
+            swal({
+                title: "Terterima!",
+                text: "Data pengajuan telah diterima.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })
+        </script>';
+    }
+    else if($proses == "selesai"){
+        echo'<script>
+            swal({
+                title: "Terselesaikan!",
+                text: "Data pengajuan telah diselesaikan.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })
+        </script>';
+    }else if ($proses == "tolak"){
+        echo'<script>
+            swal({
+                title: "Tertolak!",
+                text: "Data pengajuan telah ditolak.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })
+        </script>';
+    }
+  }  
+?>        
+
+	<script type="text/javascript">
         function logout() {
             swal({
                 title: "Konfirmasi ?",
