@@ -47,7 +47,7 @@ INSERT INTO `catatan` (`id_catatan`, `catatan`, `update_catatan`) VALUES
 
 CREATE TABLE `jenis_pengajuan` (
   `id_jenis_pengajuan` int(11) NOT NULL,
-  `jenis_pengajuan` varchar(25) NOT NULL,
+  `jenis_pengajuan` varchar(100) NOT NULL,
   `deskripsi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -111,7 +111,7 @@ CREATE TABLE `user` (
   `nama_depan` varchar(225) NOT NULL,
   `nama_belakang` varchar(225) NOT NULL,
   `jk` enum('laki-laki','perempuan') NOT NULL,
-  `no_hp` int(25) NOT NULL,
+  `no_hp` varchar(225) NOT NULL,
   `alamat` text NOT NULL,
   `role` enum('manajemen','tim') NOT NULL,
   `pembuatan_akun` datetime NOT NULL,
