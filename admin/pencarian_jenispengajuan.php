@@ -136,8 +136,7 @@
             echo "</tr>";
       }
       else {
-        while($data = mysqli_fetch_array($result))
-      {
+        while($data = mysqli_fetch_array($result)){
                                         echo '<tr>
                                             <td>'.$no.'</td>
                                             <td>'.$data['jenis_pengajuan'].'</td>
@@ -150,9 +149,8 @@
                                                     <i class="fa fa-trash"></i>
                                                 </button>';
                                         $no++;
-      }   
+        }   
       }
-      
 ?>
                                     </tbody>
                                 </table>
@@ -228,6 +226,4 @@
             })
         }
 	</script>
-	</script>
-
 </html>

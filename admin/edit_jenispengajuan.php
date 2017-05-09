@@ -41,118 +41,108 @@
     <link rel="stylesheet" href="../assets/dist/sweetalert.css">
 </head>
 <body>
-
-<?php 
-if (isset($_GET['error'])) {
-    $error = ($_GET["error"]);
-    if($error == "true"){
-        echo'<script>
-            sweetAlert("Mohon Maaf", "Jenis pengajuan yang anda masukan sudah ada!", "error");
-        </script>';
-    }
-  } 
-?>
-<div class="wrapper">
-    <div class="sidebar" data-color="green" data-image="../assets/img/sidebar.jpg">
-    	<div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="index" class="simple-text">
-<?php
- $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
-    $result_login = mysqli_query($con, $query_login);
-    if(!$result_login){
-      die ("Query Error: ".mysqli_errno($con).
-         " - ".mysqli_error($con));
-    }
-    $data_login = mysqli_fetch_assoc($result_login);
-    $username = $data_login["username"];
-?>
-                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
-                </a>
+    <div class="wrapper">
+        <div class="sidebar" data-color="green" data-image="../assets/img/sidebar.jpg">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="index" class="simple-text">
+    <?php
+    $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
+        $result_login = mysqli_query($con, $query_login);
+        if(!$result_login){
+        die ("Query Error: ".mysqli_errno($con).
+            " - ".mysqli_error($con));
+        }
+        $data_login = mysqli_fetch_assoc($result_login);
+        $username = $data_login["username"];
+    ?>
+                        Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <a href="index">
+                            <i class="pe pe-7s-graph"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="pengajuan">
+                            <i class="pe pe-7s-note2"></i>
+                            <p>Pengajuan</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="riwayat">
+                            <i class="pe pe-7s-timer"></i>
+                            <p>Riwayat</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
+                            <i class="pe-7s-server"></i>
+                            <p>Master</p>
+                        </a>
+                        <div class="collapse in" id="componentsExamples">
+                            <ul class="nav">
+                                <li><a href="user">User</a></li>
+                                <li class="active"><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" onclick = "logout()">
+                            <i class="pe pe-7s-back"></i>
+                            <p>Log out</p>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <ul class="nav">
-                <li>
-                    <a href="index">
-                        <i class="pe pe-7s-graph"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="pengajuan">
-                        <i class="pe pe-7s-note2"></i>
-                        <p>Pengajuan</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="riwayat">
-                        <i class="pe pe-7s-timer"></i>
-                        <p>Riwayat</p>
-                    </a>
-                </li>
-                <li class="active">
-                    <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
-                        <i class="pe-7s-server"></i>
-                        <p>Master</p>
-                    </a>
-                    <div class="collapse in" id="componentsExamples">
-                        <ul class="nav">
-                            <li><a href="user">User</a></li>
-                            <li class="active"><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" onclick = "logout()">
-                        <i class="pe pe-7s-back"></i>
-                        <p>Log out</p>
-                    </a>
-                </li>
-            </ul>
-    	</div>
-    </div>
-    <div class="main-panel">
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Ubah Jenis Pengajuan</h4>
-                            </div>
-                            <div class="content">
-                                <form id="form_edit_jenispengajuan" method="post" action="system/proses_edit_jenispengajuan">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Jenis Pengajuan</label>
-                                                <input type="hidden" name="id" value="<?php echo $id ?>">
-                                                <input type="text" name="jenis_pengajuan" id="jenis_pengajuan" class="form-control" placeholder="Alamat" value="<?php echo $jenis_pengajuan ?>" >
+        </div>
+        <div class="main-panel">
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Ubah Jenis Pengajuan</h4>
+                                </div>
+                                <div class="content">
+                                    <form id="form_edit_jenispengajuan" method="post" action="system/proses_edit_jenispengajuan">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Jenis Pengajuan</label>
+                                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                    <input type="text" name="jenis_pengajuan" id="jenis_pengajuan" class="form-control" placeholder="Alamat" value="<?php echo $jenis_pengajuan ?>" >
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Deskripsi</label>
-                                                <input type="text" name="deskripsi" id="deskripsi" class="form-control" placeholder="No Hp" value="<?php echo $deskripsi ?>" >
+                                        
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Deskripsi</label>
+                                                    <input type="text" name="deskripsi" id="deskripsi" class="form-control" placeholder="No Hp" value="<?php echo $deskripsi ?>" >
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div align="right">
-                                        <a href="jenis_pengajuan">
-                                            <button type="button" rel="tooltip" class="btn btn-info btn-fill">
-                                                        <i class="fa fa-arrow-left"></i> Kembali
+                                        <div align="right">
+                                            <a href="jenis_pengajuan">
+                                                <button type="button" rel="tooltip" class="btn btn-info btn-fill">
+                                                            <i class="fa fa-arrow-left"></i> Kembali
+                                                </button>
+                                            </a>
+                                            <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
+                                                <i class="fa fa-edit"></i> Simpan
                                             </button>
-                                        </a>
-                                        <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
-                                            <i class="fa fa-edit"></i> Simpan
-                                        </button>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </form>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -160,7 +150,6 @@ if (isset($_GET['error'])) {
             </div>
         </div>
     </div>
-</div>
 </body>
     <script src="../assets/dist/sweetalert-dev.js"></script>
     <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
@@ -171,7 +160,23 @@ if (isset($_GET['error'])) {
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
 	<script src="../assets/js/demo.js"></script>
-	<script type="text/javascript">
+<?php 
+if (isset($_GET['error'])) {
+    echo'<script type="text/javascript">';
+    $error = ($_GET["error"]);
+        if($error == "true"){
+            echo'swal({
+                title: "Mohon Maaf!",
+                text: "Jenis pengajuan yang anda masukan sudah ada!",
+                type: "error",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })';
+        }
+    echo'</script>';
+  }  
+?>
+    <script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();
     	});

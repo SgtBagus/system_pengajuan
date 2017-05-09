@@ -28,149 +28,149 @@
     <link rel="stylesheet" href="../assets/dist/sweetalert.css">
 </head>
 <body> 
-<div class="wrapper">
-    <div class="sidebar" data-color="green" data-image="../assets/img/sidebar.jpg">
-    	<div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="index" class="simple-text">
-<?php
- $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
-    $result_login = mysqli_query($con, $query_login);
-    if(!$result_login){
-      die ("Query Error: ".mysqli_errno($con).
-         " - ".mysqli_error($con));
-    }
-    $data_login = mysqli_fetch_assoc($result_login);
-    $username = $data_login["username"];
-?>
-                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
-                </a>
+    <div class="wrapper">
+        <div class="sidebar" data-color="green" data-image="../assets/img/sidebar.jpg">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="index" class="simple-text">
+    <?php
+    $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
+        $result_login = mysqli_query($con, $query_login);
+        if(!$result_login){
+        die ("Query Error: ".mysqli_errno($con).
+            " - ".mysqli_error($con));
+        }
+        $data_login = mysqli_fetch_assoc($result_login);
+        $username = $data_login["username"];
+    ?>
+                        Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <a href="index">
+                            <i class="pe pe-7s-graph"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="pengajuan">
+                            <i class="pe pe-7s-note2"></i>
+                            <p>Pengajuan</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="riwayat">
+                            <i class="pe pe-7s-timer"></i>
+                            <p>Riwayat</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
+                            <i class="pe-7s-server"></i>
+                            <p>Master</p>
+                        </a>
+                        <div class="collapse in" id="componentsExamples">
+                            <ul class="nav">
+                                <li class="active"><a href="user">User</a></li>
+                                <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" onclick = "logout()">
+                            <i class="pe pe-7s-back"></i>
+                            <p>Log out</p>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <ul class="nav">
-                <li>
-                    <a href="index">
-                        <i class="pe pe-7s-graph"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="pengajuan">
-                        <i class="pe pe-7s-note2"></i>
-                        <p>Pengajuan</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="riwayat">
-                        <i class="pe pe-7s-timer"></i>
-                        <p>Riwayat</p>
-                    </a>
-                </li>
-                <li class="active">
-                    <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
-                        <i class="pe-7s-server"></i>
-                        <p>Master</p>
-                    </a>
-                    <div class="collapse in" id="componentsExamples">
-                        <ul class="nav">
-                            <li class="active"><a href="user">User</a></li>
-                            <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" onclick = "logout()">
-                        <i class="pe pe-7s-back"></i>
-                        <p>Log out</p>
-                    </a>
-                </li>
-            </ul>
-    	</div>
-    </div>
-    <div class="main-panel">
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-<?php
-    $pencarian = ($_GET["cari"]);
-    $query = "SELECT * FROM user WHERE username LIKE '%".$pencarian."%'";
-    $result = mysqli_query($con, $query);
-    $query_tim = "SELECT * FROM user WHERE ROLE = 'tim'" ;
-    $result_tim = mysqli_query($con, $query_tim);
-    $no = 1;
-    $cek = count($result);
-    $banyakdata = $result->num_rows;
-?>
-                        <div class="card">
-                            <div class="header">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h4 class="title">Data Pengguna</h4>
-                                        <small>Pencarian Username = <b>"<?php echo $pencarian ?>"</b> || data sebanyak <b>[ '<?php echo $banyakdata ?>' ]</b></small>
-                                        <a href="user"><p class="category"><i class="fa fa-refresh"></i> Reset Data Pengguna</p></a>
-                                    </div>  
+        </div>
+        <div class="main-panel">
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+    <?php
+        $pencarian = ($_GET["cari"]);
+        $query = "SELECT * FROM user WHERE username LIKE '%".$pencarian."%'";
+        $result = mysqli_query($con, $query);
+        $query_tim = "SELECT * FROM user WHERE ROLE = 'tim'" ;
+        $result_tim = mysqli_query($con, $query_tim);
+        $no = 1;
+        $cek = count($result);
+        $banyakdata = $result->num_rows;
+    ?>
+                            <div class="card">
+                                <div class="header">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="title">Data Pengguna</h4>
+                                            <small>Pencarian Username = <b>"<?php echo $pencarian ?>"</b> || data sebanyak <b>[ '<?php echo $banyakdata ?>' ]</b></small>
+                                            <a href="user"><p class="category"><i class="fa fa-refresh"></i> Reset Data Pengguna</p></a>
+                                        </div>  
+                                    </div>
+                                    <br>
+                                    <div class="row">
                                 </div>
-                                <br>
-                                <div class="row">
-                            </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-hover table-striped">
-                                    <thead>
-                                        <th>ID</th>
-                                        <th>Username</th>
-                                    	<th>Email</th>
-                                        <th>Role</th>
-                                    	<th>Action</th>
-                                    </thead>
-                                    <tbody>
+                                <div class="content table-responsive table-full-width">
+                                    <table class="table table-hover table-striped">
+                                        <thead>
+                                            <th>ID</th>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tbody>
 
-<?php
-      if($result->num_rows == 0){
-            echo "<tr>
-                <td>Data Tidak Di temukan</td>
-            </tr>";
-      }
-      else {
-        while($data = mysqli_fetch_array($result))
-      {
-                                        echo '<tr>
-                                                <td>'.$no.'</td>
-                                                <td>'.$data['username'].'</td>
-                                                <td>'.$data['email'].'</td>
-                                                <td>'.$data['role'].'</td>
-                                                <td>
-                                                    <a href="detail_user?id='.$data['id_user'].'">
-                                                        <button type="button" class="btn btn-info btn-fill btn-sm">
-                                                            <i class="fa fa-eye"></i>
+    <?php
+        if($result->num_rows == 0){
+                echo "<tr>
+                    <td>Data Tidak Di temukan</td>
+                </tr>";
+        }
+        else {
+            while($data = mysqli_fetch_array($result)){
+                                            echo '<tr>
+                                                    <td>'.$no.'</td>
+                                                    <td>'.$data['username'].'</td>
+                                                    <td>'.$data['email'].'</td>
+                                                    <td>'.$data['role'].'</td>
+                                                    <td>
+                                                        <a href="detail_user?id='.$data['id_user'].'">
+                                                            <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                <i class="fa fa-eye"></i>
+                                                            </button>
+                                                        </a>
+                                                        <button onclick="editprofil('.$data['id_user'].')" type="button" rel="tooltip" class="btn btn-primary btn-fill btn-sm">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>';
+                if( $data['email'] == $_SESSION['email'] ){
+                                                        echo' <button  type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm" disabled>
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>';
+                }
+            else{
+                if ($result_tim->num_rows == 1){
+                                                        echo' <button type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm" disabled>
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>';
+                }else{
+                                                        echo' <button onclick="hapususer('.$data['id_user'].')"  type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm">
+                                                            <i class="fa fa-trash"></i>
                                                         </button>
-                                                    </a>
-                                                    <button onclick="editprofil('.$data['id_user'].')" type="button" rel="tooltip" class="btn btn-primary btn-fill btn-sm">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>';
-if( $data['email'] == $_SESSION['email'] ){
-                                                    echo' <button  type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm" disabled>
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>';
-}
-else{
-    if ($result_tim->num_rows == 1){
-                                                    echo' <button type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm" disabled>
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>';
-    }else{
-                                                    echo' <button onclick="hapususer('.$data['id_user'].')"  type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>';
-                                        $no++;
+                                                    </td>
+                                                </tr>';
+                                            $no++;
+                }
+            }
+        }
     }
-}
-}
-}
 ?>
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,6 @@ else{
             </div>
         </div>
     </div>
-</div>
 </body>
     <script src="../assets/dist/sweetalert-dev.js"></script>
     <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>

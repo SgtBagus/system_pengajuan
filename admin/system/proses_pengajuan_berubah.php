@@ -2,14 +2,14 @@
 include '../../system/koneksi.php';
 $id_pengajuan = $_POST['id_pengajuan']; 
 $jadwal_pelaksanaan = $_POST['jadwal_pelaksanaan'];
-$catatan = $_POST['catatan'];
+$catatan = $_POST['catatan']; 
+$tanggal_pelaksanaan = date('Y-m-d', strtotime($jadwal_pelaksanaan));
  
 $tanggal= mktime(date("m"),date("d"),date("Y"));
 $tgl = date("Y-m-d", $tanggal);
 
-$query = "UPDATE pengajuan SET jadwal_pelaksanaan='$jadwal_pelaksanaan', catatan='$catatan', status='proses', update_pengajuan='$tgl' WHERE id_pengajuan='$id_pengajuan'";
+$query = "UPDATE pengajuan SET jadwal_pelaksanaan='$tanggal_pelaksanaan', catatan='$catatan', status='proses', update_pengajuan='$tgl' WHERE id_pengajuan='$id_pengajuan'";
   $result = mysqli_query($con, $query);
-  // periska query apakah ada error
   if(!$result){
       die ("Query gagal dijalankan: ".mysqli_errno($con).
            " - ".mysqli_error($con));

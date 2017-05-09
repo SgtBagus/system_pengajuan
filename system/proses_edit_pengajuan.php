@@ -6,7 +6,12 @@ $pengajuan = $_POST['pengajuan'];
 $jenis_pengajuan = $_POST['jenis_pengajuan'];
 $biaya = $_POST['biaya'];
 $alasan = $_POST['alasan'];
-$keterangan = $_POST['keterangan'];
+    $ket        = $_POST['keterangan'];
+    if($ket == ""){
+      $keterangan = "-";
+    }else {
+      $keterangan = $ket;
+    }
 $ubah_foto = $_POST['ubah_foto'];
 
 $tanggal= mktime(date("m"),date("d"),date("Y"));
@@ -30,14 +35,17 @@ $tgl = date("Y-m-d", $tanggal);
   	$path = "../image/".$fotobaru;
 
   if(!in_array($extensi,$file_type)){
-      $eror   = true;
+          $eror   = "format";
     }
     if($size > 1000000){
-      $eror   = true;
+          $eror   = "size";
     }
-    if($eror == true){
-		header("location:../edit_pengajuan?proses=fail"); 
-    }
+        if($eror == "format"){
+          header("location: ../ajukan_pengajuan?id=$id&proses=format"); 
+        }
+        else if ($eror == "size"){
+          header("location: ../ajukan_pengajuan?id=$id&proses=size"); 
+        }
 
     else{
 		if($ubah_foto == "tambah"){

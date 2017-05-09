@@ -28,16 +28,6 @@
     <link rel="stylesheet" href="../assets/dist/sweetalert.css">
 </head> 
 <body>
-<?php
-if (isset($_GET['update'])) {
-    $update = ($_GET["update"]);
-    if($update == "true"){
-        echo'<script>
-            swal("Terubah!", "Catatan telah diubah !", "success")
-        </script>';
-    }
-  } 
-?>
     <div class="wrapper">
         <div class="sidebar" data-color="green" data-image="../assets/img/sidebar.jpg">
             <div class="sidebar-wrapper">
@@ -313,6 +303,24 @@ if (isset($_GET['update'])) {
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
 	<script src="../assets/js/demo.js"></script>
+
+<?php
+if (isset($_GET['update'])) {
+    $update = ($_GET["update"]);
+    if($update == "true"){
+    echo'<script type="text/javascript">
+            swal({
+                title: "Terubah!",
+                text: "Catatan telah diubah.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })
+    </script>';
+    }
+  } 
+?>
+
 	<script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();

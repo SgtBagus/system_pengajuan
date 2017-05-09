@@ -1,32 +1,30 @@
 <?php
-  include 'system/koneksi.php';
-
-
-session_start();
- $logged_in = false;
- if (empty($_SESSION['email'])) {
-    echo "<script type='text/javascript'>document.location='login?proses=error ';</script>";
- }
- else {
-   $logged_in = true;
- }
-
- $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
-    $result_login = mysqli_query($con, $query_login);
-    if(!$result_login){
-      die ("Query Error: ".mysqli_errno($con).
-         " - ".mysqli_error($con));
+    include 'system/koneksi.php';
+    session_start();
+    $logged_in = false;
+    if (empty($_SESSION['email'])) {
+        echo "<script type='text/javascript'>document.location='login?proses=error ';</script>";
     }
-    $data = mysqli_fetch_assoc($result_login);
-    $id = $data["id_user"];
-    $username = $data["username"];
-    $email = $data["email"];
-    $namadepan = $data["nama_depan"];
-    $namabelakang = $data["nama_belakang"];
-    $jk = $data["jk"];
-    $nohp = $data["no_hp"];
-    $alamat = $data["alamat"];
-    $role = $data["role"];
+    else {
+        $logged_in = true;
+    }
+
+    $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
+        $result_login = mysqli_query($con, $query_login);
+            if(!$result_login){
+                die ("Query Error: ".mysqli_errno($con).
+                    " - ".mysqli_error($con));
+            }
+        $data = mysqli_fetch_assoc($result_login);
+        $id = $data["id_user"];
+        $username = $data["username"];
+        $email = $data["email"];
+        $namadepan = $data["nama_depan"];
+        $namabelakang = $data["nama_belakang"];
+        $jk = $data["jk"];
+        $nohp = $data["no_hp"];
+        $alamat = $data["alamat"];
+        $role = $data["role"];
 ?>
 <!doctype html>
 <html lang="en">
@@ -37,34 +35,16 @@ session_start();
 	<title>Profil</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-    <!-- Bootstrap core CSS     -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Animation library for notifications   -->
     <link href="assets/css/animate.min.css" rel="stylesheet"/>
-    <!--  Light Bootstrap Table core CSS    -->
     <link href="assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="assets/css/demo.css" rel="stylesheet" />
-    <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-
-  <link rel="stylesheet" href="assets/dist/sweetalert.css">
-  <script src="assets/dist/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="assets/dist/sweetalert.css">
 </head>
 <body>
-
-<?php
-if (isset($_GET['proses'])) {
-    $proses = ($_GET["proses"]);
-    if($proses == "edit"){
-        echo'<script>
-            swal("Terubah!", "Profil anda telah diubah !", "success")
-        </script>';
-  } 
-}
-?>
 <div class="wrapper">
     <div class="sidebar" data-color="green" data-image="assets/img/sidebar.jpg">
     	<div class="sidebar-wrapper">
@@ -129,25 +109,6 @@ if (isset($_GET['proses'])) {
                         <p>Log out</p>
                     </a>
                 </li>
-
-                <script type="text/javascript">
-                    function logout() {
-                        swal({
-                            title: "Konfirmasi ?",
-                            text: "Apakah anda ingin keluar ",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#00cc00", 
-                            confirmButtonText: "Logout",
-                            cancelButtonText: "Batal",
-                            closeOnConfirm: false
-                        },
-                        function(){
-                            document.location="logout";
-                        })
-                    }
-                </script>
-
             </ul>
     	</div>
     </div>
@@ -184,7 +145,6 @@ if (isset($_GET['proses'])) {
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -207,8 +167,6 @@ if (isset($_GET['proses'])) {
                                             </div>
                                         </div>
                                     </div>
-
-                                    
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -236,33 +194,50 @@ if (isset($_GET['proses'])) {
 
 
 </body>
-
-    <!--   Core JS Files   -->
+    <script src="assets/dist/sweetalert-dev.js"></script>
     <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
-
-	<!--  Charts Plugin -->
 	<script src="assets/js/chartist.min.js"></script>
-
-    <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="assets/js/light-bootstrap-dashboard.js"></script>
-
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
 
+<?php
+if (isset($_GET['proses'])) {
+    echo '<script type="text/javascript">';
+    $proses = ($_GET["proses"]);
+    if($proses == "edit"){
+            echo'swal({
+                title: "Terubah!",
+                text: "Profil telah diubah.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })';
+  } 
+    echo '</script>';
+}
+?>
 	<script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();
     	});
+        function logout() {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin keluar ",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cc00", 
+                confirmButtonText: "Logout",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="logout";
+            })
+        }
 	</script>
-
 </html>

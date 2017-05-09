@@ -1,13 +1,13 @@
 <?php
-  include '../system/koneksi.php';
-session_start();
- $logged_in = false;
- if (empty($_SESSION['email'])) {
-    echo "<script type='text/javascript'>document.location='../login?proses=error ';</script>";
- }
- else {
-   $logged_in = true;
- }
+    include '../system/koneksi.php';
+    session_start();
+    $logged_in = false;
+    if (empty($_SESSION['email'])) {
+        echo "<script type='text/javascript'>document.location='../login?proses=error ';</script>";
+    }
+    else {
+        $logged_in = true;
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -46,7 +46,6 @@ session_start();
                     Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
                 </a>
             </div>
-
             <ul class="nav">
                 <li>
                     <a href="index">
@@ -87,44 +86,6 @@ session_start();
             </ul>
     	</div>
     </div>
-<?php
-if (isset($_GET['proses'])) {
-    $proses = ($_GET["proses"]);
-    if($proses == "delete"){
-        echo'<script>
-            swal({
-                title: "Terhapus!",
-                text: "Data user telah dihapus.",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }
-    else if ($proses == "edit") { 
-        echo'<script>
-            swal({
-                title: "Terubah!",
-                text: "Data user telah diubah.",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }
-    else if ($proses == "tambah") { 
-        echo'<script>
-            swal({
-                title: "Tertambah!",
-                text: "Data user telah ditambah.",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }
-  } 
-?>
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -183,8 +144,7 @@ if (isset($_GET['proses'])) {
       $query_tim = "SELECT * FROM user WHERE ROLE = 'tim'" ;
       $result_tim = mysqli_query($con, $query_tim);
       $no = 1;
-      while($data_user = mysqli_fetch_assoc($result_user))
-      {
+      while($data_user = mysqli_fetch_assoc($result_user)){
                                         echo '<tr>
                                                 <td>'.$no.'</td>
                                                 <td>'.$data_user['username'].'</td>
@@ -199,26 +159,26 @@ if (isset($_GET['proses'])) {
                                                     <button onclick="editprofil('.$data_user['id_user'].')" type="button" rel="tooltip" class="btn btn-primary btn-fill btn-sm">
                                                         <i class="fa fa-edit"></i>
                                                     </button>';
-if( $data_user['email'] == $_SESSION['email'] ){
+        if( $data_user['email'] == $_SESSION['email'] ){
                                                     echo' <button  type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm" disabled>
                                                         <i class="fa fa-trash"></i>
                                                     </button>';
-}
-else{
-    if ($result_tim->num_rows == 1){
+        }
+        else{
+            if ($result_tim->num_rows == 1){
                                                     echo' <button type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm" disabled>
                                                         <i class="fa fa-trash"></i>
                                                     </button>';
-    }else{
+            }else{
                                                     echo' <button onclick="hapususer('.$data_user['id_user'].')"  type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </td>
                                             </tr>';
                                         $no++;
+            }
+        }
     }
-}
-}
 ?>
                                     </tbody>
                                 </table>
@@ -240,6 +200,40 @@ else{
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
 	<script src="../assets/js/demo.js"></script>
+<?php
+if (isset($_GET['proses'])) {
+    $proses = ($_GET["proses"]);
+        echo'<script type="text/javascript">';
+    if($proses == "delete"){
+            echo 'swal({
+                title: "Terhapus!",
+                text: "Data user telah dihapus.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })';
+    }
+    else if ($proses == "edit") { 
+            echo 'swal({
+                title: "Terubah!",
+                text: "Data user telah diubah.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })';
+    }
+    else if ($proses == "tambah") { 
+            echo 'swal({
+                title: "Tertambah!",
+                text: "Data user telah ditambah.",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })';
+    }
+        echo '</script>';
+  } 
+?>
 	<script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();

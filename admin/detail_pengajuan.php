@@ -131,9 +131,9 @@
                                         <small>
                                             <?php
                                                 echo '<a href="detail_user?id='.$id_pengaju.'">
-                                                    <b>'.$pengaju.'</b> / <small>'.$taggal_pengajuan.'</small>
+                                                    <b>'.$pengaju.'</b> - <small>'.date("d-m-Y", strtotime($taggal_pengajuan)).'</small>
                                                 </a>';
-                                            ?> - <span class='badge'><?php echo $status ?></span>
+                                            ?> / <span class='badge'><?php echo $status ?></span>
                                         </small> 
                                     </div>
                                 </h4>
@@ -160,11 +160,6 @@
                                                         <td><h5><b>Jenis Pengajuan </h5></b></td>
                                                         <td><h5><b> : </h5></b></td>
                                                         <td><h5> <?php echo $jenis_pengajuan ?> </h5></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><h5><b>Tanggal Pengajuan </h5></b></td>
-                                                        <td><h5><b> : </h5></b></td>
-                                                        <td><h5> <?php echo date("d - m - Y", strtotime ($taggal_pengajuan ) )?> </h5></td>
                                                     </tr>
     <?php
         if( $data['gambar'] == "" ){
@@ -206,7 +201,7 @@
         if( $data['status'] == "menunggu" ){
 
         }
-        else if ($data['status'] == "proses" && "selesai"){
+        else if ($data['status'] == "proses"){
             echo '
                                                 <table>
                                                     <tr>
@@ -217,7 +212,7 @@
                                                     <tr>
                                                         <td><h5><b>Jadwal Pelaksanaan</h5></b></td>
                                                         <td><h5><b> : </h5></b></td>
-                                                        <td><h5>'.$data['jadwal_pelaksanaan'].'</h5></td>
+                                                        <td><h5>'.date("d-m-Y", strtotime($data['jadwal_pelaksanaan'])).'</h5></td>
                                                     </tr>
                                                     <tr>
                                                         <td><h5><b>Catatan</h5></b></td>
@@ -226,6 +221,27 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                            <hr>
+                                            <table>
+                                                <tr>
+                                                    <td colspan="5"><h5><b>Riwayat</h5></b></td>
+                                                </tr>
+            ';
+        }
+        else if ($data['status'] == "selesai"){
+            echo '
+                                                <table>
+                                                    <tr>
+                                                        <td width="150px"></td>
+                                                        <td width="25px"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><h5><b>Catatan</h5></b></td>
+                                                        <td><h5><b> : </h5></b></td>
+                                                        <td><h5>'.$data['catatan'].'</h5></td>
+                                                    </tr>
+                                                </table>
                                             <hr>
                                             <table>
                                                 <tr>
@@ -254,7 +270,7 @@
                                         $no++;
       }                                                      
 ?>
-                                        </table>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>    
@@ -311,53 +327,46 @@ if( $data['status'] == "menunggu" ){
         	demo.initChartist();
     	});
     </script>
-
 <?php
 if (isset($_GET['proses'])) {
+    echo'<script type="text/javascript">';
     $proses = ($_GET["proses"]);
-    if($proses == "edit"){
-        echo'<script>
-            swal({
-                title: "Terubah!",
-                text: "Data pengajuan telah diubah.",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }
-    else if($proses == "terima"){
-        echo'<script> 
-            swal({
-                title: "Terterima!",
-                text: "Data pengajuan telah diterima.",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }
-    else if($proses == "selesai"){
-        echo'<script>
-            swal({
-                title: "Terselesaikan!",
-                text: "Data pengajuan telah diselesaikan.",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }else if ($proses == "tolak"){
-        echo'<script>
-            swal({
-                title: "Tertolak!",
-                text: "Data pengajuan telah ditolak.",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }
+        if($proses == "edit"){
+                echo'swal({
+                    title: "Terubah!",
+                    text: "Data pengajuan telah diubah.",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#00ff00"
+                })';
+        }
+        else if($proses == "terima"){
+            echo'swal({
+                    title: "Terterima!",
+                    text: "Data pengajuan telah diterima.",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#00ff00"
+                })';
+        }
+        else if($proses == "selesai"){
+            echo'swal({
+                    title: "Terselesaikan!",
+                    text: "Data pengajuan telah diselesaikan.",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#00ff00"
+                })';
+        }else if ($proses == "tolak"){
+            echo'swal({
+                    title: "Tertolak!",
+                    text: "Data pengajuan telah ditolak.",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#00ff00"
+                })';
+        }
+    echo'</script>';
   }  
 ?>        
 

@@ -90,50 +90,9 @@
                         <p>Log out</p>
                     </a>
                 </li>
-
-                <script type="text/javascript">
-                </script>
-
-            </ul>
             </ul>
     	</div>
     </div>
-<?php 
-if (isset($_GET['proses'])) {
-    $proses = ($_GET["proses"]);
-    if($proses == "hapus"){
-        echo'<script>
-            swal({
-                title: "Terhapus!",
-                text: "Jenis pengajuan telah ditambah.",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }else if ($proses == "ubah"){
-        echo'<script>
-            swal({
-                title: "Terubah!",
-                text: "Jenis pengajuan telah diubah.",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }else if ($proses == "tambah"){
-        echo'<script>
-            swal({
-                title: "Tertambah!",
-                text: "Jenis pengajuan telah ditambah.",
-                type: "success", 
-                showConfirmButton: true,
-                confirmButtonColor: "#00ff00"
-            })
-        </script>';
-    }
-  } 
-?>
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -227,6 +186,39 @@ if (isset($_GET['proses'])) {
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
 	<script src="../assets/js/demo.js"></script>
+    
+<?php    
+    echo'<script type="text/javascript">';
+    if (isset($_GET['proses'])) {
+        $proses = ($_GET["proses"]);
+        if($proses == "hapus"){
+            echo 'swal({
+                    title: "Terhapus!",
+                    text: "Jenis pengajuan telah ditambah.",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#00ff00"
+                })';
+        }else if ($proses == "ubah"){
+            echo 'swal({
+                    title: "Terubah!",
+                    text: "Jenis pengajuan telah diubah.",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#00ff00"
+                })';
+        }else if ($proses == "tambah"){
+            echo 'swal({
+                    title: "Tertambah!",
+                    text: "Jenis pengajuan telah ditambah.",
+                    type: "success", 
+                    showConfirmButton: true,
+                    confirmButtonColor: "#00ff00"
+                })';
+        }
+    }
+    echo'</script>'
+?> 
 	<script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();
