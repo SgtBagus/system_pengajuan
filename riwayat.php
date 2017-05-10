@@ -165,6 +165,10 @@
                 $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %m - %Y') as tanggal_pengajuan,
                             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
                             AND b.username like '$username_login' AND a.pengajuan like '%$pengajuan%' AND a.status like 'selesai' ORDER BY a.id_pengajuan DESC" ;
+            }else {
+                $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %m - %Y') as tanggal_pengajuan,
+                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                            AND b.username like '$username_login' AND a.pengajuan like '%$pengajuan%' AND a.tanggal_pengajuan like '$tgl' AND a.status like 'selesai' ORDER BY a.id_pengajuan DESC" ;
             }
         }
         else{    
