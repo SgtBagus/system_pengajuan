@@ -62,6 +62,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="riwayat">
+                            <i class="pe pe-7s-timer"></i>
+                            <p>Riwayat</p>
+                        </a>
+                    </li>
+                    <li>
                         <a href="notifikasi">
                             <i class="pe pe-7s-bell"></i>
 
