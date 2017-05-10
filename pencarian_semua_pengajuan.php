@@ -143,11 +143,46 @@
                             <div class="card">
                                 <div class="header">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <h4 class="title">Data Pengguna</h4>
-                                            <small>Pencarian Judul = <b>"<?php echo $judul ?>"</b> Pengaju = <b>"<?php echo $username ?>"</b> Tanggal = <b>"<?php echo $tanggal ?>"</b> Status = <b>"<?php echo $semua ?>"</b>
-                                            <br> Data sebanyak <b>[ '<?php echo $banyakdata ?>' ]</b></small>
-                                            <a href="semua_pengajuan"><p class="category"><i class="fa fa-refresh"></i> Reset Data Pengguna</p></a>
+                                            <br>
+                                            <div class="card">
+                                                <div class="content">
+                                                    <h4 class="title">Pencarian</h4>
+                                                    <h5>Judul pengajuan : 
+                                                    <?php 
+                                                        if ($judul == ""){
+                                                            echo "<small>*semua judul pengajuan!</small>";
+                                                        }else{
+                                                            echo "<b> $judul </b>";
+                                                        }
+                                                        ?><br></h5>
+                                                            <small> Tanggal : 
+                                                        <?php 
+                                                        if ($tanggal == ""){
+                                                            echo "<b>*semua tanggal pengajuan</b>";
+                                                        }else{
+                                                            echo "<b> $tanggal </b>";
+                                                        }   
+                                                        ?>
+                                                            / Pengaju : 
+                                                        <?php
+                                                        if ($username == ""){
+                                                            echo "<b>*semua pengaju pengajuan</b>";
+                                                        }else{
+                                                            echo "<b> $username </b>";
+                                                        }   
+                                                        ?>
+                                                    </b> - Status : <b><?php echo $semua ?></b></small><br>
+                                                    <div align="right">
+                                                        <a href="pengajuan">
+                                                            <button type="button" class="btn btn-info btn-fill btn-sm btn-wd">
+                                                                <i class="fa fa-refresh"></i> Reset Pencarian
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>  
                                     </div>
                                     <br>
@@ -183,7 +218,13 @@
                                                 <td>'.$data['jenis_pengajuan'].'</td>
                                                 <td>'.$data['tanggal_pengajuan'].'</td>
                                                 <td>'.$data['biaya'].'</td>
-                                                <td>'.$data['status'].'</td>
+                                                <td align = "center">';
+    if( $data['status'] == "proses" ){
+                                                echo '<span class="badge proses upper">'.$data['status'].'</span>';
+    }else{
+                                                echo '<span class="badge  upper">'.$data['status'].'</span>';
+    }
+                                                echo '</td>
                                                 <td align="center">';
     if( $data['status'] == "menunggu" ){
         if ( $data['username'] == $username_login ){

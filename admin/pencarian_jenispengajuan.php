@@ -18,15 +18,10 @@
 	<title>Jenis Pengajuan</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-    <!-- Bootstrap core CSS     -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Animation library for notifications   -->
     <link href="../assets/css/animate.min.css" rel="stylesheet"/>
-    <!--  Light Bootstrap Table core CSS    -->
     <link href="../assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
-    <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
@@ -110,14 +105,31 @@
                         <div class="card">
                             <div class="header">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <h4 class="title">Data Pengguna</h4>
-                                        <small>Pencarian Jenis Pengajuan = <b>"<?php echo $pencarian ?>"</b> || data sebanyak <b>[ '<?php echo $banyakdata ?>' ]</b></small>
-                                        <a href="jenis_pengajuan"><p class="category"><i class="fa fa-refresh"></i> Reset Data Jenis Pengajuan</p></a>
-                                    </div>  
+                                    <div class="col-md-12">
+                                        <h4 class="title">Jenis Pengajuan</h4>
+                                        <br>
+                                        <div class="card">
+                                            <div class="content">
+                                                <h4 class="title">Pencarian</h4>
+                                                    <h5>Judul pengajuan : 
+                                                    <?php 
+                                                    if ($pencarian == ""){
+                                                        echo "<small>*semua data jenis pengajuan</small>";
+                                                    }else{
+                                                        echo "<b> $pencarian </b>";
+                                                    }
+                                                    ?></h5>
+                                                <div align="right">
+                                                    <a href="jenis_pengajuan">
+                                                        <button type="button" class="btn btn-info btn-fill btn-sm btn-wd">
+                                                            <i class="fa fa-refresh"></i> Reset Pencarian
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
                                 </div>
-                                <br>
-                                <div class="row">
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">

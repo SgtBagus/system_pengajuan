@@ -104,7 +104,7 @@
         $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %m - %Y') as tanggal_pengajuan, 
                 a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
                 AND a.pengajuan LIKE '%".$judul."%' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir')
-                AND a.status like '%".$status."%' ORDER BY a.id_pengajuan DESC " ;
+                AND a.status like '%".$status."%' ORDER BY DATE_FORMAT(a.tanggal_pengajuan, '%d - %m - %Y') " ;
         $result = mysqli_query($con, $query);
         $no = 1;
         $cek = count($result);
@@ -120,13 +120,29 @@
                                 <div class="header">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <h4 class="title">Pencarian Data Pengguna<br>
-                                            <small>Judul : <b><?php echo '"'.$judul.'"' ?></b> - <small> Tgl <b><?php echo '"'.$tanggal_awal.'"' ?></b> s/d <b><?php echo '"'.$tanggal_akhir.'"' ?></b> - Status : <b><?php echo $tampil?></b></small></small></h4>
-                                            <a href="pengajuan">
-                                                <button type="button" class="btn btn-info btn-fill btn-sm btn-wd">
-                                                    <i class="fa fa-refresh"></i> Reset Pencarian
-                                                </button>
-                                            </a>
+                                            <h4 class="title">Pengajuan</h4>
+                                            <br>
+                                            <div class="card">
+                                                <div class="content">
+                                                    <h4 class="title">Pencarian</h4>
+                                                    <h5>Judul pengajuan : 
+                                                    <?php 
+                                                    if ($judul == ""){
+                                                        echo "<small>*semua judul pengajuan</small>";
+                                                    }else{
+                                                        echo "<b> $judul </b>";
+                                                    }
+                                                    ?><br></h5>
+                                                    <small> Tanggal : <b><?php echo ''.$tanggal_awal.'' ?></b> sampai <b><?php echo ''.$tanggal_akhir.'' ?></b> - Status : <b><?php echo $tampil?></b></small><br>
+                                                    <div align="right">
+                                                        <a href="pengajuan">
+                                                            <button type="button" class="btn btn-info btn-fill btn-sm btn-wd">
+                                                                <i class="fa fa-refresh"></i> Reset Pencarian
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>  
                                     </div>
                                 </div>
@@ -161,30 +177,47 @@
                                                 <td>'.$data['jenis_pengajuan'].'</td>
                                                 <td>'.$data['tanggal_pengajuan'].'</td>
                                                 <td>'.$data['biaya'].'</td>
-                                                <td>'.$data['status'].'</td>
-                                                <td>';
+                                                <td align = "center">';
+    if( $data['status'] == "proses" ){
+                                                echo '<span class="badge proses upper">'.$data['status'].'</span>';
+    }else{
+                                                echo '<span class="badge  upper">'.$data['status'].'</span>';
+    }
+                                                echo '</td>
+                                                <td align="center">';
     if( $data['status'] == "menunggu" ){
                                             echo '<button onclick="pengajuanditerima('.$data['id_pengajuan'].')" type="button" class="btn btn-primary btn-fill btn-sm">
                                                 <i class="fa fa-check"></i>
                                             </button>
                                             <button onclick="pengajuanditolak('.$data['id_pengajuan'].')" type="button" class="btn btn-danger  btn-fill btn-sm">
                                                 <i class="fa fa-close"></i>
-                                            </button>';
+                                            </button>
+                                            <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
+                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                    <i class="fa fa-eye"></i>
+                                                </button>
+                                            </a>';
     }
     else if ($data['status'] == "proses"){
                                             echo '<button onclick="pengajuandiubah('.$data['id_pengajuan'].')" type="button" class="btn btn-primary  btn-fill btn-sm">
                                                 <i class="fa fa-edit"></i>
                                             </button>
-                                            <button onclick="pengajuandiselesaikan('.$data['id_pengajuan'].')" type="button" name="input" class="btn btn-primary  btn-fill btn-sm">
-                                                <i class="fa fa-check"></i>
-                                            </button>';
-    }
-                                            echo '<a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
+                                            <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                 <button type="button" class="btn btn-info btn-fill btn-sm">
                                                     <i class="fa fa-eye"></i>
                                                 </button>
                                             </a>
-                                        </td>
+                                            <button onclick="pengajuandiselesaikan('.$data['id_pengajuan'].')" type="button" name="input" class="btn btn-primary  btn-fill btn-sm">
+                                                <i class="fa fa-check"></i>
+                                            </button>';
+    }else if($data['status'] == "selesai"){
+                                            echo '<a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
+                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                    <i class="fa fa-eye"></i>
+                                                </button>
+                                            </a>';
+    }
+                                        echo '</td>
                                     </tr>';
                                 $no++;
         }

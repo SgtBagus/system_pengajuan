@@ -210,7 +210,13 @@
                                                 <td>'.$data['jenis_pengajuan'].'</td>
                                                 <td>'.$data['tanggal_pengajuan'].'</td>
                                                 <td>'.$data['biaya'].'</td>
-                                                <td>'.$data['status'].'</td>
+                                                <td align = "center">';
+    if( $data['status'] == "proses" ){
+                                                echo '<span class="badge proses upper">'.$data['status'].'</span>';
+    }else{
+                                                echo '<span class="badge  upper">'.$data['status'].'</span>';
+    }
+                                                echo '</td>
                                                 <td align="center">';
     if( $data['status'] == "menunggu" ){
         if ( $data['username'] == $username_login ){

@@ -169,7 +169,13 @@
         else {
             while($data_pengajuan = mysqli_fetch_assoc($result_pengajuan)){
                                             echo '<tr>
-                                                <td> '.$data_pengajuan['pengajuan'].' - ( <b>'.$data_pengajuan['status'].'</b> )</td></td>
+                                                <td> '.$data_pengajuan['pengajuan'].' - ';
+    if( $data_pengajuan['status'] == "proses" ){
+                                                echo '<span class="badge proses upper">'.$data_pengajuan['status'].'</span>';
+    }else{
+                                                echo '<span class="badge  upper">'.$data_pengajuan['status'].'</span>';
+    }   
+                                                echo '</td>
                                                 <td class="td-actions text-right">
                                                     <a href="detail_pengajuan?id='.$data_pengajuan['id_pengajuan'].'">
                                                         <button type="button" rel="tooltip" title="Lihat Pengajuan" class="btn btn-info btn-simple btn-xs">
@@ -225,7 +231,7 @@
                                         <small>'.$data2['kegiatan3'].'</small></h5>';                           
             if ($data2['notifikasi'] == "1"){
                                     echo '<div align="right">
-                                        <span class="new badge">Belum Dibaca</span>
+                                        <span class="badge upper">Belum Dibaca</span>
                                     </div>';  
             }
             else{

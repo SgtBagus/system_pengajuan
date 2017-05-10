@@ -152,6 +152,7 @@
                                                         <i class="fa fa-search"></i> Cari
                                                 </button>
                                             </div>
+                                        </div>
                                     </from>
                                 </div>
                                 <div class="content table-responsive table-full-width">
@@ -193,30 +194,47 @@
                                                 <td>'.$data['jenis_pengajuan'].'</td>
                                                 <td>'.$data['tanggal_pengajuan'].'</td>
                                                 <td>'.$data['biaya'].'</td>
-                                                <td>'.$data['status'].'</td>
-                                                <td align="center">';
+                                                <td align = "center">';
+    if( $data['status'] == "proses" ){
+                                                echo '<span class="badge proses upper">'.$data['status'].'</span>';
+    }else{
+                                                echo '<span class="badge  upper">'.$data['status'].'</span>';
+    }
+                                                echo '</td>
+                                                <td align = "center">';
     if( $data['status'] == "menunggu" ){
                                             echo '<button onclick="pengajuanditerima('.$data['id_pengajuan'].')" type="button" class="btn btn-primary btn-fill btn-sm">
                                                 <i class="fa fa-check"></i>
                                             </button>
                                             <button onclick="pengajuanditolak('.$data['id_pengajuan'].')" type="button" class="btn btn-danger  btn-fill btn-sm">
                                                 <i class="fa fa-close"></i>
-                                            </button>';
+                                            </button>
+                                            <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
+                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                    <i class="fa fa-eye"></i>
+                                                </button>
+                                            </a>';
     }
     else if ($data['status'] == "proses"){
                                             echo '<button onclick="pengajuandiubah('.$data['id_pengajuan'].')" type="button" class="btn btn-primary  btn-fill btn-sm">
                                                 <i class="fa fa-edit"></i>
                                             </button>
-                                            <button onclick="pengajuandiselesaikan('.$data['id_pengajuan'].')" type="button" name="input" class="btn btn-primary  btn-fill btn-sm">
-                                                <i class="fa fa-check"></i>
-                                            </button>';
-    }
-                                            echo '<a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
+                                            <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                 <button type="button" class="btn btn-info btn-fill btn-sm">
                                                     <i class="fa fa-eye"></i>
                                                 </button>
                                             </a>
-                                        </td>
+                                            <button onclick="pengajuandiselesaikan('.$data['id_pengajuan'].')" type="button" name="input" class="btn btn-primary  btn-fill btn-sm">
+                                                <i class="fa fa-check"></i>
+                                            </button>';
+    }else if($data['status'] == "selesai"){
+                                            echo '<a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
+                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                    <i class="fa fa-eye"></i>
+                                                </button>
+                                            </a>';
+    }
+                                        echo'</td>
                                     </tr>';
     $no++;
         }
@@ -336,7 +354,7 @@
                             "April", "Mei", "Juni", 
                             "Juli", "Agustus", "September", 
                             "Oktober", "November", "December" ],
-                dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ]
+                dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ],
                 
             });
             $( "#datepicker2" ).datepicker({

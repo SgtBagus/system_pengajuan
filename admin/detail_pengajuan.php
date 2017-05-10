@@ -132,8 +132,13 @@
                                             <?php
                                                 echo '<a href="detail_user?id='.$id_pengaju.'">
                                                     <b>'.$pengaju.'</b> - <small>'.date("d-m-Y", strtotime($taggal_pengajuan)).'</small>
-                                                </a>';
-                                            ?> / <span class='badge'><?php echo $status ?></span>
+                                                </a> / ';
+                                            
+    if( $data['status'] == "proses" ){
+                                                echo '<span class="badge proses upper">'.$data['status'].'</span>';
+    }else{
+                                                echo '<span class="badge  upper">'.$data['status'].'</span>';
+    }?> 
                                         </small> 
                                     </div>
                                 </h4>
@@ -147,7 +152,7 @@
                                             <div class="form-group">
                                                 <table>
                                                     <tr>
-                                                        <td width="150px"></td>
+                                                        <td width="180px"></td>
                                                         <td width="25px"></td>
                                                         <td></td>
                                                     </tr>
@@ -205,7 +210,7 @@
             echo '
                                                 <table>
                                                     <tr>
-                                                        <td width="150px"></td>
+                                                        <td width="180px"></td>
                                                         <td width="25px"></td>
                                                         <td></td>
                                                     </tr>

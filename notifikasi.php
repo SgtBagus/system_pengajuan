@@ -138,7 +138,7 @@
                                                 <h5>Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'</h5>';
         if ($data2['notifikasi'] == "1"){
                                 echo '<div align="right">
-                                    <span class="new badge">Belum DiBaca</span>
+                                    <span class="badge upper">Belum DiBaca</span>
                                 </div>'; 
         }
         else{

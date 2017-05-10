@@ -111,12 +111,13 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group">
-                                                <input type="text" name="cari" id="cari" class="form-control" placeholder="Pencarian..." >
+                                                <label>Pencarian : </label>
+                                                <input type="text" name="cari" id="cari" class="form-control" placeholder="Username">
                                             </div>
                                         </div>
-
                                         <div class="col-md-1">
-                                            <button type="submit" class="btn btn-primary btn-fill">
+                                            <label><br></label>
+                                            <button type="submit" rel="tooltip" class="btn btn-primary btn-fill">
                                                     <i class="fa fa-search"></i> Cari
                                             </button>
                                         </div>

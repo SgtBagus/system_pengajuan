@@ -168,7 +168,9 @@
                             <div class="card ">
                                 <div class="header">
                                     <h4 class="title">List Pengajuan</h4>
-                                    <p class="category">Status Pengajuan : <b>"Proses"</b></p>
+                                    <p class="category">Status Pengajuan :
+                                        <span class="badge proses upper">proses</span>
+                                    </p>
                                 </div>
                                 <div class="content">
                                     <div class="table-full-width">
