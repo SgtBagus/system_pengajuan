@@ -8,6 +8,25 @@
     else {
         $logged_in = true;
     }
+    
+            
+    function tanggal_indo($tanggal){
+        $bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+        );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+    }
 ?> 
 <!doctype html>
 <html lang="en">
@@ -46,7 +65,7 @@
         $id_login = $data_login["id_user"];
         $username_login = $data_login["username"];
     ?>
-                        Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) - <?php echo $username_login ?></small></small>
+                        System Pengajuan<br><small>( TIM ) - <?php echo $username_login ?></small>
                     </a>
                 </div>
                 <ul class="nav">
@@ -113,147 +132,325 @@
         </div>
         <div class="main-panel">
             <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="header">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h4 class="title">Data Pengajuan</h4>
-                                        </div>  
-                                        <div class="col-md-6" align="right">
-                                            <a href="semua_pengajuan">
-                                                <button type="button" rel="tooltip" class="btn btn-primary btn-fill">
-                                                        <i class="fa fa-search"></i> Semua Pengajuan 
-                                                </button>
-                                            </a>
-                                            <a href="ajukan_pengajuan">
-                                                <button type="button" rel="tooltip" class="btn btn-primary btn-fill">
-                                                        <i class="fa fa-plus"></i> Ajukan Pengajuan
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <br>    
-                                    <form id="form_pencarian"  action="pencarian_pengajuan" method="get">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label> Judul Pengajuan</label>
-                                                    <input type="text" name="pengajuan" id="pengajuan" class="form-control" placeholder="Judul" >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label> Tanggal Pengajuan</label>
-                                                    <input type="text" name="tanggal" id="datepicker" class="form-control" placeholder="Tanggal">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label> Status</label>
-                                                    <select name="status" form="form_pencarian" class="form-control"> 
-                                                        <option value="">Semua</option>
-                                                        <option value="menunggu">Menunggu</option>
-                                                        <option value="proses">Proses</option>
-                                                        <option value="selesai">Selesai</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <label><br></label>
-                                                <button type="submit" rel="tooltip" class="btn btn-primary btn-fill">
-                                                        <i class="fa fa-search"></i> Cari
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </from>
-                                </div>
-                                <div class="content table-responsive table-full-width">
-                                    <table class="table table-hover table-striped">
-                                        <thead>
-                                            <th>No</th>
-                                            <th>Pengajuan</th>
-                                            <th>Jenis</th>
-                                            <th>tanggal</th>
-                                            <th>biaya</th>
-                                            <th>status</th>
-                                            <th>Tindak Lanjut</th>
-                                        </thead>
-                                        <tbody>
-    <?php
-        $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %m - %Y') as tanggal_pengajuan,
-                    a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
-                    AND b.username like '$username_login' ORDER BY a.id_pengajuan DESC" ;
-        $result = mysqli_query($con, $query);
-        if(!$result){
-            die ("Query Error: ".mysqli_errno($con).
-            " - ".mysqli_error($con));
-        }
-        if($result->num_rows == 0){
-                                            echo "<tr>
-                                                <td colspan='7' align='center'>Anda tidak memiliki pengajuan</td>
-                                            </tr>";
-        }
-        else {
-        $no = 1;
-        while($data = mysqli_fetch_assoc($result))
-        {
-                                            echo '<tr>
-                                                <td>'.$no.'</td>
-                                                <td>'.$data['pengajuan'].'</td>
-                                                <td>'.$data['jenis_pengajuan'].'</td>
-                                                <td>'.$data['tanggal_pengajuan'].'</td>
-                                                <td>'.$data['biaya'].'</td>
-                                                <td align = "center">';
-    if( $data['status'] == "proses" ){
-                                                echo '<span class="badge proses upper">'.$data['status'].'</span>';
-    }else{
-                                                echo '<span class="badge  upper">'.$data['status'].'</span>';
-    }
-                                                echo '</td>
-                                                <td align="center">';
-    if( $data['status'] == "menunggu" ){
-                                            echo '<button onclick="edit('.$data['id_pengajuan'].')" type="button" class="btn btn-primary btn-fill btn-sm">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                <button type="button" class="btn btn-info btn-fill btn-sm">
-                                                    <i class="fa fa-eye"></i>
-                                                </button>
-                                            </a>
-                                            <button onclick="batal('.$data['id_pengajuan'].')" type="button" class="btn btn-danger  btn-fill btn-sm">
-                                                <i class="fa fa-close"></i>
-                                            </button>';
-    }
-    else if ($data['status'] == "proses"){
-                                            echo '<a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                <button type="button" class="btn btn-info btn-fill btn-sm">
-                                                    <i class="fa fa-eye"></i>
-                                                </button>
-                                            </a>';
-    }
-    else if ($data['status'] == "selesai"){
-                                            echo '<a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                <button type="button" class="btn btn-info btn-fill btn-sm">
-                                                    <i class="fa fa-eye"></i>
-                                                </button>
-                                            </a>
-                                            <button onclick="hapus('.$data['id_pengajuan'].')" type="button" class="btn btn-danger  btn-fill btn-sm">
-                                                <i class="fa fa-trash"></i>
-                                            </button>';
-    }
-                                                echo '</td>
-                                            </tr>';
-                                            $no++;
-            }
-        }
-    ?>
-                                        </tbody>
-                                    </table>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="title">Pengajuan</h4>
+                                </div>  
+                                <div class="col-md-6" align="right">
+                                    <a href="tambah_pengajuan">
+                                        <button type="button" rel="tooltip" class="btn btn-primary btn-fill">
+                                            <i class="fa fa-plus"></i> Tambah Pengajuan
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
+                            <br>    
+                            <form id="form_pencarian"  action="?" method="get">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label> Judul Pengajuan</label>
+                                            <input type="text" name="judul" class="form-control" >
+                                        </div> 
+                                    </div>
+                                        <?php
+                                            $query_MIN = "SELECT MIN(tanggal_pengajuan) from pengajuan";
+                                            $result_MIN = mysqli_query($con, $query_MIN);
+                                            $data_MIN = mysqli_fetch_assoc($result_MIN);
+                                            $MIN = date_create($data_MIN['MIN(tanggal_pengajuan)']);
+                                            $awal = date_format($MIN,"d-m-Y");
+                                        ?>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label> Tanggal Pengajuan Awal </label>
+                                            <input type="text" name="pertama" id="datepicker1" class="form-control" value="<?php echo $awal;?>">
+                                        </div> 
+                                    </div>
+                                        <?php
+                                            $query_MAX = "SELECT MAX(tanggal_pengajuan) from pengajuan";
+                                            $result_MAX = mysqli_query($con, $query_MAX);
+                                            $data_MAX = mysqli_fetch_assoc($result_MAX);
+                                            $MAX = date_create($data_MAX['MAX(tanggal_pengajuan)']);
+                                            $akhir = date_format($MAX,"d-m-Y");
+                                        ?>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label> Tanggal Pengajuan Akhir </label>
+                                            <input type="text" name="terakhir" id="datepicker2" class="form-control" value="<?php echo $akhir; ?>" >
+                                            </div> 
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label> Status</label>
+                                            <select name="status" form="form_pencarian" class="form-control"> 
+                                                <option value="">Semua</option>
+                                                <option value="menunggu">Menunggu</option>
+                                                <option value="proses">Proses</option>
+                                                <option value="selesai">Selesai</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label><br></label>
+                                        <button type="submit" class="btn btn-primary btn-fill">
+                                                <i class="fa fa-search"></i> Cari
+                                        </button>
+                                    </div>
+                                </div>
+                            </from>
+                        </div>
+                        <div class="content content-full-width">
+                            <ul role="tablist" class="nav nav-tabs">
+                                <li role="presentation" class="active">
+                                    <a href="#semua" data-toggle="tab">Pengajuan</a>
+                                </li>
+                                <li>
+                                    <a href="#sendiri" data-toggle="tab">Pengajuan Sendiri</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="semua" class="tab-pane active">
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <th>No</th>
+                                                <th>Pengajuan</th>
+                                                <th>Pengaju</th>
+                                                <th>Jenis</th>
+                                                <th>tanggal</th>
+                                                <th>biaya</th>
+                                                <th>status</th>
+                                                <th>Tindak Lanjut</th>
+                                            </thead>
+                                            <tbody>
+        <?php
+        if (isset($_GET['judul'])) {
+            $pengajuan = ($_GET["judul"]);
+            $first = date_create(($_GET["pertama"]));
+            $lass = date_create(($_GET["terakhir"]));
+            $awal = date_format($first,"Y-m-d");
+            $akhir = date_format($lass,"Y-m-d");
+            $status = ($_GET["status"]);
+
+            if( $pengajuan == ""){
+                $query_semua = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
+                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                            AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') ORDER BY a.id_pengajuan DESC" ;
+            }else {
+                $query_semua = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
+                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                            AND a.pengajuan like '%$pengajuan%' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir')ORDER BY a.id_pengajuan DESC" ;
+            }
+        }
+        else {
+            $query_semua = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
+                        a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                        ORDER BY a.id_pengajuan DESC" ;
+        }
+            $result_semua = mysqli_query($con, $query_semua);
+            if($result_semua->num_rows == 0){
+                                                echo "<tr>
+                                                    <td colspan='8' align='center'>
+                                                        Anda tidak memiliki pengajuan
+                                                        <br>
+                                                        <a href='pengajuan'>
+                                                            <button type='button' class='btn btn-primary btn-fill btn-sm'>
+                                                                <i class='fa fa-refresh'></i> Refresh data
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>";
+            }
+            else {
+                $no_semua = 1;
+                while($data_semua = mysqli_fetch_assoc($result_semua)){
+                                                    echo '<tr>
+                                                        <td>'.$no_semua.'</td>
+                                                        <td>'.$data_semua['pengajuan'].'</td>
+                                                        <td>'.$data_semua['username'].'</td>
+                                                        <td>'.$data_semua['jenis_pengajuan'].'</td>
+                                                        <td>'.tanggal_indo(''.$data_semua['tanggal_pengajuan'].'').' </td>
+                                                        <td>'.$data_semua['biaya'].'</td>
+                                                        <td align = "center">';
+                    if( $data_semua['status'] == "proses" ){
+                                                        echo '<span class="badge proses upper">'.$data_semua['status'].'</span>';
+                    }else{
+                                                        echo '<span class="badge  upper">'.$data_semua['status'].'</span>';
+                    }
+                                                        echo '</td>
+                                                        <td align="center">';
+                    if( $data_semua['status'] == "menunggu" ){
+                        if ( $data_semua['username'] == $username_login ){
+                                                            echo '<a href="edit_pengajuan?id='.$data_semua['id_pengajuan'].'">
+                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </button>
+                                                            </a>
+                                                            <a href="detail_pengajuan?id='.$data_semua['id_pengajuan'].'">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </button>
+                                                            </a>
+                                                            <button onclick="batal('.$data_semua['id_pengajuan'].')" type="button" class="btn btn-danger  btn-fill btn-sm">
+                                                                <i class="fa fa-close"></i>
+                                                            </button>';
+                        }else{
+                                                            echo '<a href="detail_pengajuan?id='.$data_semua['id_pengajuan'].'">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </button>
+                                                            </a>';
+                        }        
+                    }
+                    else if ($data_semua['status'] == "proses"){
+                                                            echo '<a href="detail_pengajuan?id='.$data_semua['id_pengajuan'].'">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </button>
+                                                            </a>';
+                    }
+                    else if ($data_semua['status'] == "selesai"){
+                        if ( $data_semua['username'] == $username_login ){
+                                                            echo '<a href="detail_pengajuan?id='.$data_semua['id_pengajuan'].'">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </button>
+                                                            </a>
+                                                            <button onclick="hapus('.$data_semua['id_pengajuan'].')" type="button" class="btn btn-danger  btn-fill btn-sm">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>';
+                        }else{
+                                                            echo '<a href="detail_pengajuan?id='.$data_semua['id_pengajuan'].'">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </button>
+                                                            </a>';
+                        }        
+                    }
+                                                        echo '</td>
+                                                    </tr>';
+                                                    $no_semua++;
+                }
+            }
+        ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div id="sendiri" class="tab-pane">
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <th>No</th>
+                                                <th>Pengajuan</th>
+                                                <th>Jenis</th>
+                                                <th>tanggal</th>
+                                                <th>biaya</th>
+                                                <th>status</th>
+                                                <th>Tindak Lanjut</th>
+                                            </thead>
+                                            <tbody>
+        <?php
+        if (isset($_GET['judul'])) {
+            $pengajuan = ($_GET["judul"]);
+            $first = date_create(($_GET["pertama"]));
+            $lass = date_create(($_GET["terakhir"]));
+            $awal = date_format($first,"Y-m-d");
+            $akhir = date_format($lass,"Y-m-d");
+            $status = ($_GET["status"]);
+
+            if( $pengajuan == ""){
+                $query_sendiri = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
+                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                            AND b.username LIKE '$username_login' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') ORDER BY a.id_pengajuan DESC" ;
+            }else {
+                $query_sendiri = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
+                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                            AND b.username LIKE '$username_login' AND a.pengajuan like '%$pengajuan%' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir')ORDER BY a.id_pengajuan DESC" ;
+            }
+        }
+        else {
+            $query_sendiri = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
+                        a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                        AND b.username LIKE '$username_login' ORDER BY a.id_pengajuan DESC" ;
+        }
+            $result_sendiri = mysqli_query($con, $query_sendiri);
+            if($result_sendiri->num_rows == 0){
+                                                echo "<tr>
+                                                    <td colspan='8' align='center'>
+                                                        Anda tidak memiliki pengajuan
+                                                        <br>
+                                                        <a href='pengajuan'>
+                                                            <button type='button' class='btn btn-primary btn-fill btn-sm'>
+                                                                <i class='fa fa-refresh'></i> Refresh data
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>";
+            }
+            else {
+                $no_sendiri = 1;
+                while($data_sendiri = mysqli_fetch_assoc($result_sendiri)){
+                                                    echo '<tr>
+                                                        <td>'.$no_sendiri.'</td>
+                                                        <td>'.$data_sendiri['pengajuan'].'</td>
+                                                        <td>'.$data_sendiri['jenis_pengajuan'].'</td>
+                                                        <td>'.tanggal_indo(''.$data_sendiri['tanggal_pengajuan'].'').' </td>
+                                                        <td>'.$data_sendiri['biaya'].'</td>
+                                                        <td align = "center">';
+                    if( $data_sendiri['status'] == "proses" ){
+                                                        echo '<span class="badge proses upper">'.$data_sendiri['status'].'</span>';
+                    }else{
+                                                        echo '<span class="badge  upper">'.$data_sendiri['status'].'</span>';
+                    }
+                                                        echo '</td>
+                                                        <td align="center">';
+                    if( $data_sendiri['status'] == "menunggu" ){
+                                                            echo '<a href="edit_pengajuan?id='.$data_sendiri['id_pengajuan'].'">
+                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </button>
+                                                            </a>
+                                                            <a href="detail_pengajuan?id='.$data_sendiri['id_pengajuan'].'">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </button>
+                                                            </a>
+                                                            <button onclick="batal('.$data_sendiri['id_pengajuan'].')" type="button" class="btn btn-danger  btn-fill btn-sm">
+                                                                <i class="fa fa-close"></i>
+                                                            </button>';
+                    }
+                    else if ($data_sendiri['status'] == "proses"){
+                                                            echo '<a href="detail_pengajuan?id='.$data_sendiri['id_pengajuan'].'">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </button>
+                                                            </a>';
+                    }
+                    else if ($data_sendiri['status'] == "selesai"){
+                                                            echo '<a href="detail_pengajuan?id='.$data_sendiri['id_pengajuan'].'">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </button>
+                                                            </a>
+                                                            <button onclick="hapus('.$data_sendiri['id_pengajuan'].')" type="button" class="btn btn-danger  btn-fill btn-sm">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>';
+                    }
+                                                        echo '</td>
+                                                    </tr>';
+                                                    $no_sendiri++;
+                }
+            }
+        ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                           </div>
                         </div>
                     </div>
                 </div>
@@ -317,22 +514,6 @@
             })
         }
 
-        function edit(id) {
-            swal({
-                title: "Konfirmasi ?",
-                text: "Apakah anda ingin mengubah pengajuan",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#00ff00",
-                confirmButtonText: "Terima",
-                cancelButtonText: "Batal",
-                closeOnConfirm: false
-            },
-            function(){
-                document.location="edit_pengajuan?id="+id;
-            })
-        }
-
         function batal(id) {
             swal({
                 title: "Konfirmasi ?",
@@ -366,7 +547,16 @@
         }
         
         $( function() {
-            $( "#datepicker" ).datepicker({
+            $( "#datepicker1" ).datepicker({
+                dateFormat: "dd-mm-yy",
+                monthNames: [ "Januari", "Febuari", "Maret", 
+                            "April", "Mei", "Juni", 
+                            "Juli", "Agustus", "September", 
+                            "Oktober", "November", "December" ],
+                dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ]
+                
+            });
+            $( "#datepicker2" ).datepicker({
                 dateFormat: "dd-mm-yy",
                 monthNames: [ "Januari", "Febuari", "Maret", 
                             "April", "Mei", "Juni", 

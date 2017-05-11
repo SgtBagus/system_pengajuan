@@ -26,7 +26,7 @@
     <body>
         <div class="page-container">
             <img src='assets/img/logo.png' width='300' height='158'><br>
-            <h1>Pengajuan Barang Dan Training<br>
+            <h1>Sistem Pengajuan<br>
             <form action="system/act?op=in" method="POST" >
                 <input type="text" name="email" placeholder="Email" required
                 oninvalid="this.setCustomValidity('Mohon isi Email Anda !')" 

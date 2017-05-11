@@ -50,7 +50,7 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="index" class="simple-text">
-                    Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) - <?php echo $username ?></small></small>
+                        System Pengajuan<br><small>( TIM ) - <?php echo $username ?></small>
                 </a>
             </div>
 
@@ -146,8 +146,10 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="Password">Ubah Password</label>
-                                                <input type="password" name="password" id="form_edit_user" class="form-control" placeholder="Ubah Password">
+                                                <label for="Password">Ubah Password</label><br>
+                                                <button onclick="ubah_password(<?php echo $id ?>)" type="button" class="btn btn-danger  btn-fill">
+                                                    <i class="fa fa-info"></i> Konfirmasi
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -230,6 +232,28 @@ if (isset($_GET['proses'])) {
     	$(document).ready(function(){
         	demo.initChartist();
     	});
+        function ubah_password(id) {
+            swal({
+                title: "Ubah Password",
+                type: "input",
+                confirmButtonColor: "#00cc00", 
+                confirmButtonText: "Konfirmasi",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: "slide-from-top",
+                inputPlaceholder: "Passoword Anda",
+            },
+                function(inputValue){
+                    if (inputValue === false) return false;
+                
+                if (inputValue === "") {
+                    swal.showInputError("Masukan passowrd anda!");
+                    return false
+                }
+            
+            swal("Nice!", "You wrote: " + inputValue, "success");
+            });
+        }
         function logout() {
             swal({
                 title: "Konfirmasi ?",

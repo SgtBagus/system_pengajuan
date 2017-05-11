@@ -8,6 +8,25 @@
     else {
         $logged_in = true;
     }
+    
+    function tanggal_indo($tanggal){
+        $bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+        );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+    }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -44,7 +63,7 @@
         $id_login = $data_login["id_user"];
         $username_login = $data_login["username"];
     ?>
-                        Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) - <?php echo $username_login ?></small></small>
+                        System Pengajuan<br><small>( TIM ) - <?php echo $username_login ?></small>
                     </a>
                 </div>
                 <ul class="nav">
@@ -111,14 +130,24 @@
                 </ul>
             </div>
         </div>
-
         <div class="main-panel">
             <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="header">
-                            <h4>Notifikasi</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="title">Notifikasi</h4>
+                                </div>  
+                                <br>
+                                <div class="col-md-6" align="right">
+                            <?php   echo'<a href="system/bacasemua?id_user='.$id_login.'">'; ?>
+                                        <button type="button" rel="tooltip" class="btn btn-primary btn-fill">
+                                            Baca semua 
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         
     <?php
@@ -138,28 +167,28 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">
-                                                <h5><b>'.$data2['jenis_riwayat'].'</b> - '.$data2['pengajuan'].'
-                                            <br> 
-                                                <small>'.$data2['kegiatan3'].'</small></h5>
-                                                <h5>Tanggal kegiatan = '.$data2['tanggal_kegiatan'].'</h5>';
+                                            <h5><b>'.$data2['jenis_riwayat'].'</b> - '.$data2['pengajuan'].'</h5>
+                                            '.$data2['kegiatan3'].'
+                                            <div align="right">
+                                                <small>'.tanggal_indo(''.$data2['tanggal_kegiatan'].'').'</small>
+                                            </div>';
         if ($data2['notifikasi'] == "1"){
-                                echo '<div align="right">
-                                    <span class="badge upper">Belum DiBaca</span>
-                                </div>'; 
+                                            echo '<div align="right">
+                                                <span class="badge upper atas">Belum DiBaca</span>
+                                            </div>'; 
         }
         else{
         }
-                                        echo '</div>
-                                        </div>
+                                    echo '</div>
                                     </div>
                                 </div>
-                            </a>';
+                            </div>
+                        </a>';
         }
     ?>                          
-                        </div>
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
     </div>
 </body>
@@ -193,5 +222,4 @@
             })
         }
 	</script>
-
 </html>

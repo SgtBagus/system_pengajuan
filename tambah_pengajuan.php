@@ -1,33 +1,37 @@
 <?php
-    include 'system/koneksi.php';
-    session_start();
-    $logged_in = false;
+    include"system/koneksi.php";
+        session_start();
+        $logged_in = false;
     if (empty($_SESSION['email'])) {
         echo "<script type='text/javascript'>document.location='login?proses=error ';</script>";
     }
     else {
         $logged_in = true;
     }
-    if (isset($_GET['id'])) {
-        $id = ($_GET["id"]);
-        $query = "SELECT * FROM pengajuan WHERE id_pengajuan ='$id'";
-        $result = mysqli_query($con, $query);
-        if(!$result){
-        die ("Query Error: ".mysqli_errno($con).
-            " - ".mysqli_error($con));
-        }
-        $data = mysqli_fetch_assoc($result);
-        $id_pengajuan = $data["id_pengajuan"];
-        $pengajuan = $data["pengajuan"];
-        $biaya = $data["biaya"];
-        $gambar = $data["gambar"];
-        $alasan = $data["alasan"];
-        $keterangan = $data["keterangan"];
-    } 
+    
+    function tanggal_indo($tanggal){
+        $bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+        );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+    }
+
 ?>
 <!doctype html>
 <html lang="en">
 <head>
+	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="assets/img/icon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<title>Pengajuan</title>
@@ -40,10 +44,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/lightbox.min.css">
     <link rel="stylesheet" href="assets/dist/sweetalert.css">
-  <script src="assets/dist/sweetalert-dev.js"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -137,15 +138,23 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Edit Pengajuan</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="title">Pengajuan</h4>
+                                        </div>  
+                                        <div class="col-md-6" align="right">
+                                            <?php echo '<small>'.tanggal_indo(date("Y-m-d")).'</small>'; ?>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
-                                    <form id="form_user" method="post" action="system/proses_edit_pengajuan?id=<?php echo $id_pengajuan?>" enctype="multipart/form-data">
+                                    <form id="form_user" method="post" action="system/proses_tambah_pengajuan" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Pengajuan</label>
-                                                    <input type="text" name="pengajuan" id="form_pengajuan" class="form-control" placeholder="Pengajuan" value="<?php echo $pengajuan ?>" >
+                                                    <input type="text" name="pengajuan" id="form_pengajuan" class="form-control" placeholder="Pengajuan" required >
+                                                    <input type="hidden" name="id_pengaju" id="form_pengajuan" value="<?php echo $id_login ?>" >
                                                 </div>
                                             </div>
                                         </div>
@@ -154,7 +163,10 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Jenis Pengajuan</label>
-                                                    <select name="jenis_pengajuan" id="form_pengajuan" class="form-control" required>
+                                                    <br>
+                                                    <div class="col-md-12">
+                                                        <select name="jenis_pengajuan" id="form_pengajuan" class="form-control" required>
+                                                                
     <?php
         $query = "SELECT * FROM jenis_pengajuan";     
         $result = mysqli_query($con, $query);
@@ -164,17 +176,26 @@
         }
         while($data = mysqli_fetch_assoc($result))
         {
-            echo '<option value="'.$data[jenis_pengajuan].'">'.$data[jenis_pengajuan].'</option>';
+            echo '<option value="'.$data[jenis_pengajuan].'" title="Diskripsi : '.$data[deskripsi].'">'.$data[jenis_pengajuan].'</option>';
         }
     ?>
-                                                    </select>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Tanggal Pengajuan</label>
-                                                    <input type="date" name="tanggal_pengajuan" id="form_pengajuan" class="form-control" 
-                                                    value="<?php echo date("Y-m-d");?>" disabled>
+                                                    <label>Biaya</label>
+                                                    <br>
+                                                    <div class="col-md-1">
+                                                        Rp.
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                            <input type="number" name="biaya" id="form_pengajuan" class="form-control" placeholder="Biaya" required>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        ,00,-
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -183,53 +204,16 @@
                                                 <div class="form-group">
                                                     <label>Gambar</label>
                                                     <br>
-                                                    
-    <?php
-
-    if($gambar == "" ){
-                                                echo '<input type="file" name="foto">
-                                                        <label>Tidak ada gambar yang ditampilkan</label><br>
-                                                <label>Max size : 1MB</label>';
-    }else{
-        ?>
-                                                            <a class="example-image-link" href="image/<?php echo $gambar ?>" data-lightbox="example-2" data-title="<?php echo $pengajuan ?>">
-                                                                <img class="example-image" src="image/<?php echo $gambar ?>" width='282' height='177' alt="image-1"/>
-                                                            </a>
-                                                            <button onclick="hapusgambar(<?php echo $id_pengajuan ?>)" type="button" class="btn btn-danger btn-fill">
-                                                                <i class="fa fa-trash"></i> hapus
-                                                            </button>
-                                                        <br>
-        <?php
-    }
-    ?>
+                                                    <input type="file" name="gambar" onchange="readURL(this);" onclick="myFunction()"/>
+                                                    <p id="demo"></p>
                                                 </div>
                                             </div>
                                         </div> 
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Biaya</label>
-                                                    <br>
-                                                    <div class="col-md-1">
-                                                        Rp.
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <input type="number" name="biaya" id="form_pengajuan" class="form-control" placeholder="Biaya" value="<?php echo $biaya ?>" required>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        ,00,-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Alasan</label>
-                                                    <textarea rows="5" name="alasan" id="form_pengajuan" class="form-control" placeholder="Silakan Tulis Alasan Anda Disini " ><?php echo $alasan ?></textarea>
+                                                    <textarea rows="5" name="alasan" id="form_pengajuan" class="form-control" placeholder="Silakan Tulis Alasan Anda Disini " ></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -238,7 +222,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Keterangan</label>
-                                                    <textarea rows="5" name="keterangan" id="form_pengajuan" class="form-control" placeholder="Silakan Tulis Keterangan Anda Disini" ><?php echo $keterangan ?></textarea>
+                                                    <textarea rows="5" name="keterangan" id="form_pengajuan" class="form-control" placeholder="Silakan Tulis Keterangan Anda Disini" ></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -261,17 +245,17 @@
                 </div>
             </div>
         </div>
-    </div>
 </body>
+    <script src="assets/dist/sweetalert-dev.js"></script>
     <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
 	<script src="assets/js/chartist.min.js"></script>
     <script src="assets/js/bootstrap-notify.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="assets/js/light-bootstrap-dashboard.js"></script>
 	<script src="assets/js/demo.js"></script>
-    <script src="assets/js/lightbox-plus-jquery.min.js"></script>
 <?php
     if (isset($_GET['proses'])) {
     echo '<script type="text/javascript">';
@@ -308,36 +292,40 @@
     	$(document).ready(function(){
         	demo.initChartist();
     	});
+
+    function readURL(input) { 
+        if (input.files && input.files[0]) {
+        var reader = new FileReader(); 
         
+            reader.onload = function (e) { 
+            $('#preview_gambar') 
+            .attr('src', e.target.result)
+            .width(420); 
+            };
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function myFunction() {
+        document.getElementById("demo").innerHTML = "<img id='preview_gambar' src='#' /><br><label>Max size : 1MB</label>";
+    }
+    
         function logout() {
             swal({
                 title: "Konfirmasi ?",
-                 text: "Apakah anda ingin keluar ",
-                 type: "warning",
-                 showCancelButton: true,
-                 confirmButtonColor: "#00cc00", 
-                 confirmButtonText: "Logout",
-                 cancelButtonText: "Batal",
-                 closeOnConfirm: false
+                text: "Apakah anda ingin keluar ",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cc00", 
+                confirmButtonText: "Logout",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
             },
             function(){
                 document.location="logout";
             })
         }
-        function hapusgambar(id) {
-            swal({
-                title: "Konfirmasi ?",
-                text: "Apakah anda ingin menghapus gambar ?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#00cc00",
-                confirmButtonText: "Iya",
-                cancelButtonText: "Batal",
-                closeOnConfirm: false
-            },
-            function(){
-                document.location="system/hapus_gambar?id="+id;
-            })
-        }
 	</script>
 </html>
+                                         

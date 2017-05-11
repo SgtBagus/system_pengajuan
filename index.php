@@ -44,7 +44,7 @@
         $id_login = $data_login["id_user"];
         $username_login = $data_login["username"];
     ?>
-                        Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) - <?php echo $username_login ?></small></small>
+                        System Pengajuan<br><small>( TIM ) - <?php echo $username_login ?></small>
                     </a>
                 </div>
 
@@ -161,7 +161,7 @@
     <?php
         $query_pengajuan = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.status
                                 FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user
-                                AND b.username = '$username_login' ORDER BY a.id_pengajuan DESC LIMIT 5 ";
+                                ORDER BY a.id_pengajuan DESC LIMIT 5 ";
         $result_pengajuan = mysqli_query($con, $query_pengajuan);
         if(!$result_pengajuan){
             die ("Query Error: ".mysqli_errno($con).
@@ -175,7 +175,7 @@
         else {
             while($data_pengajuan = mysqli_fetch_assoc($result_pengajuan)){
                                             echo '<tr>
-                                                <td> '.$data_pengajuan['pengajuan'].' - ';
+                                                <td> '.$data_pengajuan['pengajuan'].' - '.$data_pengajuan['username'].' - ';
     if( $data_pengajuan['status'] == "proses" ){
                                                 echo '<span class="badge proses upper">'.$data_pengajuan['status'].'</span>';
     }else{

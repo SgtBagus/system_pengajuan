@@ -46,7 +46,7 @@
         $id_login = $data_login["id_user"];
         $username_login = $data_login["username"];
     ?>
-                        Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) - <?php echo $username_login ?></small></small>
+                        System Pengajuan<br><small>( TIM ) - <?php echo $username_login ?></small>
                     </a>
                 </div>
                 <ul class="nav">
@@ -124,62 +124,77 @@
                                         </div>  
                                     </div>
                                     <br>    
-                                    <form id="form_pencarian" action="?cari=" method="get">
+                                    <form id="form_pencarian" action="?" method="get">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label> Judul Pengajuan</label>
-                                                    <input type="text" name="pengajuan" id="pengajuan" class="form-control" placeholder="Judul" >
-                                                </div>
+                                                    <input type="text" name="pengajuan" class="form-control" >
+                                                </div> 
                                             </div>
+                                                <?php
+                                                    $query_MIN = "SELECT MIN(tanggal_pengajuan) from pengajuan WHERE status LIKE 'selesai'";
+                                                    $result_MIN = mysqli_query($con, $query_MIN);
+                                                    $data_MIN = mysqli_fetch_assoc($result_MIN);
+                                                    $MIN = date_create($data_MIN['MIN(tanggal_pengajuan)']);
+                                                    $awal = date_format($MIN,"d-m-Y");
+                                                ?>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label> Tanggal Pengajuan</label>
-                                                    <input type="text" name="tanggal" id="datepicker" class="form-control" placeholder="Tanggal">
-                                                </div>
-                                            </div>  
+                                                    <label> Tanggal Pengajuan Awal </label>
+                                                    <input type="text" name="pertama" id="datepicker1" class="form-control" value="<?php echo $awal;?>">
+                                                </div> 
+                                            </div>
+                                                <?php
+                                                    $query_MAX = "SELECT MAX(tanggal_pengajuan) from pengajuan WHERE status LIKE 'selesai'";
+                                                    $result_MAX = mysqli_query($con, $query_MAX);
+                                                    $data_MAX = mysqli_fetch_assoc($result_MAX);
+                                                    $MAX = date_create($data_MAX['MAX(tanggal_pengajuan)']);
+                                                    $akhir = date_format($MAX,"d-m-Y");
+                                                ?>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label> Tanggal Pengajuan Akhir </label>
+                                                    <input type="text" name="terakhir" id="datepicker2" class="form-control" value="<?php echo $akhir; ?>" >
+                                                    </div> 
+                                            </div>
                                             <div class="col-md-1">
                                                 <label><br></label>
-                                                <button type="submit" rel="tooltip" class="btn btn-primary btn-fill">
+                                                <button type="submit" class="btn btn-primary btn-fill">
                                                         <i class="fa fa-search"></i> Cari
                                                 </button>
                                             </div>
+                                        </div>
+                                    </from>
+                                </div>
     <?php
         if (isset($_GET['pengajuan'])) {
             $pengajuan = ($_GET["pengajuan"]);
-            $tanggal = ($_GET["tanggal"]);
-            
-                if ($tanggal == ""){
-                    $tgl = $tanggal;
-                }else{
-                    $date = date_create(($_GET["tanggal"]));
-                    $tgl = date_format($date,"Y-m-d");        
-                }
+            $first = date_create(($_GET["pertama"]));
+            $lass = date_create(($_GET["terakhir"]));
+            $awal = date_format($first,"Y-m-d");
+            $akhir = date_format($lass,"Y-m-d");
 
             if( $pengajuan == ""){
-                $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %m - %Y') as tanggal_pengajuan,
+                $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
                             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
-                            AND b.username like '$username_login' AND a.tanggal_pengajuan like '$tgl' AND a.status like 'selesai' ORDER BY a.id_pengajuan DESC" ;
+                            AND b.username like '$username_login' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') 
+                            AND a.status like 'selesai' ORDER BY a.id_pengajuan DESC" ;
             }
-            else if ( $tanggal == "" ){
-                $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %m - %Y') as tanggal_pengajuan,
+            else {
+                $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
                             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
-                            AND b.username like '$username_login' AND a.pengajuan like '%$pengajuan%' AND a.status like 'selesai' ORDER BY a.id_pengajuan DESC" ;
-            }else {
-                $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %m - %Y') as tanggal_pengajuan,
-                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
-                            AND b.username like '$username_login' AND a.pengajuan like '%$pengajuan%' AND a.tanggal_pengajuan like '$tgl' AND a.status like 'selesai' ORDER BY a.id_pengajuan DESC" ;
+                            AND b.username like '$username_login' AND a.pengajuan like '%$pengajuan%' 
+                            AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') 
+                            AND a.status like 'selesai' ORDER BY a.id_pengajuan DESC" ;
             }
         }
         else{    
-            $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %m - %Y') as tanggal_pengajuan,
+            $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
                         a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
                         AND b.username like '$username_login' AND a.status like 'selesai' ORDER BY a.id_pengajuan DESC" ;
         }
     ?>
-                                        </div>
-                                    </from>
-                                </div>
                                 <div class="content table-responsive table-full-width">
                                     <table class="table table-hover table-striped">
                                         <thead>
@@ -189,11 +204,31 @@
                                             <th>tanggal</th>
                                             <th>biaya</th>
                                             <th>status</th>
-                                            <th>Aksi</th>
+                                            <th>Tindak Lanjut</th>
                                         </thead>
                                         <tbody>
     <?php
         $result = mysqli_query($con, $query);
+                                                
+        function tanggal_indo($tanggal){
+            $bulan = array (1 =>   'Januari',
+                        'Februari',
+                        'Maret',
+                        'April',
+                        'Mei',
+                        'Juni',
+                        'Juli',
+                        'Agustus',
+                        'September',
+                        'Oktober',
+                        'November',
+                        'Desember'
+                    );
+
+                $split = explode('-', $tanggal);
+                return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+            }
+
         if(!$result){
             die ("Query Error: ".mysqli_errno($con).
             " - ".mysqli_error($con));
@@ -219,7 +254,7 @@
                                                 <td>'.$no.'</td>
                                                 <td>'.$data['pengajuan'].'</td>
                                                 <td>'.$data['jenis_pengajuan'].'</td>
-                                                <td>'.$data['tanggal_pengajuan'].'</td>
+                                                <td>'.tanggal_indo(''.$data['tanggal_pengajuan'].'').'</td>
                                                 <td>'.$data['biaya'].'</td>
                                                 <td align = "center">
                                                     <span class="badge  upper">'.$data['status'].'</span>

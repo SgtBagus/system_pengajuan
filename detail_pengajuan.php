@@ -24,7 +24,7 @@
         $pengajuan = $data["pengajuan"];
         $pengaju = $data["username"];
         $jenis_pengajuan = $data["jenis_pengajuan"];
-        $taggal_pengajuan = $data["tanggal_pengajuan"];
+        $tanggal_pengajuan = $data["tanggal_pengajuan"];
         $gambar = $data["gambar"];
         $biaya = $data["biaya"];
         $alasan = $data["alasan"];
@@ -33,6 +33,26 @@
         $update = $data["update_pengajuan"];
         $pelaksanaan = $data["jadwal_pelaksanaan"];
     } 
+
+    
+    function tanggal_indo($tanggal){
+        $bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+        );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+    }
+    
 ?>
 <!doctype html>
 <html lang="en">
@@ -40,7 +60,7 @@
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="assets/img/icon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Detail Pengajuan</title>
+	<title>Pengajuan</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -72,7 +92,7 @@
         $id_login = $data_login["id_user"];
         $username_login = $data_login["username"];
     ?>
-                        Pengajuan Pengadaaan <small>Barang & Training <br> <small>( TIM ) - <?php echo $username_login ?></small></small>
+                        System Pengajuan<br><small>( TIM ) - <?php echo $username_login ?></small>
                     </a>
                 </div>
                 <ul class="nav">
@@ -135,16 +155,9 @@
                             <p>Log out</p>
                         </a>
                     </li>
-
-                    <script type="text/javascript">
-                    </script>
-
                 </ul>
             </div>
         </div>
-
-    <?php
-    ?>
         <div class="main-panel">
             <div class="content">
                 <div class="container-fluid">
@@ -157,7 +170,7 @@
                                             <b><?php echo $pengajuan ?></b><br>
                                             <small>
                                                 <?php
-                                                    echo '<b>'.$pengaju.'</b> - <small>'.date("d-m-Y", strtotime($taggal_pengajuan)).'</small>';
+                                                    echo '<b>'.$pengaju.'</b> / <small>'.tanggal_indo($tanggal_pengajuan).'</small>';
                                                 ?> / <span class='badge'><?php echo $status ?></span>
                                             </small> 
                                         </div>
@@ -197,7 +210,7 @@
                                                             <td><h5><b> : </h5></b></td>
                                                             <td><h5>';
         ?>
-                                                            <a class="example-image-link" href="image/<?php echo $gambar ?>" data-lightbox="example-2" data-title="<?php echo $pengajuan ?>">
+                                                            <a class="example-image-link" href="image/<?php echo $gambar ?>" data-lightbox="example-2">
                                                                 <img class="example-image" src="image/<?php echo $gambar ?>" width='282' height='177' alt="image-1"/>
                                                             </a>
         <?php                                                        
@@ -237,7 +250,7 @@
                                                         <tr>
                                                             <td><h5><b>Jadwal Pelaksanaan</h5></b></td>
                                                             <td><h5><b> : </h5></b></td>
-                                                            <td><h5>'.date("d-m-Y", strtotime($data['jadwal_pelaksanaan'])).'</h5></td>
+                                                            <td><h5>'.tanggal_indo(''.$data['jadwal_pelaksanaan'].'').'</h5></td>
                                                         </tr>
                                                         <tr>
                                                             <td><h5><b>Catatan</h5></b></td>
@@ -298,17 +311,19 @@
                                     </div>
                                 </div>
                                 <div align="right">
-                                        <a href="semua_pengajuan">
+                                        <a href="pengajuan">
                                             <button type="button" rel="tooltip" class="btn btn-info btn-fill" title="kembali">
-                                                        <i class="fa fa-list"></i> Semua Pengajuan 
+                                                <i class="fa fa-list"></i> Pengajuan 
                                             </button>
                                         </a>
     <?php
     if( $data['status'] == "menunggu"){
         if ( $pengaju == $username_login ){
-                                                    echo '<button onclick="editpengajuan('.$id_pengajuan.')" type="button" rel="tooltip" title="Ubah Pengajuan" class="btn btn-primary btn-fill" >
-                                                        <i class="fa fa-edit"></i> Ubah Pengajuan
-                                                    </button>
+                                                    echo '<a href="edit_pengajuan?id='.$id_pengajuan.'"
+                                                        <button type="button" rel="tooltip" title="Ubah Pengajuan" class="btn btn-primary btn-fill" >
+                                                            <i class="fa fa-edit"></i> Ubah Pengajuan
+                                                        </button>
+                                                    </a>
                                                     <button onclick="batalpengajuan('.$id_pengajuan.')" type="button" rel="tooltip" title="hapus Pengajuan" class="btn btn-danger btn-fill">
                                                         <i class="fa fa-trash"></i> Hapus
                                                     </button>'; 
@@ -382,21 +397,6 @@
             })
         }
 
-        function editpengajuan(id) {
-            swal({
-                title: "Konfirmasi ?",
-                text: "Apakah anda ingin mengubah pengajuan",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#00ff00",
-                confirmButtonText: "Iya",
-                cancelButtonText: "Batal",
-                closeOnConfirm: false
-            },
-            function(){
-                document.location="edit_pengajuan?id="+id;
-            })
-        }
         function batalpengajuan(id) {
             swal({
                 title: "Konfirmasi ?",
