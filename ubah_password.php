@@ -126,67 +126,39 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Profile <b> (<?php echo $username ?> ) </b></h4>
+                                <h4 class="title">Ubah Password</h4>
                             </div>
                             <div class="content">
-                                <form id="form_edit_user" method="post" action="system/proses_edit_profil">
+                                <form id="form_edit_user" method="post" action="system/proses_ubah_password">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="<?php echo $id ?>">
-                                                <label for="Username" >Username</label>
-                                                <input type="text" name="username" id="form_edit_user" class="form-control" placeholder="username" value="<?php echo $username ?>">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="Email">Email address</label>
-                                                <input type="email" name="email" id="form_edit_user" class="form-control" placeholder="email" value="<?php echo $email ?>">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="Password">Password</label><br>
-                                                <a href="ubah_password">
-                                                    <button type="button" class="btn btn-danger  btn-fill">
-                                                        <i class="fa fa-info"></i> Konfirmasi
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Nama Depan</label>
-                                                <input type="text" name="nama_depan" id="form_edit_user" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>">
+                                                <label>Password Baru</label>
+                                                <input type="password" name="password_baru" id="form_edit_user" class="form-control" placeholder="Password baru" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Nama Belakang</label>
-                                                <input type="text" name="nama_belakang" id="form_edit_user" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" >
+                                                <label>Konfirmasi Password</label>
+                                                <input type="password" name="konfirmasi_password" id="form_edit_user" class="form-control" placeholder="Konfirmasi password" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Alamat</label>
-                                                <input type="text" name="alamat" id="form_edit_user" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" >
+                                                <label>Passowrd Lama Anda</label>
+                                                <input type="password" name="password_lama" id="form_edit_user" class="form-control" placeholder="Password lama anda" required>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>No. Hp</label>
-                                                <input type="number" name="nohp" id="form_edit_user" class="form-control" placeholder="No Hp" value="<?php echo $nohp ?>" >
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <div align="right">
+                                        <a href="profil">
+                                            <button type="button" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-info btn-fill">
+                                                <i class="fa fa-arrow-left"></i> Kembali
+                                            </button>
+                                        </a>
                                         <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
                                             <i class="fa fa-edit"></i> Konfirmasi
                                         </button>
@@ -215,18 +187,27 @@
 	<script src="assets/js/demo.js"></script>
 
 <?php
-if (isset($_GET['proses'])) {
+if (isset($_GET['error'])) {
     echo '<script type="text/javascript">';
-    $proses = ($_GET["proses"]);
-    if($proses == "edit"){
+    $error = ($_GET["error"]);
+    if($error == "true1"){
             echo'swal({
-                title: "Terubah!",
-                text: "Profil telah diubah.",
-                type: "success",
+                title: "Mohon Maaf!",
+                text: "Konfimasi password anda tidak sama",
+                type: "error",
                 showConfirmButton: true,
                 confirmButtonColor: "#00ff00"
             })';
-  } 
+    } 
+    if($error == "true2"){
+            echo'swal({
+                title: "Mohon Maaf!",
+                text: "Password lama anda salah",
+                type: "error",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })';
+    } 
     echo '</script>';
 }
 ?>
