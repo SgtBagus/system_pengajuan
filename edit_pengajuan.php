@@ -24,6 +24,25 @@
         $alasan = $data["alasan"];
         $keterangan = $data["keterangan"];
     } 
+    
+    function tanggal_indo($tanggal){
+        $bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+        );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+    }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -137,7 +156,14 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Edit Pengajuan</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="title">Edit Pengajuan</h4>
+                                        </div>  
+                                        <div class="col-md-6" align="right">
+                                            <?php echo tanggal_indo(date("Y-m-d")); ?>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="content">
                                     <form id="form_user" method="post" action="system/proses_edit_pengajuan?id=<?php echo $id_pengajuan?>" enctype="multipart/form-data">
@@ -154,7 +180,10 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Jenis Pengajuan</label>
-                                                    <select name="jenis_pengajuan" id="form_pengajuan" class="form-control" required>
+                                                    <br>
+                                                    <div class="col-md-12">
+                                                        <select name="jenis_pengajuan" id="form_pengajuan" class="form-control" required>
+                                                                
     <?php
         $query = "SELECT * FROM jenis_pengajuan";     
         $result = mysqli_query($con, $query);
@@ -164,17 +193,26 @@
         }
         while($data = mysqli_fetch_assoc($result))
         {
-            echo '<option value="'.$data[jenis_pengajuan].'">'.$data[jenis_pengajuan].'</option>';
+            echo '<option value="'.$data[jenis_pengajuan].'" title="Diskripsi : '.$data[deskripsi].'">'.$data[jenis_pengajuan].'</option>';
         }
     ?>
-                                                    </select>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Tanggal Pengajuan</label>
-                                                    <input type="date" name="tanggal_pengajuan" id="form_pengajuan" class="form-control" 
-                                                    value="<?php echo date("Y-m-d");?>" disabled>
+                                                    <label>Biaya</label>
+                                                    <br>
+                                                    <div class="col-md-1">
+                                                        Rp.
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                            <input type="number" name="biaya" id="form_pengajuan" class="form-control" placeholder="Biaya" value="<?php echo $biaya ?>" required>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        ,00,-
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -187,17 +225,19 @@
     <?php
 
     if($gambar == "" ){
-                                                echo '<input type="file" name="foto">
-                                                        <label>Tidak ada gambar yang ditampilkan</label><br>
-                                                <label>Max size : 1MB</label>';
+                                                echo '<input type="file" name="foto" onchange="readURL(this);" onclick="myFunction()"/>
+                                                        <p id="demo">
+                                                            <label>Tidak ada gambar yang ditampilkan</label>
+                                                        </p>';
+                                                        
     }else{
-        ?>
-                                                            <a class="example-image-link" href="image/<?php echo $gambar ?>" data-lightbox="example-2" data-title="<?php echo $pengajuan ?>">
-                                                                <img class="example-image" src="image/<?php echo $gambar ?>" width='282' height='177' alt="image-1"/>
-                                                            </a>
-                                                            <button onclick="hapusgambar(<?php echo $id_pengajuan ?>)" type="button" class="btn btn-danger btn-fill">
-                                                                <i class="fa fa-trash"></i> hapus
-                                                            </button>
+        ?>                                              <input type="file" name="foto" onchange="readURL(this);" onclick="myFunction()"/>
+                                                            <p id="demo">
+                                                                <img src="image/<?php echo $gambar ?>" width='282' alt="image-1"/>
+                                                                <button onclick="hapusgambar(<?php echo $id_pengajuan ?>)" type="button" class="btn btn-danger btn-fill">
+                                                                    <i class="fa fa-trash"></i> hapus
+                                                                </button>
+                                                            </p>
                                                         <br>
         <?php
     }
@@ -206,25 +246,6 @@
                                             </div>
                                         </div> 
 
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Biaya</label>
-                                                    <br>
-                                                    <div class="col-md-1">
-                                                        Rp.
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <input type="number" name="biaya" id="form_pengajuan" class="form-control" placeholder="Biaya" value="<?php echo $biaya ?>" required>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        ,00,-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
@@ -309,6 +330,24 @@
         	demo.initChartist();
     	});
         
+    function readURL(input) { 
+        if (input.files && input.files[0]) {
+        var reader = new FileReader(); 
+        
+            reader.onload = function (e) { 
+            $('#preview_gambar') 
+            .attr('src', e.target.result)
+            .width(282); 
+            };
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function myFunction() {
+        document.getElementById("demo").innerHTML = "<img id='preview_gambar' src='#' /><br><label>Max size : 1MB</label>";
+    }
+
         function logout() {
             swal({
                 title: "Konfirmasi ?",

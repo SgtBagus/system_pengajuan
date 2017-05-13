@@ -131,24 +131,24 @@
                             <div class="content">
                                 <form id="form_edit_user" method="post" action="system/proses_edit_profil">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="<?php echo $id ?>">
                                                 <label for="Username" >Username</label>
                                                 <input type="text" name="username" id="form_edit_user" class="form-control" placeholder="username" value="<?php echo $username ?>">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
                                             <div class="form-group">
                                                 <label for="Email">Email address</label>
                                                 <input type="email" name="email" id="form_edit_user" class="form-control" placeholder="email" value="<?php echo $email ?>">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="Password">Password</label><br>
                                                 <a href="ubah_password">
-                                                    <button type="button" class="btn btn-danger  btn-fill">
+                                                    <button type="button" class="btn btn-primary  btn-fill">
                                                         <i class="fa fa-info"></i> Konfirmasi
                                                     </button>
                                                 </a>

@@ -233,12 +233,18 @@
             $lass = date_create(($_GET["terakhir"]));
             $awal = date_format($first,"Y-m-d");
             $akhir = date_format($lass,"Y-m-d");
-            $status = ($_GET["status"]);
+            $sts= ($_GET["status"]);
 
+                if ($sts == "semua"){
+                    $status = "";
+                }else{
+                    $status = $sts;
+                }
+                
             if( $pengajuan == ""){
                 $query_semua = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
                             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
-                            AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') ORDER BY a.id_pengajuan DESC" ;
+                            AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') AND a.status like '%$status%' ORDER BY a.id_pengajuan DESC" ;
             }else {
                 $query_semua = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
                             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
@@ -285,12 +291,12 @@
                     if( $data_semua['status'] == "menunggu" ){
                         if ( $data_semua['username'] == $username_login ){
                                                             echo '<a href="edit_pengajuan?id='.$data_semua['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
                                                             <a href="detail_pengajuan?id='.$data_semua['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>
@@ -307,7 +313,7 @@
                     }
                     else if ($data_semua['status'] == "proses"){
                                                             echo '<a href="detail_pengajuan?id='.$data_semua['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>';
@@ -315,7 +321,7 @@
                     else if ($data_semua['status'] == "selesai"){
                         if ( $data_semua['username'] == $username_login ){
                                                             echo '<a href="detail_pengajuan?id='.$data_semua['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>
@@ -324,7 +330,7 @@
                                                             </button>';
                         }else{
                                                             echo '<a href="detail_pengajuan?id='.$data_semua['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>';
@@ -360,16 +366,24 @@
             $lass = date_create(($_GET["terakhir"]));
             $awal = date_format($first,"Y-m-d");
             $akhir = date_format($lass,"Y-m-d");
-            $status = ($_GET["status"]);
+            $sts= ($_GET["status"]);
+
+                if ($sts == "semua"){
+                    $status = "";
+                }else{
+                    $status = $sts;
+                }
 
             if( $pengajuan == ""){
                 $query_sendiri = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
                             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
-                            AND b.username LIKE '$username_login' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') ORDER BY a.id_pengajuan DESC" ;
+                            AND b.username LIKE '$username_login' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') AND a.status like '%$status%' 
+                            ORDER BY a.id_pengajuan DESC" ;
             }else {
                 $query_sendiri = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
                             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
-                            AND b.username LIKE '$username_login' AND a.pengajuan like '%$pengajuan%' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir')ORDER BY a.id_pengajuan DESC" ;
+                            AND b.username LIKE '$username_login' AND a.pengajuan like '%$pengajuan%' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') AND a.status like '%$status%' 
+                            ORDER BY a.id_pengajuan DESC" ;
             }
         }
         else {
@@ -410,12 +424,12 @@
                                                         <td align="center">';
                     if( $data_sendiri['status'] == "menunggu" ){
                                                             echo '<a href="edit_pengajuan?id='.$data_sendiri['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
                                                             <a href="detail_pengajuan?id='.$data_sendiri['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>
@@ -425,14 +439,14 @@
                     }
                     else if ($data_sendiri['status'] == "proses"){
                                                             echo '<a href="detail_pengajuan?id='.$data_sendiri['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>';
                     }
                     else if ($data_sendiri['status'] == "selesai"){
                                                             echo '<a href="detail_pengajuan?id='.$data_sendiri['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>

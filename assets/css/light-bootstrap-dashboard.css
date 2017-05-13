@@ -568,27 +568,27 @@ body > .navbar-collapse {
     border-top-color: #87CB16; }
 
 .btn-info {
-  border-color: #4dff4d;
-  color: #4dff4d; }
+  border-color: #C0C0C0;
+  color: #C0C0C0; }
   .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle {
     background-color: transparent;
-    color: #4dff4d;
-    border-color: #66ff66; }
+    color: #A8A8A8;
+    border-color: #A8A8A8; }
   .btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled.focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info:disabled, .btn-info:disabled:hover, .btn-info:disabled:focus, .btn-info:disabled.focus, .btn-info:disabled:active, .btn-info:disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled].focus, .btn-info[disabled]:active, .btn-info[disabled].active, fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info.focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active {
     background-color: transparent;
-    border-color: #4dff4d; }
+    border-color: #C0C0C0; }
   .btn-info.btn-fill {
     color: #FFFFFF;
-    background-color: #4dff4d;
+    background-color: #C0C0C0;
     opacity: 1;
     filter: alpha(opacity=100); }
     .btn-info.btn-fill:hover, .btn-info.btn-fill:focus, .btn-info.btn-fill:active, .btn-info.btn-fill.active, .open > .btn-info.btn-fill.dropdown-toggle {
-      background-color: #66ff66;
+      background-color: #A8A8A8;
       color: #FFFFFF; }
     .btn-info.btn-fill .caret {
       border-top-color: #FFFFFF; }
   .btn-info .caret {
-    border-top-color: #66ff66; }
+    border-top-color: #C0C0C0; }
 
 .btn-warning {
   border-color: #FF9500;
@@ -614,27 +614,27 @@ body > .navbar-collapse {
     border-top-color: #FF9500; }
 
 .btn-danger {
-  border-color: #00cc00;
-  color: #00cc00; }
+  border-color: #FF4A55;
+  color: #FF4A55; }
   .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open > .btn-danger.dropdown-toggle {
     background-color: transparent;
-    color: #00b300;
-    border-color: #00b300; }
+    color: #EE2D20;
+    border-color: #EE2D20; }
   .btn-danger.disabled, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled.focus, .btn-danger.disabled:active, .btn-danger.disabled.active, .btn-danger:disabled, .btn-danger:disabled:hover, .btn-danger:disabled:focus, .btn-danger:disabled.focus, .btn-danger:disabled:active, .btn-danger:disabled.active, .btn-danger[disabled], .btn-danger[disabled]:hover, .btn-danger[disabled]:focus, .btn-danger[disabled].focus, .btn-danger[disabled]:active, .btn-danger[disabled].active, fieldset[disabled] .btn-danger, fieldset[disabled] .btn-danger:hover, fieldset[disabled] .btn-danger:focus, fieldset[disabled] .btn-danger.focus, fieldset[disabled] .btn-danger:active, fieldset[disabled] .btn-danger.active {
     background-color: transparent;
-    border-color: #00cc00; }
+    border-color: #FF4A55; }
   .btn-danger.btn-fill {
     color: #FFFFFF;
-    background-color: #00cc00;
+    background-color: #FF4A55;
     opacity: 1;
     filter: alpha(opacity=100); }
     .btn-danger.btn-fill:hover, .btn-danger.btn-fill:focus, .btn-danger.btn-fill:active, .btn-danger.btn-fill.active, .open > .btn-danger.btn-fill.dropdown-toggle {
-      background-color: #00b300;
+      background-color: #EE2D20;
       color: #FFFFFF; }
     .btn-danger.btn-fill .caret {
       border-top-color: #FFFFFF; }
   .btn-danger .caret {
-    border-top-color: #00cc00; }
+    border-top-color: #FF4A55; }
 
 .btn-neutral {
   border-color: #FFFFFF;
@@ -2844,3 +2844,18 @@ body > .navbar-collapse {
     overflow-y: hidden;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     -webkit-overflow-scrolling: touch; } }
+
+/*css3 design scrollbar*/
+::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+::-webkit-scrollbar-track {     
+    background: #FFFF8C;    
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: #00ff00;
+    border-radius:10px;
+}
+

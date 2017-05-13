@@ -28,6 +28,7 @@
     }
 
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -142,8 +143,8 @@
                                 <br>
                                 <div class="col-md-6" align="right">
                             <?php   echo'<a href="system/bacasemua?id_user='.$id_login.'">'; ?>
-                                        <button type="button" rel="tooltip" class="btn btn-primary btn-fill">
-                                            Baca semua 
+                                        <button type="button" rel="tooltip" class="btn btn-info btn-fill btn-sm">
+                                            Tandai semua sebagai sudah dibaca
                                         </button>
                                     </a>
                                 </div>
@@ -160,6 +161,7 @@
             die ("Query Error: ".mysqli_errno($con).
             " - ".mysqli_error($con));
         }
+        
         while($data2 = mysqli_fetch_assoc($result2)){ 
                         echo '<a href="system/notifikasi_pengajuan?id='.$data2['id_riwayat'].'" style="color:black">
                             <div class="card">

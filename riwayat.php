@@ -358,7 +358,16 @@
         }
         
         $( function() {
-            $( "#datepicker" ).datepicker({
+            $( "#datepicker1" ).datepicker({
+                dateFormat: "dd-mm-yy",
+                monthNames: [ "Januari", "Febuari", "Maret", 
+                            "April", "Mei", "Juni", 
+                            "Juli", "Agustus", "September", 
+                            "Oktober", "November", "December" ],
+                dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ]
+                
+            });
+            $( "#datepicker2" ).datepicker({
                 dateFormat: "dd-mm-yy",
                 monthNames: [ "Januari", "Febuari", "Maret", 
                             "April", "Mei", "Juni", 
