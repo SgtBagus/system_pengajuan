@@ -93,13 +93,17 @@
                                             oninput="setCustomValidity('')" >
                                         </div>
                                     </div>
-                                    <div align="right">
-                                        <button type="submit" name="input" rel="tooltip" class="btn btn-primary btn-fill">
-                                            <i class="fa fa-check"></i> Reset Ulang
-                                        </button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div align="right">
+                                            <button type="submit" name="input" rel="tooltip" class="btn btn-primary btn-fill">
+                                                <i class="fa fa-check"></i> Reset Ulang
+                                            </button>
+                                        </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
