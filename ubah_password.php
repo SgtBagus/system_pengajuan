@@ -135,13 +135,17 @@
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="<?php echo $id ?>">
                                                 <label>Password Baru</label>
-                                                <input type="password" name="password_baru" id="form_edit_user" class="form-control" placeholder="Password baru" required>
+                                                <input type="password" name="password_baru" id="form_edit_user" class="form-control" placeholder="Password baru" required 
+                                            oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                            oninput="setCustomValidity('')" >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Konfirmasi Password</label>
-                                                <input type="password" name="konfirmasi_password" id="form_edit_user" class="form-control" placeholder="Konfirmasi password" required>
+                                                <input type="password" name="konfirmasi_password" id="form_edit_user" class="form-control" placeholder="Konfirmasi password" required 
+                                            oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                            oninput="setCustomValidity('')" >
                                             </div>
                                         </div>
                                     </div>
@@ -149,7 +153,9 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Passowrd Lama Anda</label>
-                                                <input type="password" name="password_lama" id="form_edit_user" class="form-control" placeholder="Password lama anda" required>
+                                                <input type="password" name="password_lama" id="form_edit_user" class="form-control" placeholder="Password lama anda" required 
+                                            oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                            oninput="setCustomValidity('')" >
                                             </div>
                                         </div>
                                     </div>

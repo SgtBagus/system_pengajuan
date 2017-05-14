@@ -135,7 +135,9 @@
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="<?php echo $id ?>">
                                                 <label>Email</label>
-                                                <input type="email" name="email" id="form_edit_user" class="form-control" placeholder="Email" required>
+                                                <input type="email" name="email" id="form_edit_user" class="form-control" placeholder="Email" required
+                                                oninvalid="this.setCustomValidity('Mohon sesuikan form berikut !')"  
+                                                oninput="setCustomValidity('')">
                                             </div>
                                         </div>
                                     </div>
@@ -143,7 +145,9 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Konfirmasi Password</label>
-                                                <input type="password" name="password" id="form_edit_user" class="form-control" placeholder="Password anda" required>
+                                                <input type="password" name="password" id="form_edit_user" class="form-control" placeholder="Password anda" required 
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')" >
                                             </div>
                                         </div>
                                     </div>

@@ -59,39 +59,38 @@
                         </div>
                         <div class="content">
                             <form id="form_user" method="post" action="system/lupa_password">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="Email">Email address</label>
-                                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required
-                                                oninvalid="this.setCustomValidity('Mohon sesuikan form berikut !')"  
-                                                oninput="setCustomValidity('')">
-                                            </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="Email">Email address</label>
+                                            <input type="email" name="email" id="email" class="form-control" placeholder="Email" required
+                                            oninvalid="this.setCustomValidity('Mohon sesuikan form berikut !')"  
+                                            oninput="setCustomValidity('')">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group" align="center">
-                                                <label for="Password">Reset ulang password Anda</label>
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group" align="center">
+                                            <label for="Password">Reset ulang password Anda</label>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="Password">Password</label>
-                                                <input type="password" name="password" id="password" class="form-control" placeholder="password" required 
-                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
-                                                oninput="setCustomValidity('')" >
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="Password">Password</label>
+                                            <input type="password" name="password" id="password" class="form-control" placeholder="password" required 
+                                            oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                            oninput="setCustomValidity('')" >
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="Password">Konfirmasi Password</label>
-                                                <input type="password" name="konfirmasi_password" id="password" class="form-control" placeholder="password" required 
-                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
-                                                oninput="setCustomValidity('')" >
-                                            </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="Password">Konfirmasi Password</label>
+                                            <input type="password" name="konfirmasi_password" id="password" class="form-control" placeholder="password" required 
+                                            oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                            oninput="setCustomValidity('')" >
                                         </div>
                                     </div>
                                     <div align="right">

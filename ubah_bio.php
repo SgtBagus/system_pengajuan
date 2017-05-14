@@ -155,7 +155,9 @@
                                             <div class="form-group">
                                                 <input type="hidden" name="id" value="<?php echo $id ?>">
                                                 <label for="Username" >Username</label>
-                                                <input type="text" name="username" id="form_edit_user" class="form-control" placeholder="username" value="<?php echo $username ?>">
+                                                <input type="text" name="username" id="form_edit_user" class="form-control" placeholder="username" value="<?php echo $username ?>" required 
+                                            oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                            oninput="setCustomValidity('')" >
                                             </div>
                                         </div>
                                     </div>
@@ -163,13 +165,17 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nama Depan</label>
-                                                <input type="text" name="nama_depan" id="form_edit_user" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>">
+                                                <input type="text" name="nama_depan" id="form_edit_user" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>" required 
+                                            oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                            oninput="setCustomValidity('')" >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nama Belakang</label>
-                                                <input type="text" name="nama_belakang" id="form_edit_user" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" >
+                                                <input type="text" name="nama_belakang" id="form_edit_user" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" required 
+                                            oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                            oninput="setCustomValidity('')" >
                                             </div>
                                         </div>
                                     </div>
@@ -177,7 +183,9 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Alamat</label>
-                                                <input type="text" name="alamat" id="form_edit_user" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" >
+                                                <input type="text" name="alamat" id="form_edit_user" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" required 
+                                            oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                            oninput="setCustomValidity('')" >
                                             </div>
                                         </div>
                                     </div>
