@@ -43,7 +43,7 @@
         ?>
         <div id="footer">
             <a href="daftar" class="footer">Daftar Disini!</a>
-            @<?php echo date("Y") ?> System Pengajuan
+            &copy;<?php echo date("Y") ?> System Pengajuan
         </div>
     </body>
 </html>
