@@ -14,7 +14,7 @@ if($password_baru == $konfirmasi_password){
   
 		$query_cek = "SELECT password FROM user WHERE id_user='".$id."'";
 		$sql_cek = mysqli_query($con, $query_cek); 
-		$data_cek = mysqli_fetch_array($sql_cek); 
+		$data_cek = mysqli_fetch_array($sql_cek);  
 
     if( $hash == $data_cek['password']){
       $query = "UPDATE user SET password='$hash_baru',

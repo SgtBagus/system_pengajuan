@@ -58,7 +58,7 @@
                             <h4 class="title">Lupa Password</h4>
                         </div>
                         <div class="content">
-                            <form id="form_user" method="post" action="system/lupa_password">
+                            <form id="form_user" method="post" action="system/proses_reset_password">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -117,13 +117,22 @@
 	<script src="assets/js/light-bootstrap-dashboard.js"></script>
 	<script src="assets/js/demo.js"></script>
 <?php 
-if (isset($_GET['error'])) {
+if (isset($_GET['proses'])) {
     echo'<script type="text/javascript">';
-    $error = ($_GET["error"]);
-        if($error == "true"){
+    $error = ($_GET["proses"]);
+        if($error == "error1"){
             echo'swal({
                 title: "Mohon Maaf!",
-                text: "Email atau Username yang anda masukan sudah ada!",
+                text: "Email yang anda masukan tidak terdaftar!",
+                type: "error",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })';
+        }
+        if($error == "error2"){
+            echo'swal({
+                title: "Mohon Maaf!",
+                text: "Konfimasi password anda tidak sama!",
                 type: "error",
                 showConfirmButton: true,
                 confirmButtonColor: "#00ff00"

@@ -71,7 +71,7 @@ if (isset($_GET['proses'])) {
     }else if ($login == "edit"){
         echo'swal({
             title: "Terubah!",
-            text: "Email telah diubah! Silakan Login Kembali",
+            text: "Profil telah diubah! Silakan Login Kembali",
             type: "success",
             showConfirmButton: true,
             confirmButtonColor: "#00ff00"

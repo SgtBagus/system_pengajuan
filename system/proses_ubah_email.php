@@ -11,7 +11,7 @@ $tgl = date("Y-m-d", $tanggal);
 		$sql_cek = mysqli_query($con, $query_cek); 
 		$data_cek = mysqli_fetch_array($sql_cek); 
 
-    if( $hash == $data_cek['password']){
+    if( $hash == $data_cek['password']){ 
         $cekdulu= "SELECT * FROM user WHERE email='$email'";
             $prosescek= mysqli_query($con, $cekdulu);
 
