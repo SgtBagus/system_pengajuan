@@ -153,7 +153,9 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Pengajuan</label>
-                                                    <input type="text" name="pengajuan" id="form_pengajuan" class="form-control" placeholder="Pengajuan" required >
+                                                    <input type="text" name="pengajuan" id="form_pengajuan" class="form-control" placeholder="Pengajuan" required 
+                                                        oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                        oninput="setCustomValidity('')" >
                                                     <input type="hidden" name="id_pengaju" id="form_pengajuan" value="<?php echo $id_login ?>" >
                                                 </div>
                                             </div>
@@ -165,7 +167,9 @@
                                                     <label>Jenis Pengajuan</label>
                                                     <br>
                                                     <div class="col-md-12">
-                                                        <select name="jenis_pengajuan" id="form_pengajuan" class="form-control" required>
+                                                        <select name="jenis_pengajuan" id="form_pengajuan" class="form-control" required 
+                                                            oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                            oninput="setCustomValidity('')" >
                                                                 
     <?php
         $query = "SELECT * FROM jenis_pengajuan";     
@@ -191,7 +195,9 @@
                                                         Rp.
                                                     </div>
                                                     <div class="col-md-10">
-                                                            <input type="number" name="biaya" id="form_pengajuan" class="form-control" placeholder="Biaya" required>
+                                                            <input type="number" name="biaya" id="form_pengajuan" class="form-control" placeholder="Biaya" required 
+                                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                                oninput="setCustomValidity('')" >
                                                     </div>
                                                     <div class="col-md-1">
                                                         ,00,-

@@ -171,7 +171,9 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Pengajuan</label>
-                                                    <input type="text" name="pengajuan" id="form_pengajuan" class="form-control" placeholder="Pengajuan" value="<?php echo $pengajuan ?>" >
+                                                    <input type="text" name="pengajuan" id="form_pengajuan" class="form-control" placeholder="Pengajuan" value="<?php echo $pengajuan ?>" required 
+                                                        oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                        oninput="setCustomValidity('')" >
                                                 </div>
                                             </div>
                                         </div>
@@ -208,7 +210,9 @@
                                                         Rp.
                                                     </div>
                                                     <div class="col-md-10">
-                                                            <input type="number" name="biaya" id="form_pengajuan" class="form-control" placeholder="Biaya" value="<?php echo $biaya ?>" required>
+                                                        <input type="number" name="biaya" id="form_pengajuan" class="form-control" placeholder="Biaya" value="<?php echo $biaya ?>" required 
+                                                            oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                            oninput="setCustomValidity('')" >
                                                     </div>
                                                     <div class="col-md-1">
                                                         ,00,-
