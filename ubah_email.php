@@ -25,25 +25,6 @@
         $nohp = $data["no_hp"];
         $alamat = $data["alamat"];
         $role = $data["role"];
-        $update = $data["update_akun"];
-        
-    function tanggal_indo($tanggal){
-        $bulan = array (1 =>   'Januari',
-                'Februari',
-                'Maret',
-                'April',
-                'Mei',
-                'Juni',
-                'Juli',
-                'Agustus',
-                'September',
-                'Oktober',
-                'November',
-                'Desember'
-        );
-        $split = explode('-', $tanggal);
-        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
-    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -145,101 +126,39 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Profile <br> <small>Perubahan Terakhir : <?php echo tanggal_indo($update) ?></small></h4>
+                                <h4 class="title">Ubah Email</h4>
                             </div>
                             <div class="content">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Username</label>
-                                            <input type="hidden" name="id" value="<?php echo $id ?>">
-                                                <input type="text" name="username" id="username" class="form-control" placeholder="username" value="<?php echo $username ?>" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="Email">Email address</label>
-                                                <input type="email" name="email" id="email" class="form-control" placeholder="email" value="<?php echo $email ?>" disabled>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <form id="form_edit_user" method="post" action="system/proses_ubah_email">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Nama Depan</label>
-                                                <input type="text" name="nama_depan" id="nama_depan" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Nama Belakang</label>
-                                                <input type="text" name="nama_belakang" id="nama_belakang" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" disabled>
+                                                <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                <label>Email</label>
+                                                <input type="email" name="email" id="form_edit_user" class="form-control" placeholder="Email" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Alamat</label>
-                                                <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" disabled>
+                                                <label>Konfirmasi Password</label>
+                                                <input type="password" name="password" id="form_edit_user" class="form-control" placeholder="Password anda" required>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>No. Hp</label>
-                                                <input type="number" name="nohp" id="no_hp" class="form-control" placeholder="No Hp" value="<?php echo $nohp ?>" disabled>
-                                            </div>
-                                        </div>
+                                    <div align="right">
+                                        <a href="profil">
+                                            <button type="button" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-info btn-fill">
+                                                <i class="fa fa-arrow-left"></i> Kembali
+                                            </button>
+                                        </a>
+                                        <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
+                                            <i class="fa fa-edit"></i> Konfirmasi
+                                        </button>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="header">
-                                    <h4 class="title">Pengaturan</h4>
-                                </div>
-                                <div class="content">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group" align="center">
-                                                <label for="Username">Bio Data</label>
-                                                <br>
-                                                <a href="ubah_bio">
-                                                    <button type="button" class="btn btn-primary col-md-12 btn-fill">
-                                                        <i class="fa fa-info"></i> Ubah Bio
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group"  align="center">
-                                                <label for="Email">Email</label><br>
-                                                <a href="ubah_email">
-                                                    <button type="button" class="btn btn-primary col-md-12 btn-fill">
-                                                        <i class="fa fa-info"></i> Ubah Email
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group"  align="center">
-                                                <label for="Password">Password</label><br>
-                                                <a href="ubah_password">
-                                                    <button type="button" class="btn btn-primary col-md-12 btn-fill">
-                                                        <i class="fa fa-info"></i> Ubah Password
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <div class="clearfix"></div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -248,6 +167,8 @@
         </div>
     </div>
 </div>
+
+
 </body>
     <script src="assets/dist/sweetalert-dev.js"></script>
     <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
@@ -260,18 +181,27 @@
 	<script src="assets/js/demo.js"></script>
 
 <?php
-if (isset($_GET['proses'])) {
+if (isset($_GET['error'])) {
     echo '<script type="text/javascript">';
-    $proses = ($_GET["proses"]);
-    if($proses == "edit"){
+    $error = ($_GET["error"]);
+    if($error == "true1"){
             echo'swal({
-                title: "Terubah!",
-                text: "Profil telah diubah.",
-                type: "success",
+                title: "Mohon Maaf!",
+                text: "Email Sudah ada yang menggunakan ",
+                type: "error",
                 showConfirmButton: true,
                 confirmButtonColor: "#00ff00"
             })';
-  } 
+    } 
+    if($error == "true2"){
+            echo'swal({
+                title: "Mohon Maaf!",
+                text: "Password lama anda salah",
+                type: "error",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })';
+    } 
     echo '</script>';
 }
 ?>

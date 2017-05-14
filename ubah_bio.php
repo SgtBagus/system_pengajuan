@@ -26,7 +26,8 @@
         $alamat = $data["alamat"];
         $role = $data["role"];
         $update = $data["update_akun"];
-        
+    
+    
     function tanggal_indo($tanggal){
         $bulan = array (1 =>   'Januari',
                 'Februari',
@@ -145,21 +146,16 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Profile <br> <small>Perubahan Terakhir : <?php echo tanggal_indo($update) ?></small></h4>
+                                <h4 class="title">Ubah Bio Data</h4>
                             </div>
                             <div class="content">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Username</label>
-                                            <input type="hidden" name="id" value="<?php echo $id ?>">
-                                                <input type="text" name="username" id="username" class="form-control" placeholder="username" value="<?php echo $username ?>" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
+                                <form id="form_edit_user" method="post" action="system/proses_ubah_bio">
+                                    <div class="row">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="Email">Email address</label>
-                                                <input type="email" name="email" id="email" class="form-control" placeholder="email" value="<?php echo $email ?>" disabled>
+                                                <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                <label for="Username" >Username</label>
+                                                <input type="text" name="username" id="form_edit_user" class="form-control" placeholder="username" value="<?php echo $username ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -167,13 +163,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nama Depan</label>
-                                                <input type="text" name="nama_depan" id="nama_depan" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>" disabled>
+                                                <input type="text" name="nama_depan" id="form_edit_user" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nama Belakang</label>
-                                                <input type="text" name="nama_belakang" id="nama_belakang" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" disabled>
+                                                <input type="text" name="nama_belakang" id="form_edit_user" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" >
                                             </div>
                                         </div>
                                     </div>
@@ -181,7 +177,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Alamat</label>
-                                                <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" disabled>
+                                                <input type="text" name="alamat" id="form_edit_user" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" >
                                             </div>
                                         </div>
                                     </div>
@@ -189,57 +185,32 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>No. Hp</label>
-                                                <input type="number" name="nohp" id="no_hp" class="form-control" placeholder="No Hp" value="<?php echo $nohp ?>" disabled>
+                                                <input type="number" name="nohp" id="form_edit_user" class="form-control" placeholder="No Hp" value="<?php echo $nohp ?>" >
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="header">
-                                    <h4 class="title">Pengaturan</h4>
-                                </div>
-                                <div class="content">
+
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group" align="center">
-                                                <label for="Username">Bio Data</label>
-                                                <br>
-                                                <a href="ubah_bio">
-                                                    <button type="button" class="btn btn-primary col-md-12 btn-fill">
-                                                        <i class="fa fa-info"></i> Ubah Bio
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group"  align="center">
-                                                <label for="Email">Email</label><br>
-                                                <a href="ubah_email">
-                                                    <button type="button" class="btn btn-primary col-md-12 btn-fill">
-                                                        <i class="fa fa-info"></i> Ubah Email
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group"  align="center">
-                                                <label for="Password">Password</label><br>
-                                                <a href="ubah_password">
-                                                    <button type="button" class="btn btn-primary col-md-12 btn-fill">
-                                                        <i class="fa fa-info"></i> Ubah Password
-                                                    </button>
-                                                </a>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Konfirmasi Password</label>
+                                                <input type="password" name="password" id="form_edit_user" class="form-control" placeholder="Password Anda" required
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')" >
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <div align="right">
+                                        <a href="profil">
+                                            <button type="button" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-info btn-fill">
+                                                <i class="fa fa-arrow-left"></i> Kembali
+                                            </button>
+                                        </a>
+                                        <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
+                                            <i class="fa fa-edit"></i> Konfirmasi
+                                        </button> 
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -258,23 +229,24 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="assets/js/light-bootstrap-dashboard.js"></script>
 	<script src="assets/js/demo.js"></script>
-
+    
 <?php
-if (isset($_GET['proses'])) {
+if (isset($_GET['error'])) {
     echo '<script type="text/javascript">';
-    $proses = ($_GET["proses"]);
-    if($proses == "edit"){
+    $error = ($_GET["error"]);
+    if($error == "true"){
             echo'swal({
-                title: "Terubah!",
-                text: "Profil telah diubah.",
-                type: "success",
+                title: "Mohon Maaf!",
+                text: "Konfimasi Password anda salah",
+                type: "error",
                 showConfirmButton: true,
                 confirmButtonColor: "#00ff00"
             })';
-  } 
+    } 
     echo '</script>';
 }
 ?>
+
 	<script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();

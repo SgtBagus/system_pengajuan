@@ -9,6 +9,7 @@ $hash=md5($password_lama);
  
 $tanggal= mktime(date("m"),date("d"),date("Y"));
 $tgl = date("Y-m-d", $tanggal);
+
 if($password_baru == $konfirmasi_password){
   
 		$query_cek = "SELECT password FROM user WHERE id_user='".$id."'";

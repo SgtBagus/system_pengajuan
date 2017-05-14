@@ -12,16 +12,11 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+        <link href="assets/css/login.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="assets/css/reset.css">
         <link rel="stylesheet" href="assets/css/supersized.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/dist/sweetalert.css">
-        <style>
-            body{background-image:url(assets/img/1.jpg); background-size:cover}
-            #test{padding:20px}
-            h1{text-align:center; color:#FFF}
-            p{margin-bottom:10px; color:#FFF}
-        </style>
     </head>
     <body>
         <div class="page-container">
@@ -37,6 +32,18 @@
                 <button type="submit" value="Login" name="submit">Login</button>
                 <div class="error"><span>+</span></div>
             </form>
+        </div>
+        <?php
+        if (isset($_GET['proses'])){
+            $login = ($_GET["proses"]);
+            if($login == "false"){
+                echo'<a href="lupa_password" class="link"> Lupa Password!</a>';
+            }
+        }
+        ?>
+        <div id="footer">
+            <a href="daftar" class="footer">Daftar Disini!</a>
+            @<?php echo date("Y") ?> System Pengajuan
         </div>
     </body>
 </html>
@@ -58,6 +65,14 @@ if (isset($_GET['proses'])) {
             title: "Mohon Maaf!",
             text: "Anda harus login terlebih dahulu !",
             type: "error",
+            showConfirmButton: true,
+            confirmButtonColor: "#00ff00"
+        })';
+    }else if ($login == "edit"){
+        echo'swal({
+            title: "Terubah!",
+            text: "Email telah diubah! Silakan Login Kembali",
+            type: "success",
             showConfirmButton: true,
             confirmButtonColor: "#00ff00"
         })';

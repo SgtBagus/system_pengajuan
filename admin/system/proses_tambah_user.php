@@ -18,7 +18,7 @@ if (isset($_POST['input'])) {
 $cekdulu= "SELECT * FROM user WHERE username='$username' OR email='$email'";
 $prosescek= mysqli_query($con, $cekdulu);
 if (mysqli_num_rows($prosescek)>0) { 
-  header("location:../tambah_user?error=true"); 
+  header("location:../tambah_user?error=true");  
 }
 else { 
 
