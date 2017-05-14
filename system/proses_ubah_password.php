@@ -6,7 +6,7 @@ $konfirmasi_password = $_POST['konfirmasi_password'];
 $hash_baru=md5($password_baru);
 $password_lama = $_POST['password_lama'];
 $hash=md5($password_lama);
- 
+  
 $tanggal= mktime(date("m"),date("d"),date("Y"));
 $tgl = date("Y-m-d", $tanggal);
 

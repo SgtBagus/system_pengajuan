@@ -150,8 +150,8 @@
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title" align="center">
-                                        Pengajuan Terakhir <br>
+                                    <h4 class="title">
+                                        10 Pengajuan Terakhir <br>
                                     </h4>
                                 </div>
                                 <div class="content">
@@ -161,7 +161,7 @@
     <?php
         $query_pengajuan = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.status
                                 FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user
-                                ORDER BY a.id_pengajuan DESC LIMIT 5 ";
+                                ORDER BY a.id_pengajuan DESC LIMIT 10 ";
         $result_pengajuan = mysqli_query($con, $query_pengajuan);
         if(!$result_pengajuan){
             die ("Query Error: ".mysqli_errno($con).

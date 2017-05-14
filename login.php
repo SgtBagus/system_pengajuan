@@ -76,6 +76,14 @@ if (isset($_GET['proses'])) {
             showConfirmButton: true,
             confirmButtonColor: "#00ff00"
         })';
+    }else if ($login == "new"){
+        echo'swal({
+            title: "Terdaftar!",
+            text: "Akun anda sudah terdaftar, Silakan Login!",
+            type: "success",
+            showConfirmButton: true,
+            confirmButtonColor: "#00ff00"
+        })';
     }
     echo '</script>';
   } 

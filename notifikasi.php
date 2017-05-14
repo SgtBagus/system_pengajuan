@@ -161,7 +161,29 @@
             die ("Query Error: ".mysqli_errno($con).
             " - ".mysqli_error($con));
         }
-        
+            if($result2->num_rows == 0){
+                        echo '<a href="#" style="color:black">
+                            <div class="card">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div align="center">
+                                                Anda tidak memiliki notifikasi
+                                                <br>
+                                                <a href="notifikasi">
+                                                    <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                        <i class="fa fa-refresh"></i> Refresh data
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>';
+            }
+            else {
+         
         while($data2 = mysqli_fetch_assoc($result2)){ 
                         echo '<a href="system/notifikasi_pengajuan?id='.$data2['id_riwayat'].'" style="color:black">
                             <div class="card">
@@ -187,6 +209,7 @@
                             </div>
                         </a>';
         }
+            }
     ?>                          
                     </div>
                 </div>

@@ -58,70 +58,70 @@
                             <h4 class="title">Daftar</h4>
                         </div>
                         <div class="content">
-                            <form id="form_user" method="post" action="system/daftar">
+                            <form id="form_user" method="post" action="system/proses_daftar">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Username</label>
                                             <input type="text" name="username" id="username" class="form-control" placeholder="Username" required 
-                                            oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
-                                            oninput="setCustomValidity('')">
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')">
                                         </div>
                                     </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="Email">Email address</label>
-                                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="Email">Email address</label>
+                                            <input type="email" name="email" id="email" class="form-control" placeholder="Email" required
                                                 oninvalid="this.setCustomValidity('Mohon sesuikan form berikut !')"  
                                                 oninput="setCustomValidity('')">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="Password">Password</label>
-                                                <input type="password" name="password" id="password" class="form-control" placeholder="password" required 
-                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
-                                                oninput="setCustomValidity('')" >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="Password">Konfirmasi Password</label>
-                                                <input type="password" name="konfirmasi_password" id="password" class="form-control" placeholder="password" required 
-                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
-                                                oninput="setCustomValidity('')" >
-                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Nama Depan</label>
-                                                <input type="text" name="nama_depan" id="nama_depan" class="form-control" placeholder="Nama Depan" required
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="Password">Password</label>
+                                            <input type="password" name="password" id="password" class="form-control" placeholder="password" required 
                                                 oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
                                                 oninput="setCustomValidity('')" >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Nama Belakang</label>
-                                                <input type="text" name="nama_belakang" id="nama_belakang" class="form-control" placeholder="Nama Belakang" required 
-                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
-                                                oninput="setCustomValidity('')" >
-                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Jenis Kelamin</label>
-                                                <br>
-                                                <input type="radio" name="jeniskelamin" id="jeniskelamin" value="laki-laki" required
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="Password">Konfirmasi Password</label>
+                                            <input type="password" name="konfirmasi_password" id="password" class="form-control" placeholder="password" required 
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Nama Depan</label>
+                                            <input type="text" name="nama_depan" id="nama_depan" class="form-control" placeholder="Nama Depan" required
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Nama Belakang</label>
+                                            <input type="text" name="nama_belakang" id="nama_belakang" class="form-control" placeholder="Nama Belakang" required 
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Jenis Kelamin</label>
+                                            <br>
+                                            <input type="radio" name="jeniskelamin" id="jeniskelamin" value="laki-laki" required
                                                 oninvalid="this.setCustomValidity('Pilih salah satu jenis kelamin berikut !')" onclick="clearValidity();">
                                                 Laki - Laki
-                                                <input type="radio" name="jeniskelamin" id="jeniskelamin" value="perempuan" required
+                                            <input type="radio" name="jeniskelamin" id="jeniskelamin" value="perempuan" required
                                                 onclick="clearValidity()"> 
                                                 Perempuan
     <script>
@@ -129,40 +129,40 @@
             document.getElementById('jeniskelamin').setCustomValidity('');
         }
     </script> 
-                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Alamat</label>
-                                                <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" required
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Alamat</label>
+                                            <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" required
                                                 oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
                                                 oninput="setCustomValidity('')">
-                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>No. Hp</label>
-                                                <input type="number" name="nohp" id="no_hp" class="form-control" placeholder="No. Hp" >
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>No. Hp</label>
+                                            <input type="number" name="nohp" id="no_hp" class="form-control" placeholder="No. Hp" >
                                         </div>
                                     </div>
-                                    <div align="right">
-                                        <button type="submit" name="input" rel="tooltip" class="btn btn-primary btn-fill">
-                                            <i class="fa fa-check"></i> Daftar
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+                                </div>
+                                <div align="right">
+                                    <button type="submit" name="input" rel="tooltip" class="btn btn-primary btn-fill">
+                                        <i class="fa fa-check"></i> Daftar
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
     <script src="assets/dist/sweetalert-dev.js"></script>
     <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
@@ -177,15 +177,24 @@
 if (isset($_GET['error'])) {
     echo'<script type="text/javascript">';
     $error = ($_GET["error"]);
-        if($error == "true"){
+        if($error == "true1"){
             echo'swal({
                 title: "Mohon Maaf!",
-                text: "Email atau Username yang anda masukan sudah ada!",
+                text: "Email sudah terdaftar!",
                 type: "error",
                 showConfirmButton: true,
                 confirmButtonColor: "#00ff00"
             })';
-        }
+        } 
+        if($error == "true2"){
+            echo'swal({
+                title: "Mohon Maaf!",
+                text: "Konfirmasi password anda tidak sama!",
+                type: "error",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })';
+        } 
     echo'</script>';
   }  
 ?>
