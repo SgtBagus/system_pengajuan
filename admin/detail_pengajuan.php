@@ -28,13 +28,32 @@
         $jenis_pengajuan = $data["jenis_pengajuan"];
         $taggal_pengajuan = $data["tanggal_pengajuan"];
         $gambar = $data["gambar"];
-        $biaya = $data["biaya"];
+        $biaya = $data["biaya"]; 
         $alasan = $data["alasan"];
         $status = $data["status"];
         $keterangan = $data["keterangan"];
         $update = $data["update_pengajuan"];
         $pelaksanaan = $data["jadwal_pelaksanaan"];
     } 
+
+    function tanggal_indo($tanggal){
+        $bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+        );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+    }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -131,7 +150,7 @@
                                         <small>
                                             <?php
                                                 echo '<a href="detail_user?id='.$id_pengaju.'">
-                                                    <b>'.$pengaju.'</b> - <small>'.date("d-m-Y", strtotime($taggal_pengajuan)).'</small>
+                                                    <b>'.$pengaju.'</b> / <small>'.tanggal_indo(''.$data['tanggal_pengajuan'].'').'</small>
                                                 </a> / ';
                                             
     if( $data['status'] == "proses" ){
@@ -217,7 +236,7 @@
                                                     <tr>
                                                         <td><h5><b>Jadwal Pelaksanaan</h5></b></td>
                                                         <td><h5><b> : </h5></b></td>
-                                                        <td><h5>'.date("d-m-Y", strtotime($data['jadwal_pelaksanaan'])).'</h5></td>
+                                                        <td><h5>'.tanggal_indo(''.$data['jadwal_pelaksanaan'].'').'</h5></td>
                                                     </tr>
                                                     <tr>
                                                         <td><h5><b>Catatan</h5></b></td>
@@ -264,12 +283,13 @@
         }
     $no = 1;
       while($data2 = mysqli_fetch_assoc($result2)){
+          $tanggal_kegiatan = tanggal_indo($data2['tanggal_kegiatan']);
                                                 echo "<tr>
                                                     <td width='10px'><b>$no </b></td>
                                                     <td width='10px'> . </td>
                                                     <td width='150px'> <b>$data2[kegiatan2] </b> </td>
                                                     <td width='10px'> : </td>
-                                                    <td><small> $data2[tanggal_kegiatan]</small></td>
+                                                    <td><small>$tanggal_kegiatan</small></td>
                                                 </tr>
                                             </tbody>";
                                         $no++;

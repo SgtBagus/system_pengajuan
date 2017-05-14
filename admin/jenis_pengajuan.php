@@ -102,19 +102,18 @@
                             <div class="header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h4 class="title">Data Jenis Pengajuan</h4>
-                                        <a href="master"><p class="category"><i class="fa fa-arrow-left"></i> Klik di sini untuk kembali ke menu Master</p></a>
+                                        <h4 class="title">Jenis Pengajuan</h4>
                                     </div>  
                                     <div class="col-md-6" align="right">
                                         <a href="tambah_jenispengajuan">
-                                            <button type="button" class="btn btn-info btn-fill">
+                                            <button type="button" class="btn btn-primary btn-fill">
                                                 <i class="fa fa-plus"></i> Tambah Jenis Pengajuan
                                             </button>
                                         </a>
                                     </div>
                                 </div>
                                 <br>
-                                <form id="form_user"  action="pencarian_jenispengajuan" method="get">
+                                <form id="form_user"  action="?" method="get">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group">
@@ -142,15 +141,37 @@
                                     <tbody>
 
 <?php
-      $query = "SELECT * FROM jenis_pengajuan ORDER BY id_jenis_pengajuan" ;
+        if (isset($_GET['cari'])) {
+            $jenispengajuan = ($_GET["cari"]);
+                $query = "SELECT * FROM jenis_pengajuan WHERE jenis_pengajuan like '%$jenispengajuan%' ORDER BY id_jenis_pengajuan" ;
+        }
+        else{
+            $query = "SELECT * FROM jenis_pengajuan ORDER BY id_jenis_pengajuan" ;
+        }
+
       $result = mysqli_query($con, $query);
-      if(!$result){
-        die ("Query Error: ".mysqli_errno($con).
-           " - ".mysqli_error($con));
-      }
-      $no = 1; 
-      while($jenispengajuan = mysqli_fetch_assoc($result))
-      {
+        if(!$result){
+            die ("Query Error: ".mysqli_errno($con).
+            " - ".mysqli_error($con));
+        }
+
+        if($result->num_rows == 0){
+                                        echo "<tr>
+                                            <td colspan='4' align='center'>
+                                                Tidak ada data
+                                                <br>
+                                                <a href='jenis_pengajuan'>
+                                                    <button type='button' class='btn btn-primary btn-fill btn-sm'>
+                                                        <i class='fa fa-refresh'></i> Refresh data
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        </tr>";
+        }
+        else{
+            $no = 1; 
+            while($jenispengajuan = mysqli_fetch_assoc($result))
+            {
                                         echo '<tr>
                                             <td>'.$no.'</td>
                                             <td>'.$jenispengajuan['jenis_pengajuan'].'</td>
@@ -163,7 +184,8 @@
                                                     <i class="fa fa-trash"></i>
                                                 </button>';
                                         $no++;
-      }
+            }
+        }
 ?>
                                     </tbody>
                                 </table>

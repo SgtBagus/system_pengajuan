@@ -8,6 +8,24 @@
     else {
         $logged_in = true;
     }
+
+    function tanggal_indo($tanggal){
+        $bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+        );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -101,7 +119,7 @@
                                         </div>  
                                     </div>
                                     <br>    
-                                    <form id="form_pencarian"  action="pencarian_pengajuan" method="get">
+                                    <form id="form_pencarian"  action="?" method="get">
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <div class="form-group">
@@ -162,84 +180,112 @@
                                             <th>Pengajuan</th>
                                             <th>Pengaju</th>
                                             <th>Jenis</th>
-                                            <th>Tanggal</th>
-                                            <th>Biaya</th>
-                                            <th>Status</th>
+                                            <th>tanggal</th>
+                                            <th>biaya</th>
+                                            <th>status</th>
                                             <th>Tindak Lanjut</th>
                                         </thead>
                                         <tbody>
-    <?php
-        $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user, b.username, a.jenis_pengajuan, DATE_FORMAT(a.tanggal_pengajuan, '%d - %m - %Y') as tanggal_pengajuan, 
-                    a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
-                    ORDER BY a.id_pengajuan DESC " ;
-        $result = mysqli_query($con, $query);
-        if(!$result){
-            die ("Query Error: ".mysqli_errno($con).
-            " - ".mysqli_error($con));
-        }
-            if($result->num_rows == 0){
-                echo "<tr>";
-                    echo "<td colspan='8' align='center'>Tidak ada Data Pengajuan</td>";
-                echo "</tr>";
+        <?php
+        if (isset($_GET['judul'])) {
+            $pengajuan = ($_GET["judul"]);
+            $first = date_create(($_GET["tanggal_awal"]));
+            $lass = date_create(($_GET["tanggal_akhir"]));
+            $awal = date_format($first,"Y-m-d");
+            $akhir = date_format($lass,"Y-m-d");
+            $sts= ($_GET["status"]);
+
+                if ($sts == "semua"){
+                    $status = "";
+                }else{
+                    $status = $sts;
+                }
+                
+            if( $pengajuan == ""){
+                $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
+                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                            AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') AND a.status like '%$status%' ORDER BY a.id_pengajuan DESC" ;
+            }else {
+                $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
+                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                            AND a.pengajuan like '%$pengajuan%' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir')ORDER BY a.id_pengajuan DESC" ;
+            }
         }
         else {
-        $no = 1;
-        while($data = mysqli_fetch_assoc($result))  
-        {    
-                
-                                            echo '<tr>
-                                                <td>'.$no.'</td>
-                                                <td>'.$data['pengajuan'].'</td>
-                                                <td>'.$data['username'].'</td>
-                                                <td>'.$data['jenis_pengajuan'].'</td>
-                                                <td>'.$data['tanggal_pengajuan'].'</td>
-                                                <td>'.$data['biaya'].'</td>
-                                                <td align = "center">';
-    if( $data['status'] == "proses" ){
-                                                echo '<span class="badge proses upper">'.$data['status'].'</span>';
-    }else{
-                                                echo '<span class="badge  upper">'.$data['status'].'</span>';
-    }
-                                                echo '</td>
-                                                <td align = "center">';
-    if( $data['status'] == "menunggu" ){
-                                            echo '<button onclick="pengajuanditerima('.$data['id_pengajuan'].')" type="button" class="btn btn-primary btn-fill btn-sm">
-                                                <i class="fa fa-check"></i>
-                                            </button>
-                                            <button onclick="pengajuanditolak('.$data['id_pengajuan'].')" type="button" class="btn btn-danger  btn-fill btn-sm">
-                                                <i class="fa fa-close"></i>
-                                            </button>
-                                            <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                <button type="button" class="btn btn-info btn-fill btn-sm">
-                                                    <i class="fa fa-eye"></i>
-                                                </button>
-                                            </a>';
-    }
-    else if ($data['status'] == "proses"){
-                                            echo '<button onclick="pengajuandiubah('.$data['id_pengajuan'].')" type="button" class="btn btn-primary  btn-fill btn-sm">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                <button type="button" class="btn btn-info btn-fill btn-sm">
-                                                    <i class="fa fa-eye"></i>
-                                                </button>
-                                            </a>
-                                            <button onclick="pengajuandiselesaikan('.$data['id_pengajuan'].')" type="button" name="input" class="btn btn-primary  btn-fill btn-sm">
-                                                <i class="fa fa-check"></i>
-                                            </button>';
-    }else if($data['status'] == "selesai"){
-                                            echo '<a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                <button type="button" class="btn btn-info btn-fill btn-sm">
-                                                    <i class="fa fa-eye"></i>
-                                                </button>
-                                            </a>';
-    }
-                                        echo'</td>
-                                    </tr>';
-    $no++;
+            $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
+                        a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                        ORDER BY a.id_pengajuan DESC" ;
         }
-    }
-    ?>
+            $result = mysqli_query($con, $query);
+            if($result->num_rows == 0){
+                                                echo "<tr>
+                                                    <td colspan='8' align='center'>
+                                                        Anda tidak memiliki pengajuan
+                                                        <br>
+                                                        <a href='pengajuan'>
+                                                            <button type='button' class='btn btn-primary btn-fill btn-sm'>
+                                                                <i class='fa fa-refresh'></i> Refresh data
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>";
+            }
+            else {
+                $no = 1;
+                while($data = mysqli_fetch_assoc($result)){
+                                                    echo '<tr>
+                                                        <td>'.$no.'</td>
+                                                        <td>'.$data['pengajuan'].'</td>
+                                                        <td>'.$data['username'].'</td>
+                                                        <td>'.$data['jenis_pengajuan'].'</td>
+                                                        <td>'.tanggal_indo(''.$data['tanggal_pengajuan'].'').'</td>
+                                                        <td>'.$data['biaya'].'</td>
+                                                        <td align = "center">';
+        if( $data['status'] == "proses" ){
+                                                echo '<span class="badge proses upper">'.$data['status'].'</span>';
+        }else{
+                                                echo '<span class="badge  upper">'.$data['status'].'</span>';
+        }
+                                                        echo '</td>
+                                                    <td align = "center">';
+        if( $data['status'] == "menunggu" ){
+                                                        echo '<button onclick="pengajuanditerima('.$data['id_pengajuan'].')" type="button" class="btn btn-primary btn-fill btn-sm">
+                                                            <i class="fa fa-check"></i>
+                                                        </button>
+                                                        <button onclick="pengajuanditolak('.$data['id_pengajuan'].')" type="button" class="btn btn-danger  btn-fill btn-sm">
+                                                            <i class="fa fa-close"></i>
+                                                        </button>
+                                                        <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
+                                                            <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                <i class="fa fa-eye"></i>
+                                                            </button>
+                                                        </a>';
+        }
+        else if ($data['status'] == "proses"){
+                                                        echo '<button onclick="pengajuandiubah('.$data['id_pengajuan'].')" type="button" class="btn btn-primary  btn-fill btn-sm">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
+                                                            <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                <i class="fa fa-eye"></i>
+                                                            </button>
+                                                        </a>
+                                                        <button onclick="pengajuandiselesaikan('.$data['id_pengajuan'].')" type="button" name="input" class="btn btn-primary  btn-fill btn-sm">
+                                                            <i class="fa fa-check"></i>
+                                                        </button>';
+        }else if($data['status'] == "selesai"){
+                                                        echo '<a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
+                                                            <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                <i class="fa fa-eye"></i>
+                                                            </button>
+                                                        </a>';
+        }
+                                                    echo'</td>
+                                                    </tr>';
+                                                    $no++;
+                }
+            }
+        ?>
                                         </tbody>
                                     </table>
                                 </div>

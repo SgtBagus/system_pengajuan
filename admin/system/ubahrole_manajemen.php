@@ -10,10 +10,9 @@ $jam=date("H:i:s");
 
 $query = "UPDATE user SET role='manajemen', update_akun='$tgl $jam' WHERE id_user='$id'";
   $result = mysqli_query($con, $query);
-  // periska query apakah ada error
   if(!$result){
       die ("Query gagal dijalankan: ".mysqli_errno($con).
            " - ".mysqli_error($con));
   }
-        header('location:../detail_user?id='.$id.'&proses=edit'); 
+        header('location:../detail_user?id='.$id.'&proses=edit');  
 ?>

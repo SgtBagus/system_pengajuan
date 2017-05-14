@@ -19,7 +19,7 @@
         $id = $data["id_user"];
         $username = $data["username"];
         $email = $data["email"];
-        $namadepan = $data["nama_depan"];
+        $namadepan = $data["nama_depan"]; 
         $namabelakang = $data["nama_belakang"];
         $jk = $data["jk"];
         $nohp = $data["no_hp"];
@@ -213,7 +213,7 @@
                                                 <br>
                                                 <a href="ubah_bio">
                                                     <button type="button" class="btn btn-primary col-md-12 btn-fill">
-                                                        <i class="fa fa-info"></i> Ubah Bio
+                                                        <i class="fa fa-info"></i> Ubah Bio Data
                                                     </button>
                                                 </a>
                                             </div>

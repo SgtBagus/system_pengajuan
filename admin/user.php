@@ -41,6 +41,7 @@
          " - ".mysqli_error($con));
     }
     $data_login = mysqli_fetch_assoc($result_login);
+    $id_login = $data_login["id_user"];
     $username = $data_login["username"];
 ?>
                     Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
@@ -96,18 +97,22 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h4 class="title">Data Pengguna</h4>
-                                        <a href="master"><p class="category"><i class="fa fa-arrow-left"></i> Klik di sini untuk kembali ke menu Master</p></a>
                                     </div>  
                                     <div class="col-md-6" align="right">
-                                        <a href="tambah_user">
-                                            <button type="button" class="btn btn-info btn-fill">
-                                                <i class="fa fa-plus"></i> Tambah Pengguna
+                                <?php   echo '<a href="detail_user?id='.$id_login.'">'; ?>
+                                            <button type="button" class="btn btn-primary btn-fill">
+                                                <i class="fa fa-user"></i> Profil
                                             </button>
                                         </a>
+                                        <a href="tambah_user">
+                                            <button type="button" class="btn btn-primary btn-fill">
+                                                <i class="fa fa-plus"></i> Tambah Pengguna
+                                            </button>
+                                <?php   echo '</a>'; ?>
                                     </div>
                                 </div>
                                 <br>
-                                <form id="form_pencarian"  action="pencarian_user" method="get">
+                                <form id="form_pencarian"  action="?" method="get">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group">
@@ -136,50 +141,67 @@
                                     <tbody>
 
 <?php
-      $query_user = "SELECT * FROM user ORDER BY id_user" ;
-      $result_user = mysqli_query($con, $query_user);
-      if(!$result_user){
-        die ("Query Error: ".mysqli_errno($con).
-           " - ".mysqli_error($con));
-      }
-      $query_tim = "SELECT * FROM user WHERE ROLE = 'tim'" ;
-      $result_tim = mysqli_query($con, $query_tim);
-      $no = 1;
-      while($data_user = mysqli_fetch_assoc($result_user)){
+        if (isset($_GET['cari'])) {
+            $username = ($_GET["cari"]);
+                $query = "SELECT * FROM user WHERE username like '%$username%' ORDER BY role" ;
+        }
+        else {
+                $query = "SELECT * FROM user ORDER BY role" ;
+        }
+
+      $result = mysqli_query($con, $query);
+            if($result->num_rows == 0){
+                                        echo "<tr>
+                                            <td colspan='5' align='center'>
+                                                Tidak ada data
+                                                <br>
+                                                <a href='user'>
+                                                    <button type='button' class='btn btn-primary btn-fill btn-sm'>
+                                                        <i class='fa fa-refresh'></i> Refresh data
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        </tr>";
+            }
+            else{
+
+            $query_tim = "SELECT * FROM user WHERE ROLE = 'tim'" ;
+            $result_tim = mysqli_query($con, $query_tim);
+            $no = 1;
+
+                while($data = mysqli_fetch_assoc($result)){
                                         echo '<tr>
                                                 <td>'.$no.'</td>
-                                                <td>'.$data_user['username'].'</td>
-                                                <td>'.$data_user['email'].'</td>
-                                                <td>'.$data_user['role'].'</td>
-                                                <td>
-                                                    <a href="detail_user?id='.$data_user['id_user'].'">
+                                                <td>'.$data['username'].'</td>
+                                                <td>'.$data['email'].'</td>
+                                                <td>'.$data['role'].'</td>
+                                                <td align="center">
+                                                    <a href="detail_user?id='.$data['id_user'].'">
                                                         <button type="button" class="btn btn-info btn-fill btn-sm">
                                                             <i class="fa fa-eye"></i>
                                                         </button>
-                                                    </a>
-                                                    <button onclick="editprofil('.$data_user['id_user'].')" type="button" rel="tooltip" class="btn btn-primary btn-fill btn-sm">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>';
-        if( $data_user['email'] == $_SESSION['email'] ){
-                                                    echo' <button  type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm" disabled>
+                                                    </a>';
+                    if( $data['email'] == $_SESSION['email'] ){
+                                                    echo '<button  type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm" disabled>
                                                         <i class="fa fa-trash"></i>
                                                     </button>';
-        }
-        else{
-            if ($result_tim->num_rows == 1){
+                    }
+                    else{
+                        if ($result_tim->num_rows == 1){
                                                     echo' <button type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm" disabled>
                                                         <i class="fa fa-trash"></i>
                                                     </button>';
-            }else{
-                                                    echo' <button onclick="hapususer('.$data_user['id_user'].')"  type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm">
+                        }else{
+                                                    echo' <button onclick="hapususer('.$data['id_user'].')"  type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </td>
                                             </tr>';
+                        }
+                    }
                                         $no++;
+                }
             }
-        }
-    }
 ?>
                                     </tbody>
                                 </table>

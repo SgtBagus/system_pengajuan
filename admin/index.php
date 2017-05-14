@@ -8,6 +8,24 @@
     else {
         $logged_in = true;
     }
+
+    function tanggal_indo($tanggal){
+        $bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+        );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -110,7 +128,9 @@
                                     <div class="footer">
                                         <hr>
                                         <div class="stats">
-                                            <a href="pencarian_pengajuan?pengajuan=&pengaju=&tanggal=&status=menunggu"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Menunggu</a>
+                                            <a href="pengajuan">
+                                                <i class="fa fa-eye"></i> Lihat Semua Pengajuan
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -133,7 +153,9 @@
                                     <div class="footer">
                                         <hr>
                                         <div class="stats">
-                                            <a href="pencarian_pengajuan?pengajuan=&pengaju=&tanggal=&status=proses"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Proses</a>
+                                            <a href="pengajuan">
+                                                <i class="fa fa-eye"></i> Lihat Semua Pengajuan
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -156,7 +178,9 @@
                                     <div class="footer">
                                         <hr>
                                         <div class="stats">
-                                            <a href="pencarian_pengajuan?pengajuan=&pengaju=&tanggal=&status=selesai"><i class="fa fa-eye"></i> Lihat Semua Pengajuan Selesai</a>
+                                            <a href="pengajuan">
+                                                <i class="fa fa-eye"></i> Lihat Semua Pengajuan
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -180,7 +204,7 @@
     <?php
         $query_pengajuan = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.status
                                 FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user
-                                AND a.status = 'proses' ";
+                                AND a.status = 'proses' LIMIT 7 ";
         $result_pengajuan = mysqli_query($con, $query_pengajuan);
         if(!$result_pengajuan){
             die ("Query Error: ".mysqli_errno($con).
@@ -188,7 +212,7 @@
         }
         if($result_pengajuan->num_rows == 0){
                 echo "<tr>
-                        <td colspan='3'>Data Pengajuan Tidak Di temukan</td>
+                    <td colspan='3'>Data Pengajuan Tidak Di temukan</td>
                 </tr>";
         }
         else {
@@ -212,7 +236,10 @@
                                     <div class="footer">
                                         <hr>
                                         <div class="stats">
-                                                <a href="pencarian_pengajuan?pengajuan=&pengaju=&tanggal=&status=proses"><i class="fa fa-link"></i> Lihat Semua Pengajuan Proses</a>
+                                            <a href="pencarian_pengajuan?pengajuan=&pengaju=&tanggal=&status=proses">
+                                                <i class="fa fa-link"></i> 
+                                                Lihat Semua Pengajuan Proses
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -244,7 +271,7 @@
                                     <div class="content">
                                         <input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">
                                         <h5><b>'.$data2['jenis_riwayat'].' </b> - <small>'.$data2['pengajuan'].'</small></h5>
-                                        <h5>Tanggal kegiatan : '.$data2['tanggal_kegiatan'].'</h5>
+                                        <h5>Tanggal kegiatan : '.tanggal_indo($data2['tanggal_kegiatan']).'</h5>
                                     </div>
                                 </div>
                             </a>';
@@ -281,7 +308,7 @@
                                 <div class="content">
                                     <input type="hidden" name="id_catatan" id="form_catatan" value="<?php echo $data_catatan['id_catatan'] ?>">
                                     <div class="form-group">
-                                            <textarea rows="5" class="form-control" placeholder="Tidak Ada Catatan !" name="catatan" id="form_catatan"><?php echo $data_catatan['catatan'] ?></textarea>
+                                        <textarea rows="5" class="form-control" placeholder="Tidak Ada Catatan !" name="catatan" id="form_catatan"><?php echo $data_catatan['catatan'] ?></textarea>
                                     </div>
                                 <div align="right">
                                     <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">

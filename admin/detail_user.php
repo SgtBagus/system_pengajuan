@@ -15,7 +15,7 @@
         if(!$result){
         die ("Query Error: ".mysqli_errno($con).
             " - ".mysqli_error($con));
-        }
+        } 
         $data = mysqli_fetch_assoc($result);
         $id = $data["id_user"];
         $username = $data["username"];
@@ -30,6 +30,24 @@
         $pembuatan_akun = date('d-m-Y', strtotime ($data["pembuatan_akun"]));
         $update_akun = date('d-m-Y', strtotime ($data["update_akun"]));
     } 
+
+    function tanggal_indo($tanggal){
+        $bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+        );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -40,15 +58,10 @@
 	<title>User</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-    <!-- Bootstrap core CSS     -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Animation library for notifications   -->
     <link href="../assets/css/animate.min.css" rel="stylesheet"/>
-    <!--  Light Bootstrap Table core CSS    -->
     <link href="../assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
-    <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
@@ -69,6 +82,7 @@
         }
         $data_login = mysqli_fetch_assoc($result_login);
         $username_login = $data_login["username"];
+        $email_login = $data_login["email"];
     ?>
                         Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username_login ?></small></small>
                     </a>
@@ -120,93 +134,152 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Detail Profile <b>( <?php echo $username ?>)</b> </h4>
-                                    <small class="title">
-                                        Pembuatan Akun : <b>( <?php echo $pembuatan_akun ?> )</b> 
-                                        ||
-                                        Update Terakhir Akun : <b>( <?php echo $update_akun ?> )</b> 
-                                    </small>
+                                    <h4 class="title">Profile <br> <small>Pembuatan Akun : <?php echo tanggal_indo($pembuatan_akun) ?> / Perubahan Terakhir : <?php echo tanggal_indo($update_akun) ?></small></h4>
                                 </div>
                                 <div class="content">
-                                    <form>
-                                        <input type="hidden" name="id_pengajuan" value="<?php echo $id_pengajuan ?>">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <div class="content table-responsive table-full-width">
-                                                        <table>
-                                                            <thead>
-                                                                <th width="150px"></th>
-                                                                <th width="25px"></th>
-                                                                <th></th>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td><h5><b>Username</h5></b></td>
-                                                                    <td><h5><b>:</h5></b></td>
-                                                                    <td><h5><?php echo $username ?></h5></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><h5><b>Email</h5></b></td>
-                                                                    <td><h5><b>:</h5></b></td>
-                                                                    <td><h5><?php echo $email ?></h5></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><h5><b>Nama depan</h5></b></td>
-                                                                    <td><h5><b>:</h5></b></td>
-                                                                    <td><h5><?php echo $namadepan ?></h5></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><h5><b>Nama belakang</h5></b></td>
-                                                                    <td><h5><b>:</h5></b></td>
-                                                                    <td><h5><?php echo $namabelakang ?></h5></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><h5><b>Jenis Kelamin</h5></b></td>
-                                                                    <td><h5><b>:</h5></b></td>
-                                                                    <td><h5><?php echo $jk ?></h5></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><h5><b>Alamat</h5></b></td>
-                                                                    <td><h5><b>:</h5></b></td>
-                                                                    <td><h5><?php echo $alamat ?></h5></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><h5><b>Role</h5></b></td>
-                                                                    <td><h5><b>:</h5></b></td>
-                                                                    <td><h5><?php echo $role ?></h5></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div align="right">
-                                                        <a href="user">
-                                                            <button type="button" rel="tooltip" class="btn btn-info btn-fill">
-                                                                        <i class="fa fa-arrow-left"></i> Lihat Data Pengguna
-                                                            </button>
-                                                        </a>
-    <?php
-                                        echo '<a>
-                                                <button onclick="editprofil('.$id.')" type="button" rel="tooltip" class="btn btn-primary btn-fill">
-                                                    <i class="fa fa-edit"></i> Edit Profile
-                                                </button>
-                                        </a>';
-    if( $email == $_SESSION['email'] ){
-                                                echo'<button type="button" rel="tooltip" class="btn btn-danger btn-fill" disabled>
-                                                    <i class="fa fa-trash"></i> Hapus Profile
-                                                </button>';
-        }
-        else{
-                                                echo' <button onclick="hapususer('.$id.')"  type="button" rel="tooltip" class="btn btn-danger btn-fill ">
-                                                    <i class="fa fa-trash"></i> Hapus Profile
-                                                </button>';
-        }
-                                            
-    ?>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label>Username</label>
+                                                <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                <input type="text" name="username" id="username" class="form-control" placeholder="username" value="<?php echo $username ?>" disabled>
                                             </div>
-                                        <div class="clearfix"></div>
-                                    </form>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label for="Email">Email address</label>
+                                                <input type="email" name="email" id="email" class="form-control" placeholder="email" value="<?php echo $email ?>" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="Email">Role</label>
+                                                <input type="email" name="text" id="email" class="form-control" placeholder="email" value="<?php echo $role ?>" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nama Depan</label>
+                                                <input type="text" name="nama_depan" id="nama_depan" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>" disabled>
+                                            </div>
+                                            </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nama Belakang</label>
+                                                <input type="text" name="nama_belakang" id="nama_belakang" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Alamat</label>
+                                                <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>No. Hp</label>
+                                                <input type="number" name="nohp" id="no_hp" class="form-control" placeholder="No Hp" value="<?php echo $nohp ?>" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div align="right">
+                                        <a href="user">
+                                            <button type="button" class="btn btn-info  btn-fill">
+                                                <i class="pe pe-7s-note2"></i> Data User 
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Pengaturan</h4>
+                                </div>
+                                <div class="content">
+<?php
+    if($email == $email_login){
+?>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group" align="center">
+                                                <label for="Username">Bio Data</label>
+                                                <br>
+                                                <a href="ubah_bio?id=<?php echo$id?>">
+                                                    <button type="button" class="btn btn-primary col-md-12 btn-fill">
+                                                        <i class="fa fa-info"></i> Ubah Bio Data
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group"  align="center">
+                                                <label for="Email">Email</label><br>
+                                                <a href="ubah_email?id=<?php echo$id?>">
+                                                    <button type="button" class="btn btn-primary col-md-12 btn-fill">
+                                                        <i class="fa fa-info"></i> Ubah Email
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group"  align="center">
+                                                <label for="Password">Password</label><br>
+                                                <a href="ubah_password?id=<?php echo$id?>">
+                                                    <button type="button" class="btn btn-primary col-md-12 btn-fill">
+                                                        <i class="fa fa-info"></i> Ubah Password
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                    <?php
+                    }
+                    else {
+                        ?>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group" align="center">
+                                                <label for="Username">Ubah Role</label>
+                                                <br>
+                    <?php
+                        if($role == "tim"){
+                                                echo '<button onclick="ubahrole_manajemen('.$id.')" type="button" class="btn btn-primary col-md-12 btn-fill">
+                                                    <i class="fa fa-arrow-up"></i> Ubah Role Menjadi Manajemen
+                                                </button>';
+                        }else if ($role == "manajemen"){
+                                                echo '<button onclick="ubahrole_tim('.$id.')" type="button" class="btn btn-primary col-md-12 btn-fill">
+                                                    <i class="fa fa-arrow-down"></i> Ubah Role Menjadi tim
+                                                </button>';
+                        }
+                    ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group"  align="center">
+                                                <label for="Email">Hapus</label><br>
+                    <?php
+                                                echo '<button onclick="hapususer('.$id.')" type="button" class="btn btn-danger col-md-12 btn-fill">
+                                                    <i class="fa fa-trash"></i> Hapus Pengguna
+                                                </button>';
+                    ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                        <?php
+                    }
+                    ?>
                                 </div>
                             </div>
                         </div>
@@ -215,6 +288,7 @@
             </div>
         </div>
     </div>
+</div>
 </body>
     <script src="../assets/dist/sweetalert-dev.js"></script>
     <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
@@ -232,7 +306,7 @@ if (isset($_GET['proses'])) {
     if($proses == "edit"){
             echo'swal({
                 title: "Terubah!",
-                text: "Data pengguna telah diubah.",
+                text: "Profil telah diubah.",
                 type: "success",
                 showConfirmButton: true,
                 confirmButtonColor: "#00ff00"
@@ -262,10 +336,10 @@ if (isset($_GET['proses'])) {
             }) 
         }
 
-        function editprofil(id) {
+        function ubahrole_manajemen(id) {
             swal({
                 title: "Konfirmasi ?",
-                text: "Apakah anda ingin mengubah pengguna",
+                text: "Apakah anda ingin merubah role pengguna",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#00ff00",
@@ -274,9 +348,25 @@ if (isset($_GET['proses'])) {
                 closeOnConfirm: false
             },
             function(){
-                document.location="edit_user?id="+id;
+                document.location="system/ubahrole_manajemen?id="+id;
             })
-        }   
+        }
+
+        function ubahrole_tim(id) {
+            swal({
+                title: "Konfirmasi ?",
+                text: "Apakah anda ingin merubah role pengguna",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00ff00",
+                confirmButtonText: "Iya",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false
+            },
+            function(){
+                document.location="system/ubahrole_tim?id="+id;
+            })
+        }
 
         function hapususer(id) {
             swal({

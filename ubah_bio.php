@@ -182,7 +182,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Alamat</label>
+                                                <label>Alamat</label> 
                                                 <input type="text" name="alamat" id="form_edit_user" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" required 
                                             oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
                                             oninput="setCustomValidity('')" >

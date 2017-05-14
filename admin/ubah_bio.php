@@ -7,26 +7,47 @@
     }
     else {
         $logged_in = true;
-    }
+    }  
     if (isset($_GET['id'])) {
         $id = ($_GET["id"]);
         $query = "SELECT * FROM user WHERE id_user ='$id'";
         $result = mysqli_query($con, $query);
         if(!$result){
-            die ("Query Error: ".mysqli_errno($con).
-                " - ".mysqli_error($con));
-        }
+        die ("Query Error: ".mysqli_errno($con).
+            " - ".mysqli_error($con));
+        } 
         $data = mysqli_fetch_assoc($result);
         $id = $data["id_user"];
         $username = $data["username"];
         $email = $data["email"];
+        $password = $data["password"];
         $namadepan = $data["nama_depan"];
         $namabelakang = $data["nama_belakang"];
         $jk = $data["jk"];
         $nohp = $data["no_hp"];
         $alamat = $data["alamat"];
         $role = $data["role"];
+        $pembuatan_akun = date('d-m-Y', strtotime ($data["pembuatan_akun"]));
+        $update_akun = date('d-m-Y', strtotime ($data["update_akun"]));
     } 
+
+    function tanggal_indo($tanggal){
+        $bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+        );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -61,11 +82,11 @@
         }
         $data_login = mysqli_fetch_assoc($result_login);
         $username_login = $data_login["username"];
-    ?> 
+        $email_login = $data_login["email"];
+    ?>
                         Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username_login ?></small></small>
                     </a>
                 </div>
-
                 <ul class="nav">
                     <li>
                         <a href="index">
@@ -112,29 +133,19 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="header"> 
-                                    <h4 class="title">Edit Profile <b> (<?php echo $username ?> ) </b> - <small> <?php echo $role ?></small></h4>
+                                <div class="header">
+                                    <h4 class="title">Ubah Bio Data</h4>
                                 </div>
                                 <div class="content">
-                                    <form id="form_edit_user" method="post" action="system/proses_edit_user">
+                                    <form id="form_edit_user" method="post" action="system/proses_ubah_bio">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Username</label>
                                                     <input type="hidden" name="id" value="<?php echo $id ?>">
-                                                    <input type="text" name="username" id="username" class="form-control" placeholder="username" value="<?php echo $username ?>" >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="Email">Email address</label>
-                                                    <input type="email" name="email" id="email" class="form-control" placeholder="email" value="<?php echo $email ?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="Password">Password</label>
-                                                    <input type="password" name="password" id="form_edit_user" class="form-control" placeholder="Ubah Password">
+                                                    <label for="Username" >Username</label>
+                                                    <input type="text" name="username" id="form_edit_user" class="form-control" placeholder="username" value="<?php echo $username ?>" required 
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')" >
                                                 </div>
                                             </div>
                                         </div>
@@ -142,13 +153,17 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Nama Depan</label>
-                                                    <input type="text" name="nama_depan" id="nama_depan" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>">
+                                                    <input type="text" name="nama_depan" id="form_edit_user" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>" required 
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')" >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Nama Belakang</label>
-                                                    <input type="text" name="nama_belakang" id="nama_belakang" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" >
+                                                    <input type="text" name="nama_belakang" id="form_edit_user" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" required 
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')" >
                                                 </div>
                                             </div>
                                         </div>
@@ -156,7 +171,9 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Alamat</label>
-                                                    <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" >
+                                                    <input type="text" name="alamat" id="form_edit_user" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" required 
+                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                oninput="setCustomValidity('')" >
                                                 </div>
                                             </div>
                                         </div>
@@ -164,55 +181,31 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>No. Hp</label>
-                                                    <input type="number" name="nohp" id="no_hp" class="form-control" placeholder="No Hp" value="<?php echo $nohp ?>" >
+                                                    <input type="number" name="nohp" id="form_edit_user" class="form-control" placeholder="No Hp" value="<?php echo $nohp ?>" >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Konfirmasi Password</label>
+                                                    <input type="password" name="password" id="form_edit_user" class="form-control" placeholder="Password Anda" required
+                                                    oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                    oninput="setCustomValidity('')" >
                                                 </div>
                                             </div>
                                         </div>
                                         <div align="right">
-                                            <a href="user">
-                                                <button type="button" rel="tooltip" class="btn btn-info btn-fill">
-                                                            <i class="fa fa-arrow-left"></i> Lihat Data Penguna
+                                            <a href="detail_user?id=<?php echo$id?>">
+                                                <button type="button" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-info btn-fill">
+                                                    <i class="fa fa-arrow-left"></i> Kembali
                                                 </button>
                                             </a>
-                                            
-    <?php
-        if( $id == $data_login['id_user'] ){
-            if( $role == "manajemen" ){
-                                            echo '<button type="button" name="input" rel="tooltip" class="btn btn-primary btn-fill " disabled>
-                                                <i class="fa fa-arrow-down"></i> Ubah Role Menjadi Tim
-                                            </button>';
-            }
-        }
-        else{
-            if( $role == "manajemen" ){
-                                            echo '<button onclick="tim('.$id.')" type="button" name="input" rel="tooltip" class="btn btn-primary btn-fill ">
-                                                <i class="fa fa-arrow-down"></i> Ubah Role Menjadi Tim
-                                            </button>';
-            }
-            else {
-                                            echo '<button onclick="manajemen('.$id.')" type="button" name="input" rel="tooltip" class="btn btn-primary btn-fill ">
-                                                <i class="fa fa-arrow-up"></i> Ubah Role Menjadi Manajemen
-                                            </button>';
-            }
-        }
-                                        echo'
-                                            <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill ">
+                                            <button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
                                                 <i class="fa fa-edit"></i> Konfirmasi
-                                            </button>';
-
-        if( $data['id_user'] == $data_login['id_user'] ){
-                                                echo' <button type="button" rel="tooltip" class="btn btn-danger btn-fill " disabled>
-                                                    <i class="fa fa-trash"></i> Hapus Profile
-                                                </button>';
-        }
-        else{
-                                                echo' <button onclick="hapususer('.$id.')"  type="button" rel="tooltip" class="btn btn-danger btn-fill ">
-                                                    <i class="fa fa-trash"></i> Hapus Profile
-                                                </button>';
-        }
-    ?>
-                                            </div>
-                                        <div class="clearfix"></div>
+                                            </button> 
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -222,8 +215,8 @@
             </div>
         </div>
     </div>
+</div>
 </body>
-
     <script src="../assets/dist/sweetalert-dev.js"></script>
     <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
@@ -233,10 +226,27 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
 	<script src="../assets/js/demo.js"></script>
+<?php
+if (isset($_GET['error'])) {
+    echo '<script type="text/javascript">';
+    $error = ($_GET["error"]);
+    if($error == "true"){
+            echo'swal({
+                title: "Mohon Maaf!",
+                text: "Konfimasi Password anda salah",
+                type: "error",
+                showConfirmButton: true,
+                confirmButtonColor: "#00ff00"
+            })';
+    } 
+    echo '</script>';
+}
+?>
 	<script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();
     	});
+        
         function logout() {
             swal({
                 title: "Konfirmasi ?",
@@ -250,52 +260,7 @@
             },
             function(){
                 document.location="../logout";
-            })
-        }
-        function tim(id) {
-            swal({
-                title: "Konfirmasi ?",
-                text: "Apakah anda ingin mengubah role pengguna",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3472F7",
-                confirmButtonText: "Ubah Role",
-                cancelButtonText: "Batal",
-                closeOnConfirm: false
-            }, 
-            function(){
-                document.location="system/ubahrole_tim?id="+id;
-            })
-        }
-        function manajemen(id) {
-            swal({
-                title: "Konfirmasi ?",
-                text: "Apakah anda ingin mengubah role pengguna",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3472F7",
-                confirmButtonText: "Ubah Role",
-                cancelButtonText: "Batal",
-                closeOnConfirm: false
-            },
-            function(){
-                document.location="system/ubahrole_manajemen?id="+id;
-            })
-        }
-        function hapususer(id) {
-            swal({
-                title: "Konfirmasi ?",
-                text: "Apakah anda ingin menghapus pengguna",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#FF4A55",
-                confirmButtonText: "Hapus",
-                cancelButtonText: "Batal",
-                closeOnConfirm: false
-            },
-            function(){
-                document.location="system/hapus_user?id="+id;
-            })
+            }) 
         }
 	</script>
 </html>
