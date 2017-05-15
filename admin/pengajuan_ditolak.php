@@ -100,6 +100,12 @@
                         </div>
                     </li>
                     <li>
+                        <a href="profil">
+                            <i class="pe pe-7s-user"></i>
+                            <p>Profil</p>
+                        </a>
+                    </li>
+                    <li>
                         <a href="#" onclick = "logout()">
                             <i class="pe pe-7s-back"></i>
                             <p>Log out</p>

@@ -8,7 +8,7 @@ $password_lama = $_POST['password_lama'];
 $hash=md5($password_lama);
   
 $tanggal= mktime(date("m"),date("d"),date("Y"));
-$tgl = date("Y-m-d", $tanggal);
+$tgl = date("Y-m-d", $tanggal); 
 
 if($password_baru == $konfirmasi_password){
   
@@ -21,14 +21,14 @@ if($password_baru == $konfirmasi_password){
                update_akun='$tgl' WHERE id_user='$id'";
                
       $result = mysqli_query($con, $query);
-        header('location:../detail_user?id='.$id.'&proses=edit'); 
+        header('location:../profil?proses=edit'); 
     }
 
     else {
-        header('location:../ubah_password?id='.$id.'&error=true2'); 
+        header('location:../ubah_password?error=true2'); 
     }
 
 }else{
-        header('location:../ubah_password?id='.$id.'&error=true1'); 
+        header('location:../ubah_password?error=true1'); 
 }
 ?>

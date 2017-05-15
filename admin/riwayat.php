@@ -8,6 +8,25 @@
     else {
         $logged_in = true;
     }
+
+    function tanggal_indo($tanggal){
+        $bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+        );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+    }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -78,6 +97,12 @@
                         </div>
                     </li>
                     <li>
+                        <a href="profil">
+                            <i class="pe pe-7s-user"></i>
+                            <p>Profil</p>
+                        </a>
+                    </li>
+                    <li>
                         <a href="#" onclick = "logout()">
                             <i class="pe pe-7s-back"></i>
                             <p>Log out</p>
@@ -114,8 +139,12 @@
                                 <div class="card">
                                     <div class="content">
                                         <input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">
-                                        <h5><b>'.$data2['jenis_riwayat'].' </b> </h5><h6>'.$data2['pengajuan'].' - <small>'.$data2['kegiatan'].'</small></h6>
-                                        <h5>Tanggal kegiatan : '.$data2['tanggal_kegiatan'].'</h5>
+                                        <div align="left">
+                                            <h5><b>'.$data2['jenis_riwayat'].' </b> </h5>'.$data2['pengajuan'].' - <small>'.$data2['kegiatan'].'</small>
+                                        </div>
+                                        <div align="right"> 
+                                            <h5>Tanggal kegiatan : '.tanggal_indo($data2['tanggal_kegiatan']).'</h5>
+                                        </div>
                                     </div>
                                 </div>
                             </a>';

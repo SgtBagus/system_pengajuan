@@ -79,6 +79,12 @@
                     </div>
                 </li>
                 <li>
+                    <a href="profil">
+                        <i class="pe pe-7s-user"></i>
+                        <p>Profil</p>
+                    </a>
+                </li>
+                <li>
                     <a href="#" onclick = "logout()">
                         <i class="pe pe-7s-back"></i>
                         <p>Log out</p>
@@ -99,11 +105,6 @@
                                         <h4 class="title">Data Pengguna</h4>
                                     </div>  
                                     <div class="col-md-6" align="right">
-                                <?php   echo '<a href="detail_user?id='.$id_login.'">'; ?>
-                                            <button type="button" class="btn btn-primary btn-fill">
-                                                <i class="fa fa-user"></i> Profil
-                                            </button>
-                                        </a>
                                         <a href="tambah_user">
                                             <button type="button" class="btn btn-primary btn-fill">
                                                 <i class="fa fa-plus"></i> Tambah Pengguna

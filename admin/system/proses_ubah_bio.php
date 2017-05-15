@@ -23,8 +23,8 @@ $tgl = date("Y-m-d", $tanggal);
                 WHERE id_user='$id'";
                
       $result = mysqli_query($con, $query);
-      header("location:../detail_user?id=$id&proses=edit"); 
+      header("location:../profil?proses=edit"); 
     }else {
-      header("location:../ubah_bio?id=$id&error=true"); 
+      header("location:../ubah_bio?error=true"); 
     }
 ?>

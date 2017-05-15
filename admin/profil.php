@@ -8,28 +8,6 @@
     else {
         $logged_in = true;
     }  
-    if (isset($_GET['id'])) {
-        $id = ($_GET["id"]);
-        $query = "SELECT * FROM user WHERE id_user ='$id'";
-        $result = mysqli_query($con, $query);
-        if(!$result){
-        die ("Query Error: ".mysqli_errno($con).
-            " - ".mysqli_error($con));
-        } 
-        $data = mysqli_fetch_assoc($result);
-        $id = $data["id_user"];
-        $username = $data["username"];
-        $email = $data["email"];
-        $password = $data["password"];
-        $namadepan = $data["nama_depan"];
-        $namabelakang = $data["nama_belakang"];
-        $jk = $data["jk"];
-        $nohp = $data["no_hp"];
-        $alamat = $data["alamat"];
-        $role = $data["role"];
-        $pembuatan_akun = date('d-m-Y', strtotime ($data["pembuatan_akun"]));
-        $update_akun = date('d-m-Y', strtotime ($data["update_akun"]));
-    } 
 
     function tanggal_indo($tanggal){
         $bulan = array (1 =>   'Januari',
@@ -81,8 +59,17 @@
             " - ".mysqli_error($con));
         }
         $data_login = mysqli_fetch_assoc($result_login);
+        $id_login = $data_login["id_user"];
         $username_login = $data_login["username"];
         $email_login = $data_login["email"];
+        $namadepan_login = $data_login["nama_depan"];
+        $namabelakang_login = $data_login["nama_belakang"];
+        $jk_login = $data_login["jk"];
+        $nohp_login = $data_login["no_hp"];
+        $alamat_login = $data_login["alamat"];
+        $role_login = $data_login["role"];
+        $pembuatan_akun_login = $data_login["pembuatan_akun"];
+        $update_akun_login = $data_login["update_akun"];
     ?>
                         Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username_login ?></small></small>
                     </a>
@@ -106,19 +93,19 @@
                             <p>Riwayat</p>
                         </a>
                     </li>
-                    <li class="active">
-                        <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
+                    <li>
+                        <a data-toggle="collapse" href="#componentsExamples">
                             <i class="pe-7s-server"></i>
                             <p>Master</p>
                         </a>
-                        <div class="collapse in" id="componentsExamples">
+                        <div class="collapse" id="componentsExamples">
                             <ul class="nav">
-                                <li class="active"><a href="user">User</a></li>
+                                <li><a href="user">User</a></li>
                                 <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
                             </ul>
                         </div>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="profil">
                             <i class="pe pe-7s-user"></i>
                             <p>Profil</p>
@@ -140,27 +127,21 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Profile <br> <small>Pembuatan Akun : <?php echo tanggal_indo($pembuatan_akun) ?> / Perubahan Terakhir : <?php echo tanggal_indo($update_akun) ?></small></h4>
+                                    <h4 class="title">Profile <br> <small>Pembuatan Akun : <?php echo tanggal_indo($pembuatan_akun_login) ?> / Perubahan Terakhir : <?php echo tanggal_indo($update_akun_login) ?></small></h4>
                                 </div>
                                 <div class="content">
                                     <div class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Username</label>
-                                                <input type="hidden" name="id" value="<?php echo $id ?>">
-                                                <input type="text" name="username" id="username" class="form-control" placeholder="username" value="<?php echo $username ?>" disabled>
+                                                <input type="hidden" name="id" value="<?php echo $id_login ?>">
+                                                <input type="text" name="username" id="username" class="form-control" placeholder="username" value="<?php echo $username_login ?>" disabled>
                                             </div>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="Email">Email address</label>
-                                                <input type="email" name="email" id="email" class="form-control" placeholder="email" value="<?php echo $email ?>" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="Email">Role</label>
-                                                <input type="email" name="text" id="email" class="form-control" placeholder="email" value="<?php echo $role ?>" disabled>
+                                                <input type="email" name="email" id="email" class="form-control" placeholder="email" value="<?php echo $email_login ?>" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -168,13 +149,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nama Depan</label>
-                                                <input type="text" name="nama_depan" id="nama_depan" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>" disabled>
+                                                <input type="text" name="nama_depan" id="nama_depan" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan_login ?>" disabled>
                                             </div>
                                             </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nama Belakang</label>
-                                                <input type="text" name="nama_belakang" id="nama_belakang" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" disabled>
+                                                <input type="text" name="nama_belakang" id="nama_belakang" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang_login ?>" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +163,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Alamat</label>
-                                                <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" disabled>
+                                                <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" value="<?php echo $alamat_login ?>" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -190,27 +171,15 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>No. Hp</label>
-                                                <input type="number" name="nohp" id="no_hp" class="form-control" placeholder="No Hp" value="<?php echo $nohp ?>" disabled>
+                                                <input type="number" name="nohp" id="no_hp" class="form-control" placeholder="No Hp" value="<?php echo $nohp_login ?>" disabled>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div align="right">
-                                        <a href="user">
-                                            <button type="button" class="btn btn-info  btn-fill">
-                                                <i class="pe pe-7s-note2"></i> Data User 
-                                            </button>
-                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                      </div>
                 </div>
-<?php
-                    if($email == $email_login){
-                    }
-                    else {
-                        ?>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
@@ -220,31 +189,35 @@
                                 </div>
                                 <div class="content">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group" align="center">
-                                                <label for="Username">Ubah Role</label>
+                                                <label for="Username">Bio Data</label>
                                                 <br>
-                    <?php
-                        if($role == "tim"){
-                                                echo '<button onclick="ubahrole_manajemen('.$id.')" type="button" class="btn btn-primary col-md-12 btn-fill">
-                                                    <i class="fa fa-arrow-up"></i> Ubah Role Menjadi Manajemen
-                                                </button>';
-                        }else if ($role == "manajemen"){
-                                                echo '<button onclick="ubahrole_tim('.$id.')" type="button" class="btn btn-primary col-md-12 btn-fill">
-                                                    <i class="fa fa-arrow-down"></i> Ubah Role Menjadi tim
-                                                </button>';
-                        }
-                    ?>
+                                                <a href="ubah_bio">
+                                                    <button type="button" class="btn btn-primary col-md-12 btn-fill">
+                                                        <i class="fa fa-info"></i> Ubah Bio Data
+                                                    </button>
+                                                </a>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group"  align="center">
-                                                <label for="Email">Hapus</label><br>
-                    <?php
-                                                echo '<button onclick="hapususer('.$id.')" type="button" class="btn btn-danger col-md-12 btn-fill">
-                                                    <i class="fa fa-trash"></i> Hapus Pengguna
-                                                </button>';
-                    ?>
+                                                <label for="Email">Email</label><br>
+                                                <a href="ubah_email">
+                                                    <button type="button" class="btn btn-primary col-md-12 btn-fill">
+                                                        <i class="fa fa-info"></i> Ubah Email
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group"  align="center">
+                                                <label for="Password">Password</label><br>
+                                                <a href="ubah_password">
+                                                    <button type="button" class="btn btn-primary col-md-12 btn-fill">
+                                                        <i class="fa fa-info"></i> Ubah Password
+                                                    </button>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -253,9 +226,6 @@
                         </div>
                     </div>
                 </div>
-                        <?php
-                    }
-                    ?>
             </div>
         </div>
     </div>

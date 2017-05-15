@@ -84,7 +84,6 @@
                             <p>Riwayat</p>
                         </a>
                     </li>
-
                     <li>
                         <a data-toggle="collapse" href="#componentsExamples">
                             <i class="pe-7s-server"></i>
@@ -97,7 +96,12 @@
                             </ul>
                         </div>
                     </li>
-                    
+                    <li>
+                        <a href="profil">
+                            <i class="pe pe-7s-user"></i>
+                            <p>Profil</p>
+                        </a>
+                    </li>
                     <li>
                         <a href="#" onclick = "logout()">
                             <i class="pe pe-7s-back"></i>

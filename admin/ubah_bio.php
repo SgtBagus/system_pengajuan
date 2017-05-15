@@ -81,8 +81,14 @@
             " - ".mysqli_error($con));
         }
         $data_login = mysqli_fetch_assoc($result_login);
+        $id_login = $data_login["id_user"];
         $username_login = $data_login["username"];
-        $email_login = $data_login["email"];
+        $namadepan_login = $data_login["nama_depan"];
+        $namabelakang_login = $data_login["nama_belakang"];
+        $nohp_login = $data_login["no_hp"];
+        $alamat_login = $data_login["alamat"];
+        $pembuatan_akun_login = $data_login["pembuatan_akun"];
+        $update_akun_login = $data_login["update_akun"];
     ?>
                         Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username_login ?></small></small>
                     </a>
@@ -106,17 +112,23 @@
                             <p>Riwayat</p>
                         </a>
                     </li>
-                    <li class="active">
-                        <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
+                    <li>
+                        <a data-toggle="collapse" href="#componentsExamples">
                             <i class="pe-7s-server"></i>
                             <p>Master</p>
                         </a>
-                        <div class="collapse in" id="componentsExamples">
+                        <div class="collapse" id="componentsExamples">
                             <ul class="nav">
-                                <li class="active"><a href="user">User</a></li>
+                                <li><a href="user">User</a></li>
                                 <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
                             </ul>
                         </div>
+                    </li>
+                    <li class="active">
+                        <a href="profil">
+                            <i class="pe pe-7s-user"></i>
+                            <p>Profil</p>
+                        </a>
                     </li>
                     <li>
                         <a href="#" onclick = "logout()">
@@ -141,9 +153,9 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                    <input type="hidden" name="id" value="<?php echo $id_login ?>">
                                                     <label for="Username" >Username</label>
-                                                    <input type="text" name="username" id="form_edit_user" class="form-control" placeholder="username" value="<?php echo $username ?>" required 
+                                                    <input type="text" name="username" id="form_edit_user" class="form-control" placeholder="username" value="<?php echo $username_login ?>" required 
                                                 oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
                                                 oninput="setCustomValidity('')" >
                                                 </div>
@@ -153,7 +165,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Nama Depan</label>
-                                                    <input type="text" name="nama_depan" id="form_edit_user" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan ?>" required 
+                                                    <input type="text" name="nama_depan" id="form_edit_user" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan_login ?>" required 
                                                 oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
                                                 oninput="setCustomValidity('')" >
                                                 </div>
@@ -161,7 +173,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Nama Belakang</label>
-                                                    <input type="text" name="nama_belakang" id="form_edit_user" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang ?>" required 
+                                                    <input type="text" name="nama_belakang" id="form_edit_user" class="form-control" placeholder="Nama Belakang" value="<?php echo $namabelakang_login ?>" required 
                                                 oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
                                                 oninput="setCustomValidity('')" >
                                                 </div>
@@ -171,7 +183,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Alamat</label>
-                                                    <input type="text" name="alamat" id="form_edit_user" class="form-control" placeholder="Alamat" value="<?php echo $alamat ?>" required 
+                                                    <input type="text" name="alamat" id="form_edit_user" class="form-control" placeholder="Alamat" value="<?php echo $alamat_login ?>" required 
                                                 oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
                                                 oninput="setCustomValidity('')" >
                                                 </div>
@@ -181,7 +193,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>No. Hp</label>
-                                                    <input type="number" name="nohp" id="form_edit_user" class="form-control" placeholder="No Hp" value="<?php echo $nohp ?>" >
+                                                    <input type="number" name="nohp" id="form_edit_user" class="form-control" placeholder="No Hp" value="<?php echo $nohp_login ?>" >
                                                 </div>
                                             </div>
                                         </div>
@@ -197,7 +209,7 @@
                                             </div>
                                         </div>
                                         <div align="right">
-                                            <a href="detail_user?id=<?php echo$id?>">
+                                            <a href="profil">
                                                 <button type="button" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-info btn-fill">
                                                     <i class="fa fa-arrow-left"></i> Kembali
                                                 </button>

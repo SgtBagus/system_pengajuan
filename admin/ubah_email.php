@@ -81,6 +81,7 @@
             " - ".mysqli_error($con));
         }
         $data_login = mysqli_fetch_assoc($result_login);
+        $id_login = $data_login["id_user"];
         $username_login = $data_login["username"];
         $email_login = $data_login["email"];
     ?>
@@ -106,17 +107,23 @@
                             <p>Riwayat</p>
                         </a>
                     </li>
-                    <li class="active">
-                        <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
+                    <li>
+                        <a data-toggle="collapse" href="#componentsExamples">
                             <i class="pe-7s-server"></i>
                             <p>Master</p>
                         </a>
-                        <div class="collapse in" id="componentsExamples">
+                        <div class="collapse" id="componentsExamples">
                             <ul class="nav">
-                                <li class="active"><a href="user">User</a></li>
+                                <li><a href="user">User</a></li>
                                 <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
                             </ul>
                         </div>
+                    </li>
+                    <li class="active">
+                        <a href="profil">
+                            <i class="pe pe-7s-user"></i>
+                            <p>Profil</p>
+                        </a>
                     </li>
                     <li>
                         <a href="#" onclick = "logout()">
@@ -141,7 +148,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                    <input type="hidden" name="id" value="<?php echo $id_login ?>">
                                                     <label>Email</label>
                                                     <input type="email" name="email" id="form_edit_user" class="form-control" placeholder="Email" required
                                                     oninvalid="this.setCustomValidity('Mohon sesuikan form berikut !')"  
@@ -160,7 +167,7 @@
                                             </div>
                                         </div>
                                         <div align="right">
-                                            <a href="detail_user?id=<?php echo $id ?>">
+                                            <a href="profil">
                                                 <button type="button" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-info btn-fill">
                                                     <i class="fa fa-arrow-left"></i> Kembali
                                                 </button>
