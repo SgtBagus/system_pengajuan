@@ -27,7 +27,7 @@ $tgl = date("Y-m-d", $tanggal);
                     die ("Query gagal dijalankan: ".mysqli_errno($con).
                         " - ".mysqli_error($con));
                 }
-                header("location:../../login?proses=edit"); 
+                header("location:../../logout_edit"); 
             }
     }
     else {
