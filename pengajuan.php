@@ -137,7 +137,7 @@
                         <div class="header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="title">Pengajuan</h4>
+                                    <h4 class="title">Data Pengajuan</h4>
                                 </div>  
                                 <div class="col-md-6" align="right">
                                     <a href="tambah_pengajuan">
@@ -148,14 +148,97 @@
                                 </div>
                             </div>
                             <br>    
-                            <form id="form_pencarian"  action="?" method="get">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label> Judul Pengajuan</label>
-                                            <input type="text" name="judul" class="form-control" >
-                                        </div> 
+        <?php
+            if (isset($_GET['judul'])) {
+                $pengajuan = ($_GET["judul"]);
+                $first = ($_GET["tanggal_awal"]);
+                $lass = ($_GET["tanggal_akhir"]);
+                $sts= ($_GET["status"]);
+        ?>
+                                <form id="form_pencarian"  action="?" method="get">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label> Judul Pengajuan</label>
+                                                <input type="text" name="judul" class="form-control" value="<?php echo $pengajuan;?>">
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label> Tanggal Pengajuan Awal </label>
+                                                <input type="text" name="tanggal_awal" id="datepicker1" class="form-control" value="<?php echo $first;?>">
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label> Tanggal Pengajuan Akhir </label>
+                                                <input type="text" name="tanggal_akhir" id="datepicker2" class="form-control" value="<?php echo $lass; ?>" >
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                    <label> Status</label>
+            <?php
+            if ($sts == "semua"){
+            ?>
+                                                    <select name="status" form="form_pencarian" class="form-control"> 
+                                                        <option value="semua" selected>Semua</option>
+                                                        <option value="menunggu">Menunggu</option>
+                                                        <option value="proses">Proses</option>
+                                                        <option value="selesai">Selesai</option>
+                                                    </select>
+            <?php
+            }else if ($sts == "menunggu"){
+            ?>
+                                                    <select name="status" form="form_pencarian" class="form-control"> 
+                                                        <option value="semua">Semua</option>
+                                                        <option value="menunggu" selected>Menunggu</option>
+                                                        <option value="proses">Proses</option>
+                                                        <option value="selesai">Selesai</option>
+                                                    </select>
+            <?php
+            }else if ($sts == "proses"){
+            ?>
+                                                    <select name="status" form="form_pencarian" class="form-control"> 
+                                                        <option value="semua">Semua</option>
+                                                        <option value="menunggu">Menunggu</option>
+                                                        <option value="proses" selected>Proses</option>
+                                                        <option value="selesai">Selesai</option>
+                                                    </select>
+            <?php
+            }else if ($sts == "selesai"){
+            ?>
+                                                    <select name="status" form="form_pencarian" class="form-control"> 
+                                                        <option value="semua">Semua</option>
+                                                        <option value="menunggu">Menunggu</option>
+                                                        <option value="proses">Proses</option>
+                                                        <option value="selesai" selected>Selesai</option>
+                                                    </select>
+            <?php
+            }
+            ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label><br></label>
+                                            <button type="submit" class="btn btn-primary btn-fill">
+                                                <i class="fa fa-search"></i> Cari
+                                            </button>
+                                        </div>
                                     </div>
+                                </from>
+        <?php
+        }
+        else {
+            ?>
+                                <form id="form_pencarian"  action="?" method="get">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label> Judul Pengajuan</label>
+                                                <input type="text" name="judul" class="form-control" >
+                                            </div> 
+                                        </div>
                                         <?php
                                             $query_MIN = "SELECT MIN(tanggal_pengajuan) from pengajuan";
                                             $result_MIN = mysqli_query($con, $query_MIN);
@@ -163,12 +246,12 @@
                                             $MIN = date_create($data_MIN['MIN(tanggal_pengajuan)']);
                                             $awal = date_format($MIN,"d-m-Y");
                                         ?>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label> Tanggal Pengajuan Awal </label>
-                                            <input type="text" name="pertama" id="datepicker1" class="form-control" value="<?php echo $awal;?>">
-                                        </div> 
-                                    </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label> Tanggal Pengajuan Awal </label>
+                                                <input type="text" name="tanggal_awal" id="datepicker1" class="form-control" value="<?php echo $awal;?>">
+                                            </div> 
+                                        </div>
                                         <?php
                                             $query_MAX = "SELECT MAX(tanggal_pengajuan) from pengajuan";
                                             $result_MAX = mysqli_query($con, $query_MAX);
@@ -176,32 +259,35 @@
                                             $MAX = date_create($data_MAX['MAX(tanggal_pengajuan)']);
                                             $akhir = date_format($MAX,"d-m-Y");
                                         ?>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label> Tanggal Pengajuan Akhir </label>
-                                            <input type="text" name="terakhir" id="datepicker2" class="form-control" value="<?php echo $akhir; ?>" >
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label> Tanggal Pengajuan Akhir </label>
+                                                <input type="text" name="tanggal_akhir" id="datepicker2" class="form-control" value="<?php echo $akhir; ?>" >
                                             </div> 
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label> Status</label>
-                                            <select name="status" form="form_pencarian" class="form-control"> 
-                                                <option value="">Semua</option>
-                                                <option value="menunggu">Menunggu</option>
-                                                <option value="proses">Proses</option>
-                                                <option value="selesai">Selesai</option>
-                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                    <label> Status</label>
+                                                    <select name="status" form="form_pencarian" class="form-control"> 
+                                                        <option value="semua">Semua</option>
+                                                        <option value="menunggu">Menunggu</option>
+                                                        <option value="proses">Proses</option>
+                                                        <option value="selesai">Selesai</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label><br></label>
+                                            <button type="submit" class="btn btn-primary btn-fill">
+                                                    <i class="fa fa-search"></i> Cari
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="col-md-1">
-                                        <label><br></label>
-                                        <button type="submit" class="btn btn-primary btn-fill">
-                                                <i class="fa fa-search"></i> Cari
-                                        </button>
-                                    </div>
-                                </div>
-                            </from>
-                        </div>
+                                </from>
+    <?php
+        }
+    ?>
+                            </div>
                         <div class="content content-full-width">
                             <ul role="tablist" class="nav nav-tabs">
                                 <li role="presentation" class="active">
@@ -213,24 +299,12 @@
                             </ul>
                             <div class="tab-content">
                                 <div id="semua" class="tab-pane active">
-                                    <div class="content table-responsive table-full-width">
-                                        <table class="table table-hover table-striped">
-                                            <thead>
-                                                <th>No</th>
-                                                <th>Pengajuan</th>
-                                                <th>Pengaju</th>
-                                                <th>Jenis</th>
-                                                <th>tanggal</th>
-                                                <th>biaya</th>
-                                                <th>status</th>
-                                                <th>Tindak Lanjut</th>
-                                            </thead>
-                                            <tbody>
-        <?php
+
+<?php
         if (isset($_GET['judul'])) {
             $pengajuan = ($_GET["judul"]);
-            $first = date_create(($_GET["pertama"]));
-            $lass = date_create(($_GET["terakhir"]));
+            $first = date_create(($_GET["tanggal_awal"]));
+            $lass = date_create(($_GET["tanggal_akhir"]));
             $awal = date_format($first,"Y-m-d");
             $akhir = date_format($lass,"Y-m-d");
             $sts= ($_GET["status"]);
@@ -248,7 +322,7 @@
             }else {
                 $query_semua = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
                             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
-                            AND a.pengajuan like '%$pengajuan%' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir')ORDER BY a.id_pengajuan DESC" ;
+                            AND a.pengajuan like '%$pengajuan%' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') AND a.status like '%$status%' ORDER BY a.id_pengajuan DESC" ;
             }
         }
         else {
@@ -256,24 +330,54 @@
                         a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
                         ORDER BY a.id_pengajuan DESC" ;
         }
+
             $result_semua = mysqli_query($con, $query_semua);
             if($result_semua->num_rows == 0){
-                                                echo "<tr>
-                                                    <td colspan='8' align='center'>
+                                    echo '<div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <th>No</th>
+                                                <th>Pengajuan</th>
+                                                <th>Pengaju</th>
+                                                <th>Jenis</th>
+                                                <th>tanggal</th>
+                                                <th>biaya</th>
+                                                <th>status</th>
+                                                <th>Tindak Lanjut</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="8" align="center">
                                                         Anda tidak memiliki pengajuan
                                                         <br>
-                                                        <a href='pengajuan'>
-                                                            <button type='button' class='btn btn-primary btn-fill btn-sm'>
-                                                                <i class='fa fa-refresh'></i> Refresh data
+                                                        <a href="pengajuan">
+                                                            <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <i class="fa fa-refresh"></i> Refresh data
                                                             </button>
                                                         </a>
                                                     </td>
-                                                </tr>";
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>';
             }
             else {
                 $no_semua = 1;
+                                    echo '<div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped table-paginate">
+                                            <thead>
+                                                <th>No</th>
+                                                <th>Pengajuan</th>
+                                                <th>Pengaju</th>
+                                                <th>Jenis</th>
+                                                <th>tanggal</th>
+                                                <th>biaya</th>
+                                                <th>status</th>
+                                                <th>Tindak Lanjut</th>
+                                            </thead>
+                                            <tbody>';
                 while($data_semua = mysqli_fetch_assoc($result_semua)){
-                                                    echo '<tr>
+                                                echo '<tr>
                                                         <td>'.$no_semua.'</td>
                                                         <td>'.$data_semua['pengajuan'].'</td>
                                                         <td>'.$data_semua['username'].'</td>
@@ -291,12 +395,12 @@
                     if( $data_semua['status'] == "menunggu" ){
                         if ( $data_semua['username'] == $username_login ){
                                                             echo '<a href="edit_pengajuan?id='.$data_semua['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
                                                             <a href="detail_pengajuan?id='.$data_semua['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>
@@ -313,7 +417,7 @@
                     }
                     else if ($data_semua['status'] == "proses"){
                                                             echo '<a href="detail_pengajuan?id='.$data_semua['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>';
@@ -321,7 +425,7 @@
                     else if ($data_semua['status'] == "selesai"){
                         if ( $data_semua['username'] == $username_login ){
                                                             echo '<a href="detail_pengajuan?id='.$data_semua['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>
@@ -330,7 +434,7 @@
                                                             </button>';
                         }else{
                                                             echo '<a href="detail_pengajuan?id='.$data_semua['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>';
@@ -340,30 +444,19 @@
                                                     </tr>';
                                                     $no_semua++;
                 }
-            }
-        ?>
-                                            </tbody>
+                                            echo'</tbody>
                                         </table>
-                                    </div>
+                                    </div>';
+            }
+            ?>
                                 </div>
                                 <div id="sendiri" class="tab-pane">
-                                    <div class="content table-responsive table-full-width">
-                                        <table class="table table-hover table-striped">
-                                            <thead>
-                                                <th>No</th>
-                                                <th>Pengajuan</th>
-                                                <th>Jenis</th>
-                                                <th>tanggal</th>
-                                                <th>biaya</th>
-                                                <th>status</th>
-                                                <th>Tindak Lanjut</th>
-                                            </thead>
-                                            <tbody>
-        <?php
+                                    
+<?php
         if (isset($_GET['judul'])) {
             $pengajuan = ($_GET["judul"]);
-            $first = date_create(($_GET["pertama"]));
-            $lass = date_create(($_GET["terakhir"]));
+            $first = date_create(($_GET["tanggal_awal"]));
+            $lass = date_create(($_GET["tanggal_akhir"]));
             $awal = date_format($first,"Y-m-d");
             $akhir = date_format($lass,"Y-m-d");
             $sts= ($_GET["status"]);
@@ -373,7 +466,7 @@
                 }else{
                     $status = $sts;
                 }
-
+                
             if( $pengajuan == ""){
                 $query_sendiri = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
                             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
@@ -391,24 +484,53 @@
                         a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
                         AND b.username LIKE '$username_login' ORDER BY a.id_pengajuan DESC" ;
         }
+
             $result_sendiri = mysqli_query($con, $query_sendiri);
             if($result_sendiri->num_rows == 0){
-                                                echo "<tr>
-                                                    <td colspan='8' align='center'>
+                                    echo '<div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <th>No</th>
+                                                <th>Pengajuan</th>
+                                                <th>Pengaju</th>
+                                                <th>Jenis</th>
+                                                <th>tanggal</th>
+                                                <th>biaya</th>
+                                                <th>status</th>
+                                                <th>Tindak Lanjut</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="8" align="center">
                                                         Anda tidak memiliki pengajuan
                                                         <br>
-                                                        <a href='pengajuan'>
-                                                            <button type='button' class='btn btn-primary btn-fill btn-sm'>
-                                                                <i class='fa fa-refresh'></i> Refresh data
+                                                        <a href="pengajuan">
+                                                            <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <i class="fa fa-refresh"></i> Refresh data
                                                             </button>
                                                         </a>
                                                     </td>
-                                                </tr>";
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>';
             }
             else {
                 $no_sendiri = 1;
+                                    echo '<div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped table-paginate">
+                                            <thead>
+                                                <th>No</th>
+                                                <th>Pengajuan</th>
+                                                <th>Jenis</th>
+                                                <th>tanggal</th>
+                                                <th>biaya</th>
+                                                <th>status</th>
+                                                <th>Tindak Lanjut</th>
+                                            </thead>
+                                            <tbody>';
                 while($data_sendiri = mysqli_fetch_assoc($result_sendiri)){
-                                                    echo '<tr>
+                                                echo '<tr>
                                                         <td>'.$no_sendiri.'</td>
                                                         <td>'.$data_sendiri['pengajuan'].'</td>
                                                         <td>'.$data_sendiri['jenis_pengajuan'].'</td>
@@ -424,12 +546,12 @@
                                                         <td align="center">';
                     if( $data_sendiri['status'] == "menunggu" ){
                                                             echo '<a href="edit_pengajuan?id='.$data_sendiri['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
                                                             <a href="detail_pengajuan?id='.$data_sendiri['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>
@@ -439,14 +561,14 @@
                     }
                     else if ($data_sendiri['status'] == "proses"){
                                                             echo '<a href="detail_pengajuan?id='.$data_sendiri['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>';
                     }
                     else if ($data_sendiri['status'] == "selesai"){
                                                             echo '<a href="detail_pengajuan?id='.$data_sendiri['id_pengajuan'].'">
-                                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <button type="button" class="btn btn-info btn-fill btn-sm">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>
@@ -458,11 +580,11 @@
                                                     </tr>';
                                                     $no_sendiri++;
                 }
-            }
-        ?>
-                                            </tbody>
+                                            echo'</tbody>
                                         </table>
-                                    </div>
+                                    </div>';
+            }
+            ?>
                                 </div>
                            </div>
                         </div>
@@ -472,17 +594,28 @@
         </div>
     </div>
 </body>
-    <script src="assets/dist/sweetalert-dev.js"></script>
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
-    <script src="assets/js/chartist.min.js"></script>
+    <script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" language="javascript" src="http:////cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="http://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
+	<script src="assets/js/chartist.min.js"></script>
     <script src="assets/js/bootstrap-notify.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script src="assets/js/light-bootstrap-dashboard.js"></script>
-    <script src="assets/js/demo.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="assets/js/light-bootstrap-dashboard.js"></script>
+	<script src="assets/js/demo.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="assets/dist/sweetalert-dev.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+        $('.table-paginate').dataTable({      
+            "searching": false,
+            "paging": false, 
+            "info": false,         
+            "lengthChange":false 
+        });
+    } );
+    </script>
 <?php
     if (isset($_GET['proses'])) {
         echo '<script type="text/javascript">';

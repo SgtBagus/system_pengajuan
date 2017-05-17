@@ -119,7 +119,8 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title" align="center">
-                                        Pengajuan Berstatus <br><b>"Menunggu"</b>
+                                        Pengajuan Berstatus <br>
+                                        <span class="badge menunggu indextitle upper">Menunggu</span>
                                     </h4>
                                 </div>
     <?php 
@@ -144,7 +145,8 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title" align="center">
-                                    Pengajuan Berstatus <br><b>"Proses"</b>
+                                    Pengajuan Berstatus <br>
+                                    <span class="badge proses indextitle upper">Proses</span>
                                     </h4>
                                 </div>
     <?php
@@ -169,7 +171,8 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title" align="center">
-                                    Pengajuan Berstatus <br><b>"Selesai"</b>
+                                    Pengajuan Berstatus <br>
+                                    <span class="badge selesai indextitle upper">Selesai</span>
                                     </h4>
                                 </div>
     <?php
@@ -240,7 +243,7 @@
                                     <div class="footer">
                                         <hr>
                                         <div class="stats">
-                                            <a href="pencarian_pengajuan?pengajuan=&pengaju=&tanggal=&status=proses">
+                                            <a href="pengajuan">
                                                 <i class="fa fa-link"></i> 
                                                 Lihat Semua Pengajuan Proses
                                             </a>
@@ -306,8 +309,8 @@
                         <div class="card">
                             <form id="form_catatan" method="post" action="system/proses_catatan">
                                 <div class="header">
-                                    <h4 class="title">Catatan</h4>
-                                    <p class="category">Update Terakhir : <b><?php echo $data_catatan['update_catatan']?></b></p>
+                                    <h4 class="title">Pemberitahuan</h4>
+                                    <p class="category">Update Terakhir : <b><?php echo tanggal_indo($data_catatan['update_catatan']) ?></b></p>
                                 </div>
                                 <div class="content">
                                     <input type="hidden" name="id_catatan" id="form_catatan" value="<?php echo $data_catatan['id_catatan'] ?>">

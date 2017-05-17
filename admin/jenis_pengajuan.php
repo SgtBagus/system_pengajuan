@@ -18,15 +18,10 @@
 	<title>Jenis Pengajuan</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-    <!-- Bootstrap core CSS     -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Animation library for notifications   -->
     <link href="../assets/css/animate.min.css" rel="stylesheet"/>
-    <!--  Light Bootstrap Table core CSS    -->
     <link href="../assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
-    <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
@@ -124,77 +119,97 @@
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <label>Pencarian : </label>
-                                                <input type="text" name="cari" id="cari" class="form-control" placeholder="Pencarian..." >
+
+<?php
+        if (isset($_GET['cari'])) {
+            $username = ($_GET["cari"]);
+?>  
+                <input type="text" name="cari" id="cari" class="form-control" placeholder="Jenis pengajuan" value="<?php echo $username ?>">
+<?php
+        }
+        else {
+?>
+                <input type="text" name="cari" id="cari" class="form-control" placeholder="Jenis pengajuan">
+<?php
+        }
+?>
                                             </div>
                                         </div>
                                         <div class="col-md-1">
                                             <label><br></label>
                                             <button type="submit" rel="tooltip" class="btn btn-primary btn-fill">
-                                                    <i class="fa fa-search"></i> Cari
+                                                <i class="fa fa-search"></i> Cari
                                             </button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <div class="content table-responsive table-full-width">
-                                <table class="table table-hover table-striped">
-                                    <thead>
-                                        <th>No</th>
-                                        <th>Jenis Pengajuan</th>
-                                        <th>Deskripsi</th>
-                                    	<th>Pengaturan</th>
-                                    </thead>
-                                    <tbody>
-
-<?php
+                                <?php
         if (isset($_GET['cari'])) {
             $jenispengajuan = ($_GET["cari"]);
                 $query = "SELECT * FROM jenis_pengajuan WHERE jenis_pengajuan like '%$jenispengajuan%' ORDER BY id_jenis_pengajuan" ;
         }
-        else{
+        else {
             $query = "SELECT * FROM jenis_pengajuan ORDER BY id_jenis_pengajuan" ;
         }
 
-      $result = mysqli_query($con, $query);
-        if(!$result){
-            die ("Query Error: ".mysqli_errno($con).
-            " - ".mysqli_error($con));
-        }
-
-        if($result->num_rows == 0){
-                                        echo "<tr>
-                                            <td colspan='4' align='center'>
-                                                Tidak ada data
-                                                <br>
-                                                <a href='jenis_pengajuan'>
-                                                    <button type='button' class='btn btn-primary btn-fill btn-sm'>
-                                                        <i class='fa fa-refresh'></i> Refresh data
-                                                    </button>
-                                                </a>
-                                            </td>
-                                        </tr>";
-        }
-        else{
-            $no = 1; 
-            while($jenispengajuan = mysqli_fetch_assoc($result))
-            {
-                                        echo '<tr>
+            $result = mysqli_query($con, $query);
+            if($result->num_rows == 0){
+                                    echo '<div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <th>No</th>
+                                                <th>Jenis Pengajuan</th>
+                                                <th>Deskripsi</th>
+                                                <th>Pengaturan</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="8" align="center">
+                                                        Anda tidak memiliki pengajuan
+                                                        <br>
+                                                        <a href="user">
+                                                            <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <i class="fa fa-refresh"></i> Refresh data
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>';
+            }
+            else {
+                                    echo '<div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped table-paginate">
+                                                <thead>
+                                                    <th>No</th>
+                                                    <th>Jenis Pengajuan</th>
+                                                    <th>Deskripsi</th>
+                                                    <th>Pengaturan</th>
+                                                </thead>
+                                            <tbody>';                                        
+                $no = 1;
+                while($data = mysqli_fetch_assoc($result)){
+                                                echo '<tr>
                                             <td>'.$no.'</td>
-                                            <td>'.$jenispengajuan['jenis_pengajuan'].'</td>
-                                            <td>'.$jenispengajuan['deskripsi'].'</td>
+                                            <td>'.$data['jenis_pengajuan'].'</td>
+                                            <td>'.$data['deskripsi'].'</td>
                                             <td>
-                                                <button onclick="edit('.$jenispengajuan['id_jenis_pengajuan'].')" type="button" rel="tooltip" class="btn btn-primary btn-fill btn-sm">
+                                                <button onclick="edit('.$data['id_jenis_pengajuan'].')" type="button" rel="tooltip" class="btn btn-primary btn-fill btn-sm">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button onclick="hapus('.$jenispengajuan['id_jenis_pengajuan'].')" type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm">
+                                                <button onclick="hapus('.$data['id_jenis_pengajuan'].')" type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm">
                                                     <i class="fa fa-trash"></i>
                                                 </button>';
                                         $no++;
-            }
-        }
-?>
-                                    </tbody>
-                                </table>
+                    }
+                                            echo'</tbody>
+                                        </table>
+                                    </div>';
+                }
+            ?>
                             </div>
                         </div>
                     </div>
@@ -206,9 +221,9 @@
 
 
 </body>
-
-    <script src="../assets/dist/sweetalert-dev.js"></script>
-    <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" language="javascript" src="http:////cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="http://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap-checkbox-radio-switch.js"></script>
 	<script src="../assets/js/chartist.min.js"></script>
@@ -216,7 +231,18 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
 	<script src="../assets/js/demo.js"></script>
-    
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../assets/dist/sweetalert-dev.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+        $('.table-paginate').dataTable({      
+            "searching": false,
+            "paging": false, 
+            "info": false,         
+            "lengthChange":false 
+        });
+    } );
+    </script>
 <?php    
     echo'<script type="text/javascript">';
     if (isset($_GET['proses'])) {

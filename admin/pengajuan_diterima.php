@@ -139,11 +139,11 @@
                                         <div align="right">
     <?php
                                             echo '<a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
-                                                <button type="button" rel="tooltip" class="btn btn-info btn-fill" title="kembali">
-                                                    <i class="fa fa-arrow-left"></i> Kembali
+                                                <button type="button" class="btn btn-info btn-fill" title="kembali">
+                                                    <i class="fa fa-arrow-left"></i> Detail Pengajuan
                                                 </button>
                                             </a>';
-                                            echo '<button type="submit" name="input" rel="tooltip" title="Konfirmasi" class="btn btn-primary btn-fill">
+                                            echo '<button type="submit" name="input" title="Konfirmasi" class="btn btn-primary btn-fill">
                                                     <i class="fa fa-check"></i> Konfirmasi
                                                 </button>';
     ?>

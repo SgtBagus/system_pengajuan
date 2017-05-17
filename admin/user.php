@@ -108,8 +108,8 @@
                                         <a href="tambah_user">
                                             <button type="button" class="btn btn-primary btn-fill">
                                                 <i class="fa fa-plus"></i> Tambah Pengguna
-                                            </button>
-                                <?php   echo '</a>'; ?>
+                                            </button> 
+                                        </a>
                                     </div>
                                 </div>
                                 <br>
@@ -118,29 +118,32 @@
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <label>Pencarian : </label>
-                                                <input type="text" name="cari" id="cari" class="form-control" placeholder="Username">
+
+<?php
+        if (isset($_GET['cari'])) {
+            $username = ($_GET["cari"]);
+?>  
+                <input type="text" name="cari" id="cari" class="form-control" placeholder="Username" value="<?php echo $username ?>">
+<?php
+        }
+        else {
+?>
+                <input type="text" name="cari" id="cari" class="form-control" placeholder="Username">
+<?php
+        }
+?>
                                             </div>
                                         </div>
                                         <div class="col-md-1">
                                             <label><br></label>
                                             <button type="submit" rel="tooltip" class="btn btn-primary btn-fill">
-                                                    <i class="fa fa-search"></i> Cari
+                                                <i class="fa fa-search"></i> Cari
                                             </button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-hover table-striped">
-                                    <thead>
-                                        <th>No</th>
-                                        <th>Username</th>
-                                    	<th>Email</th>
-                                        <th>Role</th>
-                                    	<th>Detail</th>
-                                    </thead>
-                                    <tbody>
-
+                            <div class="content table-responsive table-full-width">        
 <?php
         if (isset($_GET['cari'])) {
             $username = ($_GET["cari"]);
@@ -150,28 +153,50 @@
                 $query = "SELECT * FROM user ORDER BY role" ;
         }
 
-      $result = mysqli_query($con, $query);
+            $result = mysqli_query($con, $query);
             if($result->num_rows == 0){
-                                        echo "<tr>
-                                            <td colspan='5' align='center'>
-                                                Tidak ada data
-                                                <br>
-                                                <a href='user'>
-                                                    <button type='button' class='btn btn-primary btn-fill btn-sm'>
-                                                        <i class='fa fa-refresh'></i> Refresh data
-                                                    </button>
-                                                </a>
-                                            </td>
-                                        </tr>";
+                                    echo '<div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <th>No</th>
+                                                <th>Username</th>
+                                                <th>Email</th>
+                                                <th>Role</th>
+                                                <th>Tindak Lanjut</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="8" align="center">
+                                                        Anda tidak memiliki pengajuan
+                                                        <br>
+                                                        <a href="user">
+                                                            <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <i class="fa fa-refresh"></i> Refresh data
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>';
             }
-            else{
-
-            $query_tim = "SELECT * FROM user WHERE ROLE = 'tim'" ;
-            $result_tim = mysqli_query($con, $query_tim);
-            $no = 1;
-
+            else {
+                                    echo '<div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped table-paginate">
+                                            <thead>
+                                                <th>No</th>
+                                                <th>Username</th>
+                                                <th>Email</th>
+                                                <th>Role</th>
+                                                <th>Tindak Lanjut</th>
+                                            </thead>
+                                            <tbody>';                                        
+                $no = 1;
+                    $query_tim = "SELECT * FROM user WHERE ROLE = 'tim'" ;
+                    $result_tim = mysqli_query($con, $query_tim);
+                    $no = 1;
                 while($data = mysqli_fetch_assoc($result)){
-                                        echo '<tr>
+                                                echo '<tr>
                                                 <td>'.$no.'</td>
                                                 <td>'.$data['username'].'</td>
                                                 <td>'.$data['email'].'</td>
@@ -201,11 +226,12 @@
                         }
                     }
                                         $no++;
+                    }
+                                            echo'</tbody>
+                                        </table>
+                                    </div>';
                 }
-            }
-?>
-                                    </tbody>
-                                </table>
+            ?>
                             </div>
                         </div>
                     </div>
@@ -215,8 +241,9 @@
     </div>
 </div>
 </body>
-    <script src="../assets/dist/sweetalert-dev.js"></script>
-    <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" language="javascript" src="http:////cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="http://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap-checkbox-radio-switch.js"></script>
 	<script src="../assets/js/chartist.min.js"></script>
@@ -224,6 +251,18 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
 	<script src="../assets/js/demo.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../assets/dist/sweetalert-dev.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+        $('.table-paginate').dataTable({      
+            "searching": false,
+            "paging": false, 
+            "info": false,         
+            "lengthChange":false 
+        });
+    } );
+    </script>
 <?php
 if (isset($_GET['proses'])) {
     $proses = ($_GET["proses"]);

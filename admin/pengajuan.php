@@ -24,7 +24,7 @@
                 'Desember'
         );
         $split = explode('-', $tanggal);
-        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
     }
 ?>
 <!doctype html>
@@ -47,8 +47,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="../assets/css/datepicker.css">
 </head>
-<body>
-    <div class="wrapper">
+<body><div class="wrapper">
         <div class="sidebar" data-color="green" data-image="../assets/img/sidebar.jpg">
             <div class="sidebar-wrapper">
                 <div class="logo">
@@ -125,6 +124,104 @@
                                         </div>  
                                     </div>
                                     <br>    
+        <?php
+            if (isset($_GET['judul'])) {
+                $pengajuan = ($_GET["judul"]);
+                $first = ($_GET["tanggal_awal"]);
+                $lass = ($_GET["tanggal_akhir"]);
+                $sts= ($_GET["status"]);
+        ?>
+                                    <form id="form_pencarian"  action="?" method="get">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label> Judul Pengajuan</label>
+                                                    <input type="text" name="judul" class="form-control" value="<?php echo $pengajuan;?>">
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label> Tanggal Pengajuan Awal </label>
+                                                    <input type="text" name="tanggal_awal" id="datepicker1" class="form-control" value="<?php echo $first;?>">
+                                                </div> 
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label> Tanggal Pengajuan Akhir </label>
+                                                    <input type="text" name="tanggal_akhir" id="datepicker2" class="form-control" value="<?php echo $lass; ?>" >
+                                                </div> 
+                                            </div>
+            <?php
+            if ($sts == "semua"){
+            ?>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                        <label> Status</label>
+                                                        <select name="status" form="form_pencarian" class="form-control"> 
+                                                            <option value="semua" selected>Semua</option>
+                                                            <option value="menunggu">Menunggu</option>
+                                                            <option value="proses">Proses</option>
+                                                            <option value="selesai">Selesai</option>
+                                                        </select>
+                                                </div>
+                                            </div>
+            <?php
+            }else if ($sts == "menunggu"){
+            ?>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                        <label> Status</label>
+                                                        <select name="status" form="form_pencarian" class="form-control"> 
+                                                            <option value="semua">Semua</option>
+                                                            <option value="menunggu" selected>Menunggu</option>
+                                                            <option value="proses">Proses</option>
+                                                            <option value="selesai">Selesai</option>
+                                                        </select>
+                                                </div>
+                                            </div>
+            <?php
+            }else if ($sts == "proses"){
+            ?>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                        <label> Status</label>
+                                                        <select name="status" form="form_pencarian" class="form-control"> 
+                                                            <option value="semua">Semua</option>
+                                                            <option value="menunggu">Menunggu</option>
+                                                            <option value="proses" selected>Proses</option>
+                                                            <option value="selesai">Selesai</option>
+                                                        </select>
+                                                </div>
+                                            </div>
+            <?php
+            }else if ($sts == "selesai"){
+            ?>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                        <label> Status</label>
+                                                        <select name="status" form="form_pencarian" class="form-control"> 
+                                                            <option value="semua">Semua</option>
+                                                            <option value="menunggu">Menunggu</option>
+                                                            <option value="proses">Proses</option>
+                                                            <option value="selesai" selected>Selesai</option>
+                                                        </select>
+                                                </div>
+                                            </div>
+            <?php
+            }
+            ?>
+                                            <div class="col-md-1">
+                                                <label><br></label>
+                                                <button type="submit" class="btn btn-primary btn-fill">
+                                                    <i class="fa fa-search"></i> Cari
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </from>
+        <?php
+        }
+        else {
+            ?>
                                     <form id="form_pencarian"  action="?" method="get">
                                         <div class="row">
                                             <div class="col-md-2">
@@ -163,7 +260,7 @@
                                                 <div class="form-group">
                                                         <label> Status</label>
                                                         <select name="status" form="form_pencarian" class="form-control"> 
-                                                            <option value="">Semua</option>
+                                                            <option value="semua">Semua</option>
                                                             <option value="menunggu">Menunggu</option>
                                                             <option value="proses">Proses</option>
                                                             <option value="selesai">Selesai</option>
@@ -178,21 +275,13 @@
                                             </div>
                                         </div>
                                     </from>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                                 <div class="content table-responsive table-full-width">
-                                    <table class="table table-hover table-striped">
-                                        <thead>
-                                            <th>No</th>
-                                            <th>Pengajuan</th>
-                                            <th>Pengaju</th>
-                                            <th>Jenis</th>
-                                            <th>tanggal</th>
-                                            <th>biaya</th>
-                                            <th>status</th>
-                                            <th>Tindak Lanjut</th>
-                                        </thead>
-                                        <tbody>
-        <?php
+                                    
+<?php
         if (isset($_GET['judul'])) {
             $pengajuan = ($_GET["judul"]);
             $first = date_create(($_GET["tanggal_awal"]));
@@ -214,7 +303,7 @@
             }else {
                 $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
                             a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
-                            AND a.pengajuan like '%$pengajuan%' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir')ORDER BY a.id_pengajuan DESC" ;
+                            AND a.pengajuan like '%$pengajuan%' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') AND a.status like '%$status%' ORDER BY a.id_pengajuan DESC" ;
             }
         }
         else {
@@ -222,38 +311,71 @@
                         a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
                         ORDER BY a.id_pengajuan DESC" ;
         }
+
             $result = mysqli_query($con, $query);
             if($result->num_rows == 0){
-                                                echo "<tr>
-                                                    <td colspan='8' align='center'>
+                                    echo '<div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <th>No</th>
+                                                <th>Pengajuan</th>
+                                                <th>Pengaju</th>
+                                                <th>Jenis</th>
+                                                <th>tanggal</th>
+                                                <th>biaya</th>
+                                                <th>status</th>
+                                                <th>Tindak Lanjut</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="8" align="center">
                                                         Anda tidak memiliki pengajuan
                                                         <br>
-                                                        <a href='pengajuan'>
-                                                            <button type='button' class='btn btn-primary btn-fill btn-sm'>
-                                                                <i class='fa fa-refresh'></i> Refresh data
+                                                        <a href="pengajuan">
+                                                            <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                                <i class="fa fa-refresh"></i> Refresh data
                                                             </button>
                                                         </a>
                                                     </td>
-                                                </tr>";
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>';
             }
             else {
                 $no = 1;
+                                    echo '<div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped table-paginate">
+                                            <thead>
+                                                <th>No</th>
+                                                <th>Pengajuan</th>
+                                                <th>Pengaju</th>
+                                                <th>Jenis</th>
+                                                <th>tanggal</th>
+                                                <th>biaya</th>
+                                                <th>status</th>
+                                                <th>Tindak Lanjut</th>
+                                            </thead>
+                                            <tbody>';
                 while($data = mysqli_fetch_assoc($result)){
-                                                    echo '<tr>
+                                                echo '<tr>
                                                         <td>'.$no.'</td>
                                                         <td>'.$data['pengajuan'].'</td>
                                                         <td>'.$data['username'].'</td>
                                                         <td>'.$data['jenis_pengajuan'].'</td>
-                                                        <td>'.tanggal_indo(''.$data['tanggal_pengajuan'].'').'</td>
+                                                        <td>'.tanggal_indo(''.$data['tanggal_pengajuan'].'').' </td>
                                                         <td>'.$data['biaya'].'</td>
                                                         <td align = "center">';
-        if( $data['status'] == "proses" ){
-                                                echo '<span class="badge proses upper">'.$data['status'].'</span>';
-        }else{
-                                                echo '<span class="badge  upper">'.$data['status'].'</span>';
-        }
+                    if( $data['status'] == "menunggu" ){
+                                                            echo '<span class="badge menunggu upper">'.$data['status'].'</span>';
+                    }else if ($data['status'] == "proses"){
+                                                            echo '<span class="badge proses upper">'.$data['status'].'</span>';
+                    }else{
+                                                            echo '<span class="badge selesai upper">'.$data['status'].'</span>';
+                    }
                                                         echo '</td>
-                                                    <td align = "center">';
+
+                                                        <td align = "center">';
         if( $data['status'] == "menunggu" ){
                                                         echo '<button onclick="pengajuanditerima('.$data['id_pengajuan'].')" type="button" class="btn btn-primary btn-fill btn-sm">
                                                             <i class="fa fa-check"></i>
@@ -268,9 +390,11 @@
                                                         </a>';
         }
         else if ($data['status'] == "proses"){
-                                                        echo '<button onclick="pengajuandiubah('.$data['id_pengajuan'].')" type="button" class="btn btn-primary  btn-fill btn-sm">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
+                                                        echo '<a href="pengajuan_diubah?id='.$data['id_pengajuan'].'">
+                                                            <button onclick="pengajuandiubah('.$data['id_pengajuan'].')" type="button" class="btn btn-primary  btn-fill btn-sm">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                        </a>
                                                         <a href="detail_pengajuan?id='.$data['id_pengajuan'].'">
                                                             <button type="button" class="btn btn-info btn-fill btn-sm">
                                                                 <i class="fa fa-eye"></i>
@@ -290,10 +414,11 @@
                                                     </tr>';
                                                     $no++;
                 }
+                                            echo'</tbody>
+                                        </table>
+                                    </div>';
             }
-        ?>
-                                        </tbody>
-                                    </table>
+            ?>
                                 </div>
                             </div>
                         </div>
@@ -303,7 +428,9 @@
         </div>
     </div>
 </body>
-    <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" language="javascript" src="http:////cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="http://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap-checkbox-radio-switch.js"></script>
 	<script src="../assets/js/chartist.min.js"></script>
@@ -311,9 +438,19 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
 	<script src="../assets/js/demo.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="../assets/dist/sweetalert-dev.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+        $('.table-paginate').dataTable({      
+            "searching": false,
+            "paging": false, 
+            "info": false,         
+            "lengthChange":false 
+        });
+    } );
+    </script>
+
 	<script type="text/javascript">
     	$(document).ready(function(){
         	demo.initChartist();
@@ -345,7 +482,7 @@
                 confirmButtonText: "Terima",
                 cancelButtonText: "Batal",
                 closeOnConfirm: false
-            },
+            },        
             function(){
                 document.location="pengajuan_diterima?id="+id;
             })
@@ -357,29 +494,14 @@
                 text: "Apakah anda ingin menolak pengajuan",
                 type: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#00cc00",
+                confirmButtonColor: "#FF4A55",
                 confirmButtonText: "Tolak",
                 cancelButtonText: "Batal",
+                showLoaderOnConfirm: true,
                 closeOnConfirm: false
-            },
+            },        
             function(){
                 document.location="pengajuan_ditolak?id="+id;
-            })
-        }
-
-        function pengajuandiubah(id) {
-            swal({
-                title: "Konfirmasi ?",
-                text: "Apakah anda ingin mengubah jadwal pengajuan",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#00ff00",
-                confirmButtonText: "Iya",
-                cancelButtonText: "Batal",
-                closeOnConfirm: false
-            },
-            function(){
-                document.location="pengajuan_diubah?id="+id;
             })
         }
 

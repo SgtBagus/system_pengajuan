@@ -104,9 +104,22 @@ h1 .subtitle {
     background: #00ff00;
 }
 
+.menunggu{
+    background: #FF4A55;
+}
+
 .proses {
+    background: #00ff00;
+}
+
+.selesai {
     background: #00cc00;
 }
+
+.indextitle{
+    font-size: 15px;
+}
+
 .atas{
     width: auto;
     height: auto;
@@ -115,6 +128,7 @@ h1 .subtitle {
     right:5px;
     padding:5px;
 }
+
 .upper { text-transform: uppercase; }
 
 .text-muted {

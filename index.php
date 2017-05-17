@@ -176,11 +176,13 @@
             while($data_pengajuan = mysqli_fetch_assoc($result_pengajuan)){
                                             echo '<tr>
                                                 <td> '.$data_pengajuan['pengajuan'].' - '.$data_pengajuan['username'].' - ';
-    if( $data_pengajuan['status'] == "proses" ){
+                if( $data_pengajuan['status'] == "menunggu" ){
+                                                echo '<span class="badge menunggu upper">'.$data_pengajuan['status'].'</span>';
+                }else if ($data_pengajuan['status'] == "proses"){
                                                 echo '<span class="badge proses upper">'.$data_pengajuan['status'].'</span>';
-    }else{
-                                                echo '<span class="badge  upper">'.$data_pengajuan['status'].'</span>';
-    }   
+                }else{
+                                                echo '<span class="badge selesai upper">'.$data_pengajuan['status'].'</span>';
+                }   
                                                 echo '</td>
                                                 <td class="td-actions text-right">
                                                     <a href="detail_pengajuan?id='.$data_pengajuan['id_pengajuan'].'">
@@ -261,9 +263,9 @@
                     </div>
                     <div class="row">
                         <div align="right">
-                            <a href="ajukan_pengajuan">
+                            <a href="tambah_pengajuan">
                                 <button type="button" rel="tooltip" class="btn btn-primary btn-fill">
-                                    <i class="fa fa-plus"></i> Ajukan Pengajuan
+                                    <i class="fa fa-plus"></i> Tambah Pengajuan
                                 </button>
                             </a>    
                         </div>

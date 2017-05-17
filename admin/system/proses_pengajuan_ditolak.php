@@ -1,8 +1,14 @@
 <?php 
 include '../../system/koneksi.php';
 $id_pengajuan = $_POST['id_pengajuan'];
-$catatan = $_POST['catatan'];
+$ctt = $_POST['catatan'];
  
+if($ctt == ""){
+  $catatan = "-";
+}else{
+  $catatan = $ctt;
+}
+
 $tanggal= mktime(date("m"),date("d"),date("Y"));
 $tgl = date("Y-m-d", $tanggal);
 

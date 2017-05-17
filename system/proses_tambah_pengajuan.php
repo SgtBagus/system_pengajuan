@@ -33,7 +33,7 @@
       if($result){ 
         header("location: ../pengajuan?proses=tambah"); 
       }else{
-        header("location: ../ajukan_pengajuan?id=$id&proses=error"); 
+        header("location: ../tambah_pengajuan?proses=error"); 
       }
   }
   else{
@@ -50,10 +50,10 @@
       }
 
         if($eror == "format"){
-          header("location: ../ajukan_pengajuan?id=$id&proses=format"); 
+          header("location: ../tambah_pengajuan?proses=format"); 
         }
         else if ($eror == "size"){
-          header("location: ../ajukan_pengajuan?id=$id&proses=size"); 
+          header("location: ../tambah_pengajuan?proses=size"); 
         }
         else{
           if(move_uploaded_file($tmp, $path)){ 
@@ -71,11 +71,11 @@
               header("location: ../pengajuan?proses=tambah"); 
             }
             else{
-              header("location: ../ajukan_pengajuan?id=$id&proses=error"); 
+              header("location: ../tambah_pengajuan?proses=error"); 
             }
           }
           else{
-              header("location: ../ajukan_pengajuan?id=$id&proses=error"); 
+              header("location: ../tambah_pengajuan?proses=error"); 
           }
         }
   }

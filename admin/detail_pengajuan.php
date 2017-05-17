@@ -156,14 +156,16 @@
                                         <small>
                                             <?php
                                                 echo '<a href="detail_user?id='.$id_pengaju.'">
-                                                    <b>'.$pengaju.'</b> / <small>'.tanggal_indo(''.$data['tanggal_pengajuan'].'').'</small>
-                                                </a> / ';
-                                            
-    if( $data['status'] == "proses" ){
+                                                    <b>'.$pengaju.'</b> </a>/ <small>'.tanggal_indo(''.$data['tanggal_pengajuan'].'').'</small>
+                                                 / ';
+        if( $data['status'] == "menunggu" ){
+                                                echo '<span class="badge menunggu upper">'.$data['status'].'</span>';
+        }else if ($data['status'] == "proses"){
                                                 echo '<span class="badge proses upper">'.$data['status'].'</span>';
-    }else{
-                                                echo '<span class="badge  upper">'.$data['status'].'</span>';
-    }?> 
+        }else{
+                                                echo '<span class="badge selesai upper">'.$data['status'].'</span>';
+        }
+        ?> 
                                         </small> 
                                     </div>
                                 </h4>
@@ -204,7 +206,7 @@
     ?>
                                                         <a class="example-image-link" href="../image/<?php echo $gambar ?>" data-lightbox="example-2" data-title="<?php echo $pengajuan ?>">
                                                             <img class="example-image" src="../image/<?php echo $gambar ?>" width='282' height='177' alt="image-1"/>
-                                                        </a>
+                                                        </a> 
     <?php                                                        
                                                         echo '</td>
                                                     </tr>';
@@ -440,7 +442,7 @@ if (isset($_GET['proses'])) {
                 text: "Apakah anda ingin menolak pengajuan",
                 type: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#00cc00",
+                confirmButtonColor: "#FF4A55",
                 confirmButtonText: "Tolak",
                 cancelButtonText: "Batal",
                 closeOnConfirm: false
