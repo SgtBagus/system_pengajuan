@@ -148,6 +148,14 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
+                                                    <label>Email Lama Anda</label>
+                                                    <input type="email" name="email" id="form_edit_user" class="form-control" placeholder="Email" disabled value="<?php echo $email_login ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
                                                     <input type="hidden" name="id" value="<?php echo $id_login ?>">
                                                     <label>Email</label>
                                                     <input type="email" name="email" id="form_edit_user" class="form-control" placeholder="Email" required

@@ -185,19 +185,29 @@
                                                 <div class="form-group">
                                                     <table>
                                                         <tr>
-                                                            <td width="150px"></td>
+                                                            <td width="180px"></td>
                                                             <td width="25px"></td>
                                                             <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><h5><b>Pengajuan </h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5> <?php echo $pengajuan ?> </h5></td>
                                                         </tr>
                                                         <tr>
                                                             <td><h5><b>Jenis Pengajuan </h5></b></td>
                                                             <td><h5><b> : </h5></b></td>
                                                             <td><h5> <?php echo $jenis_pengajuan ?> </h5></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h5><b>Biaya</h5></b></td>
+                                                            <td><h5><b> : </h5></b></td>
+                                                            <td><h5>  Rp. <?php echo $biaya ?>,00,-</h5></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h5><b>Alasan</h5></b></td>
+                                                            <td><h5><b> : </h5></b></td>
+                                                            <td><h5>  <?php echo $alasan ?></h5></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h5><b>Keterangan</h5></b></td>
+                                                            <td><h5><b> : </h5></b></td>
+                                                            <td><h5> <?php echo $keterangan ?></h5></td>
                                                         </tr>
         <?php
             if( $data['gambar'] == "" ){
@@ -219,21 +229,6 @@
             }
 
         ?>                                                    
-                                                        <tr>
-                                                            <td><h5><b>Biaya</h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5>  Rp. <?php echo $biaya ?>,00,-</h5></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><h5><b>Alasan</h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5>  <?php echo $alasan ?></h5></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><h5><b>Keterangan</h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5> <?php echo $keterangan ?></h5></td>
-                                                        </tr>
                                                     </tabel>
     <?php
         if( $data['status'] == "menunggu" ){
@@ -243,7 +238,7 @@
             echo '
                                                     <table>
                                                         <tr>
-                                                            <td width="150px"></td>
+                                                            <td width="180px"></td>
                                                             <td width="25px"></td>
                                                             <td></td>
                                                         </tr>
@@ -253,9 +248,9 @@
                                                             <td><h5>'.tanggal_indo(''.$data['jadwal_pelaksanaan'].'').'</h5></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><h5><b>Catatan</h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5>'.$data['catatan'].'</h5></td>
+                                                            <td colspan="3" align="center">
+                                                                <pre><p>'.$data['catatan'].'</p></pre>
+                                                            </td>
                                                         </tr>
                                                     </table>
                                                     <hr>
@@ -269,14 +264,14 @@
             echo '
                                                     <table>
                                                         <tr>
-                                                            <td width="150px"></td>
+                                                            <td width="180px"></td>
                                                             <td width="25px"></td>
                                                             <td></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><h5><b>Catatan</h5></b></td>
-                                                            <td><h5><b> : </h5></b></td>
-                                                            <td><h5>'.$data['catatan'].'</h5></td>
+                                                            <td colspan="3" align="center">
+                                                                <pre><p>'.$data['catatan'].'</p></pre>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

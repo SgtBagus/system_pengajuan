@@ -121,7 +121,7 @@
                                                 <div class="form-group">
                                                     <label>Jenis Pengajuan</label>
                                                     <input type="hidden" name="id" value="<?php echo $id ?>">
-                                                    <input type="text" name="jenis_pengajuan" id="jenis_pengajuan" class="form-control" placeholder="Alamat" value="<?php echo $jenis_pengajuan ?>" >
+                                                    <input type="text" name="jenis_pengajuan" id="jenis_pengajuan" class="form-control" placeholder="Jenis Pengajuan" value="<?php echo $jenis_pengajuan ?>" >
                                                 </div>
                                             </div>
                                         </div>
@@ -131,7 +131,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Deskripsi</label>
-                                                    <input type="text" name="deskripsi" id="deskripsi" class="form-control" placeholder="No Hp" value="<?php echo $deskripsi ?>" >
+                                                    <input type="text" name="deskripsi" id="deskripsi" class="form-control" placeholder="Deskripsi" value="<?php echo $deskripsi ?>" >
                                                 </div>
                                             </div>
                                         </div>

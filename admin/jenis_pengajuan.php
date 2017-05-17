@@ -197,9 +197,11 @@
                                             <td>'.$data['jenis_pengajuan'].'</td>
                                             <td>'.$data['deskripsi'].'</td>
                                             <td>
-                                                <button onclick="edit('.$data['id_jenis_pengajuan'].')" type="button" rel="tooltip" class="btn btn-primary btn-fill btn-sm">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
+                                                <a href="edit_jenispengajuan?id='.$data['id_jenis_pengajuan'].'">
+                                                    <button type="button" rel="tooltip" class="btn btn-primary btn-fill btn-sm">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                </a>
                                                 <button onclick="hapus('.$data['id_jenis_pengajuan'].')" type="button" rel="tooltip" class="btn btn-danger btn-fill btn-sm">
                                                     <i class="fa fa-trash"></i>
                                                 </button>';
@@ -294,22 +296,7 @@
             function(){
                 document.location="../logout";
             })
-        }
-        function edit(id) {
-            swal({
-                title: "Konfirmasi ?",
-                text: "Apakah anda ingin mengubah jenis pengajuan",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#00ff00",
-                confirmButtonText: "Iya",
-                cancelButtonText: "Batal",
-                closeOnConfirm: false
-            },
-            function(){
-                document.location="edit_jenispengajuan?id="+id;
-            })
-        }       
+        }   
         function hapus(id) {
             swal({
                 title: "Konfirmasi ?",
@@ -322,7 +309,7 @@
                 closeOnConfirm: false
             },
             function(){
-                document.location="edit_jenispengajuan?id="+id;
+                document.location="system/hapus_jenispengajuan?id="+id;
             })
         }
 	</script>
