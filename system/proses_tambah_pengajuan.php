@@ -4,7 +4,7 @@
     $tgl = date("Y-m-d", $tanggal);
     $pengajuan         = $_POST['pengajuan'];
     $id_pengaju        = $_POST['id_pengaju'];
-    $jenis_pengajuan   = $_POST['jenis_pengajuan'];
+    $id_jenis_pengajuan   = $_POST['id_jenis_pengajuan'];
     $gambar            = $_FILES['gambar']['name'];
     $tmp               = $_FILES['gambar']['tmp_name'];
     $size              = $_FILES['gambar']['size'];
@@ -19,11 +19,12 @@
       $keterangan = $ket;
     }
 
+    echo $id_jenis_pengajuan;
   if($gambar == NULL){
     $query = "INSERT INTO pengajuan SET pengajuan='$pengajuan',id_user='$id_pengaju'
-              , jenis_pengajuan='$jenis_pengajuan', tanggal_pengajuan='$tgl'
-              , biaya='$biaya', alasan='$alasan',keterangan='$keterangan'
-              , status='menunggu', update_pengajuan='$tgl' ";
+               , id_jenis_pengajuan='$id_jenis_pengajuan', tanggal_pengajuan='$tgl'
+               , biaya='$biaya', alasan='$alasan',keterangan='$keterangan'
+               , status='menunggu', update_pengajuan='$tgl' ";
       $result = mysqli_query($con, $query);
 
     if(!$result){
@@ -58,9 +59,9 @@
         else{
           if(move_uploaded_file($tmp, $path)){ 
             $query = "INSERT INTO pengajuan SET pengajuan='$pengajuan',id_user='$id_pengaju'
-                    , jenis_pengajuan='$jenis_pengajuan', tanggal_pengajuan='$tgl', gambar='$fotobaru'
-                    , biaya='$biaya', alasan='$alasan',keterangan='$keterangan'
-                    , status='menunggu', update_pengajuan='$tgl' ";
+                     , id_jenis_pengajuan='$id_jenis_pengajuan', tanggal_pengajuan='$tgl', gambar='$fotobaru'
+                     , biaya='$biaya', alasan='$alasan',keterangan='$keterangan'
+                     , status='menunggu', update_pengajuan='$tgl' ";
             $result = mysqli_query($con, $query);
 
             if(!$result){

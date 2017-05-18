@@ -167,7 +167,7 @@
                                                     <label>Jenis Pengajuan</label>
                                                     <br>
                                                     <div class="col-md-12">
-                                                        <select name="jenis_pengajuan" id="form_pengajuan" class="form-control" required 
+                                                        <select name="id_jenis_pengajuan" id="form_pengajuan" class="form-control" required 
                                                             oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
                                                             oninput="setCustomValidity('')" >
                                                                 
@@ -180,7 +180,7 @@
         }
         while($data = mysqli_fetch_assoc($result))
         {
-            echo '<option value="'.$data[jenis_pengajuan].'" title="Diskripsi : '.$data[deskripsi].'">'.$data[jenis_pengajuan].'</option>';
+            echo '<option value="'.$data[id_jenis_pengajuan].'" title="Diskripsi : '.$data[deskripsi].'">'.$data[jenis_pengajuan].'</option>';
         }
     ?>
                                                         </select>

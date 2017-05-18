@@ -25,7 +25,7 @@
                 'Desember'
         );
         $split = explode('-', $tanggal);
-        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
     }
 ?> 
 <!doctype html>
@@ -316,18 +316,18 @@
                 }
                 
             if( $pengajuan == ""){
-                $query_semua = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
-                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                $query_semua = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.id_jenis_pengajuan, c.jenis_pengajuan, a.tanggal_pengajuan,
+                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b INNER JOIN jenis_pengajuan AS c WHERE a.id_user = b.id_user AND a.id_jenis_pengajuan = c.id_jenis_pengajuan
                             AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') AND a.status like '%$status%' ORDER BY a.id_pengajuan DESC" ;
             }else {
-                $query_semua = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
-                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                $query_semua = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.id_jenis_pengajuan, c.jenis_pengajuan, a.tanggal_pengajuan,
+                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b INNER JOIN jenis_pengajuan AS c WHERE a.id_user = b.id_user AND a.id_jenis_pengajuan = c.id_jenis_pengajuan
                             AND a.pengajuan like '%$pengajuan%' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') AND a.status like '%$status%' ORDER BY a.id_pengajuan DESC" ;
             }
         }
         else {
-            $query_semua = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
-                        a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+            $query_semua = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.id_jenis_pengajuan, c.jenis_pengajuan, a.tanggal_pengajuan,
+                        a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b INNER JOIN jenis_pengajuan AS c WHERE a.id_user = b.id_user AND a.id_jenis_pengajuan = c.id_jenis_pengajuan
                         ORDER BY a.id_pengajuan DESC" ;
         }
 
@@ -385,10 +385,12 @@
                                                         <td>'.tanggal_indo(''.$data_semua['tanggal_pengajuan'].'').' </td>
                                                         <td>'.$data_semua['biaya'].'</td>
                                                         <td align = "center">';
-                    if( $data_semua['status'] == "proses" ){
-                                                        echo '<span class="badge proses upper">'.$data_semua['status'].'</span>';
+                    if( $data_semua['status'] == "menunggu" ){
+                                                            echo '<span class="badge menunggu upper">'.$data_semua['status'].'</span>';
+                    }else if ($data_semua['status'] == "proses"){
+                                                            echo '<span class="badge proses upper">'.$data_semua['status'].'</span>';
                     }else{
-                                                        echo '<span class="badge  upper">'.$data_semua['status'].'</span>';
+                                                            echo '<span class="badge selesai upper">'.$data_semua['status'].'</span>';
                     }
                                                         echo '</td>
                                                         <td align="center">';
@@ -468,20 +470,20 @@
                 }
                 
             if( $pengajuan == ""){
-                $query_sendiri = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
-                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                $query_sendiri = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.id_jenis_pengajuan, c.jenis_pengajuan, a.tanggal_pengajuan,
+                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b INNER JOIN jenis_pengajuan AS c WHERE a.id_user = b.id_user AND a.id_jenis_pengajuan = c.id_jenis_pengajuan
                             AND b.username LIKE '$username_login' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') AND a.status like '%$status%' 
                             ORDER BY a.id_pengajuan DESC" ;
             }else {
-                $query_sendiri = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
-                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                $query_sendiri = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.id_jenis_pengajuan, c.jenis_pengajuan, a.tanggal_pengajuan,
+                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b INNER JOIN jenis_pengajuan AS c WHERE a.id_user = b.id_user AND a.id_jenis_pengajuan = c.id_jenis_pengajuan
                             AND b.username LIKE '$username_login' AND a.pengajuan like '%$pengajuan%' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') AND a.status like '%$status%' 
                             ORDER BY a.id_pengajuan DESC" ;
             }
         }
         else {
-            $query_sendiri = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
-                        a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+            $query_sendiri = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.id_jenis_pengajuan, c.jenis_pengajuan, a.tanggal_pengajuan,
+                        a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b INNER JOIN jenis_pengajuan AS c WHERE a.id_user = b.id_user AND a.id_jenis_pengajuan = c. id_jenis_pengajuan
                         AND b.username LIKE '$username_login' ORDER BY a.id_pengajuan DESC" ;
         }
 
@@ -537,10 +539,12 @@
                                                         <td>'.tanggal_indo(''.$data_sendiri['tanggal_pengajuan'].'').' </td>
                                                         <td>'.$data_sendiri['biaya'].'</td>
                                                         <td align = "center">';
-                    if( $data_sendiri['status'] == "proses" ){
-                                                        echo '<span class="badge proses upper">'.$data_sendiri['status'].'</span>';
+                    if( $data_sendiri['status'] == "menunggu" ){
+                                                            echo '<span class="badge menunggu upper">'.$data_sendiri['status'].'</span>';
+                    }else if ($data_sendiri['status'] == "proses"){
+                                                            echo '<span class="badge proses upper">'.$data_sendiri['status'].'</span>';
                     }else{
-                                                        echo '<span class="badge  upper">'.$data_sendiri['status'].'</span>';
+                                                            echo '<span class="badge selesai upper">'.$data_sendiri['status'].'</span>';
                     }
                                                         echo '</td>
                                                         <td align="center">';

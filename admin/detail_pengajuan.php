@@ -11,10 +11,11 @@
     
     if (isset($_GET['id'])) {
         $id = ($_GET["id"]);
-        $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user, b.username, a.jenis_pengajuan, 
+        $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user, b.username, a.id_jenis_pengajuan, c.jenis_pengajuan,
                 a.tanggal_pengajuan, a.gambar, a.biaya, a.alasan, a.status, a.catatan, a.keterangan, 
                 a.update_pengajuan, a.jadwal_pelaksanaan FROM pengajuan AS a 
-                INNER JOIN user AS b WHERE  a.id_pengajuan ='$id' AND a.id_user = b.id_user ";
+                INNER JOIN user AS b INNER JOIN jenis_pengajuan AS c 
+                WHERE  a.id_pengajuan ='$id' AND a.id_user = b.id_user AND a.id_jenis_pengajuan = c.id_jenis_pengajuan";
         $result = mysqli_query($con, $query);
         if(!$result){
         die ("Query Error: ".mysqli_errno($con).

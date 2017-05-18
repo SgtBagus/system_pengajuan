@@ -3,7 +3,7 @@ include 'koneksi.php';
 $id = $_GET['id'];
 
 $pengajuan = $_POST['pengajuan'];
-$jenis_pengajuan = $_POST['jenis_pengajuan'];
+$id_jenis_pengajuan = $_POST['id_jenis_pengajuan'];
 $biaya = $_POST['biaya'];
 $als = $_POST['alasan'];
 
@@ -37,7 +37,7 @@ $tgl = date("Y-m-d", $tanggal);
   	$path = "../image/".$fotobaru;
 if ($foto == "") {
 	$query = "UPDATE pengajuan SET pengajuan='$pengajuan'
-			 , jenis_pengajuan='$jenis_pengajuan', tanggal_pengajuan='$tgl'
+			 , id_jenis_pengajuan='$id_jenis_pengajuan', tanggal_pengajuan='$tgl'
 			 , biaya='$biaya',alasan='$alasan', keterangan ='$keterangan' 
 			 WHERE id_pengajuan='".$id."'";
 }
@@ -58,14 +58,14 @@ else {
     else{
 		if(move_uploaded_file($tmp, $path)){ 
 			$query = "UPDATE pengajuan SET pengajuan='$pengajuan'
-				, jenis_pengajuan='$jenis_pengajuan', tanggal_pengajuan='$tgl'
+				, id_jenis_pengajuan='$id_jenis_pengajuan', tanggal_pengajuan='$tgl'
 				, gambar='$fotobaru', biaya='$biaya',alasan='$alasan'
 				, keterangan ='$keterangan' WHERE id_pengajuan='".$id."'";
 		}
 	}
 }
 
-
+ 
 		$sql = mysqli_query($con, $query); 
 		if($sql){ 
 				header("location: ../detail_pengajuan?id=$id&proses=edit"); 

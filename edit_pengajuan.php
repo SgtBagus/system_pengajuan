@@ -10,7 +10,9 @@
     }
     if (isset($_GET['id'])) {
         $id = ($_GET["id"]);
-        $query = "SELECT * FROM pengajuan WHERE id_pengajuan ='$id'";
+        $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_jenis_pengajuan, b.jenis_pengajuan,
+                  a.biaya, a.gambar, a.alasan, a.keterangan FROM pengajuan AS a INNER JOIN jenis_pengajuan AS b
+                  WHERE id_pengajuan ='$id' AND a.id_jenis_pengajuan = b.id_jenis_pengajuan";
         $result = mysqli_query($con, $query);
         if(!$result){
         die ("Query Error: ".mysqli_errno($con).
@@ -18,8 +20,9 @@
         }
         $data = mysqli_fetch_assoc($result);
         $id_pengajuan = $data["id_pengajuan"];
+        $id_jenis_pengajuan = $data["id_jenis_pengajuan"];
         $pengajuan = $data["pengajuan"];
-        $biaya = $data["biaya"];
+        $biaya = $data["biaya"]; 
         $gambar = $data["gambar"];
         $alasan = $data["alasan"];
         $keterangan = $data["keterangan"];
@@ -184,7 +187,7 @@
                                                     <label>Jenis Pengajuan</label>
                                                     <br>
                                                     <div class="col-md-12">
-                                                        <select name="jenis_pengajuan" id="form_pengajuan" class="form-control" required>
+                                                        <select name="id_jenis_pengajuan" id="form_pengajuan" class="form-control" required>
                                                                 
     <?php
         $query = "SELECT * FROM jenis_pengajuan";     
@@ -195,7 +198,7 @@
         }
         while($data = mysqli_fetch_assoc($result))
         {
-            echo '<option value="'.$data[jenis_pengajuan].'" title="Diskripsi : '.$data[deskripsi].'">'.$data[jenis_pengajuan].'</option>';
+            echo '<option value="'.$data[id_jenis_pengajuan].'" title="Diskripsi : '.$data[deskripsi].'">'.$data[jenis_pengajuan].'</option>';
         }
     ?>
                                                         </select>
@@ -268,7 +271,7 @@
                                             </div>
                                         </div>
                                         <div align="right">
-                                            <a href="pengajuan">
+                                            <a href="detail_pengajuan?id=<?php echo $id_pengajuan ?>">
                                                 <button type="button" rel="tooltip" class="btn btn-info btn-fill">
                                                             <i class="fa fa-arrow-left"></i> Batal
                                                 </button>

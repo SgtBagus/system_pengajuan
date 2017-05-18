@@ -11,9 +11,9 @@
 
     if (isset($_GET['id'])) {
         $id = ($_GET["id"]);
-        $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan, 
+        $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.id_jenis_pengajuan, c.jenis_pengajuan, a.tanggal_pengajuan, 
                     a.gambar, a.biaya, a.alasan, a.keterangan, a.jadwal_pelaksanaan, a.catatan, a.status, a.update_pengajuan
-                    FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user AND a.id_pengajuan like '$id'" ;
+                    FROM pengajuan AS a INNER JOIN user AS b INNER JOIN jenis_pengajuan AS c WHERE a.id_user = b.id_user AND a.id_jenis_pengajuan = c.id_jenis_pengajuan AND a.id_pengajuan like '$id'" ;
         $result = mysqli_query($con, $query);
             if(!$result){
             die ("Query Error: ".mysqli_errno($con).
@@ -171,7 +171,16 @@
                                             <small>
                                                 <?php
                                                     echo '<b>'.$pengaju.'</b> / <small>'.tanggal_indo($tanggal_pengajuan).'</small>';
-                                                ?> / <span class='badge'><?php echo $status ?></span>
+                                                ?> / 
+<?php                                                
+                    if( $data['status'] == "menunggu" ){
+                                                            echo '<span class="badge menunggu upper">'.$data['status'].'</span>';
+                    }else if ($data['status'] == "proses"){
+                                                            echo '<span class="badge proses upper">'.$data['status'].'</span>';
+                    }else{
+                                                            echo '<span class="badge selesai upper">'.$data['status'].'</span>';
+                    }
+?>
                                             </small> 
                                         </div>
                                     </h4>
@@ -209,7 +218,7 @@
                                                             <td><h5><b> : </h5></b></td>
                                                             <td><h5> <?php echo $keterangan ?></h5></td>
                                                         </tr>
-        <?php
+        <?php 
             if( $data['gambar'] == "" ){
 
             }
