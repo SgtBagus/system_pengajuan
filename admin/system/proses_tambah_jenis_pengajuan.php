@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../../assets/css/loader.css" rel="stylesheet" />
+</head>
+<body onload="myFunction()" style="margin:0;">
+
+<div id="loader"></div>
+
 <?php
 include '../../system/koneksi.php';
 
@@ -23,3 +32,6 @@ header("location:../jenis_pengajuan?proses=tambah");
 }
 }
 ?>
+
+</body>
+</html>

@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../../assets/css/loader.css" rel="stylesheet" />
+</head>
+<body onload="myFunction()" style="margin:0;">
+
+<div id="loader"></div>
+
 <?php 
 include '../../system/koneksi.php';
 $id_pengajuan = $_POST['id_pengajuan'];
@@ -33,3 +42,5 @@ $query2 = "INSERT INTO riwayat SET kegiatan='Telah Melakukan Penolakan Pengajuan
 
 header("location:../detail_pengajuan?id=$id_pengajuan&proses=tolak"); 
 ?>
+</body>
+</html>

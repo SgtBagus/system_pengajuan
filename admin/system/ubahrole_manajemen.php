@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../../assets/css/loader.css" rel="stylesheet" />
+</head>
+<body onload="myFunction()" style="margin:0;">
+
+<div id="loader"></div>
+
 <?php 
 include '../../system/koneksi.php';
 
@@ -16,3 +25,6 @@ $query = "UPDATE user SET role='manajemen', update_akun='$tgl $jam' WHERE id_use
   }
         header('location:../detail_user?id='.$id.'&proses=edit');  
 ?>
+
+</body>
+</html>

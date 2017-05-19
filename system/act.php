@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../assets/css/loader.css" rel="stylesheet" />
+</head>
+<body onload="myFunction()" style="margin:0;">
+
+<div id="loader"></div>
+
 <?php
 session_start();
 include "koneksi.php";
@@ -23,3 +32,6 @@ if($op=="in"){
 } 
     echo "<script type='text/javascript'>document.location='../login?proses=false ';</script>";
 ?>
+
+</body>
+</html>

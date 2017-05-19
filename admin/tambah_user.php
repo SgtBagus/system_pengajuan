@@ -104,7 +104,7 @@
                                 <div class="content">
                                     <form id="form_user" method="post" action="system/proses_tambah_user">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Username</label>
                                                     <input type="text" name="username" id="username" class="form-control" placeholder="Username" required 
@@ -112,7 +112,9 @@
                                                     oninput="setCustomValidity('')">
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="Email">Email address</label>
                                                     <input type="email" name="email" id="email" class="form-control" placeholder="Email" required
@@ -120,10 +122,18 @@
                                                     oninput="setCustomValidity('')">
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="Password">Password</label>
                                                     <input type="password" name="password" id="password" class="form-control" placeholder="password" required 
+                                                    oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                    oninput="setCustomValidity('')" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Password">Konfimasi Password</label>
+                                                    <input type="password" name="konfirmasi_password" id="password" class="form-control" placeholder="konfirmasi password" required 
                                                     oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
                                                     oninput="setCustomValidity('')" >
                                                 </div>

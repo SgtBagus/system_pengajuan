@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../assets/css/loader.css" rel="stylesheet" />
+</head>
+<body onload="myFunction()" style="margin:0;">
+
+<div id="loader"></div>
+
 <?php
   include 'koneksi.php';
     $tanggal= mktime(date("m"),date("d"),date("Y"));
@@ -81,3 +90,6 @@
         }
   }
 ?>
+
+</body>
+</html>

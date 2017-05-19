@@ -191,7 +191,7 @@ if (isset($_GET['error'])) {
                 title: "Mohon Maaf!",
                 text: "Konfirmasi password anda tidak sama!",
                 type: "error",
-                showConfirmButton: true,
+                showConfirmButton: true, 
                 confirmButtonColor: "#00ff00"
             })';
         } 

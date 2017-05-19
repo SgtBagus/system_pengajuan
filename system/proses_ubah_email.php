@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../assets/css/loader.css" rel="stylesheet" />
+</head>
+<body onload="myFunction()" style="margin:0;">
+
+<div id="loader"></div>
+
 <?php 
 include 'koneksi.php';
 $id = $_POST['id'];
@@ -34,3 +43,5 @@ $tgl = date("Y-m-d", $tanggal);
       header("location:../ubah_email?error=true2"); 
     }
 ?>
+</body>
+</html>

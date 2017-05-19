@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../assets/css/loader.css" rel="stylesheet" />
+</head>
+<body onload="myFunction()" style="margin:0;">
+
+<div id="loader"></div>
+
 <?php 
 include 'koneksi.php';
 $id = $_POST['id'];
@@ -32,3 +41,7 @@ if($password_baru == $konfirmasi_password){
   header("location:../ubah_password?error=true1"); 
 }
 ?>
+
+
+</body>
+</html>

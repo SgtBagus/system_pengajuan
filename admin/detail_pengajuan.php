@@ -252,7 +252,7 @@
                                             </table>
                                             <hr>
                                             <table>
-                                                <tr>
+                                                <tr> 
                                                     <td colspan="5"><h5><b>Riwayat</h5></b></td>
                                                 </tr>
             ';
@@ -322,10 +322,12 @@ if( $data['status'] == "menunggu" ){
                                     </button>';                      
     }
     else if ($data['status'] == "proses"){
-        echo '
-                                    <button onclick="pengajuandiubah('.$data['id_pengajuan'].')" type="button" class="btn btn-primary  btn-fill">
-                                        <i class="fa fa-edit"></i> Ubah Jadwal Pelaksanaan
-                                    </button>
+        echo '                      
+                                    <a href="pengajuan_diubah?id='.$data['id_pengajuan'].'">
+                                        <button type="button" class="btn btn-primary  btn-fill">
+                                            <i class="fa fa-edit"></i> Ubah Jadwal Pelaksanaan
+                                        </button>
+                                    </a>
                                     <button onclick="pengajuandiselesaikan('.$data['id_pengajuan'].')" type="button" name="input" class="btn btn-primary  btn-fill">
                                         <i class="fa fa-check"></i> Selesaikan Pengajuan
                                     </button>';
@@ -448,22 +450,7 @@ if (isset($_GET['proses'])) {
                 document.location="pengajuan_ditolak?id="+id;
             })
         }
-        function pengajuandiubah(id) {
-            swal({
-                title: "Konfirmasi ?",
-                text: "Apakah anda ingin mengubah jadwal pengajuan",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#00ff00",
-                confirmButtonText: "Iya",
-                cancelButtonText: "Batal",
-                closeOnConfirm: false
-            },
-            function(){
-                document.location="pengajuan_diubah?id="+id;
-            })
-        }
-
+        
         function pengajuandiselesaikan(id) {
             swal({
                 title: "Konfirmasi ?",

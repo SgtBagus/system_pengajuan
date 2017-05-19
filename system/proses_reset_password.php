@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../assets/css/loader.css" rel="stylesheet" />
+</head>
+<body onload="myFunction()" style="margin:0;">
+
+<div id="loader"></div>
+
 <?php 
 include 'koneksi.php';
 $email = $_POST['email'];
@@ -28,3 +37,6 @@ $cekdulu= "SELECT * FROM user WHERE email='$email'";
                 header("location:../lupa_password?proses=error1"); 
             }
 ?>
+
+</body>
+</html>
