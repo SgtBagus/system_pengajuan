@@ -23,10 +23,16 @@ if(is_file("../image/".$data['gambar']))
 $query2 = "DELETE FROM pengajuan WHERE id_pengajuan='".$id."'";
 $sql2 = mysqli_query($con, $query2);
 
-if($sql2){ 
-	header("location:../pengajuan?proses=delete"); 
-}else{
+$query3 = "DELETE FROM riwayat WHERE id_pengajuan='".$id."'";
+$sql3 = mysqli_query($con, $query3);
 
+if($sql2){ 
+	if($sql3){
+		header("location:../pengajuan?proses=delete"); 
+	}else{
+		header("location:../pengajuan?proses=error"); 
+	}
+}else{
 	header("location:../pengajuan?proses=error"); 
 }
 ?>

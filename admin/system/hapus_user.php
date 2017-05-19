@@ -21,6 +21,10 @@ $tgl = date("Y-m-d", $tanggal);
     $query = "DELETE FROM user WHERE id_user='$id'";
     $hasil_query = mysqli_query($con, $query);
 
+
+    $query2 = "DELETE FROM pengajuan WHERE id_user='$id'";
+    $hasil2 = mysqli_query($con, $query2);
+
     //periksa query, apakah ada kesalahan
     if(!$hasil_query) {
       die ("Gagal menghapus data: ".mysqli_errno($con).

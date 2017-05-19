@@ -299,8 +299,9 @@
         }   
         function hapus(id) {
             swal({
+                html: true,
                 title: "Konfirmasi ?",
-                text: "Apakah anda ingin menghapus jenis pengajuan",
+                text: "<b>Apakah anda ingin menghapus jenis pengajuan</b><br>Pengajuan yang memiliki jenis pengajuan terkait akan terhapus",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#00cc00",

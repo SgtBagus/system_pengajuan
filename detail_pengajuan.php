@@ -50,7 +50,7 @@
                 'Desember'
         );
         $split = explode('-', $tanggal);
-        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
     }
     
 ?>
@@ -271,23 +271,11 @@
         }
         else if ($data['status'] == "selesai"){
             echo '
-                                                    <table>
-                                                        <tr>
-                                                            <td width="180px"></td>
-                                                            <td width="25px"></td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="3" align="center">
-                                                                <pre><p>'.$data['catatan'].'</p></pre>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
                                                 </table>
                                                 <hr>
                                                 <table>
                                                     <tr>
-                                                        <td colspan="5"><h5><b>Riwayat</h5></b></td>
+                                                        <td colspan="7"><h5><b>Riwayat</h5></b></td>
                                                     </tr>';
         }
     ?>
@@ -300,13 +288,19 @@
         }
     $no = 1;
       while($data2 = mysqli_fetch_assoc($result2)){
-                                                    echo "<tr>
-                                                        <td width='10px'><b>$no </b></td>
-                                                        <td width='10px'> . </td>
-                                                        <td width='150px'> <b>$data2[kegiatan2] </b> </td>
-                                                        <td width='10px'> : </td>
-                                                        <td><small> $data2[tanggal_kegiatan]</small></td>
-                                                    </tr>";
+                                                    echo '<tr>
+                                                        <td width="10px">'.$no.'</td>
+                                                        <td width="10px"> . </td>
+                                                        <td width="180px"> <b>'.$data2['kegiatan2'] .'</b> </td>
+                                                        <td width="10px"> : </td>
+                                                        <td width="100px"><small>'.tanggal_indo(''.$data2['tanggal_kegiatan'].'').'</small></td>';
+        if($data2['kegiatan2'] == "Pengajuan Diselesaikan"){
+
+        }else{
+                                                        echo '<td width="10px"> : </td>
+                                                        <td><small>'.$data2['catatan'].'</small></td>';
+        }
+                                                    echo'</tr>';
                                                 $no++;
       }                                                      
 ?>

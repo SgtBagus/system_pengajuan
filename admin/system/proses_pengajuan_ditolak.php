@@ -31,7 +31,7 @@ $query = "UPDATE pengajuan SET catatan='$catatan', status='selesai', update_peng
 
  
 $query2 = "INSERT INTO riwayat SET kegiatan='Telah Melakukan Penolakan Pengajuan', kegiatan2='Pengajuan Ditolak',
-          kegiatan3 = 'Pengajuan Anda Telah DiTolak Oleh Pihak Manajemen', jenis_riwayat='Penolakan', 
+          kegiatan3 = 'Pengajuan Anda Telah DiTolak Oleh Pihak Manajemen', catatan = '$catatan' ,jenis_riwayat='Penolakan', 
           id_pengajuan='$id_pengajuan', tanggal_kegiatan='$tgl', notifikasi='1'";
   $result2 = mysqli_query($con, $query2);
 

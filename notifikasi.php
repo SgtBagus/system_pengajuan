@@ -24,7 +24,7 @@
                 'Desember'
         );
         $split = explode('-', $tanggal);
-        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
     }
 
 ?>
@@ -152,7 +152,7 @@
                         </div>
                         
     <?php
-        $query2 = "SELECT a.id_riwayat, a.kegiatan, a.id_pengajuan, b.pengajuan, a.jenis_riwayat, a.kegiatan3, 
+        $query2 = "SELECT a.id_riwayat, a.kegiatan, a.id_pengajuan, b.pengajuan , b.jadwal_pelaksanaan, a.jenis_riwayat, a.kegiatan3, 
                 a.tanggal_kegiatan, b.id_user, a.notifikasi FROM riwayat 
                 AS a INNER JOIN pengajuan AS b WHERE a.id_pengajuan = b.id_pengajuan
                 AND b.id_user = '$id_login' ORDER BY id_riwayat DESC " ;
@@ -170,11 +170,9 @@
                                             <div align="center">
                                                 Anda tidak memiliki notifikasi
                                                 <br>
-                                                <a href="notifikasi">
-                                                    <button type="button" class="btn btn-primary btn-fill btn-sm">
-                                                        <i class="fa fa-refresh"></i> Refresh data
-                                                    </button>
-                                                </a>
+                                                <button type="button" class="btn btn-primary btn-fill btn-sm">
+                                                    <i class="fa fa-refresh"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -192,8 +190,12 @@
                                         <div class="col-md-12">
                                             <input type="hidden" name="id_pengajuan" value="'.$data2['id_pengajuan'].'">
                                             <h5><b>'.$data2['jenis_riwayat'].'</b> - '.$data2['pengajuan'].'</h5>
-                                            '.$data2['kegiatan3'].'
-                                            <div align="right">
+                                            '.$data2['kegiatan3'].'';
+            if($data2['jenis_riwayat'] == "Penerimaan"){
+                                            echo ' - Yang akan dilaksanakan pada tanggal : <b>'.tanggal_indo(''.$data2['jadwal_pelaksanaan'].'').'</b>';
+            }
+
+                                            echo '<div align="right">
                                                 <small>'.tanggal_indo(''.$data2['tanggal_kegiatan'].'').'</small>
                                             </div>';
         if ($data2['notifikasi'] == "1"){
