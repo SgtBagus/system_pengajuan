@@ -8,6 +8,24 @@
     else {
         $logged_in = true;
     }
+    
+    function tanggal_indo($tanggal){
+        $bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+        );
+        $split = explode('-', $tanggal);
+        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -120,7 +138,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                        <h4 class="title">Catatan</h4>
+                                        <h4 class="title">Pemberitauan</h4>
         <?php
             $query_catatan = "SELECT * FROM catatan";
             $result_catatan = mysqli_query($con, $query_catatan);
@@ -129,8 +147,9 @@
                 " - ".mysqli_error($con));
             }
             $data_catatan = mysqli_fetch_assoc($result_catatan);
+            $update = $data_catatan['update_catatan'];
         ?>
-                                            <p class="category">Update Terakhir : <b><?php echo $data_catatan['update_catatan']?></b></p>
+                                            <p class="category">Update Terakhir : <b><?php echo tanggal_indo($update) ?></b></p>
                                         </div>
                                         <div class="content">
                                         <p>

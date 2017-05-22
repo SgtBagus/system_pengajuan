@@ -16,7 +16,7 @@
                 'April',
                 'Mei',
                 'Juni',
-                'Juli',
+                'Juli', 
                 'Agustus',
                 'September',
                 'Oktober',

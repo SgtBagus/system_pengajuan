@@ -29,12 +29,12 @@
                     </a>
                 </div>
                 <ul class="nav">
-                    <li>
+                    <!--<li>
                         <a href="daftar" >
                             <i class="pe-7s-add-user"></i>
                             <p>Daftar</p>
                         </a>
-                    </li>
+                    </li>-->
                     <li class="active">
                         <a href="lupa_password">
                             <i class="pe-7s-unlock"></i>

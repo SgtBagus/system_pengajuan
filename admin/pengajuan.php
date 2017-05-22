@@ -47,7 +47,8 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="../assets/css/datepicker.css">
 </head>
-<body><div class="wrapper">
+<body>
+    <div class="wrapper">
         <div class="sidebar" data-color="green" data-image="../assets/img/sidebar.jpg">
             <div class="sidebar-wrapper">
                 <div class="logo">
@@ -427,19 +428,29 @@
             </div>
         </div>
     </div>
-</body>
+</body> 
     <script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" language="javascript" src="http:////cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript" src="http://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap-checkbox-radio-switch.js"></script>
-	<script src="../assets/js/chartist.min.js"></script>
     <script src="../assets/js/bootstrap-notify.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
-	<script src="../assets/js/demo.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="../assets/dist/sweetalert-dev.js"></script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+  <script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "a0a2eb44-e381-4732-bc8c-6487b9bf6cbf",
+      autoRegister: false, /* Set to true to automatically prompt visitors */
+      subdomainName: 'https://sistem.onesignal.com',   
+      notifyButton: {
+          enable: true /* Set to false to hide */
+      }
+    }]);
+  </script>
+
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
         $('.table-paginate').dataTable({      

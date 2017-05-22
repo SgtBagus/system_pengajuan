@@ -41,10 +41,10 @@
             }
         }
         ?>
-        <div id="footer">
+        <!--<div id="footer">
             <a href="daftar" class="footer">Daftar Disini!</a>
             &copy;<?php echo date("Y") ?> System Pengajuan
-        </div>
+        </div>-->
     </body>
 </html>
     <script src="assets/dist/sweetalert-dev.js"></script>
