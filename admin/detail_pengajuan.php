@@ -5,8 +5,17 @@
     if (empty($_SESSION['email'])) {
         echo "<script type='text/javascript'>document.location='../login?proses=error ';</script>";
     }
-    else {
+    else { 
         $logged_in = true;
+
+            $query_cek = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
+                $result_cek = mysqli_query($con, $query_cek);
+                $data_cek = mysqli_fetch_assoc($result_cek);
+
+        if ($data_cek['role'] == "manajemen"){
+        }else {
+            echo "<script type='text/javascript'>window.location=history.go(-1);</script>";
+        }
     } 
     
     if (isset($_GET['id'])) {

@@ -7,6 +7,15 @@
     }
     else {
         $logged_in = true;
+
+            $query_cek = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
+                $result_cek = mysqli_query($con, $query_cek);
+                $data_cek = mysqli_fetch_assoc($result_cek);
+
+        if ($data_cek['role'] == "manajemen"){
+        }else {
+            echo "<script type='text/javascript'>window.location=history.go(-1);</script>";
+        }
     }
     if (isset($_GET['id'])) {
         $id = ($_GET["id"]);
@@ -20,7 +29,6 @@
         $id_pengajuan = $data["id_pengajuan"];
         $pengajuan = $data["pengajuan"];
         $id_pengaju = $data["id_user"];
-        $jenis_pengajuan = $data["jenis_pengajuan"];
         $taggal_pengajuan = $data["tanggal_pengajuan"];
         $gambar = $data["gambar"];
         $biaya = $data["biaya"];

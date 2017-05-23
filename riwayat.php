@@ -7,6 +7,15 @@
     }
     else {
         $logged_in = true;
+
+            $query_cek = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
+                $result_cek = mysqli_query($con, $query_cek);
+                $data_cek = mysqli_fetch_assoc($result_cek);
+
+        if ($data_cek['role'] == "tim"){
+        }else {
+            echo "<script type='text/javascript'>window.location=history.go(-1);</script>";
+        }
     }
 ?> 
 <!doctype html>

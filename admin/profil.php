@@ -7,6 +7,15 @@
     }
     else {
         $logged_in = true;
+
+            $query_cek = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
+                $result_cek = mysqli_query($con, $query_cek);
+                $data_cek = mysqli_fetch_assoc($result_cek);
+
+        if ($data_cek['role'] == "manajemen"){
+        }else {
+            echo "<script type='text/javascript'>window.location=history.go(-1);</script>";
+        }
     }  
 
     function tanggal_indo($tanggal){
@@ -151,7 +160,7 @@
                                                 <label>Nama Depan</label>
                                                 <input type="text" name="nama_depan" id="nama_depan" class="form-control" placeholder="Nama Depan" value="<?php echo $namadepan_login ?>" disabled>
                                             </div>
-                                            </div>
+                                        </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nama Belakang</label>

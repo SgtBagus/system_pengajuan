@@ -7,6 +7,15 @@
     }
     else {
         $logged_in = true;
+
+            $query_cek = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
+                $result_cek = mysqli_query($con, $query_cek);
+                $data_cek = mysqli_fetch_assoc($result_cek);
+
+        if ($data_cek['role'] == "manajemen"){
+        }else {
+            echo "<script type='text/javascript'>window.location=history.go(-1);</script>";
+        }
     }
     if (isset($_GET['id'])) {
         $id = ($_GET["id"]);
@@ -122,7 +131,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="Email">Pelaksanaan DiLaksanakan Pada Tanggal</label>
+                                                    <label>Pelaksanaan DiLaksanakan Pada Tanggal</label>
                                                     <input type="text" name="jadwal_pelaksanaan" id="datepicker" 
                                                     value="<?php echo date("d-m-Y");?>" required class="form-control">
                                                 </div>
