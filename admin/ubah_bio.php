@@ -99,7 +99,7 @@
         $pembuatan_akun_login = $data_login["pembuatan_akun"];
         $update_akun_login = $data_login["update_akun"];
     ?>
-                        System Pengajuan<br><small>( MANAJEMEN ) - <?php echo $username ?></small>
+                        System Pengajuan<br><small>( MANAJEMEN ) - <?php echo $username_login ?></small>
                     </a>
                 </div>
                 <ul class="nav">

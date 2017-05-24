@@ -94,7 +94,7 @@
         $username_login = $data_login["username"];
         $email_login = $data_login["email"];
     ?>
-                        System Pengajuan<br><small>( MANAJEMEN ) - <?php echo $username ?></small>
+                        System Pengajuan<br><small>( MANAJEMEN ) - <?php echo $username_login ?></small>
                     </a>
                 </div>
                 <ul class="nav">
