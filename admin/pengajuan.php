@@ -448,7 +448,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="../assets/dist/sweetalert-dev.js"></script>
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
-  <script>
+  <!--<script>
     var OneSignal = window.OneSignal || [];
     OneSignal.push(["init", {
       appId: "a0a2eb44-e381-4732-bc8c-6487b9bf6cbf",
@@ -458,7 +458,7 @@
           enable: true /* Set to false to hide */
       }
     }]);
-  </script>
+  </script>-->
 
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
