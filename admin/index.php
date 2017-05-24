@@ -70,10 +70,10 @@
         $data_login = mysqli_fetch_assoc($result_login);
         $username = $data_login["username"];
     ?>
-                        Pengajuan Pengadaaan <small>Barang & Training <br> <small>( Manajemen ) - <?php echo $username ?></small></small>
+                        System Pengajuan<br><small>( MANAJEMEN ) - <?php echo $username ?></small>
                     </a>
                 </div>
-
+ 
                 <ul class="nav">
                     <li class="active">
                         <a href="index">
@@ -100,7 +100,7 @@
                         </a>
                         <div class="collapse" id="componentsExamples">
                             <ul class="nav">
-                                <li><a href="user">User</a></li>
+                                <li><a href="user">Pengguna</a></li>
                                 <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
                             </ul>
                         </div>
