@@ -443,11 +443,14 @@
     <script type="text/javascript" language="javascript" src="http://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="../assets/js/bootstrap-checkbox-radio-switch.js"></script>
+	<script src="../assets/js/chartist.min.js"></script>
     <script src="../assets/js/bootstrap-notify.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="../assets/js/light-bootstrap-dashboard.js"></script>
+	<script src="../assets/js/demo.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="../assets/dist/sweetalert-dev.js"></script>
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+    
   <!--<script>
     var OneSignal = window.OneSignal || [];
     OneSignal.push(["init", {
