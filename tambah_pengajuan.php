@@ -33,7 +33,7 @@
                 'Desember'
         );
         $split = explode('-', $tanggal);
-        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
     }
 
 ?>
@@ -204,9 +204,9 @@
                                                         Rp.
                                                     </div>
                                                     <div class="col-md-10">
-                                                            <input type="number" name="biaya" id="form_pengajuan" class="form-control" placeholder="Biaya" required 
-                                                                oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
-                                                                oninput="setCustomValidity('')" >
+                                                        <input type="number" name="biaya" id="form_pengajuan" class="form-control" placeholder="Biaya" required 
+                                                            oninvalid="this.setCustomValidity('Mohon isi form berikut !')"  
+                                                            oninput="setCustomValidity('')" >
                                                     </div>
                                                     <div class="col-md-1">
                                                         ,00,-
@@ -218,9 +218,11 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Gambar</label>
+                                                    <input id="preview" style="visibility:hidden;" type="file" name="gambar" onchange="readURL(this);" onclick="myFunction()"/>
+                                                    <label for="preview" class="btn btn-primary btn-fill">Select Image</label>
+                                                    <label>Ukuran Maksimal : 1MB</label>
                                                     <br>
-                                                    <input type="file" name="gambar" onchange="readURL(this);" onclick="myFunction()"/>
-                                                    <p id="demo"></p>
+                                                    <img id="preview_gambar"/>
                                                 </div>
                                             </div>
                                         </div> 
@@ -231,7 +233,7 @@
                                                     <textarea rows="5" name="keterangan" id="form_pengajuan" class="form-control" placeholder="Silakan Tulis Keterangan Anda Disini" ></textarea>
                                                 </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
@@ -314,15 +316,11 @@
             reader.onload = function (e) { 
             $('#preview_gambar') 
             .attr('src', e.target.result)
-            .width(420); 
+            .width(250); 
             };
             
             reader.readAsDataURL(input.files[0]);
         }
-    }
-
-    function myFunction() {
-        document.getElementById("demo").innerHTML = "<img id='preview_gambar' src='#' /><br><label>Max size : 1MB</label>";
     }
     
         function logout() {

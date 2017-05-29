@@ -223,7 +223,7 @@
                                                         <td><h5>';
     ?>
                                                         <a class="example-image-link" href="../image/<?php echo $gambar ?>" data-lightbox="example-2" data-title="<?php echo $pengajuan ?>">
-                                                            <img class="example-image" src="../image/<?php echo $gambar ?>" width='282' height='177' alt="image-1"/>
+                                                            <img class="example-image" src="../image/<?php echo $gambar ?>" width='250' alt="image-1"/>
                                                         </a> 
     <?php                                                        
                                                         echo '</td>

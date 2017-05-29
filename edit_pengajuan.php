@@ -52,7 +52,7 @@
                 'Desember'
         );
         $split = explode('-', $tanggal);
-        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
     }
 
 ?>
@@ -236,25 +236,28 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Gambar</label>
-                                                    <br>
                                                     
     <?php
 
     if($gambar == "" ){
-                                                echo '<input type="file" name="foto" onchange="readURL(this);" onclick="myFunction()"/>
+                                                echo '<input id="preview" style="visibility:hidden;" type="file" accept="image/png, image/jpeg, image/jpg" name="foto" onchange="readURL(this);" onclick="myFunction()"/>
+                                                        <label for="preview" class="btn btn-primary btn-fill">Ubah Gambar</label>
                                                         <p id="demo">
                                                             <label>Tidak ada gambar yang ditampilkan</label>
                                                         </p>';
                                                         
     }else{
-        ?>                                              <input type="file" name="foto" onchange="readURL(this);" onclick="myFunction()"/>
+        ?>
+
+                                                        <input id="preview" style="visibility:hidden;" type="file" accept="image/png, image/jpeg, image/jpg" name="foto" onchange="readURL(this);" onclick="myFunction()"/>
+                                                        <label for="preview" class="btn btn-primary btn-fill">Ubah Gambar</label>
+                                                        <label>Ukuran Maksimal : 1MB</label>
                                                             <p id="demo">
-                                                                <img src="image/<?php echo $gambar ?>" width='282' alt="image-1"/>
+                                                                <img src="image/<?php echo $gambar ?>" width='250' alt="image-1"/>
                                                                 <button onclick="hapusgambar(<?php echo $id_pengajuan ?>)" type="button" class="btn btn-danger btn-fill">
                                                                     <i class="fa fa-trash"></i> hapus
                                                                 </button>
                                                             </p>
-                                                        <br>
         <?php
     }
     ?>
@@ -282,7 +285,7 @@
                                         <div align="right">
                                             <a href="detail_pengajuan?id=<?php echo $id_pengajuan ?>">
                                                 <button type="button" rel="tooltip" class="btn btn-info btn-fill">
-                                                            <i class="fa fa-arrow-left"></i> Batal
+                                                    <i class="fa fa-arrow-left"></i> Batal
                                                 </button>
                                             </a>
                                             <button type="submit" name="input" rel="tooltip" class="btn btn-primary btn-fill">
@@ -353,7 +356,7 @@
             reader.onload = function (e) { 
             $('#preview_gambar') 
             .attr('src', e.target.result)
-            .width(282); 
+            .width(250); 
             };
             
             reader.readAsDataURL(input.files[0]);
@@ -361,7 +364,7 @@
     }
 
     function myFunction() {
-        document.getElementById("demo").innerHTML = "<img id='preview_gambar' src='#' /><br><label>Max size : 1MB</label>";
+        document.getElementById("demo").innerHTML = "<img id='preview_gambar' /><br><label>Max size : 1MB</label>";
     }
 
         function logout() {
@@ -385,7 +388,7 @@
                 text: "Apakah anda ingin menghapus gambar ?",
                 type: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#00cc00",
+                confirmButtonColor: "#FF4A55",
                 confirmButtonText: "Iya",
                 cancelButtonText: "Batal",
                 closeOnConfirm: false

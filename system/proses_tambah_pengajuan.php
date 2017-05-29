@@ -28,7 +28,6 @@
       $keterangan = $ket;
     }
 
-    echo $id_jenis_pengajuan;
   if($gambar == NULL){
     $query = "INSERT INTO pengajuan SET pengajuan='$pengajuan',id_user='$id_pengaju'
                , id_jenis_pengajuan='$id_jenis_pengajuan', tanggal_pengajuan='$tgl'
