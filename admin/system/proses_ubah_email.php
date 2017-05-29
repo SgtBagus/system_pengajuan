@@ -43,6 +43,6 @@ $tgl = date("Y-m-d", $tanggal);
       header("location:../ubah_email?error=true2"); 
     }
 ?>
-
+ 
 </body>
 </html>

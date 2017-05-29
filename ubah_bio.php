@@ -16,7 +16,7 @@
         }else {
             echo "<script type='text/javascript'>window.location=history.go(-1);</script>";
         }
-    }
+    } 
 
     $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";
         $result_login = mysqli_query($con, $query_login);

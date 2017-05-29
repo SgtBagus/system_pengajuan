@@ -322,7 +322,13 @@
                         ORDER BY a.id_pengajuan DESC" ;
         }
 
+        
+
             $result = mysqli_query($con, $query);
+    if(!$result){
+      die ("Query gagal dijalankan: ".mysqli_errno($con).
+                  " - ".mysqli_error($con)); 
+    }
             if($result->num_rows == 0){
                                     echo '<div class="content table-responsive table-full-width">
                                         <table class="table table-hover table-striped">
@@ -435,7 +441,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
     </div>
 </body> 
     <script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -450,7 +456,7 @@
 	<script src="../assets/js/demo.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="../assets/dist/sweetalert-dev.js"></script>
-    
+
   <!--<script>
     var OneSignal = window.OneSignal || [];
     OneSignal.push(["init", {

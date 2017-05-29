@@ -110,7 +110,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="riwayat">
+                        <a href="riwayat"> 
                             <i class="pe pe-7s-timer"></i>
                             <p>Riwayat</p>
                         </a>

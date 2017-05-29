@@ -37,6 +37,6 @@ $tgl = date("Y-m-d", $tanggal);
       header("location:../ubah_bio?error=true"); 
     }
 ?>
-
+ 
 </body>
 </html>

@@ -67,7 +67,7 @@
                 <li>
                     <a href="pengajuan">
                         <i class="pe pe-7s-note2"></i>
-                        <p>Pengajuan</p>
+                        <p>Pengajuan</p> 
                     </a>
                 </li>
                 <li>

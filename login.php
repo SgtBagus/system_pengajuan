@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="assets/css/supersized.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/dist/sweetalert.css">
-    </head>
+    </head> 
     <body>
         <div class="page-container">
             <img src='assets/img/logo.png' width='300' height='158'><br>

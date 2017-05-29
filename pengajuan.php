@@ -341,6 +341,10 @@
         }
 
             $result_semua = mysqli_query($con, $query_semua);
+    if(!$result_semua){
+      die ("Query gagal dijalankan: ".mysqli_errno($con).
+                  " - ".mysqli_error($con)); 
+    }
             if($result_semua->num_rows == 0){
                                     echo '<div class="content table-responsive table-full-width">
                                         <table class="table table-hover table-striped">
@@ -497,6 +501,10 @@
         }
 
             $result_sendiri = mysqli_query($con, $query_sendiri);
+    if(!$result_sendiri){
+      die ("Query gagal dijalankan: ".mysqli_errno($con).
+                  " - ".mysqli_error($con)); 
+    }
             if($result_sendiri->num_rows == 0){
                                     echo '<div class="content table-responsive table-full-width">
                                         <table class="table table-hover table-striped">
@@ -592,10 +600,10 @@
                                                         echo '</td>
                                                     </tr>';
                                                     $no_sendiri++;
-                }
+                } 
                                             echo'</tbody>
                                         </table>
-                                    </div>';
+                                    </div>'; 
             }
             ?>
                                 </div>

@@ -13,7 +13,7 @@ $id_pengajuan = $_POST['id_pengajuan'];
 $jadwal_pelaksanaan = $_POST['jadwal_pelaksanaan'];
 $ctt = $_POST['catatan']; 
 $tanggal_pelaksanaan = date('Y-m-d', strtotime($jadwal_pelaksanaan));
- 
+  
 $tanggal= mktime(date("m"),date("d"),date("Y"));
 $tgl = date("Y-m-d", $tanggal);
 

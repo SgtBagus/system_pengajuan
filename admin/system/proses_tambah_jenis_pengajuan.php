@@ -21,7 +21,7 @@ if (mysqli_num_rows($prosescek)>0) {
   header("location:../tambah_jenispengajuan?error=true"); 
 }
 else { 
-
+ 
   $query = "INSERT INTO jenis_pengajuan SET jenis_pengajuan='$jenis_pengajuan', deskripsi='$deskripsi'";
   $result = mysqli_query($con, $query);
   if(!$result){

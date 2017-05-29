@@ -90,7 +90,7 @@
                     <li>
                         <a href="riwayat">
                             <i class="pe pe-7s-timer"></i>
-                            <p>Riwayat</p>
+                            <p>Riwayat</p> 
                         </a>
                     </li>
                     <li>
@@ -181,12 +181,12 @@
                                 <div class="header">
                                     <h4 class="title" align="center">
                                     Pengajuan Berstatus <br>
-                                    <span class="badge selesai indextitle upper">Selesai</span>
+                                    <span class="badge proses indextitle upper">Proses</span>
                                     </h4>
                                 </div>
     <?php
         $query_selesai = "SELECT * FROM pengajuan WHERE status LIKE 'selesai'";
-        $result_selesai = mysqli_query($con, $query_proses);
+        $result_selesai = mysqli_query($con, $query_selesai);
         $banyakdata_selesai = $result_selesai->num_rows;
     ?>
                                 <div align="center">

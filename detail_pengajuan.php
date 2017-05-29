@@ -18,7 +18,7 @@
         }
     }
 
-    if (isset($_GET['id'])) {
+    if (isset($_GET['id'])) { 
         $id = ($_GET["id"]);
         $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.id_jenis_pengajuan, c.jenis_pengajuan, a.tanggal_pengajuan, 
                     a.gambar, a.biaya, a.alasan, a.keterangan, a.jadwal_pelaksanaan, a.catatan, a.status, a.update_pengajuan

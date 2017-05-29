@@ -231,7 +231,7 @@
                                                     <textarea rows="5" name="keterangan" id="form_pengajuan" class="form-control" placeholder="Silakan Tulis Keterangan Anda Disini" ></textarea>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> 
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">

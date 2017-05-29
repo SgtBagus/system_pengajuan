@@ -73,7 +73,7 @@
                             <i class="pe pe-7s-timer"></i>
                             <p>Riwayat</p>
                         </a>
-                    </li>
+                    </li> 
                     <li class="active">
                         <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
                             <i class="pe-7s-server"></i>

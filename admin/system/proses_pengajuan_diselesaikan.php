@@ -21,7 +21,7 @@ $query = "UPDATE pengajuan SET status='selesai', update_pengajuan='$tgl' WHERE i
       die ("Query gagal dijalankan: ".mysqli_errno($con).
            " - ".mysqli_error($con));
   }
-
+ 
 $query2 = "INSERT INTO riwayat SET kegiatan='Telah Melakukan Menyelesaian Pengajuan', kegiatan2='Pengajuan Diselesaikan',
           kegiatan3='Pengajuan Anda Telah Diselesaikan Oleh Pihak Manajemen', jenis_riwayat='Penyelesaian', 
           id_pengajuan='$id_pengajuan', tanggal_kegiatan='$tgl', notifikasi='1' ";

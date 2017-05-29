@@ -72,7 +72,7 @@
         $username_login = $data_login["username"];
         $email_login = $data_login["email"];
         $namadepan_login = $data_login["nama_depan"];
-        $namabelakang_login = $data_login["nama_belakang"];
+        $namabelakang_login = $data_login["nama_belakang"]; 
         $jk_login = $data_login["jk"];
         $nohp_login = $data_login["no_hp"];
         $alamat_login = $data_login["alamat"];
@@ -83,7 +83,7 @@
                         System Pengajuan<br><small>( MANAJEMEN ) - <?php echo $username_login ?></small>
                     </a>
                 </div>
-                <ul class="nav">
+                <ul class="nav"> 
                     <li>
                         <a href="index">
                             <i class="pe pe-7s-graph"></i>

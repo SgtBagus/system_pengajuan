@@ -94,7 +94,7 @@
                             <p>Riwayat</p>
                         </a>
                     </li>
-                    <li class="active">
+                    <li class="active"> 
                         <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
                             <i class="pe-7s-server"></i>
                             <p>Master</p>

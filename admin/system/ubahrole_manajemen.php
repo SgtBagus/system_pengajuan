@@ -25,6 +25,6 @@ $query = "UPDATE user SET role='manajemen', update_akun='$tgl $jam' WHERE id_use
   }
         header('location:../detail_user?id='.$id.'&proses=edit');  
 ?>
-
+ 
 </body>
 </html>

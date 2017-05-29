@@ -18,7 +18,7 @@
         }
     }
     if (isset($_GET['id'])) {
-        $id = ($_GET["id"]);
+        $id = ($_GET["id"]); 
         $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_jenis_pengajuan, b.jenis_pengajuan,
                   a.biaya, a.gambar, a.alasan, a.keterangan FROM pengajuan AS a INNER JOIN jenis_pengajuan AS b
                   WHERE id_pengajuan ='$id' AND a.id_jenis_pengajuan = b.id_jenis_pengajuan";

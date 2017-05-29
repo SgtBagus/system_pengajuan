@@ -7,7 +7,7 @@
 
 <div id="loader"></div>
 
-<?php
+<?php 
   include("../../system/koneksi.php");
 
 $tanggal= mktime(date("m"),date("d"),date("Y"));

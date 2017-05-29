@@ -15,7 +15,7 @@
         if ($data_cek['role'] == "tim"){
         }else {
             echo "<script type='text/javascript'>window.location=history.go(-1);</script>";
-        }
+        } 
     }
 
     $query_login = "SELECT * FROM user WHERE email ='$_SESSION[email]'";

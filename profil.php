@@ -36,7 +36,7 @@
         $role = $data["role"];
         $update = $data["update_akun"];
         
-    function tanggal_indo($tanggal){
+    function tanggal_indo($tanggal){ 
         $bulan = array (1 =>   'Januari',
                 'Februari',
                 'Maret',

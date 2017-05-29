@@ -85,7 +85,7 @@
                             <li class="active"><a href="user">Pengguna</a></li>
                             <li><a href="jenis_pengajuan">Jenis Pengajuan</a></li>
                         </ul>
-                    </div>
+                    </div> 
                 </li>
                 <li>
                     <a href="profil">

@@ -16,7 +16,7 @@
         }else {
             echo "<script type='text/javascript'>window.location=history.go(-1);</script>";
         }
-    }
+    } 
 ?> 
 <!doctype html>
 <html lang="en">

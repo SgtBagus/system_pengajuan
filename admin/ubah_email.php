@@ -98,7 +98,7 @@
                     </a>
                 </div>
                 <ul class="nav">
-                    <li>
+                    <li> 
                         <a href="index">
                             <i class="pe pe-7s-graph"></i>
                             <p>Dashboard</p>

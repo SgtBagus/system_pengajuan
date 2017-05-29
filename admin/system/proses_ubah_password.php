@@ -42,6 +42,6 @@ if($password_baru == $konfirmasi_password){
 }
 ?>
 
-
+ 
 </body>
 </html>

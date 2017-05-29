@@ -30,7 +30,7 @@ $query = "UPDATE pengajuan SET jadwal_pelaksanaan='$tanggal_pelaksanaan', catata
       die ("Query gagal dijalankan: ".mysqli_errno($con).
            " - ".mysqli_error($con));
   }
- 
+  
 $query2 = "INSERT INTO riwayat SET kegiatan='Telah Melakukan Menerima Pengajuan', kegiatan2='Pengajuan diterima',
            kegiatan3='Pengajuan Anda Telah DiTerima Oleh Pihak Manajemen', catatan='$catatan', jenis_riwayat='Penerimaan', 
            id_pengajuan='$id_pengajuan', tanggal_kegiatan='$tgl', notifikasi='1' ";

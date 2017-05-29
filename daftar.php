@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="assets/dist/sweetalert.css">
 </head>
 <body>
-    <div class="wrapper">
+    <div class="wrapper"> 
         <div class="sidebar" data-color="green" data-image="assets/img/sidebar.jpg">
             <div class="sidebar-wrapper">
                 <div class="logo">

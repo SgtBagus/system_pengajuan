@@ -102,7 +102,7 @@
                         System Pengajuan<br><small>( MANAJEMEN ) - <?php echo $username_login ?></small>
                     </a>
                 </div>
-                <ul class="nav">
+                <ul class="nav"> 
                     <li>
                         <a href="index">
                             <i class="pe pe-7s-graph"></i>
