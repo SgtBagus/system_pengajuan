@@ -185,22 +185,22 @@
             $akhir = date_format($lass,"Y-m-d");
 
             if( $pengajuan == ""){
-                $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
-                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.id_jenis_pengajuan, c.jenis_pengajuan , a.tanggal_pengajuan,
+                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b INNER JOIN jenis_pengajuan AS c WHERE a.id_user = b.id_user AND a.id_jenis_pengajuan = c.id_jenis_pengajuan
                             AND b.username like '$username_login' AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') 
                             AND a.status like 'selesai' ORDER BY a.id_pengajuan DESC" ;
             }
             else {
-                $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
-                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+                $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.id_jenis_pengajuan, c.jenis_pengajuan ,a.tanggal_pengajuan,
+                            a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b INNER JOIN jenis_pengajuan AS c WHERE a.id_user = b.id_user AND a.id_jenis_pengajuan = c.id_jenis_pengajuan
                             AND b.username like '$username_login' AND a.pengajuan like '%$pengajuan%' 
                             AND (a.tanggal_pengajuan BETWEEN '$awal' AND '$akhir') 
                             AND a.status like 'selesai' ORDER BY a.id_pengajuan DESC" ;
             }
         }
         else{    
-            $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.jenis_pengajuan, a.tanggal_pengajuan,
-                        a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b WHERE a.id_user = b.id_user 
+            $query = "SELECT a.id_pengajuan, a.pengajuan, a.id_user,  b.username, a.id_jenis_pengajuan, c.jenis_pengajuan ,a.tanggal_pengajuan,
+                        a.biaya, a.status FROM pengajuan AS a INNER JOIN user AS b INNER JOIN jenis_pengajuan AS c  WHERE a.id_user = b.id_user AND a.id_jenis_pengajuan = c.id_jenis_pengajuan
                         AND b.username like '$username_login' AND a.status like 'selesai' ORDER BY a.id_pengajuan DESC" ;
         }
     ?>
