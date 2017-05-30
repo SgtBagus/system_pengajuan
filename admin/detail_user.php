@@ -36,8 +36,8 @@
         $nohp = $data["no_hp"];
         $alamat = $data["alamat"];
         $role = $data["role"];
-        $pembuatan_akun = date('d-m-Y', strtotime ($data["pembuatan_akun"]));
-        $update_akun = date('d-m-Y', strtotime ($data["update_akun"]));
+        $pembuatan_akun = $data["pembuatan_akun"];
+        $update_akun = $data["update_akun"];
     } 
 
     function tanggal_indo($tanggal){
@@ -55,7 +55,7 @@
                 'Desember'
         );
         $split = explode('-', $tanggal);
-        return $split[2] . ' - ' . $bulan[ (int)$split[1] ] . ' - ' . $split[0];
+        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
     }
 ?>
 <!doctype html>

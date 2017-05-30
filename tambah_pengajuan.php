@@ -219,7 +219,7 @@
                                                 <div class="form-group">
                                                     <label>Gambar</label>
                                                     <input id="preview" style="visibility:hidden;" accept="image/png, image/jpeg, image/jpg" type="file" name="gambar" onchange="readURL(this);" onclick="myFunction()"/>
-                                                    <label for="preview" class="btn btn-primary btn-fill">Select Image</label>
+                                                    <label for="preview" class="btn btn-primary btn-fill">Pilih Gambar</label>
                                                     <label>Ukuran Maksimal : 1MB</label> 
                                                     <br>
                                                     <img id="preview_gambar"/>
