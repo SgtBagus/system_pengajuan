@@ -34,6 +34,7 @@
         $nohp = $data["no_hp"];
         $alamat = $data["alamat"];
         $role = $data["role"];
+        $pembuatan_akun = $data["pembuatan_akun"];
         $update = $data["update_akun"];
         
     function tanggal_indo($tanggal){ 
@@ -153,8 +154,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="header">
-                                <h4 class="title">Profile <br> <small>Perubahan Terakhir : <?php echo tanggal_indo($update) ?></small></h4>
+                            <div class="header"> 
+                                <h4 class="title">Profile <br> <small>Pembuatan Akun : <?php echo tanggal_indo($pembuatan_akun) ?> / Perubahan Terakhir : <?php echo tanggal_indo($update) ?></small></h4>
                             </div>
                             <div class="content">
                                 <div class="row">
