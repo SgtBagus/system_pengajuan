@@ -246,7 +246,7 @@
             }
         }
     ?>
-                                            </tbody>
+                                            </tbody> 
                                         </table>
                                     </div>
                                     <div class="footer">
