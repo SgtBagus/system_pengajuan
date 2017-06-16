@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 19 Mei 2017 pada 14.58
+-- Generation Time: 16 Jun 2017 pada 09.28
 -- Versi Server: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -56,8 +56,7 @@ CREATE TABLE `jenis_pengajuan` (
 --
 
 INSERT INTO `jenis_pengajuan` (`id_jenis_pengajuan`, `jenis_pengajuan`, `deskripsi`) VALUES
-(1, 'Barang', 'Jenis Pengajuan, berupa jenis barang yang akan di ajukan'),
-(3, 'Training', 'untuk pengajuan pelatihan');
+(1, 'Barang', 'Jenis Pengajuan, berupa jenis barang yang akan di ajukan');
 
 -- --------------------------------------------------------
 
@@ -87,10 +86,10 @@ CREATE TABLE `pengajuan` (
 
 INSERT INTO `pengajuan` (`id_pengajuan`, `pengajuan`, `id_user`, `id_jenis_pengajuan`, `tanggal_pengajuan`, `gambar`, `biaya`, `alasan`, `keterangan`, `jadwal_pelaksanaan`, `catatan`, `status`, `update_pengajuan`) VALUES
 (4, 'Pengajuan Termial Listrik', 14, 1, '2017-05-08', '', 150000, 'Kita sepertinya kekurangan terminal listrik', '-', '2017-05-22', 'jadwal saya undur', 'proses', '2017-05-19'),
-(5, 'Pengajuan meja', 14, 1, '2017-05-09', '', 50000, 'Kita kekuangan meja', '- ', '0000-00-00', 'kita udah kebanyakan meja', 'selesai', '2017-05-09'),
 (6, 'Pengajuan MAC', 15, 1, '2017-05-09', '', 5000, 'kita kekurangan mac untuk kantor', '-', '2017-05-12', 'Pengajuan ini saya terima', 'selesai', '2017-05-19'),
 (7, 'Tes', 14, 1, '2017-05-10', '100520171007096357286795706858631912471428_1-krabby-patty.png', 10000, '-', '-', '0000-00-00', 'tes', 'selesai', '2017-05-10'),
-(8, 'tes ubah', 14, 1, '2017-05-12', '120520171307131219800149560579432soldier aiming.svg.hi.png', 15000, 'tes2', '-', '0000-00-00', 'pengajuan ini terlalu baik buat ku ', 'selesai', '2017-05-16');
+(8, 'tes ubah', 14, 1, '2017-05-12', '120520171307131219800149560579432soldier aiming.svg.hi.png', 15000, 'tes2', '-', '0000-00-00', 'pengajuan ini terlalu baik buat ku ', 'selesai', '2017-05-16'),
+(9, 'Pengajuan meja ', 15, 1, '2017-05-23', '', 50000, 'kita sepertinya kekurangan meja untuk berkerja', '-', '2017-05-23', 'pengajuan ini saya terima', 'proses', '2017-05-23');
 
 -- --------------------------------------------------------
 
@@ -116,12 +115,12 @@ CREATE TABLE `riwayat` (
 
 INSERT INTO `riwayat` (`id_riwayat`, `kegiatan`, `kegiatan2`, `kegiatan3`, `catatan`, `jenis_riwayat`, `id_pengajuan`, `tanggal_kegiatan`, `notifikasi`) VALUES
 (4, 'Telah Melakukan Menerima Pengajuan', 'Pengajuan diterima', 'Pengajuan Anda Telah DiTerima Oleh Pihak Manajemen', 'tes', 'Penerimaan', 4, '2017-05-08', '0'),
-(6, 'Telah Melakukan Penolakan Pengajuan', 'Pengajuan Ditolak', 'Pengajuan Anda Telah DiTolak Oleh Pihak Manajemen', 'kita udah kebanyakan meja', 'Penolakan', 5, '2017-05-09', '1'),
 (7, 'Telah Melakukan Penolakan Pengajuan', 'Pengajuan Ditolak', 'Pengajuan Anda Telah DiTolak Oleh Pihak Manajemen', 'tes', 'Penolakan', 7, '2017-05-10', '1'),
 (8, 'Telah Melakukan Menerima Pengajuan', 'Pengajuan diterima', 'Pengajuan Anda Telah DiTerima Oleh Pihak Manajemen', 'Pengajuan ini saya terima\r\n', 'Penerimaan', 6, '2017-05-11', '0'),
 (10, 'Telah Melakukan Penolakan Pengajuan', 'Pengajuan Ditolak', 'Pengajuan Anda Telah DiTolak Oleh Pihak Manajemen', 'pengajuan ini terlalu baik buat ku', 'Penolakan', 8, '2017-05-16', '0'),
 (15, 'Telah Melakukan Perubahan Pengajuan', 'Pengajuan Diubah', 'Pengajuan Anda Telah Diubah Oleh Pihak Manajemen', 'jadwal saya undur', 'Pengubahan', 4, '2017-05-19', '1'),
-(16, 'Telah Melakukan Menyelesaian Pengajuan', 'Pengajuan Diselesaikan', 'Pengajuan Anda Telah Diselesaikan Oleh Pihak Manajemen', '', 'Penyelesaian', 6, '2017-05-19', '1');
+(16, 'Telah Melakukan Menyelesaian Pengajuan', 'Pengajuan Diselesaikan', 'Pengajuan Anda Telah Diselesaikan Oleh Pihak Manajemen', '', 'Penyelesaian', 6, '2017-05-19', '1'),
+(17, 'Telah Melakukan Menerima Pengajuan', 'Pengajuan diterima', 'Pengajuan Anda Telah DiTerima Oleh Pihak Manajemen', 'pengajuan ini saya terima', 'Penerimaan', 9, '2017-05-23', '1');
 
 -- --------------------------------------------------------
 
@@ -196,22 +195,22 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `jenis_pengajuan`
 --
 ALTER TABLE `jenis_pengajuan`
-  MODIFY `id_jenis_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_jenis_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `pengajuan`
 --
 ALTER TABLE `pengajuan`
-  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `riwayat`
 --
 ALTER TABLE `riwayat`
-  MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
